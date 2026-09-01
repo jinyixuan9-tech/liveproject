@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.19";
+  const VERSION = "0.1.20";
   const VELA_ICON = "data:image/png;base64,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";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
@@ -199,21 +199,29 @@
         }
       },
       wallet: {
-        balance: 12680.4,
+        cashBalanceCNY: 12680.4,
+        coinBalance: 12860,
+        linkedAccount: null,
+        settlementCurrency: "",
+        fxRates: { CNY: 1, USD: 0.149, JPY: 21.9, KRW: 207, HKD: 1.16, EUR: 0.128 },
+        fxUpdatedAt: 0,
+        subscriptionAccruals: [],
+        subscriptionPurchases: {},
         transactions: [
-          { title: "直播礼物", note: "Aster 联播", amount: 328 },
-          { title: "订阅收入", note: "@anon_room", amount: 96 },
-          { title: "提现", note: "Vela Card ·••• 0718", amount: -1000 }
+          { id: "tx-demo-business", type: "cash", title: "商务合作", note: "Mellow Studio · 示例历史流水", cashCNY: 800, at: Date.now() - 86400000 * 2 },
+          { id: "tx-demo-tip", type: "coin", title: "直播打赏", note: "周末直播 · 示例历史流水", coin: 960, at: Date.now() - 86400000 },
+          { id: "tx-demo-gift", type: "coin", title: "直播礼物", note: "Aster 联播 · 示例历史流水", coin: 1280, at: Date.now() - 43200000 }
         ]
       },
+      roleEarnings: {},
       messages: [
         {
           id: "biz-mellow",
           avatar: "M",
           name: "Mellow Studio",
           handle: "@mellow_studio",
-          badge: "合作邀约",
-          preview: "Mellow Studio · Cloud Mist 香氛机合作邀约",
+          badge: "商务联系",
+          preview: "你好，我们是 Mellow Studio，主营生活方式与香氛产品。想先和你聊聊一款新品的直播合作，你这边会接广告吗？",
           unread: 1
         },
         {
@@ -528,6 +536,68 @@
 .vela-roche .v-appointment-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.vela-roche .v-appointment-actions button{border:0;border-radius:13px;min-height:42px;font-size:10px;font-weight:900}.vela-roche .v-appointment-actions .v-go{background:var(--v-blue);color:#fff}.vela-roche .v-appointment-actions .v-later{background:var(--v-soft);color:var(--v-text)}
 .vela-roche.is-dark .v-chat-head{background:rgba(16,17,22,.94)}.vela-roche.is-dark .v-chat-topmenu,.vela-roche.is-dark .v-chat-composer-wrap{background:rgba(25,26,32,.94)}
 
+
+/* v0.1.20 · DM polish / Vela Coin wallet / live economy */
+.vela-roche .v-msg .v-mini{border-radius:50%!important}
+.vela-roche .v-chat-head{grid-template-columns:40px minmax(0,1fr) auto!important}
+.vela-roche .v-chat-headcopy{text-align:left!important}
+.vela-roche .v-chat-headcopy strong{font-size:13px!important}
+.vela-roche .v-chat-headcopy small{font-size:9px!important}
+.vela-roche .v-chat-row .v-social-avatar{border-radius:50%!important}
+.vela-roche .v-chat-bubble{position:relative;border-radius:20px 20px 20px 7px!important;padding:9px 12px!important}
+.vela-roche .v-chat-row:not(.is-me) .v-chat-bubble:after{content:"";position:absolute;left:-5px;bottom:2px;width:11px;height:12px;background:var(--v-card);clip-path:polygon(100% 0,100% 100%,0 100%);border-bottom-left-radius:8px}
+.vela-roche .v-chat-row.is-me .v-chat-bubble{border-radius:20px 20px 7px 20px!important}
+.vela-roche .v-chat-row.is-me .v-chat-bubble:after{content:"";position:absolute;right:-5px;bottom:2px;width:11px;height:12px;background:#111;clip-path:polygon(0 0,100% 100%,0 100%);border-bottom-right-radius:8px}
+.vela-roche .v-chat-bubble .v-translation{margin-top:7px!important;padding:7px 0 0 0!important;border-left:0!important;border-top:1px solid var(--v-line);font-size:10px!important}
+.vela-roche .v-chat-row.is-me .v-chat-bubble .v-translation{border-top-color:rgba(255,255,255,.2)!important}
+.vela-roche .v-chat-bubble .v-translate-btn{font-size:9px!important;font-weight:850!important}
+.vela-roche .v-role-title{display:inline-flex;align-items:center;padding:2px 5px;border-radius:6px;margin-right:4px;font-size:7px;font-weight:950;vertical-align:1px}
+.vela-roche .v-role-title.is-owner{background:#111;color:#fff}.vela-roche .v-role-title.is-bot{background:#e8f2ff;color:#007aff}
+.vela-roche .v-chat-card{border-radius:20px!important;box-shadow:none!important}
+.vela-roche .v-chat-card.is-business{border-color:rgba(0,122,255,.18)}
+.vela-roche .v-chat-card-edit{margin-top:8px;border:0;background:none;color:var(--v-blue);font-size:9px;font-weight:900;padding:2px 0}
+.vela-roche .v-chat-card-actions{display:grid;grid-template-columns:1fr 1fr}
+.vela-roche .v-chat-card-actions button:first-child:last-child{grid-column:1/-1}
+.vela-roche .v-community-bot-options[hidden]{display:none!important}
+.vela-roche .v-community-bot-profile{display:grid;grid-template-columns:72px 1fr;gap:10px;align-items:center;margin-top:10px}
+.vela-roche .v-community-bot-avatar{width:64px;height:64px;border-radius:50%;background:var(--v-soft);overflow:hidden;display:grid;place-items:center;font-weight:950}
+.vela-roche .v-community-bot-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
+
+.vela-roche .v-wallet-assets{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.vela-roche .v-wallet-asset{border-radius:22px;padding:16px;min-height:150px;display:flex;flex-direction:column;justify-content:space-between}
+.vela-roche .v-wallet-asset.is-coin{background:linear-gradient(145deg,#0f62ff,#69a8ff);color:#fff}
+.vela-roche .v-wallet-asset.is-cash{background:linear-gradient(145deg,#16171c,#4d5059);color:#fff}
+.vela-roche .v-wallet-asset-label{font-size:10px;font-weight:850;opacity:.72}
+.vela-roche .v-wallet-asset-value{font-size:25px;font-weight:950;letter-spacing:-.03em;margin-top:6px}
+.vela-roche .v-wallet-asset-sub{font-size:8px;opacity:.68;margin-top:5px;line-height:1.4}
+.vela-roche .v-wallet-asset-actions{display:flex;gap:6px;margin-top:12px}
+.vela-roche .v-wallet-asset-actions button{flex:1;border:0;border-radius:11px;min-height:34px;background:rgba(255,255,255,.92);color:#111;font-size:9px;font-weight:900}
+.vela-roche .v-wallet-account{background:var(--v-card);border:1px solid var(--v-line);border-radius:19px;padding:13px;margin-bottom:12px}
+.vela-roche .v-wallet-account-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vela-roche .v-wallet-account-head button{border:0;background:var(--v-soft);color:var(--v-text);border-radius:10px;padding:7px 9px;font-size:9px;font-weight:900}
+.vela-roche .v-wallet-card-no{font-size:15px;font-weight:900;letter-spacing:.06em;margin-top:7px}
+.vela-roche .v-wallet-ledger-head{display:flex;align-items:flex-end;justify-content:space-between;gap:10px}.vela-roche .v-wallet-ledger-head small{font-size:8px;color:var(--v-muted);text-align:right}
+.vela-roche .v-tx{align-items:center}.vela-roche .v-tx-amount{font-weight:950;white-space:nowrap}.vela-roche .v-tx-amount.is-coin{color:var(--v-blue)}
+.vela-roche .v-wallet-flow-card{background:var(--v-card);border:1px solid var(--v-line);border-radius:22px;padding:14px}
+.vela-roche .v-wallet-convert-preview{padding:10px 12px;background:var(--v-soft);border-radius:13px;font-size:10px;color:var(--v-muted);line-height:1.5}
+
+.vela-roche .v-live-quicktools{margin-left:auto;display:flex;align-items:center;gap:6px;pointer-events:auto}
+.vela-roche .v-live-quicktool{height:34px;min-width:34px;border:0;border-radius:17px;padding:0 9px;color:#fff;font-size:9px;font-weight:950;backdrop-filter:blur(10px)}
+.vela-roche .v-live-quicktool.is-lottery{background:rgba(52,199,89,.86)}
+.vela-roche .v-live-quicktool.is-ad{background:rgba(255,59,48,.86)}
+.vela-roche .v-gift-rank-trigger{margin-left:0!important;max-width:36%!important}
+.vela-roche .v-live-ad-strip{display:flex;align-items:center;gap:7px;margin-top:8px;padding:8px 10px;border-radius:13px;background:#fff2f1;color:#a92720;font-size:9px;line-height:1.35}
+.vela-roche .v-live-ad-strip b{white-space:nowrap}.vela-roche .v-live-ad-strip a{color:inherit;text-decoration:none;font-weight:850;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.vela-roche .v-chat-tip{display:inline-flex;margin-left:5px;padding:2px 5px;border-radius:7px;background:#e8f2ff;color:#007aff;font-size:8px;font-weight:950}
+.vela-roche .v-live-economy-panel{position:absolute;z-index:35;inset:0;background:rgba(0,0,0,.28);display:none;align-items:center;justify-content:center;padding:18px}.vela-roche .v-live-economy-panel.is-open{display:flex}
+.vela-roche .v-live-economy-card{width:min(92%,430px);max-height:78%;overflow:auto;background:var(--v-card);color:var(--v-text);border-radius:23px;padding:14px;box-shadow:0 18px 50px rgba(0,0,0,.2)}
+.vela-roche .v-live-tool-title{display:flex;align-items:center;justify-content:space-between;gap:10px}.vela-roche .v-live-tool-title h3{margin:0;font-size:15px}.vela-roche .v-live-tool-title button{width:34px;height:34px;border:0;border-radius:12px;background:var(--v-soft);color:var(--v-text)}
+.vela-roche .v-prize-row{display:grid;grid-template-columns:78px 64px 1fr 74px;gap:6px;margin-top:8px}.vela-roche .v-prize-row input{min-width:0;border:1px solid var(--v-line);background:var(--v-card);color:var(--v-text);border-radius:10px;padding:8px;font-size:11px}
+.vela-roche .v-prize-remove{width:100%;border:0;border-radius:10px;background:rgba(255,59,48,.08);color:var(--v-red);padding:7px;font-size:9px;font-weight:900;margin-top:6px}
+.vela-roche .v-live-tool-actions{display:flex;gap:8px;margin-top:11px}.vela-roche .v-live-tool-actions button{flex:1;border:0;border-radius:12px;min-height:39px;font-size:10px;font-weight:900}.vela-roche .v-live-tool-actions .is-primary{background:#111;color:#fff}.vela-roche .v-live-tool-actions .is-light{background:var(--v-soft);color:var(--v-text)}
+.vela-roche .v-live-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.vela-roche .v-live-summary-box{background:var(--v-soft);border-radius:15px;padding:11px}.vela-roche .v-live-summary-box small{display:block;color:var(--v-muted);font-size:8px}.vela-roche .v-live-summary-box b{display:block;margin-top:4px;font-size:15px}
+@media(max-width:390px){.vela-roche .v-wallet-assets{grid-template-columns:1fr}.vela-roche .v-prize-row{grid-template-columns:1fr 58px}.vela-roche .v-prize-row input:nth-child(3),.vela-roche .v-prize-row input:nth-child(4){grid-column:auto}}
+
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 
 .vela-roche .v-subscreen[data-screen="live"]{overflow:hidden!important}
@@ -691,9 +761,10 @@
           <div data-role="messages"></div>
         </section>
         <section class="v-page" data-page="wallet">
-          <div class="v-title">钱包 <small>平台虚拟资产</small></div>
-          <div class="v-wallet"><div class="v-balance-label">可提现余额</div><div class="v-balance" data-role="balance"></div><div class="v-wallet-actions"><button data-action="wallet-demo">提现</button><button data-action="wallet-demo">银行卡</button></div></div>
-          <div class="v-card"><b>最近流水</b><div data-role="transactions"></div></div>
+          <div class="v-title">钱包 <small>Vela Coin 与结算</small></div>
+          <div data-role="wallet-assets"></div>
+          <div data-role="wallet-account"></div>
+          <div class="v-card v-wallet-ledger"><div class="v-wallet-ledger-head"><b>最近流水</b><small>🔷 为 Vela Coin，现金按当前结算币种显示</small></div><div data-role="transactions"></div></div>
         </section>
       </main>
       <nav class="v-nav">
@@ -701,7 +772,7 @@
         <button data-nav="discover"><b>✦</b>推荐</button>
         <button class="v-publish" data-action="open-publish"><b>＋</b>发布</button>
         <button data-nav="messages"><b>✉</b>DM</button>
-        <button data-nav="wallet"><b>◈</b>钱包</button>
+        <button data-nav="wallet"><b>🔷</b>钱包</button>
       </nav>
       <div class="v-mask" data-role="mask" data-action="close-drawer"></div>
       <aside class="v-drawer" data-role="drawer">
@@ -757,6 +828,8 @@
       <section class="v-subscreen" data-screen="subscription-settings"></section>
       <section class="v-subscreen" data-screen="community-settings"></section>
       <section class="v-subscreen" data-screen="appointment-reminder"></section>
+      <section class="v-subscreen" data-screen="wallet-flow"></section>
+      <section class="v-subscreen" data-screen="live-summary"></section>
       <div class="v-toast" data-role="toast"></div>
     `;
   }
@@ -785,7 +858,7 @@
                 state = {
                   ...state,
                   ...saved,
-                  wallet: { ...state.wallet, ...(saved.wallet || {}) },
+                  wallet: { ...state.wallet, ...(saved.wallet || {}), cashBalanceCNY: Number(saved.wallet?.cashBalanceCNY ?? saved.wallet?.balance ?? state.wallet.cashBalanceCNY ?? 0) },
                   roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) },
                   businessDeals: { ...state.businessDeals, ...(saved.businessDeals || {}) },
                   generationPreset: { ...state.generationPreset, ...(saved.generationPreset || {}) },
@@ -810,6 +883,21 @@
               contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, ...item
             }));
             state.appearance = { darkMode: false, topbarHeight: 62, bottombarHeight: 78, ...(state.appearance || {}) };
+            state.wallet = {
+              cashBalanceCNY: Number(state.wallet?.cashBalanceCNY ?? state.wallet?.balance ?? 0),
+              coinBalance: Number(state.wallet?.coinBalance ?? 0),
+              linkedAccount: state.wallet?.linkedAccount && typeof state.wallet.linkedAccount === "object" ? state.wallet.linkedAccount : null,
+              settlementCurrency: String(state.wallet?.settlementCurrency || ""),
+              fxRates: { CNY: 1, ...(state.wallet?.fxRates || {}) },
+              fxUpdatedAt: Number(state.wallet?.fxUpdatedAt || 0),
+              subscriptionAccruals: safeArray(state.wallet?.subscriptionAccruals),
+              subscriptionPurchases: { ...(state.wallet?.subscriptionPurchases || {}) },
+              transactions: safeArray(state.wallet?.transactions).map((tx, index) => {
+                if (tx?.cashCNY != null || tx?.coin != null) return { ...tx };
+                return { id: tx?.id || `legacy-${index}`, type: "cash", title: tx?.title || "历史流水", note: tx?.note || "", cashCNY: Number(tx?.amount || 0), at: tx?.at || Date.now() };
+              })
+            };
+            state.roleEarnings = { ...(state.roleEarnings || {}) };
             state.platformSettings = { recommendationCount: 3, allowBusinessDM: true, activityLevel: 50, ...(state.platformSettings || {}) };
             state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
             state.communityPosts = safeArray(state.communityPosts);
@@ -828,6 +916,19 @@
             state.communitySettings = { ...(state.communitySettings || {}) };
             state.dmThreads = { ...(state.dmThreads || {}) };
             state.messages = safeArray(state.messages);
+            state.messages.forEach(msg => {
+              if (String(msg?.id) === "biz-mellow") {
+                if (String(msg.preview || "").includes("Cloud Mist 香氛机合作邀约")) msg.preview = "你好，我们是 Mellow Studio，主营生活方式与香氛产品。想先和你聊聊一款新品的直播合作，你这边会接广告吗？";
+                if (String(msg.badge || "") === "合作邀约") msg.badge = "商务联系";
+              }
+            });
+            const oldMellowThread = safeArray(state.dmThreads?.["biz-mellow"]);
+            oldMellowThread.forEach(item => {
+              if (String(item?.id || "").startsWith("seed-biz-mellow") && String(item.text || "").includes("Cloud Mist 香氛机合作邀约")) {
+                item.text = "你好，我们是 Mellow Studio，主营生活方式与香氛产品。想先和你聊聊一款新品的直播合作，你这边会接广告吗？";
+              }
+            });
+            if (oldMellowThread.length) state.dmThreads["biz-mellow"] = oldMellowThread;
             state.pendingOwnLiveInput = state.pendingOwnLiveInput && typeof state.pendingOwnLiveInput === "object" ? state.pendingOwnLiveInput : null;
             state.businessDeals = {
               "biz-mellow": {
@@ -875,6 +976,7 @@
                   recommendedLives: state.recommendedLives,
                   schedule: state.schedule,
                   wallet: state.wallet,
+                  roleEarnings: state.roleEarnings,
                   roleCommerce: state.roleCommerce,
                   businessDeals: state.businessDeals,
                   homeFilter: state.homeFilter,
@@ -1079,6 +1181,13 @@
               state.activePage = page;
               qa(".v-page").forEach(el => el.classList.toggle("is-active", el.dataset.page === page));
               qa("[data-nav]").forEach(el => el.classList.toggle("is-active", el.dataset.nav === page));
+              if (page === "wallet") {
+                renderWallet();
+                settleWeeklySubscriptions().then(() => renderWallet());
+                if (!state.wallet.linkedAccount) setTimeout(() => {
+                  if (state.activePage === "wallet" && !state.wallet.linkedAccount) openWalletBind();
+                }, 120);
+              }
             };
 
             const renderChannels = () => {
@@ -1202,7 +1311,7 @@
             const getOwnSubscriptionProfile = () => getSubscriptionProfile("identity", state.viewerIdentityId);
 
             const getDMRelationshipBadge = (msg) => {
-              if (String(msg?.badge || "") === "合作邀约") return { text: "合作邀约", cls: "is-business" };
+              if (/合作|商务/.test(String(msg?.badge || ""))) return { text: String(msg.badge || "商务联系"), cls: "is-business" };
               if (msg?.fanTier === "paid") return { text: `${getOwnSubscriptionProfile().paid.emoji || "◆"} 粉丝`, cls: "is-paid" };
               if (msg?.fanTier === "free") return { text: `${getOwnSubscriptionProfile().free.emoji || "◇"} 粉丝`, cls: "is-free" };
               if (msg?.relationship === "mutual") return { text: "互关", cls: "is-mutual" };
@@ -1232,7 +1341,10 @@
                 name: String(current.name || subCfg.communityName || `${profileName(entity, ownerType)}社群`),
                 announcement: String(current.announcement || ""),
                 fanName: String(current.fanName || (tier === "paid" ? "会员" : "粉丝")),
-                botEnabled: current.botEnabled !== false,
+                botEnabled: Boolean(current.botEnabled),
+                botName: String(current.botName || "Vela 小助手"),
+                botAvatar: String(current.botAvatar || ""),
+                botLeadHours: Math.max(1, Math.min(24, Number(current.botLeadHours || 3))),
                 botScheduled: current.botScheduled !== false,
                 botLive: current.botLive !== false,
                 botLottery: current.botLottery !== false,
@@ -1267,6 +1379,7 @@
             };
 
             const renderMessages = () => {
+              syncIncomingFanSubscriptions?.();
               const host = q('[data-role="messages"]');
               qa('[data-dm-tab]').forEach(btn => btn.classList.toggle("is-active", btn.dataset.dmTab === state.dmTab));
 
@@ -1304,13 +1417,284 @@
 
               host.innerHTML = `<div class="v-card">${state.messages.map(msg => {
                 const rel = getDMRelationshipBadge(msg);
-                return `<button class="v-msg" data-action="open-message" data-message-id="${escapeHTML(msg.id)}"><div class="v-mini">${avatarHTML(msg.avatar, msg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(msg.name)}<span class="v-relation ${rel.cls}">${escapeHTML(rel.text)}</span></div><div class="v-preview">${escapeHTML(msg.preview || "暂无消息")}</div></div>${msg.unread ? `<span class="v-unread">${msg.unread}</span>` : ""}</button>`;
+                return `<button class="v-msg" data-action="open-message" data-message-id="${escapeHTML(msg.id)}" data-longpress="delete-dm-conversation"><div class="v-mini">${avatarHTML(msg.avatar, msg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(msg.name)}<span class="v-relation ${rel.cls}">${escapeHTML(rel.text)}</span></div><div class="v-preview">${escapeHTML(msg.preview || "暂无消息")}</div></div>${msg.unread ? `<span class="v-unread">${msg.unread}</span>` : ""}</button>`;
               }).join("")}</div>`;
             };
 
+            const COIN_CNY_RATE = 0.1; // 🔷100 = ¥10
+
+            const detectSettlementCurrency = () => {
+              const configured = String(state.wallet?.settlementCurrency || "").toUpperCase();
+              if (["CNY","USD","JPY","KRW","HKD","EUR"].includes(configured)) return configured;
+              const locale = String(navigator?.language || "zh-CN").toLowerCase();
+              if (locale.includes("ja")) return "JPY";
+              if (locale.includes("ko")) return "KRW";
+              if (locale.includes("hk")) return "HKD";
+              if (locale.includes("us") || locale.startsWith("en")) return "USD";
+              if (locale.includes("de") || locale.includes("fr") || locale.includes("it") || locale.includes("es") || locale.includes("nl")) return "EUR";
+              return "CNY";
+            };
+
+            const currencySymbol = code => ({ CNY:"¥", USD:"$", JPY:"¥", KRW:"₩", HKD:"HK$", EUR:"€" }[String(code)] || String(code));
+
+            const walletCurrency = () => {
+              const currency = detectSettlementCurrency();
+              state.wallet.settlementCurrency = currency;
+              return currency;
+            };
+
+            const cnyToCurrency = (cny, currency = walletCurrency()) => {
+              const rate = Number(state.wallet?.fxRates?.[currency] || (currency === "CNY" ? 1 : 0));
+              return currency === "CNY" ? Number(cny || 0) : Number(cny || 0) * (rate || 1);
+            };
+
+            const currencyToCNY = (value, currency = walletCurrency()) => {
+              const rate = Number(state.wallet?.fxRates?.[currency] || (currency === "CNY" ? 1 : 0));
+              return currency === "CNY" ? Number(value || 0) : Number(value || 0) / (rate || 1);
+            };
+
+            const formatCash = (cny, { signed = false } = {}) => {
+              const currency = walletCurrency();
+              const converted = cnyToCurrency(cny, currency);
+              const digits = ["JPY","KRW"].includes(currency) ? 0 : 2;
+              const sign = signed ? (converted > 0 ? "+" : converted < 0 ? "-" : "") : (converted < 0 ? "-" : "");
+              const abs = Math.abs(converted);
+              return `${sign}${currencySymbol(currency)}${abs.toLocaleString("zh-CN", { minimumFractionDigits: digits, maximumFractionDigits: digits })}`;
+            };
+
+            const formatCoin = (value, { signed = false } = {}) => {
+              const n = Number(value || 0);
+              const sign = signed ? (n > 0 ? "+" : n < 0 ? "-" : "") : (n < 0 ? "-" : "");
+              return `${sign}🔷 ${Math.abs(Math.round(n)).toLocaleString("zh-CN")}`;
+            };
+
+            let fxLoading = false;
+            const loadWalletFxRates = async ({ force = false } = {}) => {
+              const stale = Date.now() - Number(state.wallet?.fxUpdatedAt || 0) > 6 * 60 * 60 * 1000;
+              if (fxLoading || (!force && !stale)) return;
+              fxLoading = true;
+              try {
+                const res = await fetch("https://api.frankfurter.app/latest?from=CNY");
+                if (!res.ok) throw new Error(`FX ${res.status}`);
+                const data = await res.json();
+                const rates = { CNY: 1 };
+                ["USD","JPY","KRW","HKD","EUR"].forEach(code => {
+                  if (Number(data?.rates?.[code]) > 0) rates[code] = Number(data.rates[code]);
+                });
+                state.wallet.fxRates = { ...(state.wallet.fxRates || {}), ...rates };
+                state.wallet.fxUpdatedAt = Date.now();
+                await persist();
+                if (state.activePage === "wallet") renderWallet();
+              } catch (err) {
+                // Offline fallback only; live values will refresh again when the endpoint is reachable.
+                state.wallet.fxRates = {
+                  CNY: 1,
+                  USD: Number(state.wallet.fxRates?.USD || 0.149),
+                  JPY: Number(state.wallet.fxRates?.JPY || 21.9),
+                  KRW: Number(state.wallet.fxRates?.KRW || 207),
+                  HKD: Number(state.wallet.fxRates?.HKD || 1.16),
+                  EUR: Number(state.wallet.fxRates?.EUR || 0.128)
+                };
+              } finally {
+                fxLoading = false;
+              }
+            };
+
+            const walletTxHTML = tx => {
+              const cash = tx.cashCNY != null ? Number(tx.cashCNY || 0) : null;
+              const coin = tx.coin != null ? Number(tx.coin || 0) : null;
+              const amount = coin != null ? formatCoin(coin, { signed: true }) : formatCash(cash || 0, { signed: true });
+              const cls = coin != null ? " is-coin" : "";
+              const dateText = tx.at ? new Date(Number(tx.at)).toLocaleDateString("zh-CN", { month:"numeric", day:"numeric" }) : "";
+              return `<div class="v-tx"><span>${escapeHTML(tx.title || "流水")}<small>${escapeHTML(tx.note || "")}${dateText ? ` · ${escapeHTML(dateText)}` : ""}</small></span><b class="v-tx-amount${cls}">${escapeHTML(amount)}</b></div>`;
+            };
+
             const renderWallet = () => {
-              q('[data-role="balance"]').textContent = `¥ ${Number(state.wallet.balance || 0).toLocaleString("zh-CN", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-              q('[data-role="transactions"]').innerHTML = state.wallet.transactions.map(tx => `<div class="v-tx"><span>${escapeHTML(tx.title)}<small>${escapeHTML(tx.note)}</small></span><b>${formatMoney(tx.amount)}</b></div>`).join("");
+              const assetHost = q('[data-role="wallet-assets"]');
+              const accountHost = q('[data-role="wallet-account"]');
+              const txHost = q('[data-role="transactions"]');
+              if (!assetHost || !accountHost || !txHost) return;
+              const currency = walletCurrency();
+              const cashCNY = Number(state.wallet.cashBalanceCNY || 0);
+              const coin = Math.max(0, Number(state.wallet.coinBalance || 0));
+              assetHost.innerHTML = `<div class="v-wallet-assets"><section class="v-wallet-asset is-coin"><div><div class="v-wallet-asset-label">Vela Coin</div><div class="v-wallet-asset-value">🔷 ${Math.round(coin).toLocaleString("zh-CN")}</div><div class="v-wallet-asset-sub">打赏、礼物、订阅都使用 Vela Coin</div></div><div class="v-wallet-asset-actions"><button data-action="wallet-recharge-coin">充值 Coin</button><button data-action="wallet-cashout-coin">兑换提现</button></div></section><section class="v-wallet-asset is-cash"><div><div class="v-wallet-asset-label">可提现余额 · ${escapeHTML(currency)}</div><div class="v-wallet-asset-value">${escapeHTML(formatCash(cashCNY))}</div><div class="v-wallet-asset-sub">商务直接入账；订阅每周一自动结算</div></div><div class="v-wallet-asset-actions"><button data-action="wallet-withdraw">提现</button><button data-action="wallet-refresh-fx">更新汇率</button></div></section></div>`;
+
+              const account = state.wallet.linkedAccount;
+              accountHost.innerHTML = account
+                ? `<div class="v-wallet-account"><div class="v-wallet-account-head"><div><div class="v-wallet-asset-label">提现账户</div><div class="v-name">${escapeHTML(account.bankName || "Vela Bank")}</div></div><button data-action="wallet-edit-account">管理</button></div><div class="v-wallet-card-no">${escapeHTML(account.first4 || "0000")} ·••• ·••• ${escapeHTML(account.last4 || "0000")}</div><div class="v-hint" style="margin-top:6px">交易 PIN 已设置 · 仅用于 Vela 模拟结算</div></div>`
+                : `<button class="v-wallet-account" style="width:100%;text-align:left;color:inherit" data-action="wallet-bind-account"><div class="v-wallet-account-head"><div><div class="v-wallet-asset-label">提现账户</div><div class="v-name">绑定后才能提现 / 使用账户充值</div></div><b>＋</b></div><div class="v-hint" style="margin-top:7px">Vela 模拟账户，请勿填写真实银行卡号或真实银行密码。</div></button>`;
+
+              txHost.innerHTML = safeArray(state.wallet.transactions).slice(0, 80).map(walletTxHTML).join("") || '<div class="v-profile-empty">还没有流水。</div>';
+              loadWalletFxRates();
+            };
+
+            const hashWalletPin = async pin => {
+              const value = String(pin || "");
+              try {
+                if (crypto?.subtle && typeof TextEncoder !== "undefined") {
+                  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(`vela-wallet:${value}`));
+                  return [...new Uint8Array(bytes)].map(b => b.toString(16).padStart(2, "0")).join("");
+                }
+              } catch (_) {}
+              let h = 2166136261;
+              for (let i = 0; i < value.length; i += 1) { h ^= value.charCodeAt(i); h = Math.imul(h, 16777619); }
+              return `fallback-${Math.abs(h >>> 0)}`;
+            };
+
+            const openWalletBind = () => {
+              const account = state.wallet.linkedAccount || {};
+              openScreen("wallet-flow", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="wallet-flow">‹</button><div class="v-meta"><strong>${state.wallet.linkedAccount ? "管理提现账户" : "绑定提现账户"}</strong><div class="v-hint">Vela 模拟结算账户</div></div><button class="v-head-action" data-action="save-wallet-account">保存</button></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-editform"><div class="v-field"><label>银行名称</label><input data-wallet-field="bankName" maxlength="40" value="${escapeHTML(account.bankName || "")}" placeholder="例如 Vela Bank"></div><div class="v-fieldpair"><div class="v-field"><label>账号前四位</label><input data-wallet-field="first4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.first4 || "")}" placeholder="1234"></div><div class="v-field"><label>账号后四位</label><input data-wallet-field="last4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.last4 || "")}" placeholder="5678"></div></div><div class="v-field"><label>Vela 交易 PIN · 6 位</label><input data-wallet-field="pin" type="password" inputmode="numeric" maxlength="6" placeholder="${state.wallet.linkedAccount ? "不修改可留空" : "仅用于 Vela 模拟验证"}"></div></div><div class="v-publish-note" style="margin-top:12px">不要输入真实银行卡完整号码或真实银行密码。这里只保存银行名称、前四位、后四位以及不可逆的 Vela PIN 摘要。</div></div></div>`);
+            };
+
+            const saveWalletAccount = async () => {
+              const screen = q('[data-screen="wallet-flow"]');
+              if (!screen) return;
+              const read = name => String(screen.querySelector(`[data-wallet-field="${name}"]`)?.value || "").trim();
+              const bankName = read("bankName");
+              const first4 = read("first4").replace(/\D/g, "").slice(0, 4);
+              const last4 = read("last4").replace(/\D/g, "").slice(0, 4);
+              const pin = read("pin").replace(/\D/g, "").slice(0, 6);
+              if (!bankName || first4.length !== 4 || last4.length !== 4) { toast("请填写银行名称和账号前 / 后四位"); return; }
+              if (!state.wallet.linkedAccount && pin.length !== 6) { toast("请设置 6 位 Vela 交易 PIN"); return; }
+              if (pin && pin.length !== 6) { toast("Vela 交易 PIN 必须是 6 位"); return; }
+              const old = state.wallet.linkedAccount || {};
+              state.wallet.linkedAccount = { bankName, first4, last4, pinHash: pin ? await hashWalletPin(pin) : old.pinHash || "" };
+              await persist();
+              closeScreen("wallet-flow");
+              renderWallet();
+              toast("提现账户已保存");
+            };
+
+            const verifyWalletPin = async pin => {
+              const account = state.wallet.linkedAccount;
+              if (!account?.pinHash) return false;
+              return (await hashWalletPin(String(pin || "").replace(/\D/g, "").slice(0, 6))) === account.pinHash;
+            };
+
+            const coinCNYValue = coin => Number(coin || 0) * COIN_CNY_RATE;
+
+            const openWalletCoinRecharge = () => {
+              if (!state.wallet.linkedAccount) { openWalletBind(); return; }
+              openScreen("wallet-flow", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="wallet-flow">‹</button><div class="v-meta"><strong>充值 Vela Coin</strong><div class="v-hint">🔷100 = ¥10 基准价值</div></div></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-editform"><div class="v-field"><label>充值数量</label><input data-wallet-recharge-field="coin" type="number" min="10" step="10" value="100"></div><div class="v-field"><label>付款方式</label><select data-wallet-recharge-field="source"><option value="cash">使用可提现余额</option><option value="account">使用已绑定模拟账户</option></select></div><div class="v-field"><label>Vela 交易 PIN</label><input data-wallet-recharge-field="pin" type="password" inputmode="numeric" maxlength="6" placeholder="6 位 PIN"></div></div><div class="v-wallet-convert-preview" style="margin-top:10px">Coin 充值只发生在 Vela 模拟钱包中，不会发起真实银行卡交易。</div><button class="v-action" style="margin-top:12px;width:100%" data-action="confirm-wallet-coin-recharge">确认充值</button></div></div>`);
+            };
+
+            const confirmWalletCoinRecharge = async () => {
+              const screen = q('[data-screen="wallet-flow"]');
+              const coin = Math.max(0, Math.round(Number(screen?.querySelector('[data-wallet-recharge-field="coin"]')?.value || 0)));
+              const source = String(screen?.querySelector('[data-wallet-recharge-field="source"]')?.value || "cash");
+              const pin = String(screen?.querySelector('[data-wallet-recharge-field="pin"]')?.value || "");
+              if (coin < 10) { toast("至少充值 🔷10"); return; }
+              if (!(await verifyWalletPin(pin))) { toast("Vela 交易 PIN 不正确"); return; }
+              const costCNY = coinCNYValue(coin);
+              if (source === "cash") {
+                if (Number(state.wallet.cashBalanceCNY || 0) < costCNY) { toast("可提现余额不足"); return; }
+                state.wallet.cashBalanceCNY -= costCNY;
+                state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-cash2coin`, type:"cash", title:"余额购买 Coin", note:`兑换 ${formatCoin(coin)}`, cashCNY:-costCNY, at:Date.now() });
+              } else {
+                state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-account2coin`, type:"coin", title:"模拟账户充值", note:`${state.wallet.linkedAccount.bankName} · ${state.wallet.linkedAccount.first4}••••${state.wallet.linkedAccount.last4}`, coin, at:Date.now() });
+              }
+              state.wallet.coinBalance = Number(state.wallet.coinBalance || 0) + coin;
+              if (source === "cash") state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-coinin`, type:"coin", title:"Coin 充值", note:"由可提现余额兑换", coin, at:Date.now() });
+              await persist();
+              closeScreen("wallet-flow");
+              renderWallet();
+            };
+
+            const openWalletCoinCashout = () => {
+              if (!state.wallet.linkedAccount) { openWalletBind(); return; }
+              openScreen("wallet-flow", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="wallet-flow">‹</button><div class="v-meta"><strong>Coin 兑换</strong><div class="v-hint">转入可提现余额</div></div></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-editform"><div class="v-field"><label>兑换 Coin</label><input data-wallet-cashout-field="coin" type="number" min="10" step="10" value="100"></div><div class="v-field"><label>Vela 交易 PIN</label><input data-wallet-cashout-field="pin" type="password" inputmode="numeric" maxlength="6" placeholder="6 位 PIN"></div></div><div class="v-wallet-convert-preview" style="margin-top:10px">🔷100 = ¥10 CNY 基准；钱包会按当前汇率显示你的结算币种。</div><button class="v-action" style="margin-top:12px;width:100%" data-action="confirm-wallet-coin-cashout">兑换到余额</button></div></div>`);
+            };
+
+            const confirmWalletCoinCashout = async () => {
+              const screen = q('[data-screen="wallet-flow"]');
+              const coin = Math.max(0, Math.round(Number(screen?.querySelector('[data-wallet-cashout-field="coin"]')?.value || 0)));
+              const pin = String(screen?.querySelector('[data-wallet-cashout-field="pin"]')?.value || "");
+              if (coin < 10 || Number(state.wallet.coinBalance || 0) < coin) { toast("Coin 余额不足"); return; }
+              if (!(await verifyWalletPin(pin))) { toast("Vela 交易 PIN 不正确"); return; }
+              const cashCNY = coinCNYValue(coin);
+              state.wallet.coinBalance -= coin;
+              state.wallet.cashBalanceCNY = Number(state.wallet.cashBalanceCNY || 0) + cashCNY;
+              state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-coinout`, type:"coin", title:"Coin 兑换", note:`转入 ${formatCash(cashCNY)}`, coin:-coin, at:Date.now() });
+              state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-cashin`, type:"cash", title:"Coin 兑换入账", note:`来自 ${formatCoin(coin)}`, cashCNY, at:Date.now() });
+              await persist();
+              closeScreen("wallet-flow");
+              renderWallet();
+            };
+
+            const openWalletWithdraw = () => {
+              if (!state.wallet.linkedAccount) { openWalletBind(); return; }
+              openScreen("wallet-flow", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="wallet-flow">‹</button><div class="v-meta"><strong>提现</strong><div class="v-hint">${escapeHTML(state.wallet.linkedAccount.bankName || "提现账户")}</div></div></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-editform"><div class="v-field"><label>提现金额 · ${escapeHTML(walletCurrency())}</label><input data-wallet-withdraw-field="amount" type="number" min="0.01" step="0.01" placeholder="${escapeHTML(formatCash(state.wallet.cashBalanceCNY || 0))}"></div><div class="v-field"><label>Vela 交易 PIN</label><input data-wallet-withdraw-field="pin" type="password" inputmode="numeric" maxlength="6"></div></div><div class="v-publish-note" style="margin-top:10px">这是 Vela 模拟提现，不会产生真实银行转账。</div><button class="v-action" style="margin-top:12px;width:100%" data-action="confirm-wallet-withdraw">确认提现</button></div></div>`);
+            };
+
+            const confirmWalletWithdraw = async () => {
+              const screen = q('[data-screen="wallet-flow"]');
+              const amountLocal = Math.max(0, Number(screen?.querySelector('[data-wallet-withdraw-field="amount"]')?.value || 0));
+              const pin = String(screen?.querySelector('[data-wallet-withdraw-field="pin"]')?.value || "");
+              const cny = currencyToCNY(amountLocal);
+              if (!amountLocal || cny > Number(state.wallet.cashBalanceCNY || 0)) { toast("可提现余额不足"); return; }
+              if (!(await verifyWalletPin(pin))) { toast("Vela 交易 PIN 不正确"); return; }
+              state.wallet.cashBalanceCNY -= cny;
+              state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-withdraw`, type:"cash", title:"提现", note:`${state.wallet.linkedAccount.bankName} · ${state.wallet.linkedAccount.first4}••••${state.wallet.linkedAccount.last4}`, cashCNY:-cny, at:Date.now() });
+              await persist();
+              closeScreen("wallet-flow");
+              renderWallet();
+              toast("Vela 模拟提现已完成");
+            };
+
+            const recordSubscriptionAccrual = (ownerType, ownerId, coinAmount, note = "") => {
+              const amount = Math.max(0, Math.round(Number(coinAmount || 0)));
+              if (!amount) return;
+              if (ownerType === "identity" && String(ownerId) === String(state.viewerIdentityId)) {
+                state.wallet.subscriptionAccruals.push({ id:`subacc-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}`, ownerType, ownerId, coinAmount:amount, note, at:Date.now(), settled:false });
+              } else if (ownerType === "channel") {
+                const earning = state.roleEarnings[ownerId] || (state.roleEarnings[ownerId] = { coin:0, cashCNY:0, subscriptionCoin:0, liveHistory:[] });
+                earning.subscriptionCoin = Number(earning.subscriptionCoin || 0) + amount;
+              }
+            };
+
+            const syncIncomingFanSubscriptions = () => {
+              const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId));
+              if (!identity) return;
+              const coinPrice = Math.max(1, Math.round(Number(getSubscriptionProfile("identity", identity.id).paid.coinPrice || 0)));
+              let changed = false;
+              state.messages.forEach(msg => {
+                if (msg?.fanTier !== "paid" || msg.subscriptionAccrued) return;
+                msg.subscriptionAccrued = true;
+                msg.subscriptionCoinSnapshot = coinPrice;
+                state.wallet.subscriptionAccruals.push({
+                  id:`subacc-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}`,
+                  ownerType:"identity",
+                  ownerId:identity.id,
+                  subscriberId:String(msg.id || ""),
+                  coinAmount:coinPrice,
+                  note:`${msg.name || "付费粉丝"} · 订阅价快照 🔷${coinPrice}`,
+                  at:Number(msg.subscriptionStartedAt || Date.now()),
+                  settled:false
+                });
+                changed = true;
+              });
+              if (changed) persist();
+            };
+
+            const mondayStart = dateValue => {
+              const date = new Date(dateValue);
+              date.setHours(0,0,0,0);
+              const day = date.getDay();
+              const diff = day === 0 ? -6 : 1 - day;
+              date.setDate(date.getDate() + diff);
+              return date.getTime();
+            };
+
+            const settleWeeklySubscriptions = async () => {
+              const cutoff = mondayStart(Date.now());
+              const pending = safeArray(state.wallet.subscriptionAccruals).filter(item => !item.settled && Number(item.at || 0) < cutoff);
+              if (!pending.length) return;
+              const coin = pending.reduce((sum, item) => sum + Number(item.coinAmount || 0), 0);
+              const cashCNY = coinCNYValue(coin);
+              pending.forEach(item => { item.settled = true; item.settledAt = Date.now(); });
+              state.wallet.cashBalanceCNY = Number(state.wallet.cashBalanceCNY || 0) + cashCNY;
+              state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-weeklysub`, type:"cash", title:"订阅周结算", note:`本周订阅收入 ${formatCoin(coin)} · 无平台抽成`, cashCNY, at:Date.now() });
+              await persist();
             };
 
             const openScreen = (name, html) => {
@@ -1419,17 +1803,22 @@
                 const baseViewers = followerBase || seedViewers;
                 const currentViewers = followers > 0 ? Math.max(1, Math.round((baseViewers + seedViewers) / 2)) : Math.round(seedViewers);
                 const scale = Math.max(1, Math.round(currentViewers / 1200));
+                const seededGifts = isOwnLiveSession(live) ? [] : [
+                  { user: "Mika", amount: 180 * scale },
+                  { user: "yoo_n", amount: 110 * scale },
+                  { user: "Sato_Aki", amount: 70 * scale }
+                ];
                 state.liveStats[id] = {
                   baseViewers,
                   currentViewers,
                   peakViewers: currentViewers,
                   heat: 50,
                   userGiftTotal: 0,
-                  gifts: [
-                    { user: "Mika", amount: 180 * scale },
-                    { user: "yoo_n", amount: 110 * scale },
-                    { user: "Sato_Aki", amount: 70 * scale }
-                  ]
+                  tipReceivedCoin: 0,
+                  giftReceivedCoin: seededGifts.reduce((sum, item) => sum + Number(item.amount || 0), 0),
+                  gifts: seededGifts,
+                  lottery: null,
+                  ad: live?.business ? { ...live.business } : null
                 };
               }
               return state.liveStats[id];
@@ -1453,15 +1842,15 @@
               if (viewers) viewers.textContent = `${formatViewers(stats.currentViewers || 0)} 人正在观看`;
               const trigger = q('[data-screen="live"] [data-role="gift-rank-trigger"]');
               const ranking = getGiftRanking(live);
-              if (trigger) trigger.textContent = ranking.length ? `👑 ${ranking[0].user} · ¥${Math.round(ranking[0].amount)}` : "🎁 礼物榜";
+              if (trigger) trigger.textContent = ranking.length ? `👑 ${ranking[0].user} · 🔷${Math.round(ranking[0].amount)}` : "🎁 礼物榜";
               const rows = q('[data-screen="live"] [data-role="gift-rank-rows"]');
               if (rows) {
                 const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
                 const ownHandle = String(identity?.handle || identity?.displayName || "@user");
-                rows.innerHTML = ranking.slice(0,8).map((item,index) => `<div class="v-rank-row"><span class="v-rank-no">${index < 3 ? ["👑","2","3"][index] : index + 1}</span><span class="v-rank-user">${escapeHTML(item.user)}${item.user === ownHandle ? " · 你" : ""}</span><span class="v-rank-amount">¥${Math.round(item.amount).toLocaleString("zh-CN")}</span></div>`).join("") || '<div class="v-hint">本场还没有人送礼物。</div>';
+                rows.innerHTML = ranking.slice(0,8).map((item,index) => `<div class="v-rank-row"><span class="v-rank-no">${index < 3 ? ["👑","2","3"][index] : index + 1}</span><span class="v-rank-user">${escapeHTML(item.user)}${item.user === ownHandle ? " · 你" : ""}</span><span class="v-rank-amount">🔷${Math.round(item.amount).toLocaleString("zh-CN")}</span></div>`).join("") || '<div class="v-hint">本场还没有人送礼物。</div>';
               }
               const balance = q('[data-screen="live"] [data-role="gift-balance"]');
-              if (balance) balance.textContent = `钱包余额 ¥${Number(state.wallet?.balance || 0).toLocaleString("zh-CN", {maximumFractionDigits:2})}`;
+              if (balance) balance.textContent = `Vela Coin 余额 🔷${Math.round(Number(state.wallet?.coinBalance || 0)).toLocaleString("zh-CN")}`;
             };
 
             const advanceViewerCount = (live, { heatBoost = 0 } = {}) => {
@@ -1549,6 +1938,138 @@
               requestAnimationFrame(() => { host.scrollTop = host.scrollHeight; });
             };
 
+            let liveLotteryTimer = null;
+
+            const acceptedBusinessCards = () => {
+              const rows = [];
+              Object.entries(state.dmThreads || {}).forEach(([messageId, thread]) => {
+                safeArray(thread).forEach(item => {
+                  if (item?.kind === "business" && item?.status === "accepted") rows.push({ messageId, card:item });
+                });
+              });
+              return rows;
+            };
+
+            const livePrizeRowHTML = (item = {}, index = 0) => `<div class="v-prize-row" data-prize-row><input data-prize-field="name" maxlength="20" value="${escapeHTML(item.name || `${["一","二","三","四","五"][index] || index + 1}等奖`)}" placeholder="奖项"><input data-prize-field="count" type="number" min="1" max="100" value="${Math.max(1, Number(item.count || 1))}" placeholder="人数"><input data-prize-field="content" maxlength="100" value="${escapeHTML(item.content || "")}" placeholder="奖品内容"><input data-prize-field="value" type="number" min="0" value="${Math.max(0, Number(item.value || 0))}" placeholder="估值"><button class="v-prize-remove" data-action="remove-live-prize-row">删除这一档</button></div>`;
+
+            const closeLiveEconomyPanel = () => q('[data-screen="live"] [data-role="live-economy-panel"]')?.classList.remove("is-open");
+
+            const openLiveLotteryPanel = () => {
+              const live = state.liveSession;
+              if (!live || !isOwnLiveSession(live)) return;
+              const stats = getLiveStats(live);
+              const lottery = stats.lottery;
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              if (!panel) return;
+              if (lottery?.status === "active") {
+                const left = Math.max(0, Number(lottery.endsAt || 0) - Date.now());
+                panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场抽奖 · 进行中</h3><button data-action="close-live-economy">×</button></div><div class="v-wallet-convert-preview" style="margin-top:10px">剩余约 ${Math.max(0, Math.ceil(left/60000))} 分钟 · ${safeArray(lottery.prizes).length} 档奖项</div>${safeArray(lottery.prizes).map(item => `<div class="v-row"><div><b>${escapeHTML(item.name)}</b><small>${escapeHTML(item.content || "奖品")} · ${Number(item.count || 1)} 人</small></div><span>${item.value ? `¥${Number(item.value).toLocaleString("zh-CN")}` : ""}</span></div>`).join("")}<div class="v-live-tool-actions"><button class="is-light" data-action="resolve-live-lottery">立即开奖</button><button class="is-primary" data-action="close-live-economy">返回直播</button></div></div>`;
+              } else if (lottery?.status === "ended") {
+                panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场抽奖 · 已开奖</h3><button data-action="close-live-economy">×</button></div>${safeArray(lottery.results).map(item => `<div class="v-row"><div><b>${escapeHTML(item.prizeName)}</b><small>${escapeHTML(item.winners.join("、") || "暂无参与者")}</small></div></div>`).join("")}<div class="v-live-tool-actions"><button class="is-primary" data-action="new-live-lottery">再开一轮</button></div></div>`;
+              } else {
+                panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>设置本场抽奖</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>开奖倒计时 · 分钟</label><input data-live-lottery-minutes type="number" min="1" max="120" value="5"></div><div data-role="live-prize-rows">${livePrizeRowHTML({name:"一等奖"},0)}${livePrizeRowHTML({name:"二等奖"},1)}</div><button class="v-action light" style="width:100%;margin-top:8px" data-action="add-live-prize-row">＋ 添加奖项</button><div class="v-live-tool-actions"><button class="is-primary" data-action="save-live-lottery">开始倒计时</button></div></div>`;
+              }
+              panel.classList.add("is-open");
+            };
+
+            const saveLiveLottery = async () => {
+              const live = state.liveSession;
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              if (!live || !panel || !isOwnLiveSession(live)) return;
+              const minutes = Math.max(1, Math.min(120, Number(panel.querySelector('[data-live-lottery-minutes]')?.value || 5)));
+              const prizes = [...panel.querySelectorAll('[data-prize-row]')].map(row => ({
+                name:String(row.querySelector('[data-prize-field="name"]')?.value || "奖项").trim(),
+                count:Math.max(1, Math.min(100, Number(row.querySelector('[data-prize-field="count"]')?.value || 1))),
+                content:String(row.querySelector('[data-prize-field="content"]')?.value || "").trim(),
+                value:Math.max(0, Number(row.querySelector('[data-prize-field="value"]')?.value || 0))
+              })).filter(item => item.name);
+              if (!prizes.length) { toast("至少保留一个奖项"); return; }
+              const stats = getLiveStats(live);
+              stats.lottery = { id:`lottery-${Date.now().toString(36)}`, status:"active", startedAt:Date.now(), endsAt:Date.now()+minutes*60000, prizes, results:[] };
+              await persist();
+              if (liveLotteryTimer) clearTimeout(liveLotteryTimer);
+              liveLotteryTimer = setTimeout(() => resolveLiveLottery(), minutes*60000);
+              openLiveLotteryPanel();
+              toast(`抽奖已开始 · ${minutes} 分钟后开奖`);
+            };
+
+            const resolveLiveLottery = async () => {
+              const live = state.liveSession;
+              if (!live) return;
+              const stats = getLiveStats(live);
+              const lottery = stats.lottery;
+              if (!lottery || lottery.status !== "active") return;
+              const pool = [...new Set(state.liveChat.map(line => String(line.user || "")).filter(name => name && name !== "系统" && name !== (state.identities.find(x => x.id === state.viewerIdentityId)?.handle || "")))];
+              let cursor = 0;
+              lottery.results = safeArray(lottery.prizes).map(prize => {
+                const winners = [];
+                for (let i = 0; i < Number(prize.count || 1) && pool.length; i += 1) {
+                  winners.push(pool[(cursor + i) % pool.length]);
+                }
+                cursor += Number(prize.count || 1);
+                return { prizeName:prize.name, content:prize.content, winners };
+              });
+              lottery.status = "ended";
+              lottery.endedAt = Date.now();
+              const summary = lottery.results.map(item => `${item.prizeName}：${item.winners.join("、") || "暂无参与者"}`).join("；");
+              state.liveChat.push({ user:"系统", avatar:"🎉", text:`本场抽奖结果：${summary}`, translation:"", at:Date.now() });
+              const ownerType = live.ownerType || (isOwnLiveSession(live) ? "identity" : "channel");
+              const ownerId = live.ownerId || live.id;
+              pushCommunityBotEvent(ownerType, ownerId, "lottery_result", { title:"本场抽奖结果", text:summary });
+              await persist();
+              renderLiveChatLines();
+              openLiveLotteryPanel();
+            };
+
+            const openLiveAdPanel = () => {
+              const live = state.liveSession;
+              if (!live || !isOwnLiveSession(live)) return;
+              const stats = getLiveStats(live);
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              if (!panel) return;
+              const current = stats.ad || {};
+              const accepted = acceptedBusinessCards();
+              const currentSource = current.sourceMessageId && current.sourceCardId ? `${current.sourceMessageId}::${current.sourceCardId}` : "";
+              const options = accepted.map(({messageId, card}) => {
+                const value = `${messageId}::${card.id}`;
+                return `<option value="${escapeHTML(value)}" ${value === currentSource ? "selected" : ""}>${escapeHTML(`${card.brandName || "品牌"} · ${card.productName || card.title || "合作"}`)}</option>`;
+              }).join("");
+              panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场关联广告</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>关联已接受的商务合作</label><select data-live-ad-field="source"><option value="">不关联卡片 / 手动填写</option>${options}</select></div><div class="v-field"><label>品牌 / 产品</label><input data-live-ad-field="label" maxlength="100" value="${escapeHTML(current.label || current.productName || current.brandName || "")}" placeholder="品牌或产品名称"></div><div class="v-field"><label>广告词</label><textarea data-live-ad-field="copy" maxlength="600">${escapeHTML(current.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input data-live-ad-field="link" value="${escapeHTML(current.adLink || "")}" placeholder="https://..."></div><div class="v-live-tool-actions"><button class="is-light" data-action="clear-live-ad">清除关联</button><button class="is-primary" data-action="save-live-ad">挂到本场直播</button></div></div>`;
+              panel.classList.add("is-open");
+            };
+
+            const saveLiveAd = async () => {
+              const live = state.liveSession;
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              if (!live || !panel) return;
+              const read = name => String(panel.querySelector(`[data-live-ad-field="${name}"]`)?.value || "").trim();
+              const existing = getLiveStats(live).ad || {};
+              let ad = { ...existing, label:read("label"), adCopy:read("copy"), adLink:read("link"), cashAmountCNY:Number(existing.cashAmountCNY || 0) };
+              const source = read("source");
+              if (source) {
+                const [messageId, cardId] = source.split("::");
+                const card = findDMCard(messageId, cardId);
+                if (card?.kind === "business" && card.status === "accepted") {
+                  ad = { ...ad, brandName:card.brandName || "", productName:card.productName || "", label:ad.label || card.productName || card.brandName || "合作广告", adCopy:ad.adCopy || card.adCopy || "", adLink:ad.adLink || card.adLink || "", cashAmountCNY:Number(card.cashAmountCNY || 0), sourceMessageId:messageId, sourceCardId:cardId };
+                }
+              }
+              getLiveStats(live).ad = ad;
+              state.liveSession.ad = { ...ad };
+              await persist();
+              closeLiveEconomyPanel();
+              openLive({ ...state.liveSession });
+            };
+
+            const clearLiveAd = async () => {
+              const live = state.liveSession;
+              if (!live) return;
+              getLiveStats(live).ad = null;
+              state.liveSession.ad = null;
+              await persist();
+              closeLiveEconomyPanel();
+              openLive({ ...state.liveSession });
+            };
+
             const openLive = (live) => {
               state.liveSession = { ...live };
               const currentLive = state.liveSession;
@@ -1559,6 +2080,8 @@
               getLiveProgress(currentLive);
               getLiveStats(currentLive);
               const own = isOwnLiveSession(currentLive);
+              const liveStats = getLiveStats(currentLive);
+              if (!liveStats.ad && currentLive.business) liveStats.ad = { ...currentLive.business };
               const guests = getLiveGuests(currentLive);
               const mode = currentLive.mode || (guests.length ? (currentLive.cohostMode === "inperson" ? "same-room" : "remote") : "solo");
               currentLive.mode = mode;
@@ -1575,9 +2098,12 @@
               const ageLabel = currentLive.ageRequirement === "18+" ? " · 18+" : "";
               const modeLabel = guests.length ? ` · ${mode === "same-room" ? "线下同镜" : "线上联播"}` : "";
               const viewerComposer = `<div class="v-composer"><input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播">➤</button></div>`;
-              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话…" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">➤</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤">✦</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span><button data-action="open-invite-guest">＋ 邀请嘉宾${guests.length ? ` · ${participants.length}/4` : ""}</button></div></div>`;
+              const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">AD</button></div>` : "";
+              const activeAd = liveStats.ad || currentLive.ad || currentLive.business || null;
+              const adStrip = activeAd && (activeAd.adCopy || activeAd.adLink || activeAd.label || activeAd.productName || activeAd.brandName) ? `<div class="v-live-ad-strip"><b>AD</b><span>${escapeHTML(activeAd.adCopy || activeAd.label || activeAd.productName || activeAd.brandName || "本场合作")}</span>${activeAd.adLink ? `<a href="${escapeHTML(activeAd.adLink)}" target="_blank" rel="noopener">查看链接 ↗</a>` : ""}</div>` : "";
+              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">↑</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤 / 继续">➤</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span><button data-action="open-invite-guest">＋ 邀请嘉宾${guests.length ? ` · ${participants.length}/4` : ""}</button></div></div>`;
 
-              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div>${quickTools}<button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}${adStrip}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 🔷10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 🔷50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 🔷200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 🔷1000</button></div></div><div class="v-live-economy-panel" data-role="live-economy-panel"></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
               renderLiveHUD();
@@ -1593,7 +2119,7 @@
                 const trId = `live-chat-${absoluteIndex}-${String(line.user || "viewer")}`;
                 const translateTool = line.translation ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(trId)}">翻译</button>` : "";
                 const translationBody = line.translation ? `<div class="v-translation" data-translation-id="${escapeHTML(trId)}" hidden>${escapeHTML(line.translation)}</div>` : "";
-                return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user)}</div><div class="v-chatline-text">${escapeHTML(line.text)}</div><div class="v-live-chat-tools">${translateTool}<button data-action="delete-live-chat" data-chat-index="${absoluteIndex}">删除</button></div>${translationBody}</div></div>`;
+                return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user)}${Number(line.tipCoin || 0) > 0 ? `<span class="v-chat-tip">打赏 🔷${Number(line.tipCoin).toLocaleString("zh-CN")}</span>` : ""}</div><div class="v-chatline-text">${escapeHTML(line.text)}</div><div class="v-live-chat-tools">${translateTool}<button data-action="delete-live-chat" data-chat-index="${absoluteIndex}">删除</button></div>${translationBody}</div></div>`;
               }).join("");
               const scroll = q('[data-screen="live"] [data-role="live-chat-scroll"]');
               if (scroll) requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });
@@ -1784,7 +2310,19 @@
                 { user: "yoo_n", avatar: "Y", text: "ㅋㅋㅋ 방금 표정 봤어?", translation: "哈哈哈你们刚刚看到那个表情了吗？" }
               ];
               const base = (nextStep * 2) % chatPool.length;
-              state.liveChat.push(chatPool[base], chatPool[(base + 1) % chatPool.length]);
+              const tipCycle = [0, 20, 0, 50, 10, 0, 100, 0];
+              const first = { ...chatPool[base], tipCoin: tipCycle[nextStep % tipCycle.length] || 0, at:Date.now() };
+              const second = { ...chatPool[(base + 1) % chatPool.length], tipCoin: tipCycle[(nextStep + 3) % tipCycle.length] || 0, at:Date.now()+1 };
+              state.liveChat.push(first, second);
+              const stats = getLiveStats(live);
+              stats.tipReceivedCoin = Number(stats.tipReceivedCoin || 0) + Number(first.tipCoin || 0) + Number(second.tipCoin || 0);
+              if (nextStep % 3 === 0) {
+                const giftSender = first.user || "viewer";
+                const giftCoin = [30, 60, 120][nextStep % 3] || 30;
+                stats.gifts.push({ user:giftSender, amount:giftCoin });
+                stats.giftReceivedCoin = Number(stats.giftReceivedCoin || 0) + giftCoin;
+                state.liveChat.push({ user:"系统", avatar:"🎁", text:`${giftSender} 送出礼物 · 🔷${giftCoin}`, translation:"", at:Date.now()+2 });
+              }
               advanceViewerCount(live, { heatBoost: fromUser ? 2 : 0 });
               renderLiveMoment();
               renderLiveChatLines();
@@ -1891,7 +2429,7 @@
                 paid: {
                   emoji: "💎",
                   name: "会员",
-                  price: 5,
+                  coinPrice: 500,
                   cover: "",
                   intro: "支持喜欢的主播，并解锁付费订阅内容与社群。",
                   benefits: ["付费订阅社群", "付费订阅内容"],
@@ -1899,6 +2437,11 @@
                   ...(current.paid || {})
                 }
               };
+              if (normalized.paid.coinPrice == null) {
+                normalized.paid.coinPrice = current.paid?.price != null ? Math.max(1, Math.round(Number(current.paid.price || 0) * 10)) : 500;
+              }
+              normalized.paid.coinPrice = Math.max(1, Math.round(Number(normalized.paid.coinPrice || 500)));
+              delete normalized.paid.price;
               state.subscriptionProfiles[key] = normalized;
               return normalized;
             };
@@ -1913,7 +2456,7 @@
                 const label = paid ? (currentTier === "paid" ? "当前订阅" : currentTier === "free" ? "升级付费" : "付费订阅") : (isCurrent ? "已解锁" : "免费订阅");
                 button = `<button class="v-membership-button ${isCurrent ? "is-current" : ""}" data-action="subscribe-channel" data-channel-id="${escapeHTML(entity.id)}" data-tier="${tier}">${label}</button>`;
               }
-              return `<article class="v-membership-card ${paid ? "is-paid" : ""}"><div class="v-membership-cover">${cover}</div><div class="v-membership-body"><div class="v-membership-title">${escapeHTML(cfg.name || (paid ? "会员" : "支持者"))}</div><div class="v-membership-price">${paid ? `¥${Number(cfg.price || 0).toLocaleString("zh-CN")}` : "免费"}${paid ? "<small>/月</small>" : ""}</div>${button}<div class="v-membership-intro">${escapeHTML(cfg.intro || "")}</div>${benefits ? `<div class="v-membership-benefits">${benefits}</div>` : ""}<div class="v-membership-community">对应群聊<b>${escapeHTML(cfg.communityName || "订阅社群")}</b></div></div></article>`;
+              return `<article class="v-membership-card ${paid ? "is-paid" : ""}"><div class="v-membership-cover">${cover}</div><div class="v-membership-body"><div class="v-membership-title">${escapeHTML(cfg.name || (paid ? "会员" : "支持者"))}</div><div class="v-membership-price">${paid ? `🔷${Number(cfg.coinPrice || 0).toLocaleString("zh-CN")}` : "免费"}${paid ? "<small>/月</small>" : ""}</div>${button}<div class="v-membership-intro">${escapeHTML(cfg.intro || "")}</div>${benefits ? `<div class="v-membership-benefits">${benefits}</div>` : ""}<div class="v-membership-community">对应群聊<b>${escapeHTML(cfg.communityName || "订阅社群")}</b></div></div></article>`;
             };
 
             const renderProfileTab = (ownerType, id, tab = "activity") => {
@@ -1986,7 +2529,7 @@
                   const label = paid
                     ? `${escapeHTML(tierCfg.emoji || "💎")} ${escapeHTML(tierCfg.name || "付费订阅")}`
                     : `${escapeHTML(tierCfg.emoji || "🌊")} ${escapeHTML(tierCfg.name || "免费订阅")}`;
-                  return `<article class="v-my-sub-card"><div class="v-my-sub-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-meta"><div class="v-my-sub-title">${escapeHTML(channel.name || channel.handle || "频道")}</div><div class="v-my-sub-handle">${escapeHTML(channel.handle || "")}</div></div><span class="v-my-sub-tier ${paid ? "is-paid" : "is-free"}">${label}</span></div><div class="v-my-sub-detail"><div>当前方案 <b>${escapeHTML(tierCfg.name || (paid ? "付费订阅" : "免费订阅"))}${paid ? ` · ¥${Number(tierCfg.price || 0).toLocaleString("zh-CN")}/月` : ""}</b></div><div>对应社群 <b>${escapeHTML(tierCfg.communityName || "订阅社群")}</b></div></div><div class="v-my-sub-actions"><button class="v-continue-sub" data-action="continue-subscription" data-channel-id="${escapeHTML(channel.id)}">继续订阅</button><button class="v-cancel-sub" data-action="cancel-subscription" data-channel-id="${escapeHTML(channel.id)}">取消订阅</button></div></article>`;
+                  return `<article class="v-my-sub-card"><div class="v-my-sub-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-meta"><div class="v-my-sub-title">${escapeHTML(channel.name || channel.handle || "频道")}</div><div class="v-my-sub-handle">${escapeHTML(channel.handle || "")}</div></div><span class="v-my-sub-tier ${paid ? "is-paid" : "is-free"}">${label}</span></div><div class="v-my-sub-detail"><div>当前方案 <b>${escapeHTML(tierCfg.name || (paid ? "付费订阅" : "免费订阅"))}${paid ? ` · 🔷${Number(tierCfg.coinPrice || 0).toLocaleString("zh-CN")}/月` : ""}</b></div><div>对应社群 <b>${escapeHTML(tierCfg.communityName || "订阅社群")}</b></div></div><div class="v-my-sub-actions"><button class="v-continue-sub" data-action="continue-subscription" data-channel-id="${escapeHTML(channel.id)}">继续订阅</button><button class="v-cancel-sub" data-action="cancel-subscription" data-channel-id="${escapeHTML(channel.id)}">取消订阅</button></div></article>`;
                 }).join("");
 
                 host.innerHTML = `<div class="v-own-subscription-tools"><div><h3>我的订阅</h3><p>这里显示你已经订阅的主播。</p></div><button data-action="open-subscription-settings" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">我的频道方案</button></div>${cards ? `<div class="v-my-subscriptions">${cards}</div>` : `<div class="v-profile-empty">还没有订阅任何主播。<br>去喜欢的主播主页「订阅」里选择方案。</div>`}`;
@@ -2433,6 +2976,11 @@
               let replayOwnerType = "";
               let replayOwnerId = "";
               const own = isOwnLiveSession(live);
+              const userEligible = own || Boolean(live.userParticipant);
+              const guests = getLiveGuests(live);
+              const collab = Boolean(guests.length || live.userParticipant);
+              const userShare = userEligible ? (collab ? 0.5 : 1) : 0;
+
               if (own) {
                 const identity = state.identities.find(x => String(x.id) === String(live.ownerId || state.viewerIdentityId));
                 if (identity) {
@@ -2452,6 +3000,44 @@
                 const rec = state.recommendedLives.find(x => String(x.id) === String(live.id));
                 if (rec) rec.live = false;
               }
+
+              const tipCoin = Math.max(0, Math.round(Number(stats.tipReceivedCoin || 0)));
+              const giftCoin = Math.max(0, Math.round(Number(stats.giftReceivedCoin || safeArray(stats.gifts).reduce((sum,item) => sum + Number(item.amount || 0), 0))));
+              const totalCoin = tipCoin + giftCoin;
+              const ad = stats.ad || live.ad || live.business || null;
+              const businessCashCNY = Math.max(0, Number(ad?.cashAmountCNY || 0));
+              const userCoin = Math.round(totalCoin * userShare);
+              const userCashCNY = businessCashCNY * userShare;
+
+              if (userEligible && userCoin > 0) {
+                state.wallet.coinBalance = Number(state.wallet.coinBalance || 0) + userCoin;
+                const tipShare = Math.round(tipCoin * userShare);
+                const giftShare = Math.max(0, userCoin - tipShare);
+                if (tipShare) state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-tips`, type:"coin", title:"直播打赏", note:`${live.title || "本场直播"}${collab ? " · 联播分成 50%" : ""}`, coin:tipShare, at:Date.now() });
+                if (giftShare) state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-gifts`, type:"coin", title:"直播礼物", note:`${live.title || "本场直播"}${collab ? " · 联播分成 50%" : ""}`, coin:giftShare, at:Date.now() });
+              }
+              if (userEligible && userCashCNY > 0) {
+                state.wallet.cashBalanceCNY = Number(state.wallet.cashBalanceCNY || 0) + userCashCNY;
+                state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-biz`, type:"cash", title:"商务合作", note:`${ad?.brandName || ad?.label || "本场关联广告"}${collab ? " · 联播分成 50%" : ""}`, cashCNY:userCashCNY, at:Date.now() });
+              }
+
+              const charIds = new Set();
+              if (replayOwnerType === "channel" && replayOwnerId) charIds.add(String(replayOwnerId));
+              guests.forEach(g => { if (state.channels.some(ch => String(ch.id) === String(g.id))) charIds.add(String(g.id)); });
+              const charPoolCoin = userEligible && collab ? Math.max(0, totalCoin - userCoin) : (userEligible ? 0 : totalCoin);
+              const charPoolCash = userEligible && collab ? Math.max(0, businessCashCNY - userCashCNY) : (userEligible ? 0 : businessCashCNY);
+              const charCount = Math.max(1, charIds.size);
+              charIds.forEach(charId => {
+                const earning = state.roleEarnings[charId] || (state.roleEarnings[charId] = { coin:0, cashCNY:0, subscriptionCoin:0, liveHistory:[] });
+                const coinPart = Math.round(charPoolCoin / charCount);
+                const cashPart = charPoolCash / charCount;
+                earning.coin = Number(earning.coin || 0) + coinPart;
+                earning.cashCNY = Number(earning.cashCNY || 0) + cashPart;
+                earning.liveHistory = safeArray(earning.liveHistory);
+                earning.liveHistory.unshift({ liveId:live.id, title:live.title || "直播", coin:coinPart, cashCNY:cashPart, at:Date.now(), collab });
+                earning.liveHistory = earning.liveHistory.slice(0, 50);
+              });
+
               if (replayOwnerType && replayOwnerId) {
                 const progress = getLiveProgress(live);
                 state.liveReplays.unshift({
@@ -2462,18 +3048,24 @@
                   topic: live.category || "直播",
                   cover: live.cover || "",
                   mode: live.mode || "solo",
-                  participants: getLiveGuests(live).map(item => ({ ...item })),
+                  participants: guests.map(item => ({ ...item })),
                   accessMode: live.accessMode || "public",
                   ageRequirement: live.ageRequirement || "none",
                   startedAt: Number(live.startedAt || Date.now()),
                   peakViewers: Number(stats.peakViewers || stats.currentViewers || 0),
                   gifts: safeArray(stats.gifts).map(item => ({ ...item })),
+                  tipCoin,
+                  giftCoin,
+                  businessCashCNY,
+                  ad: ad ? { ...ad } : null,
+                  lottery: stats.lottery ? JSON.parse(JSON.stringify(stats.lottery)) : null,
                   timeline: safeArray(progress.timeline).map(item => ({ ...item })),
                   chat: safeArray(state.liveChat).map(item => ({ ...item })),
                   endedAt: Date.now(),
                   endedText: "刚刚结束"
                 });
               }
+
               state.liveSession = null;
               state.pendingLiveUserMessage = null;
               state.pendingOwnLiveInput = null;
@@ -2481,7 +3073,13 @@
               closeScreen("live");
               renderHome();
               renderChannels();
-              toast(own ? "直播已结束，并加入主页回放" : "已结束这场直播");
+              renderWallet();
+
+              if (userEligible) {
+                openScreen("live-summary", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="live-summary">‹</button><div class="v-meta"><strong>本场直播已结束</strong><div class="v-hint">${escapeHTML(live.title || "直播")}</div></div></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-live-summary-grid"><div class="v-live-summary-box"><small>本场打赏</small><b>🔷${tipCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>本场礼物</small><b>🔷${giftCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>商务合作</small><b>${escapeHTML(formatCash(businessCashCNY))}</b></div><div class="v-live-summary-box"><small>${collab ? "你的 50% 分成" : "你的结算"}</small><b>${escapeHTML(formatCoin(userCoin))}${userCashCNY ? ` · ${escapeHTML(formatCash(userCashCNY))}` : ""}</b></div></div><div class="v-publish-note" style="margin-top:12px">打赏和礼物进入 Vela Coin 余额；商务收入直接进入可提现余额。角色的分成只写入角色后台收益记录。</div></div></div>`);
+              } else {
+                toast("直播已结束，角色收益已记录到后台");
+              }
             };
 
             const openSettingsNote = (kind) => {
@@ -2550,7 +3148,7 @@
               if (!entity) return;
               const cfg = getSubscriptionProfile(ownerType, ownerId);
               const benefitsText = tier => safeArray(cfg[tier].benefits).join("\n");
-              openScreen("subscription-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="subscription-settings">‹</button><div class="v-meta"><strong>订阅设置</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))}</div></div><button class="v-head-action" data-action="save-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">保存</button></header><div class="v-subbody"><div class="v-subscription-editor-grid"><section class="v-subscription-editor-tier"><h3>免费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="freeEmoji" maxlength="4" value="${escapeHTML(cfg.free.emoji || "🌊")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="freeName" maxlength="24" value="${escapeHTML(cfg.free.name || "支持者")}"></div></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="freeCover" value="${escapeHTML(cfg.free.cover || "")}" placeholder="https://..."></div><div class="v-field"><label>方案简介</label><textarea data-sub-field="freeIntro" maxlength="260">${escapeHTML(cfg.free.intro || "")}</textarea></div><div class="v-field"><label>权益（每行一条）</label><textarea data-sub-field="freeBenefits" maxlength="400">${escapeHTML(benefitsText("free"))}</textarea></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="freeCommunity" maxlength="40" value="${escapeHTML(cfg.free.communityName || "")}"></div></div></section><section class="v-subscription-editor-tier is-paid"><h3>付费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="paidEmoji" maxlength="4" value="${escapeHTML(cfg.paid.emoji || "💎")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="paidName" maxlength="24" value="${escapeHTML(cfg.paid.name || "会员")}"></div></div><div class="v-fieldpair"><div class="v-field"><label>月费</label><input data-sub-field="paidPrice" type="number" min="1" max="9999" value="${Number(cfg.paid.price || 5)}"></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="paidCover" value="${escapeHTML(cfg.paid.cover || "")}" placeholder="https://..."></div></div><div class="v-field"><label>方案简介</label><textarea data-sub-field="paidIntro" maxlength="260">${escapeHTML(cfg.paid.intro || "")}</textarea></div><div class="v-field"><label>权益（每行一条）</label><textarea data-sub-field="paidBenefits" maxlength="400">${escapeHTML(benefitsText("paid"))}</textarea></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="paidCommunity" maxlength="40" value="${escapeHTML(cfg.paid.communityName || "")}"></div></div></section></div></div>`);
+              openScreen("subscription-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="subscription-settings">‹</button><div class="v-meta"><strong>订阅设置</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))}</div></div><button class="v-head-action" data-action="save-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">保存</button></header><div class="v-subbody"><div class="v-subscription-editor-grid"><section class="v-subscription-editor-tier"><h3>免费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="freeEmoji" maxlength="4" value="${escapeHTML(cfg.free.emoji || "🌊")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="freeName" maxlength="24" value="${escapeHTML(cfg.free.name || "支持者")}"></div></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="freeCover" value="${escapeHTML(cfg.free.cover || "")}" placeholder="https://..."></div><div class="v-field"><label>方案简介</label><textarea data-sub-field="freeIntro" maxlength="260">${escapeHTML(cfg.free.intro || "")}</textarea></div><div class="v-field"><label>权益（每行一条）</label><textarea data-sub-field="freeBenefits" maxlength="400">${escapeHTML(benefitsText("free"))}</textarea></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="freeCommunity" maxlength="40" value="${escapeHTML(cfg.free.communityName || "")}"></div></div></section><section class="v-subscription-editor-tier is-paid"><h3>付费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="paidEmoji" maxlength="4" value="${escapeHTML(cfg.paid.emoji || "💎")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="paidName" maxlength="24" value="${escapeHTML(cfg.paid.name || "会员")}"></div></div><div class="v-fieldpair"><div class="v-field"><label>月费 · Vela Coin</label><input data-sub-field="paidCoinPrice" type="number" min="1" max="999999" step="1" value="${Number(cfg.paid.coinPrice || 500)}"></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="paidCover" value="${escapeHTML(cfg.paid.cover || "")}" placeholder="https://..."></div></div><div class="v-field"><label>方案简介</label><textarea data-sub-field="paidIntro" maxlength="260">${escapeHTML(cfg.paid.intro || "")}</textarea></div><div class="v-field"><label>权益（每行一条）</label><textarea data-sub-field="paidBenefits" maxlength="400">${escapeHTML(benefitsText("paid"))}</textarea></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="paidCommunity" maxlength="40" value="${escapeHTML(cfg.paid.communityName || "")}"></div></div></section></div></div>`);
             };
 
             const saveSubscriptionSettings = async (ownerType, ownerId) => {
@@ -2562,7 +3160,7 @@
               const splitBenefits = value => value.split(/\n+/).map(item => item.trim()).filter(Boolean).slice(0, 8);
               state.subscriptionProfiles[subscriptionProfileKey(ownerType, ownerId)] = {
                 free: { ...current.free, emoji: read("freeEmoji") || "🌊", name: read("freeName") || "支持者", cover: read("freeCover"), intro: read("freeIntro"), benefits: splitBenefits(read("freeBenefits")), communityName: read("freeCommunity") || `${profileName(entity, ownerType)} · 免费社群` },
-                paid: { ...current.paid, emoji: read("paidEmoji") || "💎", name: read("paidName") || "会员", price: Math.max(1, Math.min(9999, Number(read("paidPrice") || 5))), cover: read("paidCover"), intro: read("paidIntro"), benefits: splitBenefits(read("paidBenefits")), communityName: read("paidCommunity") || `${profileName(entity, ownerType)} · 会员社群` }
+                paid: { ...current.paid, emoji: read("paidEmoji") || "💎", name: read("paidName") || "会员", coinPrice: Math.max(1, Math.min(999999, Math.round(Number(read("paidCoinPrice") || 500)))), cover: read("paidCover"), intro: read("paidIntro"), benefits: splitBenefits(read("paidBenefits")), communityName: read("paidCommunity") || `${profileName(entity, ownerType)} · 会员社群` }
               };
               await persist();
               closeScreen("subscription-settings");
@@ -2588,25 +3186,34 @@
                 : "";
             };
 
-            const renderChatBubble = (item, { group = false } = {}) => {
+            const renderChatBubble = (item, { group = false, threadKey = "", threadType = "dm" } = {}) => {
               const mine = item.sender === "user" || item.isUser;
               const trId = `chat-${String(item.id || item.at || Math.random())}`;
-              return `<div class="v-chat-row ${mine ? "is-me" : ""}">${mine ? "" : `<div class="v-social-avatar">${avatarHTML(item.avatar || "", item.name || "V")}</div>`}<div class="v-chat-stack">${group || item.name ? `<div class="v-chat-sender">${escapeHTML(item.name || (mine ? "你" : "成员"))}</div>` : ""}<div class="v-chat-bubble">${escapeHTML(item.text || "")}${item.translation ? translationHTML(trId, item.translation) : ""}</div></div></div>`;
+              const role = item.role === "owner" || item.sender === "owner" ? `<span class="v-role-title is-owner">博主</span>` : item.role === "bot" || item.sender === "bot" ? `<span class="v-role-title is-bot">机器人</span>` : "";
+              const title = group || item.name ? `<div class="v-chat-sender">${role}${escapeHTML(item.name || (mine ? "你" : "成员"))}</div>` : "";
+              const longpress = item.id && threadKey ? ` data-longpress="delete-chat-item" data-thread-type="${escapeHTML(threadType)}" data-thread-key="${escapeHTML(threadKey)}" data-item-id="${escapeHTML(item.id)}"` : "";
+              return `<div class="v-chat-row ${mine ? "is-me" : ""}"${longpress}>${mine ? "" : `<div class="v-social-avatar">${avatarHTML(item.avatar || "", item.name || "V")}</div>`}<div class="v-chat-stack">${title}<div class="v-chat-bubble">${escapeHTML(item.text || "")}${item.translation ? translationHTML(trId, item.translation) : ""}</div></div></div>`;
             };
 
-            const statusLabel = status => status === "accepted" ? "已接受" : status === "declined" ? "已婉拒" : status === "cancelled" ? "已取消" : status === "filled" ? "已填写" : "待确认";
+            const statusLabel = status => status === "accepted" ? "已接受" : status === "declined" ? "已婉拒" : status === "cancelled" ? "已取消" : status === "filled" ? "已填写" : status === "revising" ? "修改确认中" : "待确认";
 
             const renderDMToolCard = (item, messageId) => {
               const incoming = item.direction === "incoming";
               const status = String(item.status || "pending");
               if (item.kind === "live_invite") {
-                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">直播邀约</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "一起直播")}</div><div class="v-chat-card-meta"><div>时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>内容 <b>${escapeHTML(item.content || "一起聊聊")}</b></div><div>方式 <b>${item.mode === "same-room" ? "线下同镜" : "线上联播"}</b></div><div>主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div></div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒</button></div>` : status === "pending" ? `<div class="v-chat-card-actions"><button class="is-light" data-action="cancel-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">取消邀约</button></div>` : ""}</div>`;
+                return `<div class="v-chat-card" data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"><div class="v-chat-card-head"><span class="v-chat-card-type">直播邀约</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "一起直播")}</div><div class="v-chat-card-meta"><div>时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>内容 <b>${escapeHTML(item.content || "一起聊聊")}</b></div><div>方式 <b>${item.mode === "same-room" ? "线下同镜" : "线上联播"}</b></div><div>主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div></div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒</button></div>` : status === "pending" ? `<div class="v-chat-card-actions"><button class="is-light" data-action="cancel-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">取消邀约</button></div>` : ""}</div>`;
               }
               if (item.kind === "business") {
-                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">商务合作</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "合作方案")}</div><div class="v-chat-card-meta"><div>合作内容 <b>${escapeHTML(item.content || "")}</b></div>${item.includesLive ? `<div>直播时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>直播主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div>` : `<div>形式 <b>非直播合作</b></div>`}</div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒</button></div>` : status === "pending" ? `<div class="v-chat-card-actions"><button class="is-light" data-action="cancel-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">取消方案</button></div>` : ""}</div>`;
+                const money = Number(item.cashAmountCNY || 0) > 0 ? formatCash(Number(item.cashAmountCNY || 0)) : "金额待确认";
+                const longpress = ` data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"`;
+                return `<div class="v-chat-card is-business"${longpress}><div class="v-chat-card-head"><span class="v-chat-card-type">商务合作 · ${escapeHTML(item.brandName || "品牌")}</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || item.productName || "直播合作方案")}</div><div class="v-chat-card-meta"><div>产品 / 项目 <b>${escapeHTML(item.productName || item.title || "合作项目")}</b></div><div>合作内容 <b>${escapeHTML(item.content || "")}</b></div><div>直播时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>直播主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div><div>合作费用 <b>${escapeHTML(money)}</b></div>${item.adCopy ? `<div>广告词 <b>${escapeHTML(item.adCopy)}</b></div>` : ""}${item.adLink ? `<div>广告链接 <b>${escapeHTML(item.adLink)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<button class="v-chat-card-edit" data-action="edit-business-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">需要改动？编辑后回传给对方确认</button><div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受并预定直播</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒直播</button></div>` : ""}</div>`;
+              }
+              if (item.kind === "business_revision") {
+                const longpress = ` data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"`;
+                return `<div class="v-chat-card"${longpress}><div class="v-chat-card-head"><span class="v-chat-card-type">你回传的合作修改</span><span class="v-chat-card-status">${status === "accepted" ? "对方已确认" : "等待对方确认"}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "合作修改")}</div><div class="v-chat-card-meta"><div>直播时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>合作内容 <b>${escapeHTML(item.content || "")}</b></div><div>合作费用 <b>${escapeHTML(Number(item.cashAmountCNY || 0) > 0 ? formatCash(item.cashAmountCNY) : "待确认")}</b></div></div></div>`;
               }
               if (item.kind === "winner_form") {
-                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">中奖信息填写</span><span class="v-chat-card-status ${status === "filled" ? "is-ok" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.prize || "中奖礼物")}</div><div class="v-chat-card-meta"><div>${escapeHTML(item.note || "请填写领奖所需的信息。")}</div>${item.reply ? `<div>已提交 <b>${escapeHTML(item.reply)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="fill-winner-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">填写信息</button></div>` : ""}</div>`;
+                return `<div class="v-chat-card" data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"><div class="v-chat-card-head"><span class="v-chat-card-type">中奖信息填写</span><span class="v-chat-card-status ${status === "filled" ? "is-ok" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.prize || "中奖礼物")}</div><div class="v-chat-card-meta"><div>${escapeHTML(item.note || "请填写领奖所需的信息。")}</div>${item.reply ? `<div>已提交 <b>${escapeHTML(item.reply)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="fill-winner-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">填写信息</button></div>` : ""}</div>`;
               }
               return "";
             };
@@ -2618,7 +3225,7 @@
               const rows = state.dmThreads[messageId];
               const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
               const handle = String(channel?.handle || msg.handle || (msg.name ? `@${String(msg.name).toLowerCase().replace(/\s+/g, "_")}` : "@vela"));
-              const rowHTML = rows.map((item, index) => `${threadTimeHTML(rows, index)}${item.kind && item.kind !== "text" ? renderDMToolCard(item, messageId) : renderChatBubble(item)}`).join("");
+              const rowHTML = rows.map((item, index) => `${threadTimeHTML(rows, index)}${item.kind && item.kind !== "text" ? renderDMToolCard(item, messageId) : renderChatBubble(item, { threadKey: messageId, threadType: "dm" })}`).join("");
               openScreen("message", `<div class="v-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="清除聊天">🗑︎</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap"><input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}">➤</button></div></div>`);
               requestAnimationFrame(() => {
                 const body = q('[data-screen="message"] [data-role="chat-body"]');
@@ -2746,15 +3353,20 @@
                 hostOwnerType: String(card.hostOwnerType),
                 hostOwnerId: String(card.hostOwnerId),
                 participantIds: participants.map(p => p.id),
-                participants
+                participants,
+                business: card.kind === "business" ? {
+                  brandName:String(card.brandName || ""),
+                  productName:String(card.productName || ""),
+                  cashAmountCNY:Number(card.cashAmountCNY || 0),
+                  adCopy:String(card.adCopy || ""),
+                  adLink:String(card.adLink || ""),
+                  sourceMessageId:String(messageId),
+                  sourceCardId:String(card.id || "")
+                } : null
               };
               await persist();
-              pushCommunityBotEvent(card.hostOwnerType, card.hostOwnerId, "scheduled", {
-                title: host.scheduledLive.title,
-                dateText: host.scheduledLive.dateText,
-                sourceMessageId: messageId
-              });
               armAppointmentTimer();
+              armCommunityBotTimers?.();
             };
 
             const findDMCard = (messageId, cardId) => {
@@ -2798,18 +3410,24 @@
               const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
               const persona = getChannelPersonaText(channel);
               const history = thread.slice(-18).map(item => {
-                if (item.kind && item.kind !== "text") return `[${item.kind}] ${item.title || item.content || item.prize || ""} / status=${item.status || "pending"}`;
+                if (item.kind && item.kind !== "text") {
+                  if (item.kind === "business" || item.kind === "business_revision") return `[${item.kind}] brand=${item.brandName || ""}; product=${item.productName || ""}; title=${item.title || ""}; content=${item.content || ""}; date=${item.dateText || ""}; cashCNY=${Number(item.cashAmountCNY || 0)}; host=${item.hostLabel || ""}; adCopy=${item.adCopy || ""}; adLink=${item.adLink || ""}; status=${item.status || "pending"}`;
+                  if (item.kind === "live_invite") return `[live_invite] title=${item.title || ""}; content=${item.content || ""}; date=${item.dateText || ""}; mode=${item.mode || ""}; host=${item.hostLabel || ""}; status=${item.status || "pending"}`;
+                  return `[${item.kind}] ${item.title || item.content || item.prize || ""} / status=${item.status || "pending"}`;
+                }
                 return `${item.sender === "user" ? "USER" : "OTHER"}: ${item.text || ""}`;
               }).join("\n");
-              const pendingOutgoing = thread.filter(item => item.direction === "outgoing" && item.status === "pending" && ["live_invite","business"].includes(item.kind)).slice(-1)[0];
+              const pendingOutgoing = thread.filter(item => item.direction === "outgoing" && item.status === "pending" && item.kind === "live_invite").slice(-1)[0];
               const system = `你正在模拟 Vela 私信中 USER 之外的对方。绝对禁止替 USER 发言、行动、做决定。Enter 只发送 USER 自己写的内容，小飞机召唤时即使 USER 没有新消息，对方也可以自然继续说自己的事，不需要强行围着 USER。对方身份：${msg.name || "对方"} ${channel?.handle || msg.handle || ""}。${persona ? `角色设定：${persona}` : ""}
 
 请返回严格 JSON。普通消息：
 {"type":"message","text":"对方实际发出的消息","translation":"若 text 不是中文则给中文翻译，否则空字符串","acceptCardId":""}
-只有在非常自然、符合身份和上下文时，才可以主动发直播邀约或商务卡：
+只有在非常自然、符合身份和上下文时，才可以主动发直播邀约。商务合作只能由“对方 / 品牌方”主动提出，USER 不能自己生成正式商务卡。
+直播邀约：
 {"type":"live_invite","title":"标题","content":"直播内容","dateText":"时间文字","scheduledAt":"YYYY-MM-DDTHH:mm","mode":"online|same-room","host":"counterpart|user","text":"可选附言","translation":""}
-或
-{"type":"business","title":"合作标题","content":"合作内容","includesLive":true,"dateText":"时间文字","scheduledAt":"YYYY-MM-DDTHH:mm","host":"counterpart|user","text":"可选附言","translation":""}
+如果你是品牌 / 商务联系人：先像真实工作人员一样正常聊天，说明公司主营、品牌和产品，询问 USER 是否接广告；只有时间、直播要求、费用等基本聊清楚后，才发正式商务卡：
+{"type":"business","brandName":"公司或品牌","productName":"产品","title":"合作标题","content":"直播要求","cashAmountCNY":800,"dateText":"时间文字","scheduledAt":"YYYY-MM-DDTHH:mm","host":"user|counterpart","adCopy":"广告词","adLink":"链接","text":"可选附言","translation":""}
+如果最近出现 [business_revision]，你可以继续讨论；若同意 USER 的修改，必须重新发一张新的 business 卡，内容采用双方最后确认的版本。
 如果对方自然同意 USER 已经发出的待确认卡，可以在普通 message JSON 里把 acceptCardId 写成卡片 ID：${pendingOutgoing?.id || "无待确认卡"}。不要自动替 USER 接受任何东西。`;
               const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近私信：\n${history || "目前还没有聊天。请对方自然开启或继续话题。"}` }]);
               let data = extractJSON(aiText);
@@ -2832,10 +3450,15 @@
                   sender: "other",
                   name: msg.name || "对方",
                   avatar: msg.avatar || "",
+                  brandName: String(data.brandName || (data.type === "business" ? msg.name || "品牌" : "")),
+                  productName: String(data.productName || ""),
                   title: String(data.title || (data.type === "business" ? "合作方案" : "一起直播")),
                   content: String(data.content || ""),
+                  cashAmountCNY: data.type === "business" ? Math.max(0, Number(data.cashAmountCNY || 0)) : 0,
+                  adCopy: String(data.adCopy || ""),
+                  adLink: String(data.adLink || ""),
                   mode: data.mode === "same-room" ? "same-room" : "online",
-                  includesLive: data.type === "business" ? data.includesLive !== false : true,
+                  includesLive: data.type === "business" ? true : true,
                   dateText: String(data.dateText || (data.scheduledAt ? formatDateTextFromInput(data.scheduledAt) : "时间待定")),
                   scheduledAt: data.scheduledAt && !Number.isNaN(new Date(data.scheduledAt).getTime()) ? new Date(data.scheduledAt).getTime() : 0,
                   at: Date.now()
@@ -2867,7 +3490,7 @@
               const sheet = q('[data-role="publish-sheet"]');
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发送到私信</h3><button data-action="close-publish-sheet">×</button></div><div class="v-chat-tool-grid"><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="live_invite">直播邀约<small>填写直播时间、内容、联播方式和主场频道</small></button><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="business">商务合作<small>正常聊完以后再发正式合作卡</small></button><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="winner_form">中奖信息填写<small>让中奖粉丝提交领奖所需的虚拟信息</small></button></div>`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发送到私信</h3><button data-action="close-publish-sheet">×</button></div><div class="v-chat-tool-grid"><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="live_invite">直播邀约<small>你和对方都可以发直播邀约</small></button><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="winner_form">中奖信息填写<small>直播抽奖后让中奖粉丝填写领奖信息</small></button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -2896,7 +3519,9 @@
               if (toolType === "live_invite") {
                 host.innerHTML = `<div class="v-publish-sheet-title"><h3>直播邀约</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>直播时间</label><input type="datetime-local" data-dm-tool-field="scheduledAt" value="${dateInputDefault()}"></div><div class="v-field"><label>直播标题</label><input data-dm-tool-field="title" maxlength="90" placeholder="一起播什么？"></div><div class="v-field"><label>直播内容</label><textarea data-dm-tool-field="content" maxlength="500" placeholder="大概聊什么、做什么"></textarea></div><div class="v-fieldpair"><div class="v-field"><label>联播方式</label><select data-dm-tool-field="mode"><option value="online">线上联播</option><option value="same-room">线下同镜</option></select></div><div class="v-field"><label>主场频道</label><select data-dm-tool-field="host">${hostOptions}</select></div></div><div class="v-tool-note">接受后才会生成预约直播，并自动挂到主场主播的主页。</div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="live_invite">发送邀约</button></div>`;
               } else if (toolType === "business") {
-                host.innerHTML = `<div class="v-publish-sheet-title"><h3>商务合作</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>合作标题</label><input data-dm-tool-field="title" maxlength="90" placeholder="合作项目 / 品牌 / 企划"></div><div class="v-field"><label>合作内容</label><textarea data-dm-tool-field="content" maxlength="650" placeholder="合作要求、内容方向等"></textarea></div><div class="v-field"><label>是否包含直播任务</label><select data-dm-tool-field="includesLive"><option value="yes">包含直播</option><option value="no">不包含直播</option></select></div><div class="v-field"><label>直播时间（有直播时）</label><input type="datetime-local" data-dm-tool-field="scheduledAt" value="${dateInputDefault()}"></div><div class="v-field"><label>直播主场（有直播时）</label><select data-dm-tool-field="host">${hostOptions}</select></div><div class="v-tool-note">只有“包含直播”的商务合作接受后会生成主页预约直播。</div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="business">发送合作卡</button></div>`;
+                toast("商务合作由品牌 / 对方发起");
+                openDMPlus(messageId);
+                return;
               } else {
                 host.innerHTML = `<div class="v-publish-sheet-title"><h3>中奖信息填写</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>奖品</label><input data-dm-tool-field="prize" maxlength="90" placeholder="中奖礼物"></div><div class="v-field"><label>填写说明</label><textarea data-dm-tool-field="note" maxlength="350" placeholder="例如：请填写领奖联系方式和收件备注"></textarea></div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="winner_form">发送填写卡</button></div>`;
               }
@@ -2904,6 +3529,7 @@
             };
 
             const sendDMToolCard = async (messageId, toolType) => {
+              if (toolType === "business") { toast("商务合作只能由品牌 / 对方发起"); return; }
               const msg = state.messages.find(item => String(item.id) === String(messageId));
               const sheet = q('[data-role="publish-sheet"]');
               if (!msg || !sheet) return;
@@ -2946,6 +3572,59 @@
               state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]);
               state.dmThreads[messageId].push(card);
               msg.preview = toolType === "live_invite" ? "[直播邀约]" : toolType === "business" ? "[商务合作]" : "[中奖信息填写]";
+              sheet.classList.remove("is-open");
+              await persist();
+              renderMessages();
+              renderDirectThread(messageId);
+            };
+
+            const openBusinessCardEditor = (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              if (!card || card.kind !== "business" || !msg) return;
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              if (!sheet || !host) return;
+              const hostCurrent = card.hostOwnerType === "channel" ? "counterpart" : "user";
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>修改合作卡</h3><button data-action="close-publish-sheet">×</button></div><div class="v-tool-form"><div class="v-field"><label>品牌 / 公司</label><input data-business-edit="brandName" value="${escapeHTML(card.brandName || msg.name || "")}" maxlength="60"></div><div class="v-field"><label>产品 / 项目</label><input data-business-edit="productName" value="${escapeHTML(card.productName || "")}" maxlength="90"></div><div class="v-field"><label>合作标题</label><input data-business-edit="title" value="${escapeHTML(card.title || "")}" maxlength="100"></div><div class="v-field"><label>直播要求 / 内容</label><textarea data-business-edit="content" maxlength="800">${escapeHTML(card.content || "")}</textarea></div><div class="v-field"><label>直播时间</label><input type="datetime-local" data-business-edit="scheduledAt" value="${card.scheduledAt ? new Date(Number(card.scheduledAt) - new Date().getTimezoneOffset()*60000).toISOString().slice(0,16) : dateInputDefault()}"></div><div class="v-fieldpair"><div class="v-field"><label>合作费用 · CNY 基准</label><input type="number" min="0" step="1" data-business-edit="cashAmountCNY" value="${Number(card.cashAmountCNY || 0)}"></div><div class="v-field"><label>直播主场</label><select data-business-edit="host"><option value="user" ${hostCurrent === "user" ? "selected" : ""}>我的直播间</option>${channel ? `<option value="counterpart" ${hostCurrent === "counterpart" ? "selected" : ""}>${escapeHTML(channel.name || "对方")}的直播间</option>` : ""}</select></div></div><div class="v-field"><label>广告词</label><textarea data-business-edit="adCopy" maxlength="500">${escapeHTML(card.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input data-business-edit="adLink" value="${escapeHTML(card.adLink || "")}" placeholder="https://..."></div><div class="v-tool-note">修改后不是直接生效，而是把修改卡回传给对方。对方同意后会重新发最终合作卡。</div><button class="v-action" data-action="send-business-revision" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(cardId)}">把修改发给对方确认</button></div>`;
+              sheet.classList.add("is-open");
+            };
+
+            const sendBusinessRevision = async (messageId, cardId) => {
+              const original = findDMCard(messageId, cardId);
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              const sheet = q('[data-role="publish-sheet"]');
+              if (!original || original.kind !== "business" || !msg || !sheet) return;
+              const read = name => String(sheet.querySelector(`[data-business-edit="${name}"]`)?.value || "").trim();
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              const scheduledValue = read("scheduledAt");
+              const hostChoice = read("host");
+              original.status = "revising";
+              const revision = {
+                id:`bizrev-${Date.now().toString(36)}`,
+                kind:"business_revision",
+                direction:"outgoing",
+                status:"pending",
+                sender:"user",
+                name:state.identities.find(i => String(i.id) === String(state.viewerIdentityId))?.displayName || "user",
+                brandName:read("brandName"),
+                productName:read("productName"),
+                title:read("title") || original.title || "合作修改",
+                content:read("content"),
+                cashAmountCNY:Math.max(0, Number(read("cashAmountCNY") || 0)),
+                adCopy:read("adCopy"),
+                adLink:read("adLink"),
+                scheduledAt: scheduledValue ? new Date(scheduledValue).getTime() : 0,
+                dateText:formatDateTextFromInput(scheduledValue),
+                hostOwnerType: hostChoice === "counterpart" && channel ? "channel" : "identity",
+                hostOwnerId: hostChoice === "counterpart" && channel ? channel.id : state.viewerIdentityId,
+                hostLabel: hostChoice === "counterpart" && channel ? `${channel.name || "对方"}的直播间` : "你的直播间",
+                at:Date.now()
+              };
+              state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]);
+              state.dmThreads[messageId].push(revision);
+              msg.preview = "[合作修改已回传]";
               sheet.classList.remove("is-open");
               await persist();
               renderMessages();
@@ -3004,20 +3683,21 @@
             const renderCommunityItem = (item, key, own) => {
               if (item.kind === "poll") {
                 const total = safeArray(item.votes).reduce((sum, n) => sum + Number(n || 0), 0);
-                return `<div class="v-community-card-msg"><div class="v-kicker">群内投票</div><h4>${escapeHTML(item.question || "投票")}</h4><p>${escapeHTML(item.note || "")}</p><div class="v-poll-options">${safeArray(item.options).map((opt, index) => {
+                return `<div class="v-community-card-msg" data-longpress="delete-chat-item" data-thread-type="community" data-thread-key="${escapeHTML(key)}" data-item-id="${escapeHTML(item.id)}"><div class="v-kicker">群内投票</div><h4>${escapeHTML(item.question || "投票")}</h4><p>${escapeHTML(item.note || "")}</p><div class="v-poll-options">${safeArray(item.options).map((opt, index) => {
                   const count = Number(item.votes?.[index] || 0);
                   const voted = safeArray(item.myVotes).includes(index);
                   return `<button class="${voted ? "is-voted" : ""}" data-action="vote-community-poll" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}" data-option-index="${index}" ${own ? "disabled" : ""}><span>${escapeHTML(opt)}</span><span>${count}${total ? ` · ${Math.round(count / total * 100)}%` : ""}</span></button>`;
                 }).join("")}</div></div>`;
               }
               if (item.kind === "lottery") {
-                return `<div class="v-community-card-msg"><div class="v-kicker">${item.botPosted ? "🤖 助手机器人 · 群内抽奖" : "群内抽奖"}</div><h4>${escapeHTML(item.prize || "抽奖")}</h4><p>${escapeHTML(item.note || "")}<br>${Number(item.winners || 1)} 人中奖 · ${Number(item.joinedCount || 0)} 人已参与</p>${own ? `<button class="v-lottery-action" disabled>已发布</button>` : `<button class="v-lottery-action" data-action="join-community-lottery" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}">${item.joined ? "已参与" : "参与抽奖"}</button>`}</div>`;
+                const ended = item.status === "ended";
+                return `<div class="v-community-card-msg" data-longpress="delete-chat-item" data-thread-type="community" data-thread-key="${escapeHTML(key)}" data-item-id="${escapeHTML(item.id)}"><div class="v-kicker">${item.botPosted ? "🤖 机器人 · 群内抽奖" : "群内抽奖"}</div><h4>${escapeHTML(item.prize || "抽奖")}</h4><p>${escapeHTML(item.note || "")}<br>${Number(item.winners || 1)} 人中奖 · ${Number(item.joinedCount || 0)} 人已参与${ended ? `<br>中奖：${escapeHTML(safeArray(item.results).join("、") || "暂无")}` : ""}</p>${own ? (ended ? `<button class="v-lottery-action" disabled>已开奖</button>` : `<button class="v-lottery-action" data-action="resolve-community-lottery" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}">开奖并公布结果</button>`) : `<button class="v-lottery-action" data-action="join-community-lottery" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}" ${ended ? "disabled" : ""}>${ended ? "已开奖" : item.joined ? "已参与" : "参与抽奖"}</button>`}</div>`;
               }
               if (item.kind === "bot_card") {
-                const label = item.eventType === "scheduled" ? "📅 预约直播" : item.eventType === "live" ? "🔴 已开播" : "🤖 社群助手";
-                return `<div class="v-community-card-msg"><div class="v-kicker">${escapeHTML(label)}</div><h4>${escapeHTML(item.title || "频道通知")}</h4><p>${escapeHTML(item.text || item.dateText || "")}</p></div>`;
+                const label = item.eventType === "scheduled" ? "📅 预约直播" : item.eventType === "live" ? "🔴 已开播" : item.eventType === "lottery_result" ? "🎉 抽奖结果" : "🤖 社群助手";
+                return `<div class="v-community-card-msg" data-longpress="delete-chat-item" data-thread-type="community" data-thread-key="${escapeHTML(key)}" data-item-id="${escapeHTML(item.id)}"><div class="v-social-head" style="margin-bottom:8px"><div class="v-social-avatar">${avatarHTML(item.botAvatar || "", item.botName || "BOT")}</div><div class="v-meta"><div class="v-name"><span class="v-role-title is-bot">机器人</span>${escapeHTML(item.botName || "Vela 小助手")}</div><div class="v-sub">${escapeHTML(label)}</div></div></div><h4>${escapeHTML(item.title || "频道通知")}</h4><p>${escapeHTML(item.text || item.dateText || "")}</p></div>`;
               }
-              return renderChatBubble(item, { group: true });
+              return renderChatBubble(item, { group: true, threadKey: key, threadType: "community" });
             };
 
             const sendCommunityMessage = async (key) => {
@@ -3026,7 +3706,7 @@
               if (!text) return;
               const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
               state.communityChats[key] = safeArray(state.communityChats[key]);
-              state.communityChats[key].push({ id: `group-${Date.now().toString(36)}`, kind: "text", sender: "user", name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, translation: "", at: Date.now(), isUser: true });
+              state.communityChats[key].push({ id: `group-${Date.now().toString(36)}`, kind: "text", sender: "user", role: (String(key).split(":")[0] === "identity" && String(key).split(":")[1] === String(state.viewerIdentityId)) ? "owner" : "member", name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, translation: "", at: Date.now(), isUser: true });
               state.communityChats[key] = state.communityChats[key].slice(-300);
               if (input) input.value = "";
               await persist();
@@ -3052,18 +3732,20 @@
 粉丝画像：${cfg.fanProfile}
 聊天内容倾向：${cfg.chatStyle}
 返回严格 JSON 数组，1~3 条，例如：
-[{"name":"成员昵称","text":"消息","translation":"如果不是中文则给中文翻译，否则空字符串"}]
-成员风格要有差异，不要每轮所有人都说话。`;
+[{"role":"member","name":"成员昵称","text":"消息","translation":"如果不是中文则给中文翻译，否则空字符串"}]
+如果群主自然想参与，可以偶尔输出 {"role":"owner","text":"群主消息","translation":""}；不要每轮都让群主出现。成员风格要有差异，不要每轮所有人都说话。`;
               const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近群聊：\n${history || "群里暂时安静，让成员自然开启一个话题。"}` }]);
               let data = extractJSON(aiText);
               if (!Array.isArray(data)) data = fallbackGroupReplies(cfg);
               data.slice(0, 3).forEach((item, index) => {
+                const ownerReply = item?.role === "owner";
                 state.communityChats[key].push({
                   id: `group-ai-${Date.now().toString(36)}-${index}`,
                   kind: "text",
-                  sender: "other",
-                  name: String(item?.name || `${cfg.fanName || "粉丝"}_${index + 1}`),
-                  avatar: initials(item?.name || cfg.fanName || "F"),
+                  sender: ownerReply ? "owner" : "other",
+                  role: ownerReply ? "owner" : "member",
+                  name: ownerReply ? profileName(entity, ownerType) : String(item?.name || `${cfg.fanName || "粉丝"}_${index + 1}`),
+                  avatar: ownerReply ? String(entity.avatar || "") : initials(item?.name || cfg.fanName || "F"),
                   text: String(item?.text || "群里继续聊了起来。"),
                   translation: String(item?.translation || ""),
                   at: Date.now() + index
@@ -3104,9 +3786,7 @@
               if (toolType === "lottery") {
                 const prize = read("prize");
                 if (!prize) { toast("先填写奖品"); return; }
-                const [ownerType, ownerId, tier] = String(key).split(":");
-                const cfg = getCommunitySettings(ownerType, ownerId, tier);
-                state.communityChats[key].push({ id: `lottery-${Date.now().toString(36)}`, kind: "lottery", sender: cfg.botEnabled && cfg.botLottery ? "bot" : "owner", botPosted: Boolean(cfg.botEnabled && cfg.botLottery), prize, winners: Math.max(1, Math.min(100, Number(read("winners") || 1))), note: read("note"), joinedCount: 0, joined: false, at: Date.now() });
+                state.communityChats[key].push({ id: `lottery-${Date.now().toString(36)}`, kind: "lottery", sender: "owner", botPosted: false, prize, winners: Math.max(1, Math.min(100, Number(read("winners") || 1))), note: read("note"), joinedCount: 0, joined: false, status:"active", at: Date.now() });
               } else {
                 const question = read("question");
                 const options = read("options").split(/\n+/).map(x => x.trim()).filter(Boolean).slice(0, 6);
@@ -3143,6 +3823,24 @@
               openCommunityChat(ownerType, ownerId, tier);
             };
 
+            const resolveCommunityLottery = async (key, cardId) => {
+              const [ownerType, ownerId] = String(key).split(":");
+              if (!isOwnCommunity(ownerType, ownerId)) return;
+              const card = safeArray(state.communityChats[key]).find(item => String(item.id) === String(cardId));
+              if (!card || card.kind !== "lottery" || card.status === "ended") return;
+              const cfg = getCommunitySettings(ownerType, ownerId, String(key).split(":")[2] || "free");
+              const count = Math.max(1, Number(card.winners || 1));
+              const synthetic = Array.from({length:Math.max(count, Math.min(12, Number(card.joinedCount || 0) || count + 3))}, (_,i) => `${cfg.fanName || "粉丝"}_${String(i+1).padStart(2,"0")}`);
+              card.results = synthetic.slice(0, count);
+              card.status = "ended";
+              card.endedAt = Date.now();
+              const text = `${card.prize || "群内抽奖"}：${card.results.join("、")}`;
+              const tier = String(key).split(":")[2] || "free";
+              pushCommunityBotEvent(ownerType, ownerId, "lottery_result", { title:"群内抽奖结果", text }, tier);
+              await persist();
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
             const clearCommunityChat = async (key, ownerType, ownerId, tier) => {
               const own = isOwnCommunity(ownerType, ownerId);
               const wording = own ? "清空这个社群的全部聊天记录？" : "清空你本地看到的这段社群聊天记录？";
@@ -3157,7 +3855,7 @@
               const entity = getProfileEntity(ownerType, ownerId);
               const cfg = getCommunitySettings(ownerType, ownerId, tier);
               if (!entity) return;
-              openScreen("community-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="community-settings">‹</button><div class="v-meta"><strong>编辑社群</strong><div class="v-hint">${tier === "paid" ? "付费订阅社群" : "免费订阅社群"}</div></div><button class="v-head-action" data-action="save-community-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="${escapeHTML(tier)}">保存</button></header><div class="v-subbody"><div class="v-community-edit-grid"><div class="v-community-preview"><div class="v-social-avatar" data-role="community-avatar-preview">${avatarHTML(cfg.avatar || entity.avatar || "", cfg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(cfg.name)}</div><div class="v-sub">${escapeHTML(cfg.fanName)} · 社群设置</div></div></div><div class="v-card"><div class="v-editform"><div class="v-field"><label>群头像</label><input type="file" accept="image/*" data-community-avatar-file><input type="hidden" data-community-field="avatar" value="${escapeHTML(cfg.avatar || "")}"></div><div class="v-field"><label>群名</label><input data-community-field="name" maxlength="48" value="${escapeHTML(cfg.name)}"></div><div class="v-field"><label>群公告</label><textarea data-community-field="announcement" maxlength="600">${escapeHTML(cfg.announcement)}</textarea></div><div class="v-field"><label>粉丝名</label><input data-community-field="fanName" maxlength="24" value="${escapeHTML(cfg.fanName)}"></div><div class="v-field"><label>粉丝画像</label><textarea data-community-field="fanProfile" maxlength="800">${escapeHTML(cfg.fanProfile)}</textarea></div><div class="v-field"><label>聊天内容 / 氛围</label><textarea data-community-field="chatStyle" maxlength="800">${escapeHTML(cfg.chatStyle)}</textarea></div></div></div><div class="v-card"><div class="v-name">机器人助手</div><div class="v-community-botchecks"><label class="v-community-check"><span>启用机器人助手</span><input class="v-switch" type="checkbox" data-community-field="botEnabled" ${cfg.botEnabled ? "checked" : ""}></label><label class="v-community-check"><span>推送预约直播</span><input class="v-switch" type="checkbox" data-community-field="botScheduled" ${cfg.botScheduled ? "checked" : ""}></label><label class="v-community-check"><span>推送普通开播</span><input class="v-switch" type="checkbox" data-community-field="botLive" ${cfg.botLive ? "checked" : ""}></label><label class="v-community-check"><span>推送群内抽奖</span><input class="v-switch" type="checkbox" data-community-field="botLottery" ${cfg.botLottery ? "checked" : ""}></label></div></div></div></div>`);
+              openScreen("community-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="community-settings">‹</button><div class="v-meta"><strong>编辑社群</strong><div class="v-hint">${tier === "paid" ? "付费订阅社群" : "免费订阅社群"}</div></div><button class="v-head-action" data-action="save-community-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="${escapeHTML(tier)}">保存</button></header><div class="v-subbody"><div class="v-community-edit-grid"><div class="v-community-preview"><div class="v-social-avatar" data-role="community-avatar-preview">${avatarHTML(cfg.avatar || entity.avatar || "", cfg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(cfg.name)}</div><div class="v-sub">${escapeHTML(cfg.fanName)} · 社群设置</div></div></div><div class="v-card"><div class="v-editform"><div class="v-field"><label>群头像</label><input type="file" accept="image/*" data-community-avatar-file><input type="hidden" data-community-field="avatar" value="${escapeHTML(cfg.avatar || "")}"></div><div class="v-field"><label>群名</label><input data-community-field="name" maxlength="48" value="${escapeHTML(cfg.name)}"></div><div class="v-field"><label>群公告</label><textarea data-community-field="announcement" maxlength="600">${escapeHTML(cfg.announcement)}</textarea></div><div class="v-field"><label>粉丝名</label><input data-community-field="fanName" maxlength="24" value="${escapeHTML(cfg.fanName)}"></div><div class="v-field"><label>粉丝画像</label><textarea data-community-field="fanProfile" maxlength="800">${escapeHTML(cfg.fanProfile)}</textarea></div><div class="v-field"><label>聊天内容 / 氛围</label><textarea data-community-field="chatStyle" maxlength="800">${escapeHTML(cfg.chatStyle)}</textarea></div></div></div><div class="v-card"><div class="v-name">机器人助手</div><div class="v-community-botchecks"><label class="v-community-check"><span>启用机器人助手</span><input class="v-switch" type="checkbox" data-community-field="botEnabled" ${cfg.botEnabled ? "checked" : ""}></label></div><div class="v-community-bot-options" data-role="community-bot-options" ${cfg.botEnabled ? "" : "hidden"}><div class="v-community-bot-profile"><div class="v-community-bot-avatar" data-role="community-bot-avatar-preview">${avatarHTML(cfg.botAvatar || "", cfg.botName)}</div><div class="v-editform"><div class="v-field"><label>机器人名字</label><input data-community-field="botName" maxlength="28" value="${escapeHTML(cfg.botName)}"></div><div class="v-field"><label>机器人头像</label><input type="file" accept="image/*" data-community-bot-avatar-file><input type="hidden" data-community-field="botAvatar" value="${escapeHTML(cfg.botAvatar || "")}"></div></div></div><div class="v-field" style="margin-top:10px"><label>预约直播提前提醒 · 小时</label><input data-community-field="botLeadHours" type="number" min="1" max="24" value="${Number(cfg.botLeadHours || 3)}"></div><div class="v-community-botchecks"><label class="v-community-check"><span>推送预约直播提醒</span><input class="v-switch" type="checkbox" data-community-field="botScheduled" ${cfg.botScheduled ? "checked" : ""}></label><label class="v-community-check"><span>推送普通开播消息</span><input class="v-switch" type="checkbox" data-community-field="botLive" ${cfg.botLive ? "checked" : ""}></label><label class="v-community-check"><span>推送群内抽奖结果</span><input class="v-switch" type="checkbox" data-community-field="botLottery" ${cfg.botLottery ? "checked" : ""}></label></div></div></div></div></div>`);
             };
 
             const saveCommunitySettings = async (ownerType, ownerId, tier) => {
@@ -3176,6 +3874,9 @@
                 fanProfile: read("fanProfile"),
                 chatStyle: read("chatStyle"),
                 botEnabled: checked("botEnabled"),
+                botName: read("botName") || current.botName || "Vela 小助手",
+                botAvatar: read("botAvatar"),
+                botLeadHours: Math.max(1, Math.min(24, Number(read("botLeadHours") || current.botLeadHours || 3))),
                 botScheduled: checked("botScheduled"),
                 botLive: checked("botLive"),
                 botLottery: checked("botLottery")
@@ -3184,22 +3885,28 @@
               closeScreen("community-settings");
               openCommunityChat(ownerType, ownerId, tier);
               renderMessages();
+              armCommunityBotTimers?.();
             };
 
-            const pushCommunityBotEvent = (ownerType, ownerId, eventType, payload = {}) => {
+            const pushCommunityBotEvent = (ownerType, ownerId, eventType, payload = {}, onlyTier = "") => {
               ["free","paid"].forEach(tier => {
+                if (onlyTier && tier !== onlyTier) return;
                 const key = communityChatKey(ownerType, ownerId, tier);
                 const cfg = getCommunitySettings(ownerType, ownerId, tier);
                 if (!cfg.botEnabled) return;
                 if (eventType === "scheduled" && !cfg.botScheduled) return;
                 if (eventType === "live" && !cfg.botLive) return;
+                if (eventType === "lottery_result" && !cfg.botLottery) return;
                 state.communityChats[key] = safeArray(state.communityChats[key]);
                 state.communityChats[key].push({
                   id: `bot-${eventType}-${Date.now().toString(36)}-${tier}`,
                   kind: "bot_card",
                   sender: "bot",
+                  role: "bot",
+                  botName: cfg.botName || "Vela 小助手",
+                  botAvatar: cfg.botAvatar || "",
                   eventType,
-                  title: String(payload.title || (eventType === "live" ? "直播已经开始" : "新的预约直播")),
+                  title: String(payload.title || (eventType === "live" ? "开播啦" : eventType === "lottery_result" ? "抽奖结果" : "今天有预约直播")),
                   text: String(payload.text || payload.dateText || ""),
                   dateText: String(payload.dateText || ""),
                   at: Date.now()
@@ -3220,6 +3927,7 @@
               if (!channel || !state.subscriptions?.[String(channelId)]) return;
               if (typeof window.confirm === "function" && !window.confirm(`取消订阅 ${channel.name || channel.handle || "这个主播"}？`)) return;
               delete state.subscriptions[String(channelId)];
+              delete state.wallet.subscriptionPurchases[String(channelId)];
               await persist();
               renderMessages();
               renderProfileTab("identity", state.viewerIdentityId, "subscriptions");
@@ -3270,7 +3978,44 @@
               openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">引入 Roche 角色后，在这里管理主页与商业合作</div></div><button class="v-head-action" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">加入角色后可以直接编辑他的 Vela 主页；主页装饰只保存在 Vela，不会修改 Roche 原人设资料。</p>${status}${rows}</div></div>`);
             };
 
+            const deleteDMConversation = async messageId => {
+              const index = state.messages.findIndex(item => String(item.id) === String(messageId));
+              if (index < 0) return;
+              const msg = state.messages[index];
+              if (typeof window.confirm === "function" && !window.confirm(`删除与 ${msg.name || "这个账号"} 的私信？聊天记录也会一起删除。`)) return;
+              state.messages.splice(index, 1);
+              delete state.dmThreads[String(messageId)];
+              await persist();
+              if (q('[data-screen="message"]')?.classList.contains("is-open")) closeScreen("message");
+              renderMessages();
+              toast("私信已删除");
+            };
+
+            const deleteChatItem = async (threadType, threadKey, itemId) => {
+              const store = threadType === "community" ? state.communityChats : state.dmThreads;
+              const rows = safeArray(store?.[String(threadKey)]);
+              const index = rows.findIndex(item => String(item.id) === String(itemId));
+              if (index < 0) return;
+              if (typeof window.confirm === "function" && !window.confirm("删除这条消息？")) return;
+              rows.splice(index, 1);
+              store[String(threadKey)] = rows;
+              await persist();
+              if (threadType === "community") {
+                const [ownerType, ownerId, tier] = String(threadKey).split(":");
+                openCommunityChat(ownerType, ownerId, tier);
+              } else {
+                const msg = state.messages.find(item => String(item.id) === String(threadKey));
+                if (msg) {
+                  const last = [...rows].reverse().find(item => item.kind === "text");
+                  msg.preview = last?.text || "";
+                }
+                renderMessages();
+                renderDirectThread(threadKey);
+              }
+            };
+
             let appointmentTimer = null;
+            let communityBotTimer = null;
             let appointmentReminderShown = false;
 
             const viewerAppointments = () => {
@@ -3324,6 +4069,49 @@
               appointmentTimer = setTimeout(() => checkAppointmentReminder({ entry: false }), delay);
             };
 
+            const allHostAppointments = () => {
+              const rows = [];
+              state.identities.forEach(entity => { if (entity?.scheduledLive) rows.push({ ownerType:"identity", ownerId:entity.id, entity, item:entity.scheduledLive }); });
+              state.channels.forEach(entity => { if (entity?.scheduledLive) rows.push({ ownerType:"channel", ownerId:entity.id, entity, item:entity.scheduledLive }); });
+              return rows;
+            };
+
+            const processCommunityBotReminders = async () => {
+              if (communityBotTimer) { clearTimeout(communityBotTimer); communityBotTimer = null; }
+              const now = Date.now();
+              let nextDue = Number.MAX_SAFE_INTEGER;
+              let changed = false;
+              for (const entry of allHostAppointments()) {
+                const scheduledAt = Number(entry.item?.scheduledAt || 0);
+                if (!scheduledAt || scheduledAt <= now) continue;
+                entry.item.botReminderSentKeys = { ...(entry.item.botReminderSentKeys || {}) };
+                for (const tier of ["free","paid"]) {
+                  const key = communityChatKey(entry.ownerType, entry.ownerId, tier);
+                  const cfg = getCommunitySettings(entry.ownerType, entry.ownerId, tier);
+                  if (!cfg.botEnabled || !cfg.botScheduled) continue;
+                  const due = scheduledAt - Math.max(1, Number(cfg.botLeadHours || 3)) * 60 * 60 * 1000;
+                  if (now >= due && !entry.item.botReminderSentKeys[key]) {
+                    pushCommunityBotEvent(entry.ownerType, entry.ownerId, "scheduled", {
+                      title: entry.item.title || "今天有预约直播",
+                      dateText: entry.item.dateText || "",
+                      text: `今天 ${entry.item.dateText || "稍后"} 开播，记得来。`
+                    }, tier);
+                    entry.item.botReminderSentKeys[key] = true;
+                    changed = true;
+                  } else if (!entry.item.botReminderSentKeys[key] && due > now) {
+                    nextDue = Math.min(nextDue, due);
+                  }
+                }
+              }
+              if (changed) await persist();
+              if (nextDue < Number.MAX_SAFE_INTEGER) {
+                const delay = Math.max(250, Math.min(2147480000, nextDue - Date.now()));
+                communityBotTimer = setTimeout(() => processCommunityBotReminders(), delay);
+              }
+            };
+
+            const armCommunityBotTimers = () => { processCommunityBotReminders(); };
+
             const startAppointmentHostLive = async (ownerType, ownerId) => {
               const entity = getProfileEntity(ownerType, ownerId);
               const item = entity?.scheduledLive;
@@ -3339,7 +4127,17 @@
                   mode: item.mode || "solo",
                   startedAt: Date.now(),
                   live: true,
-                  viewers: Math.max(1, Number(entity.viewers || 0))
+                  viewers: Math.max(1, Number(entity.viewers || 0)),
+                  userParticipant: safeArray(item.participantIds).map(String).includes(String(state.viewerIdentityId)),
+                  participants: safeArray(item.participants).filter(p => String(p?.id || "") !== String(entity.id)).map(p => {
+                    if (String(p?.id || "") === String(state.viewerIdentityId)) {
+                      const viewer = state.identities.find(x => String(x.id) === String(state.viewerIdentityId));
+                      return { id:String(viewer?.id || p.id), name:String(viewer?.displayName || p.name || "user"), handle:String(viewer?.handle || ""), avatar:String(viewer?.avatar || "") };
+                    }
+                    const ch = state.channels.find(x => String(x.id) === String(p?.id || ""));
+                    return { id:String(p?.id || ""), name:String(ch?.name || p?.name || "嘉宾"), handle:String(ch?.handle || ""), avatar:String(ch?.avatar || "") };
+                  }),
+                  business: item.business ? { ...item.business } : null
                 };
                 entity.live = true;
                 entity.title = live.title;
@@ -3348,7 +4146,7 @@
                 await persist();
                 openLive(live);
               } else {
-                const live = { id: `own-scheduled-${entity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: entity.id, isOwn: true, name: entity.displayName || "我的频道", handle: entity.handle || "@me", avatar: entity.avatar || "U", followers: Number(entity.followers || 0), title: item.title || "我的直播间", category: item.content || "预约直播", cover: item.cover || "", viewers: 0, mode: item.mode || "solo", accessMode: "public", ageRequirement: "none", startedAt: Date.now() };
+                const live = { id: `own-scheduled-${entity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: entity.id, isOwn: true, name: entity.displayName || "我的频道", handle: entity.handle || "@me", avatar: entity.avatar || "U", followers: Number(entity.followers || 0), title: item.title || "我的直播间", category: item.content || "预约直播", cover: item.cover || "", viewers: 0, mode: item.mode || "solo", accessMode: "public", ageRequirement: "none", participants: safeArray(item.participants).filter(p => String(p?.id || "") !== String(entity.id)).map(p => { const ch = state.channels.find(x => String(x.id) === String(p?.id || "")); return { id:String(p?.id || ""), name:String(ch?.name || p?.name || "嘉宾"), handle:String(ch?.handle || ""), avatar:String(ch?.avatar || "") }; }), business: item.business ? { ...item.business } : null, startedAt: Date.now() };
                 entity.live = true;
                 entity.activeLive = { ...live };
                 entity.scheduledLive = null;
@@ -3372,9 +4170,47 @@
             await refreshRocheData({ announce: false, sync: true });
             rerender();
             armAppointmentTimer();
+            armCommunityBotTimers();
+            settleWeeklySubscriptions();
             setTimeout(() => checkAppointmentReminder({ entry: true }), 420);
 
+            let longPressTimer = null;
+            let suppressClickUntil = 0;
+            const triggerLongPressAction = async target => {
+              const kind = String(target?.dataset?.longpress || "");
+              if (!kind) return;
+              suppressClickUntil = Date.now() + 650;
+              if (kind === "delete-dm-conversation") {
+                await deleteDMConversation(target.dataset.messageId || "");
+              } else if (kind === "delete-chat-item") {
+                await deleteChatItem(target.dataset.threadType || "dm", target.dataset.threadKey || "", target.dataset.itemId || "");
+              }
+            };
+            root.addEventListener("pointerdown", event => {
+              const target = event.target.closest?.("[data-longpress]");
+              if (!target || !root.contains(target)) return;
+              if (longPressTimer) clearTimeout(longPressTimer);
+              longPressTimer = setTimeout(() => triggerLongPressAction(target), 560);
+            });
+            ["pointerup","pointercancel","pointerleave"].forEach(type => root.addEventListener(type, () => {
+              if (longPressTimer) clearTimeout(longPressTimer);
+              longPressTimer = null;
+            }));
+            root.addEventListener("pointermove", event => {
+              if (!longPressTimer) return;
+              if (Math.abs(Number(event.movementX || 0)) > 3 || Math.abs(Number(event.movementY || 0)) > 3) {
+                clearTimeout(longPressTimer); longPressTimer = null;
+              }
+            });
+            root.addEventListener("contextmenu", event => {
+              const target = event.target.closest?.("[data-longpress]");
+              if (!target || !root.contains(target)) return;
+              event.preventDefault();
+              triggerLongPressAction(target);
+            });
+
             root.addEventListener("click", async (event) => {
+              if (Date.now() < suppressClickUntil) { event.preventDefault(); event.stopPropagation(); return; }
               const button = event.target.closest("button,[data-action]");
               if (!button || !root.contains(button)) return;
 
@@ -3399,6 +4235,26 @@
                   console.warn("[Vela] closeApp failed", err);
                   toast("退出失败，请从 Roche 返回");
                 }
+              } else if (action === "wallet-bind-account" || action === "wallet-edit-account") {
+                openWalletBind();
+              } else if (action === "save-wallet-account") {
+                await saveWalletAccount();
+              } else if (action === "wallet-recharge-coin") {
+                openWalletCoinRecharge();
+              } else if (action === "confirm-wallet-coin-recharge") {
+                await confirmWalletCoinRecharge();
+              } else if (action === "wallet-cashout-coin") {
+                openWalletCoinCashout();
+              } else if (action === "confirm-wallet-coin-cashout") {
+                await confirmWalletCoinCashout();
+              } else if (action === "wallet-withdraw") {
+                openWalletWithdraw();
+              } else if (action === "confirm-wallet-withdraw") {
+                await confirmWalletWithdraw();
+              } else if (action === "wallet-refresh-fx") {
+                await loadWalletFxRates({ force:true });
+                renderWallet();
+                toast("结算汇率已更新");
               } else if (action === "open-publish") {
                 renderPublishMenu();
                 q('[data-role="publish-sheet"]')?.classList.add("is-open");
@@ -3439,16 +4295,31 @@
               } else if (action === "subscribe-channel") {
                 const channelId = String(button.dataset.channelId || "");
                 const tier = button.dataset.tier === "paid" ? "paid" : "free";
-                if (channelId) {
-                  state.subscriptions[channelId] = tier === "paid" ? "paid" : (state.subscriptions[channelId] === "paid" ? "paid" : "free");
+                const channel = state.channels.find(ch => String(ch.id) === channelId);
+                if (channelId && channel) {
+                  const currentTier = state.subscriptions[channelId] || "none";
+                  if (tier === "paid" && currentTier !== "paid") {
+                    const cfg = getSubscriptionProfile("channel", channelId).paid;
+                    const coinPrice = Math.max(1, Math.round(Number(cfg.coinPrice || 0)));
+                    if (Number(state.wallet.coinBalance || 0) < coinPrice) { toast(`Vela Coin 不足，需要 🔷${coinPrice.toLocaleString("zh-CN")}`); return; }
+                    state.wallet.coinBalance -= coinPrice;
+                    state.wallet.subscriptionPurchases[channelId] = { tier:"paid", coinPriceSnapshot:coinPrice, subscribedAt:Date.now(), identityId:state.viewerIdentityId };
+                    state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-sub`, type:"coin", title:"付费订阅", note:`${channel.name || channel.handle || "频道"} · ${cfg.name || "会员"}`, coin:-coinPrice, at:Date.now() });
+                    // Char / other creator side records the exact Coin price that was paid.
+                    recordSubscriptionAccrual("channel", channelId, coinPrice, `订阅者 ${state.viewerIdentityId}`);
+                    state.subscriptions[channelId] = "paid";
+                  } else if (tier === "free" && currentTier === "none") {
+                    state.wallet.subscriptionPurchases[channelId] = { tier:"free", coinPriceSnapshot:0, subscribedAt:Date.now(), identityId:state.viewerIdentityId };
+                    state.subscriptions[channelId] = "free";
+                  }
                   await persist();
                   renderMessages();
-                  const channel = state.channels.find(ch => String(ch.id) === channelId);
-                  if (channel && q('[data-screen="profile"]')?.classList.contains("is-open")) {
+                  renderWallet();
+                  if (q('[data-screen="profile"]')?.classList.contains("is-open")) {
                     openProfile("channel", channel.id);
                     renderProfileTab("channel", channel.id, "subscriptions");
                   }
-                  toast(tier === "paid" ? "已加入付费订阅" : "已加入免费订阅");
+                  toast(tier === "paid" ? "已使用 Vela Coin 订阅" : "已加入免费订阅");
                 }
               } else if (action === "set-host-input-mode") {
                 setHostInputMode(button.dataset.hostInputMode || "speech");
@@ -3518,6 +4389,31 @@
                   }
                   renderRecommended(); renderChannels(); await persist();
                 }
+              } else if (action === "open-live-lottery") {
+                openLiveLotteryPanel();
+              } else if (action === "close-live-economy") {
+                closeLiveEconomyPanel();
+              } else if (action === "add-live-prize-row") {
+                const host = q('[data-screen="live"] [data-role="live-prize-rows"]');
+                if (host) host.insertAdjacentHTML("beforeend", livePrizeRowHTML({}, host.querySelectorAll('[data-prize-row]').length));
+              } else if (action === "remove-live-prize-row") {
+                const row = button.closest('[data-prize-row]');
+                const host = q('[data-screen="live"] [data-role="live-prize-rows"]');
+                if (row && host && host.querySelectorAll('[data-prize-row]').length > 1) row.remove();
+                else toast("至少保留一个奖项");
+              } else if (action === "save-live-lottery") {
+                await saveLiveLottery();
+              } else if (action === "resolve-live-lottery") {
+                await resolveLiveLottery();
+              } else if (action === "new-live-lottery") {
+                const live = state.liveSession;
+                if (live) { getLiveStats(live).lottery = null; await persist(); openLiveLotteryPanel(); }
+              } else if (action === "open-live-ad") {
+                openLiveAdPanel();
+              } else if (action === "save-live-ad") {
+                await saveLiveAd();
+              } else if (action === "clear-live-ad") {
+                await clearLiveAd();
               } else if (action === "open-live-exit") {
                 q('[data-screen="live"] [data-role="live-exit-menu"]')?.classList.add("is-open");
               } else if (action === "close-live-exit") {
@@ -3551,19 +4447,22 @@
                 const amount = Math.max(0, Number(button.dataset.giftAmount || 0));
                 const live = state.liveSession;
                 if (!live || !amount) return;
-                if (Number(state.wallet?.balance || 0) < amount) { toast("钱包余额不足"); return; }
-                state.wallet.balance = Number(state.wallet.balance || 0) - amount;
-                state.wallet.transactions.unshift({ title: "直播送礼", note: live.handle || live.name || "直播间", amount: -amount });
+                if (Number(state.wallet?.coinBalance || 0) < amount) { toast("Vela Coin 余额不足"); return; }
+                state.wallet.coinBalance = Number(state.wallet.coinBalance || 0) - amount;
+                state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-giftout`, type:"coin", title:"直播送礼", note: live.handle || live.name || "直播间", coin: -amount, at:Date.now() });
                 const stats = getLiveStats(live);
                 stats.userGiftTotal = Number(stats.userGiftTotal || 0) + amount;
+                stats.giftReceivedCoin = Number(stats.giftReceivedCoin || 0) + amount;
+                const ownHandle = state.identities.find(x => x.id === state.viewerIdentityId)?.handle || "@user";
+                stats.gifts.push({ user:ownHandle, amount });
                 stats.heat = Math.min(100, Number(stats.heat || 50) + Math.min(18, amount / 80));
                 advanceViewerCount(live, { heatBoost: Math.min(10, amount / 120) });
-                state.liveChat.push({ user: "系统", avatar: "🎁", text: `${state.identities.find(x => x.id === state.viewerIdentityId)?.handle || "@user"} 送出了 ¥${amount} 的礼物`, translation: "" });
+                state.liveChat.push({ user: "系统", avatar: "🎁", text: `${state.identities.find(x => x.id === state.viewerIdentityId)?.handle || "@user"} 送出了 🔷${amount} 的礼物`, translation: "", at:Date.now() });
                 await persist();
                 renderLiveChatLines();
                 renderLiveHUD();
                 q('[data-screen="live"] [data-role="gift-picker"]')?.classList.remove("is-open");
-                toast(`已送出 ¥${amount}`);
+                toast(`已送出 🔷${amount}`);
               } else if (action === "open-message") {
                 openMessage(button.dataset.messageId);
               } else if (action === "toggle-business-task") {
@@ -3636,6 +4535,10 @@
                 await declineDMCard(button.dataset.messageId || "", button.dataset.cardId || "");
               } else if (action === "cancel-dm-card") {
                 await cancelDMCard(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "edit-business-card") {
+                openBusinessCardEditor(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "send-business-revision") {
+                await sendBusinessRevision(button.dataset.messageId || "", button.dataset.cardId || "");
               } else if (action === "fill-winner-card") {
                 fillWinnerCard(button.dataset.messageId || "", button.dataset.cardId || "");
               } else if (action === "save-winner-reply") {
@@ -3656,6 +4559,8 @@
                 await voteCommunityPoll(button.dataset.communityKey || "", button.dataset.cardId || "", button.dataset.optionIndex || "0");
               } else if (action === "join-community-lottery") {
                 await joinCommunityLottery(button.dataset.communityKey || "", button.dataset.cardId || "");
+              } else if (action === "resolve-community-lottery") {
+                await resolveCommunityLottery(button.dataset.communityKey || "", button.dataset.cardId || "");
               } else if (action === "clear-community-chat") {
                 await clearCommunityChat(button.dataset.communityKey || "", button.dataset.ownerType || "channel", button.dataset.ownerId || "", button.dataset.tier || "free");
               } else if (action === "edit-community") {
@@ -3694,17 +4599,8 @@
               } else if (action === "start-scheduled-live") {
                 const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
                 if (identity?.scheduledLive) {
-                  const item = identity.scheduledLive;
                   closeScreen("schedule-detail");
-                  const live = { id: `own-scheduled-${identity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: identity.id, isOwn: true, name: identity.displayName || "我的频道", handle: identity.handle || "@me", avatar: identity.avatar || "U", followers: Number(identity.followers || 0), title: item.title || "我的直播间", category: "预约直播", cover: item.cover || "", viewers: 0, mode: "solo", accessMode: "public", ageRequirement: "none", startedAt: Date.now() };
-                  identity.live = true;
-                  identity.activeLive = { ...live };
-                  identity.scheduledLive = null;
-                  pushCommunityBotEvent("identity", identity.id, "live", { title: live.title, text: "直播已经开始。" });
-                  state.liveChat = [];
-                  state.pendingLiveUserMessage = null;
-                  await persist();
-                  openLive(live);
+                  await startAppointmentHostLive("identity", identity.id);
                 }
               } else if (action === "settings-note") {
                 closeDrawer(); openSettingsNote(button.dataset.settingsKind || "platform");
@@ -3800,8 +4696,8 @@
                 if (host) host.innerHTML = `<article class="v-card"><div class="v-name">频道社群</div><p class="v-posttext">默认并未加入。正式版进入时可以选择用哪个 Vela 身份加入，匿名号也可以单独加入。</p><button class="v-action" data-action="noop">加入社群</button></article>`;
               } else if (action === "start-own-live") {
                 openLivePublisher();
-              } else if (action === "wallet-demo" || action === "biz-demo" || action === "noop") {
-                toast("这个入口会在下一阶段接真实业务逻辑");
+              } else if (action === "biz-demo" || action === "noop") {
+                toast("这个入口会在后续继续完善");
               }
             });
 
@@ -3858,6 +4754,18 @@
                   const preview = q('[data-screen="community-settings"] [data-role="community-avatar-preview"]');
                   if (preview) preview.innerHTML = `<img src="${escapeHTML(value)}" alt="">`;
                 } catch (err) { toast(String(err?.message || err || "读取头像失败")); }
+              } else if (input?.matches?.('[data-community-bot-avatar-file]')) {
+                try {
+                  const value = await readLocalImage(input.files?.[0]);
+                  if (!value) return;
+                  const hidden = q('[data-screen="community-settings"] [data-community-field="botAvatar"]');
+                  if (hidden) hidden.value = value;
+                  const preview = q('[data-screen="community-settings"] [data-role="community-bot-avatar-preview"]');
+                  if (preview) preview.innerHTML = `<img src="${escapeHTML(value)}" alt="">`;
+                } catch (err) { toast(String(err?.message || err || "读取机器人头像失败")); }
+              } else if (input?.matches?.('[data-community-field="botEnabled"]')) {
+                const options = q('[data-screen="community-settings"] [data-role="community-bot-options"]');
+                if (options) options.hidden = !input.checked;
               }
             });
 
