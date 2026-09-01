@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.3";
+  const VERSION = "0.1.4";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -42,6 +42,16 @@
 
   const safeArray = (value) => Array.isArray(value) ? value : [];
 
+  const VELA_DEFAULT_PRESET = `Vela 是一个以频道、直播、贴文、社群与私信为核心的虚拟创作者平台。生成内容时优先遵循当前账号设定、角色人设、账号公开程度、直播内容方向、粉丝画像，以及已经发生过的平台事件。
+
+绝对禁止扮演 user。不得替 user 发言、替 user 发送弹幕、替 user 私信、替 user 做选择或决定 user 的心理与行为。只有 user 明确输入或操作过的内容，才视为 user 的行为。
+
+后台知道的真实身份关系不等于角色或平台网友知道。角色与网友只能依据他们实际掌握的公开信息和线索进行判断；匿名或不露脸账号可以被怀疑、猜测或认错，但不能无依据直接识破。
+
+直播应保持连续推进，不要每次生成都像重新开播。user 发弹幕时主播可以看到并回应，也可以自然略过；user 只选择继续观看时，只推进主播行为、话题和观众互动，不强制让主播与 user 对话。
+
+观众弹幕应有差异，参考频道粉丝画像，不要所有网友都像同一个人。频道、角色和平台账号应有自己的活动，不要永远围绕 user 运转。商业邀约、私信与推荐内容要符合频道规模和内容方向，避免高频、重复或无缘由出现。`;
+
   function createDefaultState() {
     return {
       activePage: "home",
@@ -63,6 +73,11 @@
           banner: "",
           followers: 0,
           following: 0,
+          accountRole: "alias",
+          faceMode: "hidden",
+          identityVisibility: "hidden",
+          contentStyle: "",
+          fanProfile: "",
           isAnonymous: true
         }
       ],
@@ -80,6 +95,11 @@
           banner: "",
           followers: 0,
           following: 0,
+          accountRole: "primary",
+          faceMode: "mixed",
+          identityVisibility: "partial",
+          contentStyle: "",
+          fanProfile: "",
           profileCustomized: false,
           isDemo: true
         },
@@ -96,6 +116,11 @@
           banner: "",
           followers: 0,
           following: 0,
+          accountRole: "primary",
+          faceMode: "mixed",
+          identityVisibility: "partial",
+          contentStyle: "",
+          fanProfile: "",
           profileCustomized: false,
           isDemo: true
         }
@@ -169,6 +194,20 @@
       roleCommerce: {
         "char-aster": { enabled: true, tendency: 35 }
       },
+      generationPreset: {
+        mode: "default",
+        customText: ""
+      },
+      appearance: {
+        darkMode: false,
+        topbarHeight: 62,
+        bottombarHeight: 78
+      },
+      platformSettings: {
+        recommendationCount: 3,
+        allowBusinessDM: true,
+        activityLevel: 50
+      },
       liveChat: [
         { user: "yoo_n", text: "声音听着很舒服，今晚会播多久？" },
         { user: "Sato_Aki", text: "刚进来，今天的气氛好安静。" },
@@ -192,26 +231,33 @@
   function styles() {
     return `
 <style data-vela-style>
-.vela-roche{--v-bg:#f6f6f8;--v-card:#fff;--v-text:#111116;--v-muted:#7c7c86;--v-line:#e8e8ed;--v-soft:#efeff3;--v-live:#ff415d;position:relative;width:100%;height:100%;min-height:0;background:var(--v-bg);color:var(--v-text);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;isolation:isolate}
-.vela-roche *{box-sizing:border-box}.vela-roche button,.vela-roche input,.vela-roche textarea{font:inherit}.vela-roche button{cursor:pointer}.vela-roche .v-top{position:absolute;z-index:20;left:0;right:0;top:0;height:62px;padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,246,248,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.035)}
+.vela-roche{--v-bg:#f6f6f8;--v-card:#fff;--v-text:#111116;--v-muted:#7c7c86;--v-line:#e8e8ed;--v-soft:#efeff3;--v-live:#ff415d;--v-top-h:62px;--v-bottom-h:78px;position:relative;width:100%;height:100%;min-height:0;background:var(--v-bg);color:var(--v-text);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;isolation:isolate}
+.vela-roche *{box-sizing:border-box}.vela-roche button,.vela-roche input,.vela-roche textarea{font:inherit}.vela-roche button{cursor:pointer}.vela-roche .v-top{position:absolute;z-index:20;left:0;right:0;top:0;height:var(--v-top-h);padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,246,248,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.035)}
 .vela-roche .v-brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900}.vela-roche .v-logo{width:28px;height:28px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-size:13px}.vela-roche .v-plainbtn{width:42px;height:42px;border:0;border-radius:14px;background:#fff;color:#111;font-size:19px;display:grid;place-items:center}.vela-roche .v-top-actions{display:flex;gap:7px}
-.vela-roche .v-main{position:absolute;inset:62px 0 calc(78px + env(safe-area-inset-bottom,0px));overflow:auto;overscroll-behavior:contain;padding:12px 14px 24px;-webkit-overflow-scrolling:touch}.vela-roche .v-page{display:none}.vela-roche .v-page.is-active{display:block}.vela-roche .v-title{display:flex;justify-content:space-between;align-items:flex-end;margin:5px 2px 13px;font-size:22px;font-weight:900}.vela-roche .v-title small{font-size:11px;color:var(--v-muted);font-weight:700}
+.vela-roche .v-main{position:absolute;inset:var(--v-top-h) 0 calc(var(--v-bottom-h) + env(safe-area-inset-bottom,0px));overflow:auto;overscroll-behavior:contain;padding:12px 14px 24px;-webkit-overflow-scrolling:touch}.vela-roche .v-page{display:none}.vela-roche .v-page.is-active{display:block}.vela-roche .v-title{display:flex;justify-content:space-between;align-items:flex-end;margin:5px 2px 13px;font-size:22px;font-weight:900}.vela-roche .v-title small{font-size:11px;color:var(--v-muted);font-weight:700}
 .vela-roche .v-channels{display:flex;gap:12px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.vela-roche .v-channels::-webkit-scrollbar{display:none}.vela-roche .v-channel{width:64px;flex:0 0 auto;text-align:center;border:0;background:none;color:inherit;padding:0}.vela-roche .v-avatar-wrap{position:relative;width:58px;height:58px;border-radius:20px;padding:2px;background:linear-gradient(135deg,#111,#aaa);margin:auto}.vela-roche .v-avatar{width:100%;height:100%;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#dadbe1,#fff);font-weight:900;font-size:18px}.vela-roche .v-live-dot{position:absolute;right:-4px;bottom:-3px;background:var(--v-live);color:#fff;border:3px solid var(--v-bg);border-radius:8px;font-size:8px;font-weight:900;padding:2px 5px}.vela-roche .v-channel-name{font-size:11px;font-weight:750;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vela-roche .v-schedule{background:#111;color:#fff;border-radius:22px;padding:13px 14px;margin:4px 0 13px}.vela-roche .v-schedule-top,.vela-roche .v-schedule-main{display:flex;align-items:center;justify-content:space-between;gap:10px}.vela-roche .v-kicker{font-size:10px;opacity:.62;font-weight:800}.vela-roche .v-schedule-time{font-size:17px;font-weight:900;margin-top:3px}.vela-roche .v-pill{font-size:10px;background:#fff;color:#111;border-radius:9px;padding:5px 8px;font-weight:900}.vela-roche .v-schedule-main{margin-top:10px}.vela-roche .v-schedule-icon{width:38px;height:38px;border-radius:13px;background:#2a2a30;display:grid;place-items:center;font-weight:900}.vela-roche .v-schedule-copy{flex:1;min-width:0}.vela-roche .v-schedule-copy b{display:block;font-size:13px}.vela-roche .v-schedule-copy span{display:block;font-size:11px;opacity:.68;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-small-dark{border:0;background:#2a2a30;color:#fff;border-radius:12px;padding:9px 11px;font-size:11px;font-weight:850;min-height:38px}
 .vela-roche .v-filters{display:flex;gap:8px;margin:9px 0 14px}.vela-roche .v-chip{border:0;border-radius:14px;background:#e9e9ee;padding:9px 14px;font-size:12px;font-weight:850;color:#111}.vela-roche .v-chip.is-active{background:#111;color:#fff}.vela-roche .v-card{background:#fff;border-radius:24px;padding:14px;margin-bottom:14px}.vela-roche .v-author{display:flex;align-items:center;gap:10px}.vela-roche .v-mini{width:41px;height:41px;border-radius:14px;background:#ececf1;display:grid;place-items:center;font-weight:900}.vela-roche .v-meta{min-width:0;flex:1}.vela-roche .v-name{font-size:14px;font-weight:900}.vela-roche .v-sub{font-size:11px;color:var(--v-muted);margin-top:2px}.vela-roche .v-stage{display:flex;align-items:flex-end;width:100%;aspect-ratio:16/9;margin-top:12px;padding:14px;border:0;border-radius:20px;background:radial-gradient(circle at 72% 16%,rgba(255,255,255,.34),transparent 29%),linear-gradient(135deg,#1b1b22,#7a7d88);color:#fff;text-align:left;overflow:hidden;position:relative}.vela-roche .v-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(0,0,0,.48))}.vela-roche .v-stage-copy{position:relative;z-index:1}.vela-roche .v-badge{display:inline-block;background:var(--v-live);padding:5px 8px;border-radius:8px;font-size:9px;font-weight:900;margin-bottom:7px}.vela-roche .v-live-title{font-size:18px;font-weight:900;line-height:1.25}.vela-roche .v-viewers{font-size:11px;opacity:.82;margin-top:4px}.vela-roche .v-engage{display:flex;gap:14px;margin-top:10px;color:#555;font-size:12px}.vela-roche .v-postimg{height:170px;border-radius:19px;margin-top:12px;background:linear-gradient(135deg,#d7d8df,#fafafd);display:grid;place-items:center;font-size:42px}.vela-roche .v-posttext{font-size:14px;line-height:1.55;margin-top:10px}
 .vela-roche .v-rec-card{padding:0;overflow:hidden}.vela-roche .v-rec-cover{display:flex;align-items:flex-end;aspect-ratio:16/9;padding:14px;background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.4),transparent 26%),linear-gradient(135deg,#2a2b31,#8c8f99);color:#fff;position:relative}.vela-roche .v-rec-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(0,0,0,.55))}.vela-roche .v-rec-cover>*{position:relative;z-index:1}.vela-roche .v-rec-body{padding:12px 14px 14px;display:flex;gap:10px;align-items:center}.vela-roche .v-follow{border:0;background:#111;color:#fff;border-radius:12px;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-follow.is-on{background:#e9e9ee;color:#111}
 .vela-roche .v-msg{display:flex;align-items:center;gap:11px;padding:12px 2px;border-bottom:1px solid var(--v-line);border-top:0;border-left:0;border-right:0;background:none;width:100%;text-align:left;color:inherit}.vela-roche .v-msg:last-child{border-bottom:0}.vela-roche .v-preview{font-size:12px;color:var(--v-muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-unread{min-width:20px;height:20px;border-radius:10px;background:#111;color:#fff;font-size:10px;display:grid;place-items:center}.vela-roche .v-biz{font-size:9px;padding:3px 6px;border-radius:7px;background:#fff0d4;color:#925e00;margin-left:5px}.vela-roche .v-wallet{background:#111;color:#fff;border-radius:28px;padding:22px;margin:7px 0 16px}.vela-roche .v-balance-label{font-size:12px;opacity:.65}.vela-roche .v-balance{font-size:35px;font-weight:900;margin:7px 0 18px}.vela-roche .v-wallet-actions{display:flex;gap:8px}.vela-roche .v-wallet-actions button{flex:1;border:0;background:#fff;color:#111;border-radius:14px;padding:12px;font-weight:900}.vela-roche .v-tx{display:flex;justify-content:space-between;gap:12px;padding:13px 2px;border-bottom:1px solid var(--v-line);font-size:13px}.vela-roche .v-tx:last-child{border-bottom:0}.vela-roche .v-tx small{display:block;color:var(--v-muted);margin-top:3px}
-.vela-roche .v-nav{position:absolute;z-index:30;left:0;right:0;bottom:0;height:calc(78px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--v-line)}.vela-roche .v-nav button{border:0;background:none;color:#8b8b93;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px}.vela-roche .v-nav button b{font-size:20px;font-weight:500}.vela-roche .v-nav button.is-active{color:#111;font-weight:900}.vela-roche .v-nav .v-publish b{width:42px;height:42px;border-radius:15px;background:#111;color:#fff;display:grid;place-items:center;font-size:25px;margin-top:-13px;box-shadow:0 7px 18px rgba(0,0,0,.17)}
+.vela-roche .v-nav{position:absolute;z-index:30;left:0;right:0;bottom:0;height:calc(var(--v-bottom-h) + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--v-line)}.vela-roche .v-nav button{border:0;background:none;color:#8b8b93;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px}.vela-roche .v-nav button b{font-size:20px;font-weight:500}.vela-roche .v-nav button.is-active{color:#111;font-weight:900}.vela-roche .v-nav .v-publish b{width:42px;height:42px;border-radius:15px;background:#111;color:#fff;display:grid;place-items:center;font-size:25px;margin-top:-13px;box-shadow:0 7px 18px rgba(0,0,0,.17)}
 .vela-roche .v-mask{position:absolute;z-index:50;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s}.vela-roche .v-mask.is-open{opacity:1;pointer-events:auto}.vela-roche .v-drawer{position:absolute;z-index:60;top:0;bottom:0;left:0;width:min(84%,350px);padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px));background:#fff;transform:translateX(-102%);transition:transform .22s ease;overflow:auto;display:flex;flex-direction:column}.vela-roche .v-drawer.is-open{transform:none}.vela-roche .v-drawer-main{flex:1;min-height:0}.vela-roche .v-userhead{width:100%;border:0;background:#f6f6f8;border-radius:22px;padding:13px;display:flex;align-items:center;gap:12px;margin:6px 0 18px;text-align:left;color:inherit}.vela-roche .v-userav{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#111,#777);color:#fff;display:grid;place-items:center;font-weight:900;flex:0 0 auto}.vela-roche .v-avatar img,.vela-roche .v-mini img,.vela-roche .v-userav img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}.vela-roche .v-usercopy{min-width:0;flex:1}.vela-roche .v-userhead b{display:block;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-userhead span{display:block;color:var(--v-muted);font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-identity-chip{display:inline-flex!important;width:auto!important;margin-top:7px!important;padding:4px 7px;border-radius:8px;background:#111;color:#fff!important;font-size:9px!important;font-weight:900}.vela-roche .v-drawer-section{margin-top:14px}.vela-roche .v-drawer-label{padding:0 4px 7px;color:#a0a0a8;font-size:10px;font-weight:900;letter-spacing:.06em}.vela-roche .v-drawer-item{width:100%;padding:13px 4px;border:0;border-bottom:1px solid var(--v-line);background:none;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;color:inherit;font-size:14px;font-weight:800;min-height:48px}.vela-roche .v-drawer-item .v-itemcopy{display:flex;align-items:center;gap:10px;min-width:0}.vela-roche .v-drawer-item .v-itemicon{width:30px;height:30px;border-radius:10px;background:#f2f2f5;display:grid;place-items:center;font-size:14px;flex:0 0 auto}.vela-roche .v-drawer-item .v-itembadge{font-size:10px;color:var(--v-muted);font-weight:800}.vela-roche .v-drawer-foot{padding-top:18px;margin-top:auto}.vela-roche .v-version{font-size:10px;color:#b0b0b7;text-align:center;margin:0 0 9px}.vela-roche .v-exit{width:100%;min-height:48px;border:0;border-radius:15px;background:#f3f3f6;color:#b3261e;font-weight:900;font-size:13px}
 .vela-roche .v-sheetmask{position:absolute;z-index:80;inset:0;background:rgba(0,0,0,.28);display:none;align-items:flex-end}.vela-roche .v-sheetmask.is-open{display:flex}.vela-roche .v-sheet{width:100%;max-height:82%;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:13px 16px calc(24px + env(safe-area-inset-bottom,0px));overscroll-behavior:contain}.vela-roche .v-handle{width:42px;height:5px;border-radius:3px;background:#d2d2d7;margin:0 auto 15px}.vela-roche .v-create-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-create{border:0;border-radius:18px;background:#f1f1f4;padding:17px;text-align:left;font-weight:900;min-height:92px}.vela-roche .v-create b{display:block;font-size:24px;margin-bottom:12px}.vela-roche .v-hint{font-size:11px;line-height:1.5;color:var(--v-muted)}
-.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:62px;padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead>button:first-child{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px;flex:0 0 auto}.vela-roche .v-subhead .v-head-action{width:auto!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border:0;border-radius:11px;background:#fff!important;color:#111!important;font-size:11px!important;font-weight:850!important;white-space:nowrap}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
-.vela-roche .v-profile-shell{padding-bottom:18px}.vela-roche .v-profile-banner{height:138px;background:linear-gradient(135deg,#d5d6dc,#f5f5f8);overflow:hidden;position:relative}.vela-roche .v-profile-banner img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-info{position:relative;padding:0 16px 14px;background:#fff}.vela-roche .v-profile-avatar{width:78px;height:78px;border-radius:50%;border:4px solid #fff;background:linear-gradient(135deg,#222,#888);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;overflow:hidden;position:relative;margin-top:-39px}.vela-roche .v-profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-main{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}.vela-roche .v-profile-maincopy{min-width:0;flex:1;padding-top:8px}.vela-roche .v-profile-maincopy h2{font-size:22px;line-height:1.2;margin:0 0 4px}.vela-roche .v-profile-handle{font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats b{color:var(--v-text);font-size:13px}.vela-roche .v-profile-bio{font-size:13px;line-height:1.55;margin-top:11px;white-space:pre-wrap}.vela-roche .v-profile-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid var(--v-line);border-bottom:1px solid var(--v-line)}.vela-roche .v-profile-tabs button{border:0;background:#fff;padding:13px 6px;font-size:12px;font-weight:850;color:var(--v-muted);position:relative}.vela-roche .v-profile-tabs button.is-active{color:#111}.vela-roche .v-profile-tabs button.is-active:after{content:"";position:absolute;left:24%;right:24%;bottom:0;height:2px;background:#111;border-radius:2px}.vela-roche .v-profile-tabbody{padding:14px}.vela-roche .v-editform{display:grid;gap:12px}.vela-roche .v-field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}.vela-roche .v-field input,.vela-roche .v-field textarea{width:100%;border:1px solid var(--v-line);background:#fff;border-radius:13px;padding:11px 12px;font-size:16px;color:#111;outline:none}.vela-roche .v-field textarea{min-height:88px;resize:vertical}.vela-roche .v-fieldpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-identity-card{border:1px solid var(--v-line);background:#fff;border-radius:18px;padding:12px;margin-top:10px}.vela-roche .v-identity-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-roche-compact{background:#fafafd;border:1px solid var(--v-line);border-radius:18px;padding:12px}.vela-roche .v-roche-persona{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid var(--v-line)}.vela-roche .v-roche-persona:first-of-type{border-top:0}.vela-roche .v-role-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-profile-empty{padding:42px 12px;text-align:center;color:var(--v-muted);font-size:12px;line-height:1.6}.vela-roche .v-settings-note{font-size:12px;line-height:1.65;color:var(--v-muted)}.vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
+.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:var(--v-top-h);padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead>button:first-child{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px;flex:0 0 auto}.vela-roche .v-subhead .v-head-action{width:auto!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border:0;border-radius:11px;background:#fff!important;color:#111!important;font-size:11px!important;font-weight:850!important;white-space:nowrap}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
+.vela-roche .v-profile-shell{padding-bottom:18px}.vela-roche .v-profile-banner{height:156px;background:linear-gradient(135deg,#d5d6dc,#f5f5f8);overflow:hidden;position:relative}.vela-roche .v-profile-banner img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-info{position:relative;padding:48px 16px 14px;background:var(--v-card)}.vela-roche .v-profile-avatar{width:84px;height:84px;border-radius:50%;border:4px solid var(--v-card);background:linear-gradient(135deg,#222,#888);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;overflow:hidden;position:absolute;left:16px;top:-42px;margin:0}.vela-roche .v-profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-main{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}.vela-roche .v-profile-maincopy{min-width:0;flex:1;padding-top:8px}.vela-roche .v-profile-maincopy h2{font-size:22px;line-height:1.2;margin:0 0 4px}.vela-roche .v-profile-handle{font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats b{color:var(--v-text);font-size:13px}.vela-roche .v-profile-bio{font-size:13px;line-height:1.55;margin-top:11px;white-space:pre-wrap}.vela-roche .v-profile-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--v-card);border-top:1px solid var(--v-line);border-bottom:1px solid var(--v-line)}.vela-roche .v-profile-tabs button{border:0;background:var(--v-card);padding:13px 6px;font-size:12px;font-weight:850;color:var(--v-muted);position:relative}.vela-roche .v-profile-tabs button.is-active{color:#111}.vela-roche .v-profile-tabs button.is-active:after{content:"";position:absolute;left:24%;right:24%;bottom:0;height:2px;background:#111;border-radius:2px}.vela-roche .v-profile-tabbody{padding:14px}.vela-roche .v-editform{display:grid;gap:12px}.vela-roche .v-field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}.vela-roche .v-field input,.vela-roche .v-field textarea,.vela-roche .v-field select{width:100%;border:1px solid var(--v-line);background:var(--v-card);border-radius:13px;padding:11px 12px;font-size:16px;color:var(--v-text);outline:none}.vela-roche .v-field textarea{min-height:88px;resize:vertical}.vela-roche .v-field select{min-height:44px}.vela-roche .v-fieldpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-identity-card{border:1px solid var(--v-line);background:#fff;border-radius:18px;padding:12px;margin-top:10px}.vela-roche .v-identity-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-roche-compact{background:#fafafd;border:1px solid var(--v-line);border-radius:18px;padding:12px}.vela-roche .v-roche-persona{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid var(--v-line)}.vela-roche .v-roche-persona:first-of-type{border-top:0}.vela-roche .v-role-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-profile-empty{padding:42px 12px;text-align:center;color:var(--v-muted);font-size:12px;line-height:1.6}.vela-roche .v-settings-note{font-size:12px;line-height:1.65;color:var(--v-muted)}.vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
+.vela-roche .v-settings-group{background:var(--v-card);border-radius:20px;padding:14px;margin-bottom:12px}.vela-roche .v-settings-group h3{font-size:14px;margin:0 0 10px}.vela-roche .v-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--v-line)}.vela-roche .v-setting-row:first-of-type{border-top:0}.vela-roche .v-setting-row .v-meta{min-width:0}.vela-roche .v-switch{appearance:none;width:46px;height:28px;border-radius:16px;background:#d8d8de;position:relative;transition:.18s;flex:0 0 auto}.vela-roche .v-switch:after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.18s}.vela-roche .v-switch:checked{background:#111}.vela-roche .v-switch:checked:after{transform:translateX(18px)}.vela-roche .v-range{width:100%;accent-color:#111}.vela-roche .v-preset-box{white-space:pre-wrap;font-size:12px;line-height:1.65;color:var(--v-muted);background:var(--v-soft);border-radius:16px;padding:12px}.vela-roche .v-settings-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
 </style>`;
   }
 
   function mountMarkup(root, state) {
     const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
+    const topH = Math.max(52, Math.min(86, Number(state.appearance?.topbarHeight || 62)));
+    const bottomH = Math.max(64, Math.min(100, Number(state.appearance?.bottombarHeight || 78)));
+    root.classList.toggle("is-dark", Boolean(state.appearance?.darkMode));
+    root.style.setProperty("--v-top-h", `${topH}px`);
+    root.style.setProperty("--v-bottom-h", `${bottomH}px`);
     root.innerHTML = `${styles()}
       <header class="v-top">
         <div class="v-brand"><button class="v-plainbtn" data-action="open-drawer">☰</button><span class="v-logo">V</span>Vela</div>
@@ -325,7 +371,10 @@
                   ...state,
                   ...saved,
                   wallet: { ...state.wallet, ...(saved.wallet || {}) },
-                  roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) }
+                  roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) },
+                  generationPreset: { ...state.generationPreset, ...(saved.generationPreset || {}) },
+                  appearance: { ...state.appearance, ...(saved.appearance || {}) },
+                  platformSettings: { ...state.platformSettings, ...(saved.platformSettings || {}) }
                 };
               }
             } catch (err) {
@@ -336,6 +385,17 @@
               ownerPersonaId: String(state.rocheLink?.ownerPersonaId || ""),
               linkedCharacterIds: safeArray(state.rocheLink?.linkedCharacterIds).map(id => String(id))
             };
+            state.identities = safeArray(state.identities).map(item => ({
+              accountRole: "alias", faceMode: "hidden", identityVisibility: item?.isAnonymous ? "hidden" : "public",
+              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, ...item
+            }));
+            state.channels = safeArray(state.channels).map(item => ({
+              accountRole: "primary", faceMode: "mixed", identityVisibility: "partial",
+              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, ...item
+            }));
+            state.appearance = { darkMode: false, topbarHeight: 62, bottombarHeight: 78, ...(state.appearance || {}) };
+            state.platformSettings = { recommendationCount: 3, allowBusinessDM: true, activityLevel: 50, ...(state.platformSettings || {}) };
+            state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
 
             const rocheRuntime = {
               loaded: false,
@@ -362,6 +422,9 @@
                   schedule: state.schedule,
                   wallet: state.wallet,
                   roleCommerce: state.roleCommerce,
+                  generationPreset: state.generationPreset,
+                  appearance: state.appearance,
+                  platformSettings: state.platformSettings,
                   liveChat: state.liveChat
                 });
               } catch (err) {
@@ -406,6 +469,11 @@
                   banner: "",
                   followers: 0,
                   following: 0,
+                  accountRole: "primary",
+                  faceMode: "mixed",
+                  identityVisibility: "partial",
+                  contentStyle: "",
+                  fanProfile: "",
                   profileCustomized: false,
                   live: Boolean(existing?.live),
                   title: String(existing?.title || ""),
@@ -415,7 +483,9 @@
                   const custom = existing.profileCustomized ? {
                     name: existing.name, handle: existing.handle, avatar: existing.avatar,
                     bio: existing.bio, banner: existing.banner, followers: existing.followers,
-                    following: existing.following, profileCustomized: true
+                    following: existing.following, accountRole: existing.accountRole, faceMode: existing.faceMode,
+                    identityVisibility: existing.identityVisibility, contentStyle: existing.contentStyle,
+                    fanProfile: existing.fanProfile, profileCustomized: true
                   } : {};
                   Object.assign(existing, snapshot, custom);
                 } else state.channels.push(snapshot);
@@ -484,6 +554,15 @@
                 handle: normalizeHandle(char?.handle || ""),
                 avatar: String(char?.avatar || initials(displayName)),
                 bio: String(char?.bio || ""),
+                banner: String(existing?.banner || ""),
+                followers: Number(existing?.followers || 0),
+                following: Number(existing?.following || 0),
+                accountRole: String(existing?.accountRole || "primary"),
+                faceMode: String(existing?.faceMode || "mixed"),
+                identityVisibility: String(existing?.identityVisibility || "partial"),
+                contentStyle: String(existing?.contentStyle || ""),
+                fanProfile: String(existing?.fanProfile || ""),
+                profileCustomized: Boolean(existing?.profileCustomized),
                 live: Boolean(existing?.live),
                 title: String(existing?.title || ""),
                 viewers: Number(existing?.viewers || 0)
@@ -550,7 +629,8 @@
             };
 
             const renderRecommended = () => {
-              q('[data-role="recommended"]').innerHTML = state.recommendedLives.map(live => `
+              const recCount = Math.max(1, Math.min(6, Number(state.platformSettings?.recommendationCount || 3)));
+              q('[data-role="recommended"]').innerHTML = state.recommendedLives.slice(0, recCount).map(live => `
                 <article class="v-card v-rec-card">
                   <button class="v-rec-cover" data-action="open-recommended-live" data-rec-id="${escapeHTML(live.id)}" style="border:0;width:100%;text-align:left">
                     <div><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(live.title)}</div><div class="v-viewers">${formatViewers(live.viewers)} 人正在观看 · ${escapeHTML(live.category)}</div></div>
@@ -639,7 +719,27 @@
               const entity = getProfileEntity(ownerType, id);
               if (!entity) return;
               const name = profileName(entity, ownerType);
-              openScreen("profile-edit", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="profile-edit">‹</button><div class="v-meta"><strong>编辑主页</strong><div class="v-hint">${escapeHTML(name)} · 只影响 Vela 展示</div></div><button class="v-head-action" data-action="save-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">保存</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>主页背景图片 URL</label><input data-edit-field="banner" value="${escapeHTML(entity.banner || "")}" placeholder="https://..."></div><div class="v-field"><label>头像 URL / 文字占位</label><input data-edit-field="avatar" value="${escapeHTML(entity.avatar || "")}" placeholder="https://... 或 NN"></div><div class="v-field"><label>昵称</label><input data-edit-field="name" value="${escapeHTML(name)}" maxlength="40"></div><div class="v-field"><label>账号 @ID</label><input data-edit-field="handle" value="${escapeHTML(entity.handle || "")}" maxlength="40" placeholder="@vela_name"></div><div class="v-fieldpair"><div class="v-field"><label>粉丝数</label><input data-edit-field="followers" type="number" min="0" step="1" value="${Number(entity.followers || 0)}"></div><div class="v-field"><label>关注数</label><input data-edit-field="following" type="number" min="0" step="1" value="${Number(entity.following || 0)}"></div></div><div class="v-field"><label>签名 / 简介</label><textarea data-edit-field="bio" maxlength="300" placeholder="写点主页介绍…">${escapeHTML(entity.bio || "")}</textarea></div></div></div><p class="v-hint">角色主页的这些展示资料属于 Vela 自定义内容，不会反向修改 Roche 原角色资料。</p></div>`);
+              const accountRole = String(entity.accountRole || (ownerType === "identity" ? "alias" : "primary"));
+              const faceMode = String(entity.faceMode || "mixed");
+              const visibility = String(entity.identityVisibility || (entity.isAnonymous ? "hidden" : "partial"));
+              const opt = (value, current, label) => `<option value="${value}" ${current === value ? "selected" : ""}>${label}</option>`;
+              openScreen("profile-edit", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="profile-edit">‹</button><div class="v-meta"><strong>编辑主页</strong><div class="v-hint">${escapeHTML(name)} · 只影响 Vela 展示</div></div><button class="v-head-action" data-action="save-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">保存</button></header><div class="v-subbody">
+                <div class="v-card"><div class="v-editform">
+                  <div class="v-field"><label>主页背景图片 URL</label><input data-edit-field="banner" value="${escapeHTML(entity.banner || "")}" placeholder="https://..."></div>
+                  <div class="v-field"><label>头像 URL / 文字占位</label><input data-edit-field="avatar" value="${escapeHTML(entity.avatar || "")}" placeholder="https://... 或 NN"></div>
+                  <div class="v-field"><label>昵称</label><input data-edit-field="name" value="${escapeHTML(name)}" maxlength="40"></div>
+                  <div class="v-field"><label>账号 @ID</label><input data-edit-field="handle" value="${escapeHTML(entity.handle || "")}" maxlength="40" placeholder="@vela_name"></div>
+                  <div class="v-fieldpair"><div class="v-field"><label>粉丝数</label><input data-edit-field="followers" type="number" min="0" step="1" value="${Number(entity.followers || 0)}"></div><div class="v-field"><label>关注数</label><input data-edit-field="following" type="number" min="0" step="1" value="${Number(entity.following || 0)}"></div></div>
+                  <div class="v-field"><label>签名 / 简介</label><textarea data-edit-field="bio" maxlength="300" placeholder="写点主页介绍…">${escapeHTML(entity.bio || "")}</textarea></div>
+                </div></div>
+                <div class="v-card"><b>账号风格</b><p class="v-hint">这些是账号自己的长期设定。主账号也可以完全不露脸、保持现实身份匿名；小号也不等于一定不露脸。</p><div class="v-editform">
+                  <div class="v-field"><label>账号关系</label><select data-edit-field="accountRole">${opt("primary",accountRole,"主账号 / 主要频道")}${opt("alias",accountRole,"关联账号 / 小号")}${opt("shared",accountRole,"共同运营账号")}</select></div>
+                  <div class="v-fieldpair"><div class="v-field"><label>露脸方式</label><select data-edit-field="faceMode">${opt("show",faceMode,"露脸")}${opt("hidden",faceMode,"不露脸")}${opt("mixed",faceMode,"偶尔露脸 / 不固定")}</select></div><div class="v-field"><label>现实身份公开程度</label><select data-edit-field="identityVisibility">${opt("public",visibility,"公开")}${opt("partial",visibility,"半公开 / 留有线索")}${opt("hidden",visibility,"完全匿名")}</select></div></div>
+                  <div class="v-field"><label>主要直播 / 频道内容</label><textarea data-edit-field="contentStyle" maxlength="800" placeholder="例如：深夜聊天、做饭、游戏、舞蹈、工作室日常……">${escapeHTML(entity.contentStyle || "")}</textarea></div>
+                  <div class="v-field"><label>粉丝画像 / 社群氛围</label><textarea data-edit-field="fanProfile" maxlength="800" placeholder="例如：老粉较多、弹幕爱开玩笑、语言混合、对主播很熟……">${escapeHTML(entity.fanProfile || "")}</textarea></div>
+                </div></div>
+                <p class="v-hint">角色主页的这些展示和账号风格只保存在 Vela，不会反向修改 Roche 原角色资料。</p>
+              </div>`);
             };
 
             const saveProfileEditor = async (ownerType, id) => {
@@ -659,6 +759,12 @@
               entity.bio = String(get("bio") || "").trim();
               entity.followers = Number.isFinite(followers) ? followers : 0;
               entity.following = Number.isFinite(following) ? following : 0;
+              entity.accountRole = ["primary","alias","shared"].includes(get("accountRole")) ? get("accountRole") : "primary";
+              entity.faceMode = ["show","hidden","mixed"].includes(get("faceMode")) ? get("faceMode") : "mixed";
+              entity.identityVisibility = ["public","partial","hidden"].includes(get("identityVisibility")) ? get("identityVisibility") : "partial";
+              entity.contentStyle = String(get("contentStyle") || "").trim();
+              entity.fanProfile = String(get("fanProfile") || "").trim();
+              if (ownerType === "identity") entity.isAnonymous = entity.identityVisibility === "hidden";
               if (ownerType === "channel") entity.profileCustomized = true;
               await persist();
               mountMarkup(root, state);
@@ -669,14 +775,64 @@
             };
 
             const openSettingsNote = (kind) => {
-              const map = {
-                presets: { title: "生成预设", text: "这里以后放用户可编辑的生成规则：直播内容与主播表现、观众弹幕、推荐直播、私信/商业合作、贴文与社群。平台会内置一套默认预设，用户也可以自己改。" },
-                appearance: { title: "外观设置", text: "主页装饰已经归到每个账号/角色自己的“编辑主页”里，所以这里仅保留 Vela 全局外观，例如明暗主题、界面密度、卡片圆角、直播间显示风格。" },
-                platform: { title: "平台设置", text: "这里以后放整个平台的运行选项，例如推荐刷新数量、陌生商务私信是否出现、平台活跃度、通知与数据清理。不会放角色个人主页设置。" },
-                memory: { title: "记忆互通", text: "这一项按计划最后再接。以后用于读取主聊天记忆、重要直播事件回传，以及是否让主聊天知道 Vela 的近期状态。" }
-              };
-              const item = map[kind] || map.platform;
-              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>${escapeHTML(item.title)}</strong><div class="v-hint">功能规划</div></div></header><div class="v-subbody"><div class="v-card"><p class="v-settings-note" style="margin:0">${escapeHTML(item.text)}</p></div></div>`);
+              if (kind === "presets") {
+                const mode = String(state.generationPreset?.mode || "default");
+                openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>生成预设</strong><div class="v-hint">先用一套通用内置规则，测试后再继续细分</div></div><button class="v-head-action" data-action="save-generation-settings">保存</button></header><div class="v-subbody">
+                  <div class="v-settings-group"><h3>Vela 默认生成规则</h3><div class="v-preset-box">${escapeHTML(VELA_DEFAULT_PRESET)}</div></div>
+                  <div class="v-settings-group"><h3>自定义</h3><div class="v-field"><label>使用方式</label><select data-setting-field="presetMode"><option value="default" ${mode === "default" ? "selected" : ""}>只使用 Vela 默认预设</option><option value="custom" ${mode === "custom" ? "selected" : ""}>默认预设 + 我的补充</option></select></div><div class="v-field" style="margin-top:12px"><label>自定义补充（可留空）</label><textarea data-setting-field="customPreset" maxlength="5000" placeholder="例如：希望弹幕更安静、直播节奏更慢……">${escapeHTML(state.generationPreset?.customText || "")}</textarea></div><p class="v-hint">账号自己的风格与角色人设优先。这里不需要一次写得很复杂。</p></div>
+                </div>`);
+                return;
+              }
+              if (kind === "appearance") {
+                const ap = state.appearance || {};
+                openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>外观设置</strong><div class="v-hint">夜间模式与界面上下比例</div></div><button class="v-head-action" data-action="save-appearance-settings">保存</button></header><div class="v-subbody">
+                  <div class="v-settings-group"><div class="v-setting-row"><div class="v-meta"><div class="v-name">夜间模式</div><div class="v-sub">切换 Vela 整体明暗主题</div></div><input class="v-switch" data-setting-field="darkMode" type="checkbox" ${ap.darkMode ? "checked" : ""}></div></div>
+                  <div class="v-settings-group"><h3>界面比例</h3><div class="v-setting-row"><div class="v-meta"><div class="v-name">顶栏高度 · <span data-role="topbar-value">${Number(ap.topbarHeight || 62)}px</span></div><div class="v-sub">类似 INS 的顶栏高度调整</div></div></div><input class="v-range" data-setting-field="topbarHeight" type="range" min="52" max="86" step="1" value="${Number(ap.topbarHeight || 62)}"><div class="v-setting-row"><div class="v-meta"><div class="v-name">底栏高度 · <span data-role="bottombar-value">${Number(ap.bottombarHeight || 78)}px</span></div><div class="v-sub">调节五栏导航占用的高度</div></div></div><input class="v-range" data-setting-field="bottombarHeight" type="range" min="64" max="100" step="1" value="${Number(ap.bottombarHeight || 78)}"><div class="v-settings-actions"><button class="v-action light" data-action="reset-appearance">恢复默认</button></div></div>
+                </div>`);
+                return;
+              }
+              if (kind === "platform") {
+                const ps = state.platformSettings || {};
+                openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>平台设置</strong><div class="v-hint">控制 Vela 世界整体运行方式</div></div><button class="v-head-action" data-action="save-platform-settings">保存</button></header><div class="v-subbody">
+                  <div class="v-settings-group"><div class="v-field"><label>推荐页每批直播数量</label><input data-setting-field="recommendationCount" type="number" min="1" max="6" step="1" value="${Number(ps.recommendationCount || 3)}"></div><div class="v-setting-row"><div class="v-meta"><div class="v-name">允许陌生商务邀约</div><div class="v-sub">关闭后，后续生成不会主动新增品牌合作私信</div></div><input class="v-switch" data-setting-field="allowBusinessDM" type="checkbox" ${ps.allowBusinessDM !== false ? "checked" : ""}></div><div class="v-setting-row"><div class="v-meta"><div class="v-name">平台活跃度 · <span data-role="activity-value">${Number(ps.activityLevel ?? 50)}%</span></div><div class="v-sub">以后影响推荐、陌生私信和网友互动的活跃程度</div></div></div><input class="v-range" data-setting-field="activityLevel" type="range" min="0" max="100" step="5" value="${Number(ps.activityLevel ?? 50)}"></div><p class="v-hint">目前先保留最基础的三项，等首页、推荐和私信实测以后再补。</p></div>
+                </div>`);
+                return;
+              }
+              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>记忆互通</strong><div class="v-hint">最后阶段再接</div></div></header><div class="v-subbody"><div class="v-card"><p class="v-settings-note" style="margin:0">这一项先保留入口，不在当前版本接逻辑。以后用于读取主聊天记忆、重要直播事件回传，以及角色对匿名账号的认知与 Vela 近期事件同步。</p></div></div>`);
+            };
+
+            const saveGenerationSettings = async () => {
+              const screen = q('[data-screen="settings"]');
+              const mode = screen?.querySelector('[data-setting-field="presetMode"]')?.value === "custom" ? "custom" : "default";
+              const customText = String(screen?.querySelector('[data-setting-field="customPreset"]')?.value || "").trim();
+              state.generationPreset = { mode, customText };
+              await persist();
+              toast("生成预设已保存");
+            };
+
+            const saveAppearanceSettings = async () => {
+              const screen = q('[data-screen="settings"]');
+              const darkMode = Boolean(screen?.querySelector('[data-setting-field="darkMode"]')?.checked);
+              const topbarHeight = Math.max(52, Math.min(86, Number(screen?.querySelector('[data-setting-field="topbarHeight"]')?.value || 62)));
+              const bottombarHeight = Math.max(64, Math.min(100, Number(screen?.querySelector('[data-setting-field="bottombarHeight"]')?.value || 78)));
+              state.appearance = { darkMode, topbarHeight, bottombarHeight };
+              await persist();
+              mountMarkup(root, state);
+              rerender();
+              switchPage(state.activePage || "home");
+              openSettingsNote("appearance");
+              toast("外观设置已保存");
+            };
+
+            const savePlatformSettings = async () => {
+              const screen = q('[data-screen="settings"]');
+              const recommendationCount = Math.max(1, Math.min(6, Math.floor(Number(screen?.querySelector('[data-setting-field="recommendationCount"]')?.value || 3))));
+              const allowBusinessDM = Boolean(screen?.querySelector('[data-setting-field="allowBusinessDM"]')?.checked);
+              const activityLevel = Math.max(0, Math.min(100, Number(screen?.querySelector('[data-setting-field="activityLevel"]')?.value ?? 50)));
+              state.platformSettings = { recommendationCount, allowBusinessDM, activityLevel };
+              await persist();
+              renderRecommended();
+              toast("平台设置已保存");
             };
 
             const openMessage = (id) => {
@@ -831,6 +987,17 @@
                 renderProfileTab(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.profileTab || "live");
               } else if (action === "settings-note") {
                 closeDrawer(); openSettingsNote(button.dataset.settingsKind || "platform");
+              } else if (action === "save-generation-settings") {
+                await saveGenerationSettings();
+              } else if (action === "save-appearance-settings") {
+                await saveAppearanceSettings();
+              } else if (action === "save-platform-settings") {
+                await savePlatformSettings();
+              } else if (action === "reset-appearance") {
+                state.appearance = { darkMode: false, topbarHeight: 62, bottombarHeight: 78 };
+                await persist();
+                mountMarkup(root, state); rerender(); switchPage(state.activePage || "home"); openSettingsNote("appearance");
+                toast("外观已恢复默认");
               } else if (action === "open-identities") {
                 closeDrawer(); openIdentities();
               } else if (action === "open-roles") {
@@ -873,6 +1040,9 @@
                       handle,
                       avatar: String(persona?.avatar || initials(name)),
                       bio: String(persona?.bio || ""),
+                      banner: "", followers: 0, following: 0,
+                      accountRole: "primary", faceMode: "mixed", identityVisibility: "partial",
+                      contentStyle: "", fanProfile: "",
                       isAnonymous: false
                     };
                     state.identities.push(item);
@@ -894,7 +1064,7 @@
                 mountMarkup(root, state); rerender(); switchPage(state.activePage || "home"); toast("身份已切换");
               } else if (action === "add-demo-identity") {
                 if (!state.identities.some(x => x.id === "public-main")) {
-                  state.identities.push({ id: "public-main", type: "public", displayName: "Nini Daily", handle: "@nini_daily", avatar: "ND", bio: "公开频道", banner: "", followers: 0, following: 0, isAnonymous: false });
+                  state.identities.push({ id: "public-main", type: "public", displayName: "Nini Daily", handle: "@nini_daily", avatar: "ND", bio: "公开频道", banner: "", followers: 0, following: 0, accountRole: "primary", faceMode: "mixed", identityVisibility: "partial", contentStyle: "", fanProfile: "", isAnonymous: false });
                   await persist(); openIdentities();
                 } else toast("示例公开身份已经存在");
               } else if (action === "toggle-role-commerce") {
@@ -926,6 +1096,15 @@
                 const label = qa('[data-screen="roles"] [data-role="commerce-value"]').find(el => String(el.dataset.characterId || "") === charId);
                 if (label) label.textContent = `${value}%`;
                 await persist();
+              } else if (input?.matches?.('[data-setting-field="topbarHeight"]')) {
+                const label = q('[data-screen="settings"] [data-role="topbar-value"]');
+                if (label) label.textContent = `${Number(input.value || 62)}px`;
+              } else if (input?.matches?.('[data-setting-field="bottombarHeight"]')) {
+                const label = q('[data-screen="settings"] [data-role="bottombar-value"]');
+                if (label) label.textContent = `${Number(input.value || 78)}px`;
+              } else if (input?.matches?.('[data-setting-field="activityLevel"]')) {
+                const label = q('[data-screen="settings"] [data-role="activity-value"]');
+                if (label) label.textContent = `${Number(input.value || 0)}%`;
               }
             });
           },
