@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.17";
+  const VERSION = "0.1.18";
   const VELA_ICON = "data:image/png;base64,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";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
@@ -433,6 +433,31 @@
 .vela-roche .v-group-composer,.vela-roche .v-dm-composer{position:sticky;bottom:0;display:grid;grid-template-columns:1fr 44px;gap:8px;background:var(--v-bg);padding-top:10px}.vela-roche .v-group-composer input,.vela-roche .v-dm-composer input{min-width:0;border:1px solid var(--v-line);background:var(--v-card);color:var(--v-text);border-radius:14px;padding:10px 11px;font-size:16px}.vela-roche .v-group-composer button,.vela-roche .v-dm-composer button{border:0;border-radius:14px;background:#111;color:#fff;font-weight:900}
 .vela-roche .v-subscription-editor-grid{display:grid;gap:12px}.vela-roche .v-subscription-editor-tier{background:var(--v-card);border-radius:20px;padding:13px;border:1px solid var(--v-line)}.vela-roche .v-subscription-editor-tier h3{font-size:14px;margin:0 0 11px}.vela-roche .v-subscription-editor-tier.is-paid h3{color:var(--v-red)}
 @media (max-width:390px){.vela-roche .v-membership-grid{grid-template-columns:1fr}}
+
+
+/* v0.1.18 · activity is display-only; own subscription list */
+.vela-roche .v-inline-manage{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:9px;padding-top:9px;border-top:1px solid var(--v-line)}
+.vela-roche .v-inline-manage button{border:0;border-radius:10px;background:var(--v-soft);color:var(--v-text);padding:7px 9px;font-size:9px;font-weight:900}
+.vela-roche .v-inline-manage button.is-danger{background:rgba(255,59,48,.09);color:var(--v-red)}
+.vela-roche .v-my-subscriptions{display:grid;gap:10px}
+.vela-roche .v-my-sub-card{background:var(--v-card);border:1px solid var(--v-line);border-radius:18px;padding:12px}
+.vela-roche .v-my-sub-head{display:flex;align-items:center;gap:10px}
+.vela-roche .v-my-sub-head .v-social-avatar{width:44px;height:44px}
+.vela-roche .v-my-sub-head .v-meta{min-width:0;flex:1}
+.vela-roche .v-my-sub-title{font-size:13px;font-weight:950}
+.vela-roche .v-my-sub-handle{font-size:10px;color:var(--v-muted);margin-top:2px}
+.vela-roche .v-my-sub-tier{display:inline-flex;align-items:center;gap:4px;border-radius:9px;padding:4px 7px;font-size:8px;font-weight:950;white-space:nowrap}
+.vela-roche .v-my-sub-tier.is-free{background:#e8f2ff;color:#007aff}
+.vela-roche .v-my-sub-tier.is-paid{background:#fff0f1;color:#ff3b30}
+.vela-roche .v-my-sub-detail{margin-top:10px;padding-top:9px;border-top:1px solid var(--v-line);display:grid;gap:4px;font-size:10px;line-height:1.45;color:var(--v-muted)}
+.vela-roche .v-my-sub-detail b{color:var(--v-text);font-size:10px}
+.vela-roche .v-my-sub-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.vela-roche .v-my-sub-actions button{border:0;border-radius:12px;min-height:38px;font-size:10px;font-weight:900}
+.vela-roche .v-my-sub-actions .v-continue-sub{background:var(--v-blue-soft);color:var(--v-blue)}
+.vela-roche .v-my-sub-actions .v-cancel-sub{background:rgba(255,59,48,.09);color:var(--v-red)}
+.vela-roche .v-own-subscription-tools{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:11px}
+.vela-roche .v-own-subscription-tools h3{font-size:16px;margin:0}.vela-roche .v-own-subscription-tools p{font-size:10px;color:var(--v-muted);margin:3px 0 0}
+.vela-roche .v-own-subscription-tools button{border:0;border-radius:11px;background:var(--v-soft);color:var(--v-text);padding:8px 9px;font-size:9px;font-weight:900;white-space:nowrap}
 
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 
@@ -1047,7 +1072,7 @@
 
             const translationHTML = (id, text) => text ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(id)}">翻译</button><div class="v-translation" data-translation-id="${escapeHTML(id)}" hidden>${escapeHTML(text)}</div>` : "";
 
-            const renderSocialPostCard = (post, { compact = false } = {}) => {
+            const renderSocialPostCard = (post, { compact = false, canDelete = false } = {}) => {
               post = { ...post, ...(state.postOverrides?.[String(post?.id || "")] || {}) };
               const imageHTML = isImageURL(post.image || "") ? `<img src="${escapeHTML(post.image)}" alt="">` : "✦";
               const trId = `post-card-${String(post.id || "post")}`;
@@ -1055,7 +1080,7 @@
               const age = String(post.ageRequirement || "none");
               const accessLabel = mode === "free" ? `免费订阅${age === "18+" ? " · 18+" : ""}` : mode === "paid" ? `付费订阅${age === "18+" ? " · 18+" : ""}` : (age === "18+" ? "公开 · 18+" : "");
               const accessClass = mode === "free" ? " is-free" : mode === "paid" ? " is-paid" : (age === "18+" ? " is-age" : "");
-              return `<article class="v-card v-home-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.time || "刚刚")}</div>${accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : ""}</div></div><div class="v-social-text" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<button class="v-social-media" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${imageHTML}</button><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">◌ ${Number(post.comments || safeArray(state.postReplies?.[post.id]).length || 0)}</button><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button></div></article>`;
+              return `<article class="v-card v-home-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.time || "刚刚")}</div>${accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : ""}</div></div><div class="v-social-text" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<button class="v-social-media" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${imageHTML}</button><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">◌ ${Number(post.comments || safeArray(state.postReplies?.[post.id]).length || 0)}</button><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button>${canDelete ? `<button data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}" style="color:var(--v-red)">删除</button>` : ""}</div></article>`;
             };
 
             const renderHome = () => {
@@ -1763,33 +1788,42 @@
 
               if (tab === "activity") {
                 const blocks = [];
+
                 if (entity.scheduledLive) {
                   const scheduledInner = `<div class="v-kicker">置顶 · 预约直播</div><div class="v-live-title">${escapeHTML(entity.scheduledLive.title || "预约直播")}</div><div class="v-sub" style="margin-top:6px">${escapeHTML(entity.scheduledLive.dateText || "未设置时间")}</div>`;
-                  blocks.push(`<article class="v-activity-pin is-scheduled">${ownerType === "identity" ? `<button data-action="open-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">${scheduledInner}</button><div class="v-profile-actions"><button class="v-action light" data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">编辑预约</button></div>` : scheduledInner}</article>`);
+                  const manage = ownerType === "identity"
+                    ? `<div class="v-inline-manage"><button data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">编辑</button><button class="is-danger" data-action="cancel-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">删除</button></div>`
+                    : "";
+                  blocks.push(`<article class="v-activity-pin is-scheduled">${ownerType === "identity" ? `<button data-action="open-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">${scheduledInner}</button>` : scheduledInner}${manage}</article>`);
                 }
 
                 if (ownerType === "identity" && entity.activeLive) {
                   const active = entity.activeLive;
                   const stats = getLiveStats(active);
-                  blocks.push(`<article class="v-activity-pin is-live"><button data-action="open-own-profile-live" data-identity-id="${escapeHTML(entity.id)}"><div class="v-kicker">正在直播</div><div class="v-live-title">${escapeHTML(active.title || "正在直播")}</div><div class="v-sub" style="margin-top:6px">${formatViewers(stats.currentViewers || 0)} 人正在观看 · ${escapeHTML(active.category || "公开直播")}</div></button></article>`);
+                  blocks.push(`<article class="v-activity-pin is-live"><button data-action="open-own-profile-live" data-identity-id="${escapeHTML(entity.id)}"><div class="v-kicker">正在直播</div><div class="v-live-title">${escapeHTML(active.title || "正在直播")}</div><div class="v-sub" style="margin-top:6px">${formatViewers(stats.currentViewers || 0)} 人正在观看 · ${escapeHTML(active.category || "公开直播")}</div></button><div class="v-inline-manage"><button data-action="open-own-profile-live" data-identity-id="${escapeHTML(entity.id)}">进入直播</button></div></article>`);
                 } else if (entity.live) {
                   blocks.push(`<article class="v-activity-pin is-live"><button data-action="open-live" data-live-id="${escapeHTML(entity.id)}"><div class="v-kicker">正在直播</div><div class="v-live-title">${escapeHTML(entity.title || "正在直播")}</div><div class="v-sub" style="margin-top:6px">${formatViewers(entity.viewers || 0)} 人正在观看</div></button></article>`);
                 }
 
                 const ownPosts = state.communityPosts.filter(p => String(p.ownerType || "") === String(ownerType) && String(p.ownerId || "") === String(id));
                 const sample = ownerType === "channel" ? getHomeSamplePost() : null;
-                const cards = [sample, ...ownPosts].filter(Boolean).map(post => renderSocialPostCard({ ...post, comments: safeArray(state.postReplies?.[String(post.id)]).length })).join("");
-                const compose = ownerType === "identity" ? `<div class="v-activity-compose"><button class="v-community-compose" data-action="open-community-post-editor" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">＋ 发布一条贴文</button></div>` : "";
-                if (compose || cards) blocks.push(`${compose}<div class="v-activity-posts">${cards}</div>`);
-
-                if (!blocks.length) {
-                  blocks.push(ownerType === "identity"
-                    ? `<div class="v-profile-empty">这里还没有动态。<br><button class="v-action" style="margin-top:12px" data-action="open-live-publisher">＋ 开始直播</button><button class="v-action light" style="margin-top:12px" data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">＋ 预约直播</button></div>`
-                    : `<div class="v-profile-empty">这里还没有动态。</div>`);
-                } else if (ownerType === "identity" && !entity.activeLive && !entity.live && !entity.scheduledLive) {
-                  blocks.unshift(`<div class="v-profile-actions"><button class="v-action" data-action="open-live-publisher">＋ 开始直播</button><button class="v-action light" data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">＋ 预约直播</button></div>`);
+                const postItems = [sample, ...ownPosts].filter(Boolean);
+                if (postItems.length) {
+                  const cards = postItems.map(post => {
+                    const isOwnedUserPost = ownerType === "identity"
+                      && String(post.ownerType || "identity") === "identity"
+                      && String(post.ownerId || id) === String(state.viewerIdentityId || "");
+                    return renderSocialPostCard(
+                      { ...post, comments: safeArray(state.postReplies?.[String(post.id)]).length },
+                      { canDelete: isOwnedUserPost }
+                    );
+                  }).join("");
+                  blocks.push(`<div class="v-activity-posts">${cards}</div>`);
                 }
-                host.innerHTML = `<div class="v-activity-stack">${blocks.join("")}</div>`;
+
+                host.innerHTML = blocks.length
+                  ? `<div class="v-activity-stack">${blocks.join("")}</div>`
+                  : `<div class="v-profile-empty">这里还没有发布过动态。</div>`;
                 return;
               }
 
@@ -1799,24 +1833,42 @@
                 return;
               }
 
-              const cfg = getSubscriptionProfile(ownerType, id);
-              const currentTier = ownerType === "channel" ? (state.subscriptions?.[String(id)] || "none") : "owner";
-              const canEdit = ownerType === "identity" || Boolean(entity.sourceCharacterId);
-              let currentText = "这是你的频道";
-              let currentNote = "你是自己订阅社群的群主。";
-              if (ownerType === "channel") {
-                if (currentTier === "paid") {
-                  currentText = `${cfg.paid.emoji || "💎"} ${cfg.paid.name || "付费订阅"}`;
-                  currentNote = `你已加入 ${cfg.paid.communityName || "付费订阅社群"}，同时也可以进入免费社群。`;
-                } else if (currentTier === "free") {
-                  currentText = `${cfg.free.emoji || "🌊"} ${cfg.free.name || "免费订阅"}`;
-                  currentNote = `你已加入 ${cfg.free.communityName || "免费订阅社群"}。`;
-                } else {
-                  currentText = "暂未订阅";
-                  currentNote = "选择上面的免费或付费方案后，对应社群会自动出现在 DM → 社群。";
-                }
+              if (ownerType === "identity") {
+                const subscribed = Object.entries(state.subscriptions || {})
+                  .filter(([, tier]) => tier === "free" || tier === "paid")
+                  .map(([channelId, tier]) => {
+                    const channel = state.channels.find(ch => String(ch.id) === String(channelId));
+                    return channel ? { channel, tier } : null;
+                  })
+                  .filter(Boolean);
+
+                const cards = subscribed.map(({ channel, tier }) => {
+                  const cfg = getSubscriptionProfile("channel", channel.id);
+                  const tierCfg = cfg[tier];
+                  const paid = tier === "paid";
+                  const label = paid
+                    ? `${escapeHTML(tierCfg.emoji || "💎")} ${escapeHTML(tierCfg.name || "付费订阅")}`
+                    : `${escapeHTML(tierCfg.emoji || "🌊")} ${escapeHTML(tierCfg.name || "免费订阅")}`;
+                  return `<article class="v-my-sub-card"><div class="v-my-sub-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-meta"><div class="v-my-sub-title">${escapeHTML(channel.name || channel.handle || "频道")}</div><div class="v-my-sub-handle">${escapeHTML(channel.handle || "")}</div></div><span class="v-my-sub-tier ${paid ? "is-paid" : "is-free"}">${label}</span></div><div class="v-my-sub-detail"><div>当前方案 <b>${escapeHTML(tierCfg.name || (paid ? "付费订阅" : "免费订阅"))}${paid ? ` · ¥${Number(tierCfg.price || 0).toLocaleString("zh-CN")}/月` : ""}</b></div><div>对应社群 <b>${escapeHTML(tierCfg.communityName || "订阅社群")}</b></div></div><div class="v-my-sub-actions"><button class="v-continue-sub" data-action="continue-subscription" data-channel-id="${escapeHTML(channel.id)}">继续订阅</button><button class="v-cancel-sub" data-action="cancel-subscription" data-channel-id="${escapeHTML(channel.id)}">取消订阅</button></div></article>`;
+                }).join("");
+
+                host.innerHTML = `<div class="v-own-subscription-tools"><div><h3>我的订阅</h3><p>这里显示你已经订阅的主播。</p></div><button data-action="open-subscription-settings" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">我的频道方案</button></div>${cards ? `<div class="v-my-subscriptions">${cards}</div>` : `<div class="v-profile-empty">还没有订阅任何主播。<br>去喜欢的主播主页「订阅」里选择方案。</div>`}`;
+                return;
               }
-              host.innerHTML = `<div class="v-subscription-head"><div><h3>订阅</h3><p>简单的频道会员方案，不做复杂商城。</p></div>${canEdit ? `<button data-action="open-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(id)}">编辑方案</button>` : ""}</div><div class="v-membership-grid">${renderMembershipCard(ownerType, entity, "free", cfg.free, currentTier)}${renderMembershipCard(ownerType, entity, "paid", cfg.paid, currentTier)}</div><div class="v-your-membership"><div class="v-your-membership-label">你的订阅</div><div class="v-your-membership-value">${escapeHTML(currentText)}</div><div class="v-your-membership-note">${escapeHTML(currentNote)}</div></div>`;
+
+              const cfg = getSubscriptionProfile(ownerType, id);
+              const currentTier = state.subscriptions?.[String(id)] || "none";
+              const canEdit = Boolean(entity.sourceCharacterId);
+              let currentText = "暂未订阅";
+              let currentNote = "选择上面的免费或付费方案后，对应社群会自动出现在 DM → 社群。";
+              if (currentTier === "paid") {
+                currentText = `${cfg.paid.emoji || "💎"} ${cfg.paid.name || "付费订阅"}`;
+                currentNote = `你已加入 ${cfg.paid.communityName || "付费订阅社群"}，同时也可以进入免费社群。`;
+              } else if (currentTier === "free") {
+                currentText = `${cfg.free.emoji || "🌊"} ${cfg.free.name || "免费订阅"}`;
+                currentNote = `你已加入 ${cfg.free.communityName || "免费订阅社群"}。`;
+              }
+              host.innerHTML = `<div class="v-subscription-head"><div><h3>订阅</h3><p>选择这个主播的订阅方案。</p></div>${canEdit ? `<button data-action="open-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(id)}">编辑方案</button>` : ""}</div><div class="v-membership-grid">${renderMembershipCard(ownerType, entity, "free", cfg.free, currentTier)}${renderMembershipCard(ownerType, entity, "paid", cfg.paid, currentTier)}</div><div class="v-your-membership"><div class="v-your-membership-label">你的订阅</div><div class="v-your-membership-value">${escapeHTML(currentText)}</div><div class="v-your-membership-note">${escapeHTML(currentNote)}</div></div>`;
             };
 
             const openCommunityPostEditor = (ownerType, ownerId) => {
@@ -2436,6 +2488,24 @@
               openMessage(messageId);
             };
 
+            const continueSubscription = (channelId) => {
+              const channel = state.channels.find(ch => String(ch.id) === String(channelId));
+              if (!channel) return;
+              openProfile("channel", channel.id);
+              renderProfileTab("channel", channel.id, "subscriptions");
+            };
+
+            const cancelSubscription = async (channelId) => {
+              const channel = state.channels.find(ch => String(ch.id) === String(channelId));
+              if (!channel || !state.subscriptions?.[String(channelId)]) return;
+              if (typeof window.confirm === "function" && !window.confirm(`取消订阅 ${channel.name || channel.handle || "这个主播"}？`)) return;
+              delete state.subscriptions[String(channelId)];
+              await persist();
+              renderMessages();
+              renderProfileTab("identity", state.viewerIdentityId, "subscriptions");
+              toast("已取消订阅");
+            };
+
             const openMessage = (id) => {
               const msg = state.messages.find(x => x.id === id);
               if (!msg) return;
@@ -2572,6 +2642,10 @@
                 state.dmTab = button.dataset.dmTab === "community" ? "community" : "dm";
                 await persist();
                 renderMessages();
+              } else if (action === "continue-subscription") {
+                continueSubscription(button.dataset.channelId || "");
+              } else if (action === "cancel-subscription") {
+                await cancelSubscription(button.dataset.channelId || "");
               } else if (action === "subscribe-channel") {
                 const channelId = String(button.dataset.channelId || "");
                 const tier = button.dataset.tier === "paid" ? "paid" : "free";
