@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.1";
+  const VERSION = "0.2.2";
   const VELA_ICON = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAPQAAAD7CAIAAADSGy58AAAQAElEQVR4AezdCbjeRXU/cDASyApZCSGEBMIakE0k7KAWFX1UVCqILS61Vmu1LlVaURFZlUWgINRWZBMJkbCHLIAECCQYIAkJWcgGZIMkhLAULeD/wz3t/F/fe3O5y7vfuc/3Gc+c37yznPnOmTMzat7xSv7LFmhQC7xjs/yXLdCgFsjkbtCJzcPabLNM7syChrVAJnfDTm0eWCZ3XXEgd7Y9Fsjkbo+1ctm6skAmd11NV+5seyyQyd0ea+WydWWBTO66mq7c2fZYIJO7PdbKZevKAlUnd11ZK3e2riyQyV1X05U72x4LZHK3x1q5bF1ZIJO7rqYrd7Y9Fsjkbo+1ctm6skAmd11NV9U7W1cdyOSuq+nKnW2PBTK522OtXLauLJDJXVfTlTvbHgtkcrfHWrlsXVkgk7uupit3tj0WyORuj7Vy2bqyQCZ3XU1X7mx7LJDJ3R5r5bJ1ZYFM7rqartzZ9lggk7s91spl68oCmdx1NV1Nnf3zn//sP6UJsl0F7RlnJnd7rFWNshj85ptvSgNvvPHG66+//sYbb6WvN/298cYbb775vwWq0cHabTOTuxbnBo9TtzZv+qN5s+kPlcmgwP/8z/+89NJLUnJoCBnJApncyRQ1JOBz6k2wlgbIUp82btz4hz/84dprr502bRr3jfY+0WcUWiCTu9AatSXja7CWED2Tfe655+68887Tm/5mzpw5dOjQ7t27YzxEmZwmC2RyJ1NUWcBgiE4Q8LgQr7322tKlS8eNG3fmmWeed955N99886pVq/baa6+RI0d269YNsyF+m9NkgUzuZIpqCW+1i81v/cdmmxEgyUKOV155ZdGiRWPHjv3JT35y/vnn33777fPnzxdn77fffu973/t69+6N1oH4VU6TBTK5kymqLwStpTjt4Mhbr1y5cvz48WKQCy64YOLEiZy3aNun4cOHH3PMMTvuuGO47ep3vSZ7kMld/WnB5ohAdIUMyP3MM8/w1qeeeuqFF1547733Llmy5OWXX0ZrZfr27XvIIYccddRRW221VfhsKX2khIywQCZ32KEKKRJrVQoEQHH0FUwLqU877TS0njJlCm+N1lFGAQweNWrUhz70oQEDBrzjHW9NH43fRgFCRrLAW9ZJmSxUzAJomoCXZLRev379pEmTBCGOjJMnT3766af/+7//2ye9CgZjc79+/Q466KB9992XTJ8QBVI2CyyQyc0IFQUqQyEX0ddbjBvrc8455+yzz54wYcLixYudIxXTMyUhhC233HL//fc/7rjj4hypQHzyNaO5BcpC7ubNZA0L4CIeAyEgtkbiWbNm/fKXvzz33HNvuummuXPnvvjii7y4YqCYHwISOzsOGjRozJgxu+222zvf+U4aSAWUySiyQCZ3kUHKmMVFtUuBgNnPPvssQv/sZz+76qqrvDi+8MILlDjtqzJAABEIuUePHi62jzjiCP6bEjCbnpDRogUyuVs0S1mUiYscM/f8wAMPiEMuvvjiqVOnrlix4k9/+lOitZKF0Btue/DgwUceeeQuu+wiG3RXhpyxKQtkcm/KMiXQI18C4uI0IPGCBQsuu+yyM84444477nDH9+qrr/oK0aSfhCANx0wjDtl1113dAPbp0wfRfQIUl2ZsygKZ3JuyTMn0qInTQHjuuefEIT/+8Y/FIbNnz3aOpEdrn6CVJocMGcJt77TTTgiN3FK8h1Z+kj9lcpeXAygL6OtS75FHHvHQ6Pb6wQcfXL16tSd0bQdBkZWsJBCK0L179z322OPoo4/u2bOn8lBUoHPZhv11Jnd5pxZZnRFR+frrrz/rrLNuvfXWRYsWxaOMT0gv1YNICS1i4MCBLkmGDRuG1tBimaxsboFM7uY26bgGR/EVQhByCDymT59+0UUXueybMWPGmjVrKKNANKNkCM1TPAZv7C5JPLanS5LmJbOmRQtkcrdolo4rkRXQ18HRHQhXLRQRZ3tFF5lgtq9Q2IAsFGrIaB0pt33ggQeKtoXaNM1LUma0aIFM7hbN0nFlkBKPn3jiiV/84hd89sMPP7xhwwZcby8vVeWSZOTIkYcddphL7o73qav+MpO7szOPsgHemiBdt27dxIkTPc2MHTvWQ7qbPg67A804Zfbr1++AAw5wmvRzy6Nj9fht10Rjkrtic4nNAZwmuAB56qmn/vM//1Moct9992G50yS9/kRKaDt47hEjRniS7N27N98/b968559/vu0/zyUzudvNATQFbIb4MQGJeWhnx/POO++aa66ZP3/+K6+8Qq+AwkBoLxwlvUfuvffeWO6h3mpZu3ZteyvpyuUzuTs4+/iKuxCC15lx48ade+65U6ZMcSXChWOkT1F7EiL7tqnfOj4OHz788MMPHzBggNqWLVs2Z84cdy9v+9tcIFkgkzuZoh1CIisB8xYuXHj11VdffvnlLvviv/xEDzjajkr/sqiLvz333PPggw8Web/44ote7K0fu4Fq/7Jgzm3SApncmzRNKx+wFskiFJk5c6Zbkeuuu060/dprr4Uvj98qE0IHUkdJ19vbbrutSsQkls3GjRvj9acDtXXNn2Ryd2TeEc7FBbZNmjTpzDPPvOOOO1auXOk2I9WlAFgDSdMuIWIS9yT89x//+EdXLnPnznW9qEWLp11V1UPhcvUxk/vtLYumKAWEAGYLEgTZl1xyySOPPOJWhEZF8VVKhiSQ2w5LYuutt95nn3122203snsSMYloB7nF3BrqWLVt70DDlMzkbtNUBp/wWyjClS5atOjKK6905ed6TtZXaFNFbSiE0KIRbltkosXVq1fPmjVLZC/mEXzTqKOEzamtUZHJ3Y6ZRSnuE9UuvfTSa6+91ot6MLsdVbShqJhk6NChHm48T1pLAh4HVr/TFi+egh+docxoxQKZ3K0Y5y8+cZlC3oceeujf//3fJ0yYsGbNGhpe9i8KlSLDYYtJhg0bpjLRiGib89YW543ccabMzGact0Umd8smwp4ExAI8c4d92WWXeUwRZNMoIE2/l01yxwRLxcXfDjvs4AawV69eKkRr19u8tYZE28IS3aAHGmnHGuoiv8rkbmGi8QaTIkUgsuPjrbfeitmu5DCMhl4BKTSvor0atA64Htlxxx133333LbbYQv3e28X3BBVqlNvmvGUVpslo3QKZ3C3YB3USRL2rVq0aO3asy2zHx3I/o7gnEW2LTDDYCVLTEF2kCXLz7lZU9DA+5bRFC2Ryt2CW4A0C4dPy5cuvueaaX//61y6bsY2GvoXfdE6V6tx+++3333//rbbaimbt2rVPPvkkQkd/tGBpiYh8IlNKM1qxQCb3/xoHYxA3QVYYICS46qqrvD4+/fTTsoq6yigTq7SI06NGjfIwqRU98TD5+OOP02tXowTkxng9IVNmtG6BTO637IMrAZSSxx73bvPnz3eTfeONNwoMBCcK+AoEZTqPqAdroyqCaMTDTf/+/QUeDpE2DZeAUSza1Ss3NmSF41c5bcUCmdz/3zgYg1Xy+ORR8Iorrrjtttviyo8G4pO0JNCcelRL0C5vPWjQoNGjR7vepneh7qpETEJOwHiPlNLQ+G0IOW3RAm0md4u/bghlUATDjIYssJ45c+bll19+1113uazgJil9KjeQ29uNexJE16JbkWXLltkxCtt11e2u5tVXX43eFn7KcnMLdGly4xDuBsiA2e6Vf/WrX2F2RLe+NrdaqTRaTFX16dNn1113HTJkCOKKi7htET9yF5ahX79+vSWnjB9GSsho0QJdmtwsgh9AQGLbvTgbsydNmuStBJPooZBesuUAb43We+65Z/fu3dUvtl6xYoUDZfSNJqCTPLozQGQr0LFoqE7TrkvuYEZKMZvPFo1gtrg26cs6r4m7hG233dYNN5ZrUQeWLl2Kx/Q00Rl6ArftlInlsr5KMzZlga5LbhbBFUAUnnLu3LlXXnklZofPplegYvAe6TTpkjtaFFgLuMVI0Y1IfSK4LVnR9H8JG1lpxqYs0KXJHUbBbNGtZ5oJEyZgNq5DfKpMygH37dt3xIgRnie1iMG64R5QXKQn0lBKAeM5b7coPilJ0yKykgW6OrlRx9OjN8jJkycLA1ik8hB48Nn77rsv/42vAqQ4NaJvdAb7IWQdFrRw7bJJSc5oboEuRG68QRdpgrsIzP7tb3975513cod4kz41t1SZNAiK08OHDxdwa0LWDbfAg/OWBRppQPcMAbn1lqbwk2xGkQW6ELlRAYIfeOzO2KO6B8jx48e7d6NhGl8D5HJDZ6IJr+6uSsTcoRFVL1myxEt7fC1KdY/bxv4ifc42t0AXIncMHjkIUoS++eabb7jhBgIXziPSB4JkIZcv1YeovFevXp5vUFxW0+vWrXMjae3JQipGBv0UtIjI6YEmY1MW6HLkxh6c8EAzceLE6667buXKlZhNCfSbMlOZ9BoVcPfv33/Hpn/oWis2EOS2pRBkoXmvhCU8t3dKXzNasUD9kLuVQbTtE5YE7Pv33nuviz/+jyPEsNC3rZqSldKuupBbQILcsjrjNInccbSlUSBSQoLrHe84iul2UmahuQUanNymvxD2esx+8MEHXfy5/pPFJ1CmuWnKqgnKalc04qpEWELWops+UQf6ygJNIeJXthplvF8SOHjFoLBYlsMCDU5ugwzumn7gFz1DXn/99bNnzyb7SimtPLQb6NmzJ3L37t0bccE5Emutuha75Cf0RoTcQhfZAGVGcws0PrkxJobNz7n4c4KcNm2a6zYUCX0VU33zfOMesHv37mQ9sbFgra6SW4ELE8Uwu5Uy+VPjk9scIwG68Ii33HJLPNbQCHZ9qiKwWR+8Sg4bNqxbt256oleut5955plWFp4y4IXSUdgS9auMTVmgkcmNBGDkUvv4pEmT3Go/99xz4tRQSquLIPfAgQORWyd1TD9dTZI31bFYEmiN3J5yWlkGm6qhMvpaaKWRyY0HTGz6BbJCEQEJ582Fo06CAlXEO9/5zm2a/nQVnCatPSGHPrfSK503ChcmCxcuJEfJJEQ2pyzQsOQ22WCEeOAQ+Zvf/GbevHlkGohPhCpCHzzfxGmSrCeurjnjTZ0mFQAlA67qkVthqyI0UgUykgUak9ymmfNDZXP/1FNPiUamT5/OL6Zh14KAlH369Nlhhx223HJLsj7bYVCW0Hr3ooCj57Jly+LSsPXyXfZrA5Lb3Afwe82aNU6QHiOdwGpqjrEZXJXw3BFw655O6jChLUBr0bkY3WDbUr4LlmlAcptF8w2eqb3X3HTTTfZ6ZzUan2oHTpPibc83BL3SvSA3Ae+BskXEJyMSoHPehPhJi4W7srLRyG2aA95oFixYMH78eIGp+IQX7+w0l/T3OonT7gG9vRNkAbkLH9WDxM2bVZJSatEao9BLDTQZRRZoNHIHIVDZG8e4ceNmzJgh1MYDemnR4KubdVUiLHGmDGriqHuSDRs26LyuBlrvoUvxJ598UvCtcOslu+bXRiN3zCKWTJ06VbRNfJ+M2wAAEABJREFUwBUIfU2lW2yxhVd3FLfwdMwi5LadKfUWWYGydfiJFx+Rd9TQeuEu+LXRyI0THjg4bLfaQlLZmHhCrc2uJ3eeG8X1DdBamOGYmPpJmeQiwaBAtG2MS5YsEXcVFchZFqh7cmMAVwdm2s4uNdkOkXPnzuXYZH0yzhpEz549Bw8eLCYxBIhLbh3WVcQNkFuE8qEXkyxdutQBww8pIfQ5ZYG6J7cxFMJV2t133y0m4b/pa3mye/ToMWDAAOSOfuowppLRWto6lImh+YmLfBeCUU/rv+pSXw22LsltXkHvwTQHaPCDw77tttvs77J8tk/K1CZ47oEDByZS6rwDYru6aoz8vdvAxYsXk9v1265QuC7JjbJgeswohGBfNs233HKLZ3YypTLxlVxr0Df3JMhNiL4hNwcccttTI12xYoU7E0LNDrbtwyltybokdzKB6TSpARcj06ZNmzJlCmemQJAmUtlag47x3A6UhhBAbmdK+rZ3VWFweyjsdsAgt/23XaFkfZPbDMWMOlE98cQTEyZMEJDguoAEgjTK1CDcAPLcwm79B111GsbvNnZVeTBGg/UrW9by5cvjt/Qh5LS+yR20MMGrVq2aNGnSo48+SqaEGp9aN4B9+vSJ/8qU3qKpS0BoV7eDx1aFCyJjl4V21dDYheub3DE34hBT65LkpZdeosEVINQsdM8ltxccqU5iJHKLK5CbDJQtoCWVwrBy5crHHntMVNNSka6rq3tym1p+yw2J93YUCVBCLc+qsERM4qoE0XXVKwxy88Gy0K6e+7nIxPC9Vrbrhw1fuC7JbTrB3EidIx9p+hN2J1rQ+1rL6NatW8QkOqnbyI2gyC3bARivwMw1kbXt57JA6OKoS3Jjg2kzkdiQLrZF22Y0PklBmZoFz43cqXsG8vLLL8cQjCLp2ygwBXKLTKyQ9PMktLGSxitWl+Q2baYTFZ577rn7779/1qxZZMpAXUwScm+11Va6Gn0WkzgwkGk6tiz93G23axObAONEVWrryqg/cpu2mDzejtt2SeIghdxm0Scg1D4SuXVVnx0lsZMM7SJ3KozTXnPch6otoKoujuqSu+PGx29HqMmTJy9YsICc5jgJHa+6/L/USVeBDpQEZ0oNIrewRBZk2w48VljKCPax2bNni0xoMligzshtFnVa6vi4aNGie+65x4ZuXmkgPklrH+G5UVm3Abl5boKeR0poI5QPOFs7U1rzhQZpYyUNWazOyI0NpsHkCS69R7r8IsfU0tcROGwXJtFzqRDLKtV/srRjEJkwy4wZM9QWhupYPQ3zq7ohd+Gse7V5/PHHp06dahbrdCaC3CgYcGbgvI1FVtoxMJHIxHvWxo0byZ2pqmMdqLVf1Q2501Rx1R7kHnzwQZdf5FozaBv7YzgiE6nyiGiVBrnJQNkxWPaetJYuXdqZSjrWdA3+qm7IjcfcGzh4cU7ILexm0OAHob4Qnjv1WUSRhtOZEbHS8uXLp0+f7lhZen6n7taJUDfkZk+zZfJceD3wwAOrV6+mwQMaQt0BuXlu3TYEaQwtBGmHoZ61a9fOnDnT5qYS2QTZroZ6Ijceu9J2IeDM9Mc//jGmra4nLJhtCDGWSGU7AzuAyMQLAHOlelJDSdMVhLoht4k3H+Lse++9l/Mmc37mDMh1B8MB3Y7+kyFlCR2D2tRjW3Pgdqws5HfHKqzrX9UNuU2bU5cnm4cffpjbNm1mMVCPE6Dnzg9S0H8pEDoPhkJr5Oa81ZnQ+Zrrroa6ITfLiiYdJUWTaCELZk5aj9Bz6zN6ToaQpdgp7RjUA46nixcvTsFbx6pqgF/VB7lNmFBy4cKF9913n3sAdqcBQudQtV/rvCUqBZ0IQkcq2xmo0LJZv349z+3aWxZUGCmh66AOyG1WYrYee+yxp556qjHmJgbVfCz47VNzfds1fg5cwBNPPHH//feT47dqDqHrpLVObnMDyO2l3d22N2pZqPcZ4rYdIWIUaOdw7DWeEJpOpuzDYk8//bQ703Xr1nWytvr9ea2Tm2VNlRPSrFmzZs+ejROylPUOYXHhQsVs/DaoTo4u/ZzAeQvk2E21XRM1TW4zFHj22We57Q3/93/vWyoPV60pNyhuG/kI+mA4yF34P8yh7BhUVfhDduO8rSJKbQXIXQS1S+6YCSlvbZLmzJnD28lCA8yNQTkip4F4rSwJuVOFIdjx3AmG6bQYppNCFKiztJ3drQNyuwE0PfFw0zCzYqG6rTdZ4Wu7d+/es2dP2RKCrbSydOlSmx7nLQqnKWH9tV9VjZI7pkEYyt+4Ifn9739vepI142vK1qOAdsKS6Dl+I3evXr0iW8IUod0GPvLIIw6XjKahhBK2UrNV1Si5Yw5YDaedip588kkaWUgCuX5h0eK3/sdwkDv+98JJQ+g8VG5/cCc4efJkURB+Bzpfc13UUKPkZjvTgAHPP//8vHnzxI6cEE3A13oHZvPcMShjEXD37duXgI7GSOg81MOAmmDD+O8JylKWsInOd7KsNdQouc2BYWOAkNGRiBAayiSQ6xduS1555RXjMgRs47nLEXNjtvo5b6+Vrk0Iid/0DY8aJbf5ZvqXXnrJrCxevDiyNI0B6xO5je5Pf/qTERkdz92nTx9nDJ+AsoRA6JUrVzq3iLy1hfGagBI2UZtV1Si5w1gOQx5uXn755cabCeQ2LnFwjJTnDnJHtlQpu4HaHF2cW2bMmBEthpK+sVGj5OZdTP/q1asXLVpk7268yeBNxdwQQ9tiiy2EJW67sY1zlZYEUZUm2HPNmjXTp093o8qeWqeEkrRSs5XUIrkZHTg2zPZ8Y2JkgRHNFhDqHYbz6quvvvDCC0ZnLF4oe/ToERcmPtGUHJp79NFHRd6YXVR5mVosaqXy2RolN0PwNC5o3ZOQG4PQBlIIbHOPgWq4JdrGbDBScmGxUslWEbftQUf8rU6NSgMaDaHB0lokNxObcjPhglZwIls4E7KNgSC3seAWCLsdK40UKEsOJnU/w3nffffdiF7y+muwwtKTuySDNPGO9py3mTbxZXJmJelqxyoxKAE3z22AapDltp0pCbIlh1YAp4V5rk08+sqmVgrlpGwAobbIzcomgFkFo073PA2NbEPCDYZhcqhGh9M9evTo169fyNLSIpnRVfecOXM4b8dKTdAz+Oabb05uPNQQuRmafTfffHOCuHDWrFnJ7jQ+NRKMyK2cE4W4i2zUvXr16t+/P6FMw9QKe0rdQXHeKI7fspqLlNBgqCFyJ8tyacuXL1+yZAmjB8o35anRCgtGhNbxjmOMWi83uTWhUalFNW/evPgHO+0bGE/ZkKgtcptmePHFF5ctW8arMb1o25RQNp71jQ65wQCNzj334MGDjZdcDrAhqFkTXsfuu+++mTNnhvNuVH7XHLkZet26dfPnz2d3csyHKWk8ILdlvHbtWsM0OjH3wIED3ZmUaciWEGhI/WzrSHPnnXe+8MILlOhO33ioFXKzODC01HwvXryYrWWlNNLGg3Fx2yJggpHy3IMGDZKSyzRYDVlIQLCuvMZ7sxSlyIZSCmVqvfLV1gq5Y0ZZ2XHedRWQkznia8o2jOAVFrm5cAP09r711lsPGDCg3H6UYUGjTjV33HGHK1eOnIZVdQMIjYFaIXdYk4k3bNjAbUfAzYvQ+BQpoWEQI+K5ccsBGqXAPfeQIUMI5R6mJsDSeuyxx+6//37kTi3SJ7nehVohd0w2azrrLGj6N5zIydBJoGwYGLK3qlWrVrnOj0H17dt36NChFRispgOuXCdPnjx79mx+BHSDXtoYqBVysyazsq93DVclKUsZsrTBgMRiA7Ev/23gsr17966M52ZJzYFX0scff1xwwuz6oD8+NQxqi9yMa7I5b4ZmYtYHQrtQL4WtW+PF7PXr10efXXXHbWAFRq11RgbH96lTp7oZ1Jnohk8h1HtaQ+Q2o7ZpG6X5rnezvm3/DRbwyRljxYoVBJRyVbLddtsJTnx62xo6X0CLIOBeuHAh5+3hTBbdO19zjdRQQ+RmWV5k0aJFLkzINWKgMnXDAAGJHZ1dDXmtlHVhwnNvv/325b4wKRyUdvkUDzoTJkxwtI1PlCHUdVpD5OYzgtwEs17XZm1L5xHISF1ZPPPMM+iF0EbtKnDnnXfu1q1bW2ooYRmh4MSJEx966KHYQ9Sse9K6Rg2R2/64Zs0aM82sprmuzdr2znOWIjHcMmq/2mabbXbaaSfkDguEkr7kUHOCNaYb8+bNu+2223TGRND4KoWSN12xCmuI3LZmRysxaMxrxUxQrYZimJj0/PPPe8qJbgi7hSVbbbVVZKNMyOVOBUgPPPCA4NtmgtOA3+VudLPNythCDZHbO7ALKZdTZpRlyzjo2qg6qGOk1rOwm6BfW265pbCb/xalyEIUI5QVWtEB26bI2+WgJac5EyGtX9QQub1l8GHMytD1a9B29TxG6vYTuQW7fhtnymHDhiViJcHXsgK5+RcPOr/73e/0J9qqWOvRXGnTWiE3y9oWxdzmmFzaQdZmbXgD+mazEpYIBsg0gwYN2nPPPbFcNthPqBjcw06bNs3hkq+pWKNlaqhWyG0W7c62RULakcs05pqq1nhdfXqEx2/Mhn79+u2xxx59+vQhV8YU+sChREpw73777beLv+2i4WsofQ3UlPVa70ytkJsdnSbTpYF5bb3fDfAVV2IUCIRPLisiG2fKgQMHyrJDZfitreiPVHCiM+PHj/e4o291ymwjqhVyM6iAW/RpOnWrrtHGzqORksZL4LbnzJnDCLICEpHJiBEjXAj6BIpVAJrWFmBzBCeC73Xr1uG3TxXoQMmbqBVyizuR2wZdp3bswMTESJEJBLjOcPauqKd///6jRo3q3r27bBQjVADa0hlAaOtt8uTJ99xzj0mh0XqkhHpB9cnNZOARwT0gmzIcE0sbHmmYhi8q4yPxyajpXQUi99Zbb032lbIC0FZqRaOeHZ566inBSdwM0vgqBUJdoMrkZqkAz+1AaUMME1PWhfk608nCMVrVNq7FixeHUtiN3CNHjmQN6Ewrbf9tNK08IfDqq6/OnDlTcGJXMTWhVKBeUH1ysxSr2ZfXrVtHMJdhR/quAwN3mJ47d27EAKLtoUOHjh49mjV8qpYdTASPM2XKlOuvv97s6AxUqzMdaLfK5A5jmT+e22mSNY1BVtrV4Ay3aNEi/tvw3ZAIu3nu9A5fLWvYUlauXOlN3s23Hupb9IQAIdds2jZyl7n7zCTm9opBwG+MhzK3WXPVi3FdCOI3C0CPHj2Qe/jw4WxS3b7i97Jly8aNG+dxRyd1RpeAUOOoPrnx2Fzy3MBk0GGT+S0U/Vz9zRFlUuEkhL55WlhD86+d1GgdcIjbfvLJJ8maE5kg94EHHkiQBa1ESqgYdAYE357lb7zxxjhcmi9KqFg3OtZQ9cnNRvwBt815d2wM6VfmHlI2BDMR0FBCfGp7GjVI1dD2X7W9pGpV7ipwwYIFdn8/xOltt1eFmPQAABAASURBVN12r7326tv0r5zRGJpiUnIloVFwKOK5+e+lS5dah3pLWcludKCtapKbdUCnPV6YUWcpcsmBDYHO1Bw1SDtTydv+1t7l9m3JkiXYo63evXvvtNNOw4YNix/SEMJihEpC09jsTCnyvuGGG5x99VAHqtIZ7bYR1SQ3kwXc8jpNdpjcycRRW9HIQymlVzJBthUo3wpa+WGHP2kOY4Tds2bNYhBZzlvMve+++zpfyuq5FDrcRMd+qEXMtruaIHeCt9xyy8033yxQodSlQMdqLvevqknuGBvr8NwbN240o6HpWGoOioATQCkFXPGyDVs0/YUgBQqpAqBkIfwcdEk/E2TLAQ2JTITdIjRt6cZ22233nve8p1+/fj4F2tJuacvoCUSdlp+wZOzYsXfddRc5lNJUgFw7qDK5GQWC3DxBkV1iOqX0kSpMLoJPgJ29evUSp9rK995770MPPfRDH/rQ8ccff/LJJ//DP/zDt771rX/913/9wQ9+cNppp51++ulnnHHGWWeddeaZZ/7kJz/50Y9+9P3vf/+73/3uN7/5TSU///nPf/rTn/7gBz942GGHqUdtrpw9Fm655ZbYFk1rLiBLkEL0TTZAQ5BCfCK0AmWAR3Q1wUGSFe7Zs+euu+66xx57qApoQk9oEcoUIsrQhCAlAwE2VVXSJ0HhgDniwh0Mrr32Wvff4igUB1+bF6asLqpMboYG5HZeKTIEJkEoOdSwHQ0SA6oh3A477HDAAQd84hOfwMuf/vSnl1566WWXXSa98MILzz77bFT+3ve+59M//uM/fulLX/rc5z73t3/7t5/97Gc/85nPnHjiiSeccMKJJ55IpqH39e/+7u+++tWvfuMb3/iXf/kXv0X9Cy64QG2/aPq76KKLfvzjH//93//9scce+653vcsqEhPrhi4lRG+jq8YFeu6rlBxfW0n90PaF3C4l2MRP/FbMvf/++6vBV7+lkW4KyvgVKAZRLJRkAhDUBt2b/gzBbbqbRyA06bqzsAKgsJ8EyFGn+EQPr7zySkdMsuZ8wvtUTLYWUGVyhwlMpAMl60RWyohhWQIwnzmwO+++++64xb/+8Ic/PO+885D43HPPPeWUU3DuU5/61Ac+8IEjjjjioIMOwnhOl8Pbeeedd9xxR/wYMmTIoEGDBg4cOGDAAO8joDYgUA4aNEgBHtpqGTFihKdvv1UDVqmNC/+rv/qrj33sY5bBP/3TP+G9hYTrqG8fsHJ80uL222+P7sgRzNDn6LnhGJqJJ7QOPwHHtUceecTToMKy+ibsHjx4MFklQL8pKBNQQEmyPugS4qrH3cvRRx/9yU9+8otf/OJ3vvOdU0891Q52zjnn/Kzpz6AYk1Ows1neX/7yl0844YSPfOQjBx98MIMwlEoMTZ2GwxnNmDHj6quv9j7Pl3PemtMoJIFcXdQEua1+5C40BAOBWWFTPBMk8KmYxJuKLr7yla+cdNJJ7H7kkUdi1S677IKarsxYX/RsVQTMa4IpIUsDhW2RQxmpYgnmMmBpiXksBuzXH41aRR/+8Ic5fp2xuoQ3+oYu3L81hkZcO0eoKvW3BVo3ZMCbxYsX899kSkawpK0xPVEPpbR1GD5TsIlV8dGPfjR8QRDX5mM3s0Tx235l7/rrv/5rdLf7SUVxQjKD+sIXvmBc3/72t//t3/7N0CwAo/NDv4rRWSoIPX36dPHJY489ht+pS/qc5OoK1Se32eK5zSiBXWJiOCpbP0OjC48iLGZrvvnwww830zwx0mMbzikPfhh2JEChHFlpID5pC0Iu1JNDGakyELJPmBqwhETDOoDu/L2w2GuLWUeLr33ta3qLSThhQVqWOmw4ymOnn0dtzdPUkMjEnYljJcZQatd4uU/bAhkKfxtZKehVnz597FTWPHPxykzHgPYWHbMUDznkENsRX+ASxtpjQ6Edp+BXUiDQGJQOW8ZekXbbbTcrRIUf//jHnV6sCqPj6J1YrBmL3PHglltucYOJ64UdqwW5muQ2czY4MJ34jaOMy+cJf/kJE8NzIPSYMWN23XVX9wbsziEFRbAEzGiAHIhspC3aNz5JlZdCFCNAyFJyc6SfEALKEHSJf8V1dEFEbHbFYWMRLAmfRC/GIpQ/6qijrATuXGGDDfi5SsjSaJdZ1q5d++ijj4pPyKBm2wVSKqwMKAwhqA3Q0epyMhatWVeCCmy25Cw8jeqYSjRtAeitehLUA6qCEKS+6pKSyvsVs5sa8RvG64ltROVGJ0KzkdrE3OR6hjOVKtFhaS2gmuQ2foYIi5gAkSuvgAecn4uO/fbbjynZ1MyxNYsrDwQgAKEQNG2EX7WxZFExP2wFCvuqtzjB0fKOGIlh/LcN3Yr9+c9/bowiAfsST4lACgM7gJ+zhhrcmcybN++JJ56gpFHA4cHaQFBlKEExP1fJu9/9br4Zp1FNlBybm7ABI7HTb5X0q0LQBAqVIYc+Ur+FkNNXGtXqieVk5RidDWHPPfc03lQmhKqnlSC3mUiIAcuGwHCMhQHuNFzGCfuc4eJkxoK+KqZwCOS6g54jOp5xe4bJyeGfw1zs7H/zN39j0x8wYACaKhmp8drKbPdec0Qm9DRCBSR22GUuGuk222zjdMhoVgsn+v73vx/VbG5CNQX8pNy20opuGB0HZI1F58vdaLvqLwu5WbYQRR3yiSZSBmIUbkb0xjmZQsbylZ7hgKAk70VZpzCEGAgB81BZLGtfErd8/etfF53brITIVjXnp6RhGrKNfu7cucuXLw+Npc4+4gHrBIO5Z37aCdsmgPT2PTG9+v2WrQigEtnyQf2gIU3oJCEgWyMoPbkNmH0jDYEcMOYQUkoDZs6sS9kI14GZ6KUJsoVQQ2STENnmaWEBMrRYhh6af9qUpo2F9T9qiKFJA9Ywjo4YMQKnBS1cr0AZnDecOrCc83amnDp1KkElfuX2Q2RiSQhCXGIcd9xxo0ePFhsI26IAu4GSkSVE02VKo5WitExtdazaspDbxJsSIIDxR+eC62SaQiQNAXySBvwcyNJAyNIWEWUK08JiaobCryFTRrHISiObUpqEQiU56UOgSVBtIbBN1lcpOWBJc8YiMcErvrqO4I+9pzp1WPBz5sx5/vnnlfcrBzvnVAVct++zzz7CkkRlBRJUm2S/Kh9SK0lIbdWIUBZyv/DCCw5DCxYscEO0dOlSV7YiyJUrV65Zs8ZUrVu3bv369crYeTdu3OiG2z2gI5S33Ndee821CYg1rY3C1MIABIqU+chSCI0syEZKCDB9CJH6mhAaKY20FagkoahY0odQ9LUwq5VC+OQnkWIkB8xhu2xxPhOLu1QGN0UbN240QCVR2aWHwNo5FdFpwM8zNmWB0pPbTCxatMi1gDMiN2MPBRcgZNdhokypT5yTZzBXV97DxJ3Kezn/r//6r2uuuebGG2+89dZb77rrrrvvvvuBBx7wXOex1+2BpfL000+vWrXK8jDlsR4siYCFEfAkFMsjrY0QrBZwHauHEDwj0ACBRgqEQnvJUjZH6KUJyrQoh7KwTnIoERSQO1KOXPTsEOI+8b3vfa/bPXfS8VUBX8UzWE4DUYk0o0ULlJ7cjO6eyEzMnj3bC61HrGnTpt1///2///3vkXXy5MmTJk2aMGHCnXfeicG/+93vfvvb3yI0Wl9++eUXX3zx+eef74EA4x2YRJZuA9x2//M//7O1YYV4FgHPB+5xwTmM0jpRzDrx/Ob12L2yetT2q1/9Ss1jx471yqC5KVOm6IalYq+3q3gFfOaZZ1avXr1+/fq0e1gehQsjkT6IWJiypmykhIRCfidlCApvCgr4xHQB1sNgjtzpkzHJNMpIycooHKAJIafNLVB6cjO3w7vbDyGjmeYsge8EvAEE4mv5XdGIm3/BCU8sXMEzoQvCuSJYsmQJP20HwELnKkGON168fPjhh/ly62Ty5Mlc+x1NfxbJ+PHjx40bd/3112MzTv/Hf/yHfQDFEd224IIZ760WLw6u4WwdNhNrw90zfL7pz4MzjY0l9hPl/co9hhouueQSFV511VXWoYZineiG/thS3GnopKUS0ZdReHwxInuLARqsIVskqBkomoOkZLdCYHBklVcmybIhR+oTDRBahE+FSGUKleTQJ0G2SJYF+hbhE/gkDRTKoUlpK59SmZIIpSe3rrv4dAngYt82qpemQdoxqM0PpfgBsU7QReyBNxYJAlkhXO+GDRv4YG97uCW4t04E+sIYQb91snDhQhSMdeL+2FLxBGhjsaugqdVyzz332FIsFvQVF1knV199dVon+H3hhRe6nLYzuNNwtRy7ik0jdhWrJbYU9x42FlsKDdhwlLFglPcrm5KtycJTsyZsKXYzK1aXxF0Wsw6Luyx1y8OyNy6j4wjAeI3a2IEdgEG4D2AfVmJnIMgmZcrSgE80haCBQk3IlGoLhKYoVYCmqABlwKcW4WuL+nIoS09uo7V1uuQ69NBDOW8eSL8ppc1hqAktfqWMAiGYHqCRTZAN0ISgTEJopDTYUAgaoEEUGwvqWCo8rkWCXhYJN4xqb62TZ5+N/QT/5s+fz1uLbTCS5/7DH/7AhYu+Hmr6e/DBB93f3XvvvZaKveW2225Lq+Xaa6+98sorbQKXXnqpM4alYnPwPn/KKadYABaJfcNiEGhJQZbSJ7uNuEsxK8T+Y3VZJH6uErX9+te/vu666yzIm2++ecKECaKv++67z6LVK520nm2D9kMDMSLneAvGMK0W4B3SmmEEYJBAWIzMPiALYWFpwFfKhJRNX2nAzwPkVDiEKFmmtCzkRmjnendb3h0QfVPMbsuQwgTS1gsrEFBMc4Wg2RTiJ1IFpIWmT3II0kIoHLMlDT0BkAN4VusEUAeBkMmCwSrOGL2QzJYSS8V+IuKyQmwjuMiF20ZQ0zYi7sLU22+/XdCFtQ4n6HvDDTfw90IvhP7lL395xRVXxDrx9n7OOedgvLOK/cGCsQYcQqyHQojKKE899VRlxF3KWyEXXXSRSmKR/OY3vxHd2U/sYBanJWqhWrMWsE7aW3TYTqjzK1assPKNiCOwZ9pk7DDWCRg4MAJTBFiGlRitCGF2aZlQenLrKG451AtLHPaFKLKULaJwtC0WSEqVBJJmU0JhneTCYrKFSBWGMpVM+tD4Sog0CcqQIYRIU5agPBAS0gTHZEsD9CGggg0ELVAkwQqJ5YFAEIskNhbrRBgj1uebhV7iLvyzqzjK4+LMmTNjtQi6uPOJEyc6LSCudWKR4HHEXRaJw7e4y+nC+eSMM86wQty1x/KwV1gS9g0biLOKzSRtKQ764JOStiALzCFHVXYnO4kmbFkWiabTCrHX6aQVbsjMUmQfmtKi9OSOaZZ6PHNl614W0YGGRy/qPWVC0aeiLEMEivTtyqa2QojfhiyNrLSwIXqgjLRQICtpnqQgC0kgJ1BCyqaqaJKsQAI9FGYVA8pCKKD1hFghkaZ1wolaHmAPEY1YJ1YIX2uRcLqOKM4nFom0PPxZAAAI/ElEQVTQS+jCJXPMDscRfVkqNhaMtFRibxF9CXhcOnHq9hZxl73lpptusp/EZuI4YStAdDuJdZIWiTt7wZXFYBnYnXRS540ICkdUWrn05NY/PcZjDw3hvPv27WsCKH3KaJcFMADa9ZPOF9ZiwKwFcDFgzYDtxZqxt1gzFoygy2oRonDJYhURi3USW4p1wlVbJAEHANHLjjvuWBkylJ7cYZfovWvao48+2slSlr7zds811JEFLIyYdGlg4MCBRxxxhPcpvq+sA4nKS09u9aKyFJwmR44cecwxx3hmk83oUhbAYEAGMHD3wqNHj3YM8wQbesqyovTkjpHoNAE8sx122GHHH3+8+5MYEiUBCIplNKQFTC6E8yaY7h122OGoo45yR8zl0QTKOvbSk1t3U78J1uuQIUM47/e+972uvWNgysQ+RchoSAvE/OI0DgAft99++x155JE4YLw0QCgrykLu6HH0Xtq9e3dh1qc+9SnDQ25fjVwKvkozGtICaZaNbujQodx2xY6SWoRykTsGhrsE6NGjx0EHHXTSSSeNGjUKv+m1LfUpIJvRkBYwy7169eLXxowZYxuv5BjLRe40BmMLbLPNNtYuflu+we/Ys6IkioeQ05YtUIfamHezHJcK2223HbmS4ygXuQ3MMKRgSAHPOscee+wJJ5yw/fbbB799BV+lymc0jAVMqGk1HE/U3PaBBx7o3YMGKCuDcpE79d4gAzR2pWHDhn3iE5/47Gc/S6DJaFQL2IrBjHui/tjHPsavoUGFB1t2cqfxGBt4h3cldNxxx5188sm77LKLrKVMH0iFs9AAFkBusejBBx+87777xkSnua7M6CpE7uBupMaJ3/z3l7/8ZcN21rS+KzPa3ErFLGCuTTS3/b73va9v376yCRXrQ4XIHeOJ4Vm+LjuF3R/+8Ie/8Y1vuPvEb4aIMjltDAuYa4/t3u/22WefOF9VflwVJbfhGTNyQ/fu3QcNGnT44Yd/85vfPPnkk3GdCRSwlxWlfkKTUS8WMF/m12688847e7nzfGNOofL9rzS5Y4TGD0zQp08fR+kvfvGL3/72t48++mghWrdu3djFVyBLq2KX6GdO22UBkwWmFTxLC0j23ntvGpVESqgkqkPuGKEBs4KAxM2JEOWUU075+te/fsABB4hS8Buz0RoUi/I5rXELmCzQSW/Se+211zHHHOP5xjwCZeVRTXK/+eabr7/+OnOgeL9+/ZjjM5/5zOmnn/6tb33r3e9+d7KLApW3S26xAxbghkwleGx3lNppp51UYvrogVxhVJPcrGBNG7aU7JLfXua23y34j370o1NPPfWTn/yk47bQhSNXjGmkCbKQsiHQtAhfW9QXKc0EUCoPhAAZQk6pkiArLQJlB6CS+BWhwoh2I23edOjbkrJSz549bb/vf//77cCyZtYP1SmtMKpJbiMPWhs/kMFFyrbbbovixx9//He+8x2OXIrl7OXdXlBuDYhklAS/KrSXCgvhU8qGLC1EsngU8ykJ5OaIr5H6SpCqhFAE+tahfPMCSUmoMJp3plBjjJsV5luV3Q1w20LNKGUghEgJlUQ1yR3jLBw2GVBW0CZQ8cpzxBFHcOTf/e53f/rTn5533nnc+Re+8IUPfOAD+++/v11vu+22c+UyYMAAhbfeems+3pVqCPwHcB4WA1gzQAACaCJSS8XOUAQrpxC6lKCHIKuAX0llE+gD9AR6aSFCI20RUbLFT5VR6oCeFyI00uYo7JKfsKeJcEPwnve8h2Xiq1kmSCuP6pO7xTEzR5iSvfr37z9q1CgmO+qoo7jzr33ta6eddtoFF1xw2WWXXXHFFZdffvmll156ySWX/PznPz///POtgbPPPvvMM8/k8hX7/ve//73vfc9VjAv1r371q65lPtf0D/addNJJJ5xwgoekj3/84x/96EcdZ51+7KQO+G6vNHTooYce0vTnge2gpn8ezXLSB69O4O72Xe96l0PC6NGj92j623333XfbbTdBlAWptxbeiBEjRo4cSbDhDB8+3LsV8GdSvk1U2iIEZmDvqiS0yE202B9KvY1uG0UhjCsGaIwBWRvsBz/4QWPEdZPY4uRWTFmj5E7jR3FmipTT5RgYGoFwi3s49NBDEREjUfPYY4/9yEc+gqn4Koz59Kc/feKJJ/L62MzZf+lLX/rKV77iNib+b27Q3W6A+j/4wQ9++MMfWgZnNP2zq2eddZa1cc4559glwGqxii688MKLL77Y+mkR1hhYYNIW0fSvWL6V+Oo/pAFyQmhSJVZsJaEbmoboRlHqa9KQi5A++flFF13EnjZbM2XKMrkTjf9CYBdgoAC5EKFEehFFRBfCD0GI9wKRCQhOROdWgojFO9ngwYM5Qs6p0AmF4+FsvDXwtRYMv7tb0x83zB3v+X9/3DMnDW5twbriuflv4MuBU3e9A44KAc4+YcyYMdw/NO0Eh1iQ3u28XkkTZAEtqgVRsqb1QZekhaDR5+i8USSMGTMmjZHA1wD72Gljgv5iRquRqXXPnWyC3EkuElr5lEoWlZGF9LXtgl8lxBQ2T606EHQWwjosgmVZmyjqZ8oWDmdTsoGHfdpu0vKVrBtyl8EEucoGt0Amd4NPcFceXiZ3V579Bh97JneDT3BXHl4md1ee/QYfeyZ3g09w4wyv/SPJ5G6/zfIv6sQCmdx1MlG5m+23QCZ3+22Wf1EnFsjkrpOJyt1svwUyudtvs/yLOrFAJncVJyo3XV4LZHKX17659ipaIJO7isbPTZfXApnc5bVvrr2KFsjkrqLxc9PltUAmd3ntm2uvogVKTO4qjiQ3nS1QZIFM7iKD5GzjWCCTu3HmMo+kyAKZ3EUGydnGsUAmd+PMZR5JkQUyuYsM0qWyDT7YTO4Gn+CuPLxM7q48+w0+9kzuBp/grjy8TO6uPPsNPvZM7gaf4K48vEYjd1eeyzz2IgtkchcZJGcbxwKZ3I0zl3kkRRbI5C4ySM42jgUyuRtnLvNIiiyQyV1kkJytpAXK21Ymd3ntm2uvogUyuato/Nx0eS2QyV1e++baq2iBTO4qGj83XV4LZHKX17659ipa4P8BAAD//yMVRw8AAAAGSURBVAMAsLpoNZhOe74AAAAASUVORK5CYII=";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
@@ -562,6 +562,35 @@
 .vela-roche .v-wallet-flow-card{background:var(--v-card);border:1px solid var(--v-line);border-radius:22px;padding:14px}
 .vela-roche .v-wallet-convert-preview{padding:10px 12px;background:var(--v-soft);border-radius:13px;font-size:10px;color:var(--v-muted);line-height:1.5}
 
+
+/* v0.2.2 · account cap / live compact cards / bottom icon polish */
+.vela-roche .v-nav-icon{width:22px;height:22px;object-fit:contain;display:block;flex:0 0 auto}
+.vela-roche .v-nav button{gap:3px!important}
+.vela-roche .v-nav .v-publish b{margin-bottom:0}
+.vela-roche .v-drawer-clear{width:100%;border:0;background:none;color:#c9362b;padding:13px 4px;text-align:left;font-size:13px;font-weight:850;border-top:1px solid var(--v-line);margin-bottom:8px}
+.vela-roche .v-rolecard>.v-author .v-mini,.vela-roche [data-screen="roles"] .v-mini{width:44px!important;height:44px!important;flex:0 0 44px!important;aspect-ratio:1/1!important;border-radius:50%!important;overflow:hidden!important}
+.vela-roche [data-screen="roles"] .v-mini img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important}
+.vela-roche .v-account-delete{background:#fff1f1!important;color:#c9362b!important}
+.vela-roche .v-live-quicktools{margin-left:0!important;order:3}
+.vela-roche .v-live-quicktool,.vela-roche .v-live-quicktool.is-lottery,.vela-roche .v-live-quicktool.is-ad{height:38px!important;min-width:38px!important;border-radius:19px!important;padding:0 10px!important;background:rgba(18,18,22,.66)!important;color:#fff!important;font-size:9px!important;font-weight:900!important;backdrop-filter:blur(10px)}
+.vela-roche .v-gift-rank-trigger{margin-left:auto!important;order:4!important;background:rgba(18,18,22,.66)!important;color:#fff!important}
+.vela-roche .v-live-title-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vela-roche .v-live-title-row h2{min-width:0;flex:1}
+.vela-roche .v-live-connect-btn{flex:0 0 auto;border:0;border-radius:12px;background:var(--v-soft);color:var(--v-text);padding:7px 10px;font-size:9px;font-weight:900;white-space:nowrap}
+.vela-roche .v-live-ad-strip{display:none!important}
+.vela-roche .v-live-body{padding:7px 8px 8px!important}
+.vela-roche .v-live-stage{border-radius:19px!important}
+.vela-roche .v-live-info{margin-top:7px!important;padding:9px 11px!important}
+.vela-roche .v-chat-panel{flex:0 1 205px!important;min-height:118px!important;max-height:245px!important;margin-top:7px!important;padding:9px 11px!important}
+.vela-roche .v-chat-scroll{min-height:45px!important}
+.vela-roche .v-live-economy-panel{padding:14px!important}
+.vela-roche .v-live-economy-card{width:min(92%,390px)!important;max-height:76%!important}
+.vela-roche .v-live-summary-card{width:min(92%,390px);background:var(--v-card);color:var(--v-text);border-radius:24px;padding:15px;box-shadow:0 18px 50px rgba(0,0,0,.22)}
+.vela-roche .v-live-summary-card h3{margin:0 0 4px;font-size:16px}
+.vela-roche .v-live-summary-card .v-hint{margin-bottom:10px}
+.vela-roche .v-live-summary-close{width:100%;margin-top:12px;border:0;border-radius:13px;min-height:40px;background:#111;color:#fff;font-size:10px;font-weight:900}
+.vela-roche .v-readonly-link{background:var(--v-soft)!important;color:var(--v-muted)!important}
+
 .vela-roche .v-live-quicktools{margin-left:auto;display:flex;align-items:center;gap:6px;pointer-events:auto}
 .vela-roche .v-live-quicktool{height:34px;min-width:34px;border:0;border-radius:17px;padding:0 9px;color:#fff;font-size:9px;font-weight:950;backdrop-filter:blur(10px)}
 .vela-roche .v-live-quicktool.is-lottery{background:rgba(52,199,89,.86)}
@@ -709,6 +738,17 @@
 .vela-roche .v-access-badge.is-age{box-shadow:inset 0 0 0 1px rgba(189,37,57,.18)}
 
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
+
+/* v0.2.2 final live sizing overrides */
+.vela-roche .v-live-body{padding:7px 8px 8px!important}
+.vela-roche .v-live-stage{border-radius:19px!important}
+.vela-roche .v-live-info{margin-top:7px!important;padding:9px 11px!important}
+.vela-roche .v-chat-panel{flex:0 1 205px!important;min-height:118px!important;max-height:245px!important;margin-top:7px!important;padding:9px 11px!important}
+.vela-roche .v-chat-scroll{min-height:45px!important}
+.vela-roche .v-live-quicktools{margin-left:0!important;order:3!important}
+.vela-roche .v-live-quicktool,.vela-roche .v-live-quicktool.is-lottery,.vela-roche .v-live-quicktool.is-ad{height:38px!important;min-width:38px!important;border-radius:19px!important;padding:0 10px!important;background:rgba(18,18,22,.66)!important;color:#fff!important}
+.vela-roche .v-gift-rank-trigger{margin-left:auto!important;order:4!important;max-width:42%!important}
+
 </style>`;
   }
 
@@ -748,11 +788,11 @@
         </section>
       </main>
       <nav class="v-nav">
-        <button class="is-active" data-nav="home"><b>⌂</b>首页</button>
-        <button data-nav="discover"><b>✦</b>推荐</button>
+        <button class="is-active" data-nav="home"><img class="v-nav-icon" src="https://imgbed.heliar.top/i/fV1QV24Idhyq5eLW_7e05df23a9a155c4a103dce04bbf45c9.webp" alt="">首页</button>
+        <button data-nav="discover"><img class="v-nav-icon" src="https://imgbed.heliar.top/i/v3qLon2ownzeUSZz_5d47fe37a5795aeda79a43687cdf7509.webp" alt="">推荐</button>
         <button class="v-publish" data-action="open-publish"><b>＋</b>发布</button>
-        <button data-nav="messages"><b>✉</b>DM</button>
-        <button data-nav="wallet"><b>🔷</b>钱包</button>
+        <button data-nav="messages"><img class="v-nav-icon" src="https://imgbed.heliar.top/i/DA6HCswKkWlxsubp_1096c3944796c4014d0e61524da96691.webp" alt="">DM</button>
+        <button data-nav="wallet"><img class="v-nav-icon" src="https://imgbed.heliar.top/i/iGFBlwtDW8QMNSgv_c7a1d5d3edc7d5d7950b866a79f93158.webp" alt="">钱包</button>
       </nav>
       <div class="v-mask" data-role="mask" data-action="close-drawer"></div>
       <aside class="v-drawer" data-role="drawer">
@@ -782,6 +822,7 @@
         </div>
 
         <div class="v-drawer-foot">
+          <button class="v-drawer-clear" data-action="clear-vela-data">清空插件数据</button>
           <div class="v-version">Vela v${VERSION}</div>
           <button class="v-exit" data-action="exit-vela">退出 Vela</button>
         </div>
@@ -1042,8 +1083,10 @@
 
             const getPersonaAccounts = (personaId) => state.identities.filter(item => String(item?.sourcePersonaId || "") === String(personaId || ""));
             const getPersonaMainAccount = (personaId) => getPersonaAccounts(personaId).find(item => item.accountRole !== "alias") || null;
+            const getPersonaSubAccount = (personaId) => getPersonaAccounts(personaId).find(item => item.accountRole === "alias") || null;
             const getCharacterAccounts = (characterId) => state.channels.filter(item => String(item?.sourceCharacterId || "") === String(characterId || ""));
             const getCharacterMainAccount = (characterId) => getCharacterAccounts(characterId).find(item => item.accountRole !== "alias") || null;
+            const getCharacterSubAccount = (characterId) => getCharacterAccounts(characterId).find(item => item.accountRole === "alias") || null;
 
             const nextUniqueHandle = (baseHandle, collection) => {
               const normalized = normalizeHandle(baseHandle || "") || "@vela";
@@ -2085,7 +2128,8 @@
                 const value = `${messageId}::${card.id}`;
                 return `<option value="${escapeHTML(value)}" ${value === currentSource ? "selected" : ""}>${escapeHTML(`${card.brandName || "品牌"} · ${card.productName || card.title || "合作"}`)}</option>`;
               }).join("");
-              panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场关联广告</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>关联已接受的商务合作</label><select data-live-ad-field="source"><option value="">不关联卡片 / 手动填写</option>${options}</select></div><div class="v-field"><label>品牌 / 产品</label><input data-live-ad-field="label" maxlength="100" value="${escapeHTML(current.label || current.productName || current.brandName || "")}" placeholder="品牌或产品名称"></div><div class="v-field"><label>广告词</label><textarea data-live-ad-field="copy" maxlength="600">${escapeHTML(current.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input data-live-ad-field="link" value="${escapeHTML(current.adLink || "")}" placeholder="https://..."></div><div class="v-live-tool-actions"><button class="is-light" data-action="clear-live-ad">清除关联</button><button class="is-primary" data-action="save-live-ad">挂到本场直播</button></div></div>`;
+              const locked = Boolean(current.active && current.adLink);
+              panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场广告</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>关联已接受的商务合作</label><select data-live-ad-field="source" ${current.active ? "disabled" : ""}><option value="">不关联卡片 / 手动填写</option>${options}</select></div><div class="v-field"><label>品牌 / 产品</label><input data-live-ad-field="label" maxlength="100" value="${escapeHTML(current.label || current.productName || current.brandName || "")}" placeholder="品牌或产品名称" ${current.active ? "readonly" : ""}></div><div class="v-field"><label>广告词</label><textarea data-live-ad-field="copy" maxlength="600" ${current.active ? "readonly" : ""}>${escapeHTML(current.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input class="${locked ? "v-readonly-link" : ""}" data-live-ad-field="link" value="${escapeHTML(current.adLink || "")}" placeholder="https://..." ${locked ? "readonly" : ""}></div><div class="v-publish-note" style="margin-top:9px">${current.active ? "广告正在投放。开始投放后广告链接锁定，本场不再修改。" : "不添加、不开始投放时，本场默认没有广告。开始投放后广告链接会锁定。"}</div><div class="v-live-tool-actions"><button class="is-light" data-action="clear-live-ad">${current.active ? "结束投放" : "本场不投放"}</button><button class="is-primary" data-action="save-live-ad" ${current.active ? "disabled" : ""}>${current.active ? "投放中" : "开始投放广告"}</button></div></div>`;
               panel.classList.add("is-open");
             };
 
@@ -2095,7 +2139,8 @@
               if (!live || !panel) return;
               const read = name => String(panel.querySelector(`[data-live-ad-field="${name}"]`)?.value || "").trim();
               const existing = getLiveStats(live).ad || {};
-              let ad = { ...existing, label:read("label"), adCopy:read("copy"), adLink:read("link"), cashAmountCNY:Number(existing.cashAmountCNY || 0) };
+              if (existing.active) { toast("本场广告已经在投放"); return; }
+              let ad = { ...existing, label:read("label"), adCopy:read("copy"), adLink:read("link"), cashAmountCNY:Number(existing.cashAmountCNY || 0), active:true, startedAt:Date.now() };
               const source = read("source");
               if (source) {
                 const [messageId, cardId] = source.split("::");
@@ -2104,21 +2149,26 @@
                   ad = { ...ad, brandName:card.brandName || "", productName:card.productName || "", label:ad.label || card.productName || card.brandName || "合作广告", adCopy:ad.adCopy || card.adCopy || "", adLink:ad.adLink || card.adLink || "", cashAmountCNY:Number(card.cashAmountCNY || 0), sourceMessageId:messageId, sourceCardId:cardId };
                 }
               }
+              if (!ad.label && !ad.adCopy && !ad.adLink && !ad.sourceCardId) { toast("先填写广告内容或关联商务合作"); return; }
               getLiveStats(live).ad = ad;
               state.liveSession.ad = { ...ad };
               await persist();
               closeLiveEconomyPanel();
               openLive({ ...state.liveSession });
+              toast("广告已开始投放");
             };
 
             const clearLiveAd = async () => {
               const live = state.liveSession;
               if (!live) return;
-              getLiveStats(live).ad = null;
-              state.liveSession.ad = null;
+              const stats = getLiveStats(live);
+              if (stats.ad?.active) stats.ad = { ...stats.ad, active:false, endedAt:Date.now() };
+              else stats.ad = null;
+              state.liveSession.ad = stats.ad ? { ...stats.ad } : null;
               await persist();
               closeLiveEconomyPanel();
               openLive({ ...state.liveSession });
+              toast(stats.ad ? "本场广告投放已结束" : "本场不投放广告");
             };
 
             const openLive = (live) => {
@@ -2149,12 +2199,13 @@
               const ageLabel = currentLive.ageRequirement === "18+" ? " · 18+" : "";
               const modeLabel = guests.length ? ` · ${mode === "same-room" ? "线下同镜" : "线上联播"}` : "";
               const viewerComposer = `<div class="v-composer"><input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播">➤</button></div>`;
-              const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">AD</button></div>` : "";
               const activeAd = liveStats.ad || currentLive.ad || currentLive.business || null;
-              const adStrip = activeAd && (activeAd.adCopy || activeAd.adLink || activeAd.label || activeAd.productName || activeAd.brandName) ? `<div class="v-live-ad-strip"><b>AD</b><span>${escapeHTML(activeAd.adCopy || activeAd.label || activeAd.productName || activeAd.brandName || "本场合作")}</span>${activeAd.adLink ? `<a href="${escapeHTML(activeAd.adLink)}" target="_blank" rel="noopener">查看链接 ↗</a>` : ""}</div>` : "";
-              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">↑</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤 / 继续">➤</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span><button data-action="open-invite-guest">＋ 邀请嘉宾${guests.length ? ` · ${participants.length}/4` : ""}</button></div></div>`;
+              const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">${activeAd?.active ? "AD · 投放中" : "AD"}</button></div>` : "";
+              const adStrip = "";
+              const connectButton = own ? `<button class="v-live-connect-btn" data-action="open-invite-guest">与…连线${guests.length ? ` · ${participants.length}/4` : ""}</button>` : "";
+              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">↑</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤 / 继续">➤</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span></div></div>`;
 
-              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div>${quickTools}<button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}${adStrip}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 🔷10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 🔷50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 🔷200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 🔷1000</button></div></div><div class="v-live-economy-panel" data-role="live-economy-panel"></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div>${quickTools}<button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><div class="v-live-title-row"><h2>${escapeHTML(title)}</h2>${connectButton}</div><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}${adStrip}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 🔷10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 🔷50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 🔷200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 🔷1000</button></div></div><div class="v-live-economy-panel" data-role="live-economy-panel"></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
               renderLiveHUD();
@@ -2830,15 +2881,18 @@
               const roles = state.channels.filter(ch => (ch.kind === "character" || ch.sourceCharacterId) && !used.has(String(ch.id)));
               const rows = roles.map(ch => `<option value="${escapeHTML(ch.id)}">${escapeHTML(ch.name || ch.handle || "角色")}</option>`).join("");
               const fixedMode = guests.length ? (live.mode === "same-room" ? "inperson" : "online") : "";
-              openScreen("invite-guest", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="invite-guest">‹</button><div class="v-meta"><strong>邀请嘉宾</strong><div class="v-hint">当前 ${guests.length + 1}/4 人</div></div><button class="v-head-action" data-action="confirm-invite-guest">邀请</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>选择角色</label><select data-invite-field="cohostId"><option value="">请选择</option>${rows}</select></div><div class="v-field"><label>联动方式</label><select data-invite-field="cohostMode" ${fixedMode ? "disabled" : ""}><option value="online" ${fixedMode === "online" ? "selected" : ""}>线上连麦</option><option value="inperson" ${fixedMode === "inperson" ? "selected" : ""}>同镜直播 / 一起线下播</option></select></div></div><p class="v-hint">${fixedMode ? "已有嘉宾后，本场联播方式保持不变。" : "首位嘉宾会决定这场直播是线上分屏还是线下同镜。"} 同时出镜最多 4 人。</p></div></div>`);
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              if (!panel) return;
+              panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>与…连线</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>选择角色</label><select data-invite-field="cohostId"><option value="">请选择</option>${rows}</select></div><div class="v-field"><label>连线方式</label><select data-invite-field="cohostMode" ${fixedMode ? "disabled" : ""}><option value="online" ${fixedMode === "online" ? "selected" : ""}>线上连线</option><option value="inperson" ${fixedMode === "inperson" ? "selected" : ""}>同镜直播 / 一起线下播</option></select></div><div class="v-publish-note" style="margin-top:9px">${fixedMode ? "已有嘉宾后，本场联播方式保持不变。" : "首位嘉宾会决定本场是线上连线还是线下同镜。"} 同时最多 4 人。</div><div class="v-live-tool-actions"><button class="is-light" data-action="close-live-economy">取消</button><button class="is-primary" data-action="confirm-invite-guest">发起连线</button></div></div>`;
+              panel.classList.add("is-open");
             };
 
             const confirmInviteGuest = async () => {
               const live = state.liveSession;
               if (!live || !isOwnLiveSession(live)) return;
-              const screen = q('[data-screen="invite-guest"]');
-              const cohostId = String(screen?.querySelector('[data-invite-field="cohostId"]')?.value || "");
-              const selectedMode = String(screen?.querySelector('[data-invite-field="cohostMode"]')?.value || "online");
+              const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+              const cohostId = String(panel?.querySelector('[data-invite-field="cohostId"]')?.value || "");
+              const selectedMode = String(panel?.querySelector('[data-invite-field="cohostMode"]')?.value || "online");
               const cohost = state.channels.find(ch => String(ch.id) === cohostId);
               if (!cohost) { toast("先选择一个角色"); return; }
               const guests = getLiveGuests(live);
@@ -2857,9 +2911,9 @@
               const identity = state.identities.find(x => String(x.id) === String(live.ownerId || state.viewerIdentityId));
               if (identity?.activeLive) identity.activeLive = { ...identity.activeLive, participants: live.participants.map(item => ({ ...item })), cohostId: live.cohostId, cohostName: live.cohostName, cohostHandle: live.cohostHandle, cohostAvatar: live.cohostAvatar, cohostMode: live.cohostMode, mode: live.mode };
               await persist();
-              closeScreen("invite-guest");
+              closeLiveEconomyPanel();
               openLive(live);
-              toast(`嘉宾已加入 · 当前 ${live.participants.length + 1}/4 人`);
+              toast(`已与 ${cohost.name || "嘉宾"} 连线 · ${live.participants.length + 1}/4 人`);
             };
 
             const openRestrictedPublisher = () => {
@@ -3231,14 +3285,20 @@
               state.pendingLiveUserMessage = null;
               state.pendingOwnLiveInput = null;
               await persist();
-              closeScreen("live");
               renderHome();
               renderChannels();
               renderWallet();
 
               if (userEligible) {
-                openScreen("live-summary", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="live-summary">‹</button><div class="v-meta"><strong>本场直播已结束</strong><div class="v-hint">${escapeHTML(live.title || "直播")}</div></div></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-live-summary-grid"><div class="v-live-summary-box"><small>本场打赏</small><b>🔷${tipCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>本场礼物</small><b>🔷${giftCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>商务合作</small><b>${escapeHTML(formatCash(businessCashCNY))}</b></div><div class="v-live-summary-box"><small>${collab ? "你的 50% 分成" : "你的结算"}</small><b>${escapeHTML(formatCoin(userCoin))}${userCashCNY ? ` · ${escapeHTML(formatCash(userCashCNY))}` : ""}</b></div></div><div class="v-publish-note" style="margin-top:12px">打赏和礼物进入 Vela Coin 余额；商务收入直接进入可提现余额。角色的分成只写入角色后台收益记录。</div></div></div>`);
+                const panel = q('[data-screen="live"] [data-role="live-economy-panel"]');
+                if (panel) {
+                  panel.innerHTML = `<div class="v-live-summary-card"><h3>本场直播已结束</h3><div class="v-hint">${escapeHTML(live.title || "直播")}</div><div class="v-live-summary-grid"><div class="v-live-summary-box"><small>本场打赏</small><b>🔷${tipCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>本场礼物</small><b>🔷${giftCoin.toLocaleString("zh-CN")}</b></div><div class="v-live-summary-box"><small>商务合作</small><b>${escapeHTML(formatCash(businessCashCNY))}</b></div><div class="v-live-summary-box"><small>${collab ? "你的 50% 分成" : "你的结算"}</small><b>${escapeHTML(formatCoin(userCoin))}${userCashCNY ? ` · ${escapeHTML(formatCash(userCashCNY))}` : ""}</b></div></div><div class="v-publish-note" style="margin-top:12px">打赏和礼物进入 Vela Coin 余额；商务收入直接进入可提现余额。角色分成只写入角色后台收益记录。</div><button class="v-live-summary-close" data-action="close-live-summary-card">完成</button></div>`;
+                  panel.classList.add("is-open");
+                } else {
+                  closeScreen("live");
+                }
               } else {
+                closeScreen("live");
                 toast("直播已结束，角色收益已记录到后台");
               }
             };
@@ -4115,10 +4175,13 @@
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
               const name = displayProfileName(persona);
+              const sub = getPersonaSubAccount(personaId);
               if (!main) {
-                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建主账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(persona?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">底层使用这份 Roche 人设</div></div></div><p class="v-hint">主账号是这份 Roche 身份在 Vela 的主要账号。露脸方式和现实身份公开程度之后在主页的「账号风格」里设置。</p><button class="v-action" style="width:100%" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="primary">创建主账号</button></div>`;
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建主账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(persona?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">底层使用这份 Roche 人设</div></div></div><p class="v-hint">每份 Roche 用户人设最多创建 1 个主账号 + 1 个副账号。</p><button class="v-action" style="width:100%" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="primary">创建主账号</button></div>`;
+              } else if (sub) {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>账号已创建完整</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(main.avatar || "", main.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(main.displayName || name)}</div><div class="v-sub">已有主账号和副账号</div></div></div><p class="v-hint">一个 Roche 用户人设只能有一个主账号和一个副账号。要重新选择副账号是否关联主账号，请先删除现有副账号。</p></div>`;
               } else {
-                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建副账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(main.avatar || "", main.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(main.displayName || name)}</div><div class="v-sub">${escapeHTML(main.handle || "")} · 主账号</div></div></div><p class="v-hint">副账号底层仍使用同一份 Roche 人设。关联主账号时，它是公开的小号 / 工作号 / 生活号；不关联时，默认作为隐藏小号独立运行。</p><div class="v-settings-actions"><button class="v-action" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="alias" data-linked-main="yes">创建关联副账号</button><button class="v-action light" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="alias" data-linked-main="no">创建隐藏副账号</button></div></div>`;
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建副账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(main.avatar || "", main.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(main.displayName || name)}</div><div class="v-sub">${escapeHTML(main.handle || "")} · 主账号</div></div></div><p class="v-hint">副账号只有一个名额。创建时二选一：关联主账号，或作为不公开关联的隐藏副号。</p><div class="v-settings-actions"><button class="v-action" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="alias" data-linked-main="yes">关联主账号</button><button class="v-action light" data-action="create-vela-user-account" data-persona-id="${escapeHTML(String(personaId))}" data-account-role="alias" data-linked-main="no">不关联主账号</button></div></div>`;
               }
               sheet.classList.add("is-open");
             };
@@ -4128,8 +4191,10 @@
                 (String(rocheRuntime.activePersona?.id || "") === String(personaId || "") ? rocheRuntime.activePersona : null);
               if (!persona || isRocheBotIdentity(persona)) { toast("没有可用的 Roche 用户资料"); return; }
               const main = getPersonaMainAccount(personaId);
+              const existingSub = getPersonaSubAccount(personaId);
               const role = accountRole === "alias" && main ? "alias" : "primary";
               if (role === "primary" && main) { toast("这份 Roche 身份已经有主账号"); return; }
+              if (role === "alias" && existingSub) { toast("这份 Roche 身份已经有副账号，最多只能创建一个"); return; }
               const name = displayProfileName(persona);
               const cleanId = String(personaId || "").replace(/[^a-zA-Z0-9_-]/g, "").slice(-12) || Math.random().toString(36).slice(2,8);
               const id = role === "primary"
@@ -4140,10 +4205,10 @@
                 id,
                 type: "vela-account",
                 sourcePersonaId: String(personaId),
-                displayName: name,
-                handle: nextUniqueHandle(role === "primary" ? baseHandle : `${baseHandle.replace(/^@/,"")}_sub`, state.identities),
-                avatar: String(persona?.avatar || initials(name)),
-                bio: String(persona?.bio || ""),
+                displayName: role === "primary" ? name : "新副账号",
+                handle: nextUniqueHandle(role === "primary" ? baseHandle : `vela_sub_${cleanId.slice(-4)}`, state.identities),
+                avatar: role === "primary" ? String(persona?.avatar || initials(name)) : "",
+                bio: role === "primary" ? String(persona?.bio || "") : "",
                 banner: "",
                 followers: 0,
                 following: 0,
@@ -4187,12 +4252,13 @@
                 const selected = ownerId === id;
                 const current = String(rocheRuntime.activePersona?.id || "") === id;
                 const accounts = getPersonaAccounts(id);
-                return `<div class="v-roche-persona"><div class="v-mini">${avatarHTML(p?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${current ? "当前 Roche 用户资料" : "Roche 用户资料"}${accounts.length ? ` · 已创建 ${accounts.length} 个 Vela 账号` : ""}</div></div><div class="v-identity-actions" style="margin-top:0">${selected ? `<button class="v-action light" disabled>已关联</button><button class="v-action" data-action="open-user-account-creator" data-persona-id="${escapeHTML(id)}">使用此身份创建新账号</button>` : `<button class="v-action" data-action="bind-owner-persona" data-persona-id="${escapeHTML(id)}">关联</button>`}</div></div>`;
+                const capReached = Boolean(getPersonaMainAccount(id) && getPersonaSubAccount(id));
+                return `<div class="v-roche-persona"><div class="v-mini">${avatarHTML(p?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${current ? "当前 Roche 用户资料" : "Roche 用户资料"}${accounts.length ? ` · 已创建 ${accounts.length} 个 Vela 账号` : ""}</div></div><div class="v-identity-actions" style="margin-top:0">${selected ? `<button class="v-action light" disabled>已关联</button>${capReached ? `<button class="v-action light" disabled>已满 1主 + 1副</button>` : `<button class="v-action" data-action="open-user-account-creator" data-persona-id="${escapeHTML(id)}">使用此身份创建新账号</button>`}` : `<button class="v-action" data-action="bind-owner-persona" data-persona-id="${escapeHTML(id)}">关联</button>`}</div></div>`;
               }).join("");
 
               const identitiesHTML = state.identities.length ? state.identities.map(item => {
                 const active = String(state.viewerIdentityId || "") === String(item.id);
-                return `<div class="v-identity-card"><div class="v-author"><div class="v-mini">${avatarHTML(item.avatar || "", item.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(item.displayName || "Vela User")}</div><div class="v-sub">${escapeHTML(item.handle || "@vela")} · ${accountRoleLabel(item)}${item.accountRole === "alias" ? ` · ${subLinkLabel(item)}` : ""}</div></div>${active ? '<span class="v-pill" style="background:#111;color:#fff">当前</span>' : ''}</div><div class="v-identity-actions"><button class="v-action light" data-action="open-profile-by-id" data-owner-type="identity" data-owner-id="${escapeHTML(item.id)}">主页</button>${active ? '' : `<button class="v-action" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">切换到此账号</button>`}</div></div>`;
+                return `<div class="v-identity-card"><div class="v-author"><div class="v-mini">${avatarHTML(item.avatar || "", item.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(item.displayName || "Vela User")}</div><div class="v-sub">${escapeHTML(item.handle || "@vela")} · ${accountRoleLabel(item)}${item.accountRole === "alias" ? ` · ${subLinkLabel(item)}` : ""}</div></div>${active ? '<span class="v-pill" style="background:#111;color:#fff">当前</span>' : ''}</div><div class="v-identity-actions"><button class="v-action light" data-action="open-profile-by-id" data-owner-type="identity" data-owner-id="${escapeHTML(item.id)}">主页</button>${active ? '' : `<button class="v-action" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">切换到此账号</button>`}<button class="v-action v-account-delete" data-action="delete-vela-account" data-owner-type="identity" data-owner-id="${escapeHTML(item.id)}">删除本账号</button></div></div>`;
               }).join("") : `<div class="v-empty" style="padding:28px 8px">还没有 Vela 账号。<br>先在上面关联一份非 Bot 的 Roche 用户资料，再创建主账号。</div>`;
 
               openScreen("identities", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="identities">‹</button><div class="v-meta"><strong>身份与账号</strong><div class="v-hint">Roche 人设负责底层，Vela 账号负责对外身份</div></div><button class="v-head-action" data-action="refresh-roche">刷新</button></header><div class="v-subbody">
@@ -4208,10 +4274,13 @@
               const sheet = q('[data-role="publish-sheet"]');
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
+              const sub = getCharacterSubAccount(characterId);
               if (!main) {
-                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建角色主账号</h3><button data-action="close-publish-sheet">×</button></div><p class="v-hint">角色加入 Vela 时先建立一个主账号。</p><button class="v-action" style="width:100%" data-action="link-roche-character" data-character-id="${escapeHTML(String(characterId))}">创建主账号</button>`;
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建角色主账号</h3><button data-action="close-publish-sheet">×</button></div><p class="v-hint">每个 Roche 角色最多创建 1 个主账号 + 1 个副账号。</p><button class="v-action" style="width:100%" data-action="link-roche-character" data-character-id="${escapeHTML(String(characterId))}">创建主账号</button>`;
+              } else if (sub) {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>角色账号已创建完整</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><p class="v-hint">这个角色已经有主账号和副账号。要重新选择副账号是否关联主账号，请先删除现有副账号。</p></div>`;
               } else {
-                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建角色副账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(main.avatar || "", main.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(main.name || displayProfileName(char))}</div><div class="v-sub">${escapeHTML(main.handle || "")} · 主账号</div></div></div><p class="v-hint">关联主账号＝公开属于这个角色的工作号 / 生活号；不关联＝隐藏小号，外部默认不知道和主账号是同一个人。</p><div class="v-settings-actions"><button class="v-action" data-action="create-character-sub-account" data-character-id="${escapeHTML(String(characterId))}" data-linked-main="yes">创建关联副账号</button><button class="v-action light" data-action="create-character-sub-account" data-character-id="${escapeHTML(String(characterId))}" data-linked-main="no">创建隐藏副账号</button></div></div>`;
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>创建角色副账号</h3><button data-action="close-publish-sheet">×</button></div><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(main.avatar || "", main.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(main.name || displayProfileName(char))}</div><div class="v-sub">${escapeHTML(main.handle || "")} · 主账号</div></div></div><p class="v-hint">副账号只有一个名额。创建时二选一：关联主账号，或作为不公开关联的隐藏副号。</p><div class="v-settings-actions"><button class="v-action" data-action="create-character-sub-account" data-character-id="${escapeHTML(String(characterId))}" data-linked-main="yes">关联主账号</button><button class="v-action light" data-action="create-character-sub-account" data-character-id="${escapeHTML(String(characterId))}" data-linked-main="no">不关联主账号</button></div></div>`;
               }
               sheet.classList.add("is-open");
             };
@@ -4220,18 +4289,20 @@
               const id = String(characterId || "");
               const char = rocheRuntime.characters.find(item => String(item?.id || "") === id);
               const main = getCharacterMainAccount(id);
+              const existingSub = getCharacterSubAccount(id);
               if (!char || !main) { toast("请先创建角色主账号"); return; }
+              if (existingSub) { toast("这个角色已经有副账号，最多只能创建一个"); return; }
               const name = displayProfileName(char);
               const baseHandle = normalizeHandle(char?.handle || "") || `@${String(name || "vela").replace(/\s+/g,"_")}`;
               const channel = {
                 id: `roche-char-${id}-sub-${Date.now().toString(36).slice(-5)}`,
                 kind: "character",
                 sourceCharacterId: id,
-                name,
+                name: "新副账号",
                 realName: String(char?.name || ""),
-                handle: nextUniqueHandle(`${baseHandle.replace(/^@/,"")}_sub`, state.channels),
-                avatar: String(char?.avatar || initials(name)),
-                bio: String(char?.bio || ""),
+                handle: nextUniqueHandle(`vela_sub_${id.slice(-4)}`, state.channels),
+                avatar: "",
+                bio: "",
                 banner: "",
                 followers: 0,
                 following: 0,
@@ -4273,11 +4344,99 @@
                 const name = displayProfileName(char);
                 const linked = linkedIds.has(id);
                 const accounts = getCharacterAccounts(id);
-                const accountRows = accounts.map(channel => `<div class="v-identity-card" style="margin-top:8px"><div class="v-author"><div class="v-mini">${avatarHTML(channel.avatar || "", channel.name || name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(channel.name || name)}</div><div class="v-sub">${escapeHTML(channel.handle || "")} · ${accountRoleLabel(channel)}${channel.accountRole === "alias" ? ` · ${subLinkLabel(channel)}` : ""}</div></div></div><div class="v-identity-actions"><button class="v-action light" data-action="open-profile-by-id" data-owner-type="channel" data-owner-id="${escapeHTML(channel.id)}">主页</button></div></div>`).join("");
-                return `<div class="v-rolecard"><div class="v-author"><div class="v-mini">${avatarHTML(char?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${escapeHTML(char?.name || "")}${char?.handle ? ` · ${escapeHTML(normalizeHandle(char.handle))}` : ""}</div></div>${linked ? `<button class="v-action light" data-action="unlink-roche-character" data-character-id="${escapeHTML(id)}">移除</button>` : `<button class="v-action" data-action="open-character-account-creator" data-character-id="${escapeHTML(id)}">加入 Vela</button>`}</div>${linked ? `${accountRows}<button class="v-action light" style="width:100%;margin-top:10px" data-action="open-character-account-creator" data-character-id="${escapeHTML(id)}">使用此角色创建新账号</button>` : ""}</div>`;
+                const accountRows = accounts.map(channel => `<div class="v-identity-card" style="margin-top:8px"><div class="v-author"><div class="v-mini">${avatarHTML(channel.avatar || "", channel.name || name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(channel.name || name)}</div><div class="v-sub">${escapeHTML(channel.handle || "")} · ${accountRoleLabel(channel)}${channel.accountRole === "alias" ? ` · ${subLinkLabel(channel)}` : ""}</div></div></div><div class="v-identity-actions"><button class="v-action light" data-action="open-profile-by-id" data-owner-type="channel" data-owner-id="${escapeHTML(channel.id)}">主页</button><button class="v-action v-account-delete" data-action="delete-vela-account" data-owner-type="channel" data-owner-id="${escapeHTML(channel.id)}">删除本账号</button></div></div>`).join("");
+                const capReached = Boolean(getCharacterMainAccount(id) && getCharacterSubAccount(id));
+                return `<div class="v-rolecard"><div class="v-author"><div class="v-mini">${avatarHTML(char?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${escapeHTML(char?.name || "")}${char?.handle ? ` · ${escapeHTML(normalizeHandle(char.handle))}` : ""}</div></div>${linked ? `<button class="v-action light" data-action="unlink-roche-character" data-character-id="${escapeHTML(id)}">移除</button>` : `<button class="v-action" data-action="open-character-account-creator" data-character-id="${escapeHTML(id)}">加入 Vela</button>`}</div>${linked ? `${accountRows}${capReached ? `<button class="v-action light" style="width:100%;margin-top:10px" disabled>已满 1主 + 1副</button>` : `<button class="v-action light" style="width:100%;margin-top:10px" data-action="open-character-account-creator" data-character-id="${escapeHTML(id)}">使用此角色创建新账号</button>`}` : ""}</div>`;
               }).join("") : `<div class="v-empty">没有读取到 Roche 角色。<br>可以先点右上角“刷新”。</div>`;
 
               openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">这里只管理角色与 Vela 账号的对应关系</div></div><button class="v-head-action" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">每个 Roche 角色先创建主账号，再按需要创建关联副账号或隐藏副账号。主页编辑、商业合作与接单设置都放到角色主页里。</p>${status}${rows}</div></div>`);
+            };
+
+            const deleteVelaAccount = async (ownerType, ownerId) => {
+              const id = String(ownerId || "");
+              if (!id) return;
+              if (ownerType === "identity") {
+                const item = state.identities.find(x => String(x.id) === id);
+                if (!item) return;
+                const children = state.identities.filter(x => x.accountRole === "alias" && String(x.mainAccountId || "") === id);
+                if (item.accountRole !== "alias" && children.length) {
+                  toast("请先删除这个主账号下面的副账号");
+                  return;
+                }
+                if (typeof window.confirm === "function" && !window.confirm(`删除 Vela 账号 ${item.displayName || item.handle || ""}？不会删除 Roche 用户资料。`)) return;
+                state.identities = state.identities.filter(x => String(x.id) !== id);
+                if (String(state.viewerIdentityId || "") === id) state.viewerIdentityId = state.identities[0]?.id || "";
+                Object.keys(state.subscriptionProfiles || {}).forEach(key => { if (key === `identity:${id}`) delete state.subscriptionProfiles[key]; });
+                Object.keys(state.communitySettings || {}).forEach(key => { if (key.startsWith(`identity:${id}:`)) delete state.communitySettings[key]; });
+                Object.keys(state.communityChats || {}).forEach(key => { if (key.startsWith(`identity:${id}:`)) delete state.communityChats[key]; });
+              } else if (ownerType === "channel") {
+                const item = state.channels.find(x => String(x.id) === id);
+                if (!item) return;
+                const children = state.channels.filter(x => x.accountRole === "alias" && String(x.mainChannelId || "") === id);
+                if (item.accountRole !== "alias" && children.length) {
+                  toast("请先删除这个主账号下面的副账号");
+                  return;
+                }
+                if (typeof window.confirm === "function" && !window.confirm(`删除角色的 Vela 账号 ${item.name || item.handle || ""}？不会删除 Roche 角色资料。`)) return;
+                state.channels = state.channels.filter(x => String(x.id) !== id);
+                Object.keys(state.subscriptionProfiles || {}).forEach(key => { if (key === `channel:${id}`) delete state.subscriptionProfiles[key]; });
+                Object.keys(state.communitySettings || {}).forEach(key => { if (key.startsWith(`channel:${id}:`)) delete state.communitySettings[key]; });
+                Object.keys(state.communityChats || {}).forEach(key => { if (key.startsWith(`channel:${id}:`)) delete state.communityChats[key]; });
+                state.messages = state.messages.filter(msg => String(msg.channelId || "") !== id);
+              } else return;
+              await persist();
+              mountMarkup(root, state);
+              rerender();
+              switchPage(state.activePage || "home");
+              if (ownerType === "identity") openIdentities();
+              else openRoles();
+              toast("Vela 账号已删除");
+            };
+
+            const clearVelaPluginData = async () => {
+              if (typeof window.confirm === "function" && !window.confirm("清空 Vela 插件数据？账号、DM、社群、直播、帖子、钱包和设置都会重置，但不会删除 Roche 用户/角色资料。")) return;
+              if (typeof window.confirm === "function" && !window.confirm("再次确认：此操作无法撤销。继续清空 Vela 数据？")) return;
+              const fresh = createDefaultState();
+              fresh.identities = [];
+              fresh.viewerIdentityId = "";
+              fresh.channels = [];
+              fresh.rocheLink = { ownerPersonaId: "", linkedCharacterIds: [] };
+              fresh.messages = [];
+              fresh.dmThreads = {};
+              fresh.communityChats = {};
+              fresh.communitySettings = {};
+              fresh.communityPosts = [];
+              fresh.liveReplays = [];
+              fresh.postReplies = {};
+              fresh.postOverrides = {};
+              fresh.liveProgress = {};
+              fresh.liveStats = {};
+              fresh.liveChat = [];
+              fresh.subscriptions = {};
+              fresh.subscriptionProfiles = {};
+              fresh.roleCommerce = {};
+              fresh.roleEarnings = {};
+              fresh.businessDeals = {};
+              fresh.wallet = {
+                cashBalanceCNY: 0,
+                coinBalance: 0,
+                linkedAccount: null,
+                settlementCurrency: "",
+                fxRates: { CNY: 1, USD: 0.149, JPY: 21.9, KRW: 207, HKD: 1.16, EUR: 0.128 },
+                fxUpdatedAt: 0,
+                subscriptionAccruals: [],
+                subscriptionPurchases: {},
+                transactions: []
+              };
+              fresh.appearance = { topbarHeight: 62, bottombarHeight: 78 };
+              fresh.platformSettings = { recommendationCount: 3, allowBusinessDM: true, activityLevel: 50, strangerInteraction: "normal" };
+              state = fresh;
+              await roche?.storage?.set?.("vela-shell-state", {});
+              await persist();
+              mountMarkup(root, state);
+              rerender();
+              switchPage("home");
+              toast("Vela 插件数据已清空");
             };
 
             const deleteDMConversation = async messageId => {
@@ -4700,6 +4859,9 @@
                 openLiveLotteryPanel();
               } else if (action === "close-live-economy") {
                 closeLiveEconomyPanel();
+              } else if (action === "close-live-summary-card") {
+                closeLiveEconomyPanel();
+                closeScreen("live");
               } else if (action === "add-live-prize-row") {
                 const host = q('[data-screen="live"] [data-role="live-prize-rows"]');
                 if (host) host.insertAdjacentHTML("beforeend", livePrizeRowHTML({}, host.querySelectorAll('[data-prize-row]').length));
@@ -4924,6 +5086,11 @@
                 await persist();
                 openSettingsNote("appearance");
                 toast("界面比例已恢复默认");
+              } else if (action === "clear-vela-data") {
+                closeDrawer();
+                await clearVelaPluginData();
+              } else if (action === "delete-vela-account") {
+                await deleteVelaAccount(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
               } else if (action === "open-identities") {
                 closeDrawer(); openIdentities();
               } else if (action === "open-roles") {
