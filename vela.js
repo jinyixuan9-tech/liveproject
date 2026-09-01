@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.2";
+  const VERSION = "0.1.3";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -60,6 +60,9 @@
           handle: "@night_vela",
           avatar: "NN",
           bio: "匿名频道",
+          banner: "",
+          followers: 0,
+          following: 0,
           isAnonymous: true
         }
       ],
@@ -74,6 +77,10 @@
           title: "今晚不赶时间，坐下来聊一会儿",
           viewers: 4281,
           bio: "Shell 演示频道",
+          banner: "",
+          followers: 0,
+          following: 0,
+          profileCustomized: false,
           isDemo: true
         },
         {
@@ -86,6 +93,10 @@
           title: "",
           viewers: 0,
           bio: "Shell 演示频道",
+          banner: "",
+          followers: 0,
+          following: 0,
+          profileCustomized: false,
           isDemo: true
         }
       ],
@@ -193,8 +204,8 @@
 .vela-roche .v-nav{position:absolute;z-index:30;left:0;right:0;bottom:0;height:calc(78px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--v-line)}.vela-roche .v-nav button{border:0;background:none;color:#8b8b93;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px}.vela-roche .v-nav button b{font-size:20px;font-weight:500}.vela-roche .v-nav button.is-active{color:#111;font-weight:900}.vela-roche .v-nav .v-publish b{width:42px;height:42px;border-radius:15px;background:#111;color:#fff;display:grid;place-items:center;font-size:25px;margin-top:-13px;box-shadow:0 7px 18px rgba(0,0,0,.17)}
 .vela-roche .v-mask{position:absolute;z-index:50;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s}.vela-roche .v-mask.is-open{opacity:1;pointer-events:auto}.vela-roche .v-drawer{position:absolute;z-index:60;top:0;bottom:0;left:0;width:min(84%,350px);padding:18px 16px calc(16px + env(safe-area-inset-bottom,0px));background:#fff;transform:translateX(-102%);transition:transform .22s ease;overflow:auto;display:flex;flex-direction:column}.vela-roche .v-drawer.is-open{transform:none}.vela-roche .v-drawer-main{flex:1;min-height:0}.vela-roche .v-userhead{width:100%;border:0;background:#f6f6f8;border-radius:22px;padding:13px;display:flex;align-items:center;gap:12px;margin:6px 0 18px;text-align:left;color:inherit}.vela-roche .v-userav{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#111,#777);color:#fff;display:grid;place-items:center;font-weight:900;flex:0 0 auto}.vela-roche .v-avatar img,.vela-roche .v-mini img,.vela-roche .v-userav img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}.vela-roche .v-usercopy{min-width:0;flex:1}.vela-roche .v-userhead b{display:block;font-size:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-userhead span{display:block;color:var(--v-muted);font-size:12px;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-identity-chip{display:inline-flex!important;width:auto!important;margin-top:7px!important;padding:4px 7px;border-radius:8px;background:#111;color:#fff!important;font-size:9px!important;font-weight:900}.vela-roche .v-drawer-section{margin-top:14px}.vela-roche .v-drawer-label{padding:0 4px 7px;color:#a0a0a8;font-size:10px;font-weight:900;letter-spacing:.06em}.vela-roche .v-drawer-item{width:100%;padding:13px 4px;border:0;border-bottom:1px solid var(--v-line);background:none;display:flex;align-items:center;justify-content:space-between;gap:10px;text-align:left;color:inherit;font-size:14px;font-weight:800;min-height:48px}.vela-roche .v-drawer-item .v-itemcopy{display:flex;align-items:center;gap:10px;min-width:0}.vela-roche .v-drawer-item .v-itemicon{width:30px;height:30px;border-radius:10px;background:#f2f2f5;display:grid;place-items:center;font-size:14px;flex:0 0 auto}.vela-roche .v-drawer-item .v-itembadge{font-size:10px;color:var(--v-muted);font-weight:800}.vela-roche .v-drawer-foot{padding-top:18px;margin-top:auto}.vela-roche .v-version{font-size:10px;color:#b0b0b7;text-align:center;margin:0 0 9px}.vela-roche .v-exit{width:100%;min-height:48px;border:0;border-radius:15px;background:#f3f3f6;color:#b3261e;font-weight:900;font-size:13px}
 .vela-roche .v-sheetmask{position:absolute;z-index:80;inset:0;background:rgba(0,0,0,.28);display:none;align-items:flex-end}.vela-roche .v-sheetmask.is-open{display:flex}.vela-roche .v-sheet{width:100%;max-height:82%;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:13px 16px calc(24px + env(safe-area-inset-bottom,0px));overscroll-behavior:contain}.vela-roche .v-handle{width:42px;height:5px;border-radius:3px;background:#d2d2d7;margin:0 auto 15px}.vela-roche .v-create-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-create{border:0;border-radius:18px;background:#f1f1f4;padding:17px;text-align:left;font-weight:900;min-height:92px}.vela-roche .v-create b{display:block;font-size:24px;margin-bottom:12px}.vela-roche .v-hint{font-size:11px;line-height:1.5;color:var(--v-muted)}
-.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:62px;padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead button{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
-.vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
+.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:62px;padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead>button:first-child{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px;flex:0 0 auto}.vela-roche .v-subhead .v-head-action{width:auto!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border:0;border-radius:11px;background:#fff!important;color:#111!important;font-size:11px!important;font-weight:850!important;white-space:nowrap}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
+.vela-roche .v-profile-shell{padding-bottom:18px}.vela-roche .v-profile-banner{height:138px;background:linear-gradient(135deg,#d5d6dc,#f5f5f8);overflow:hidden;position:relative}.vela-roche .v-profile-banner img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-info{position:relative;padding:0 16px 14px;background:#fff}.vela-roche .v-profile-avatar{width:78px;height:78px;border-radius:50%;border:4px solid #fff;background:linear-gradient(135deg,#222,#888);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;overflow:hidden;position:relative;margin-top:-39px}.vela-roche .v-profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-main{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}.vela-roche .v-profile-maincopy{min-width:0;flex:1;padding-top:8px}.vela-roche .v-profile-maincopy h2{font-size:22px;line-height:1.2;margin:0 0 4px}.vela-roche .v-profile-handle{font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats b{color:var(--v-text);font-size:13px}.vela-roche .v-profile-bio{font-size:13px;line-height:1.55;margin-top:11px;white-space:pre-wrap}.vela-roche .v-profile-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:#fff;border-top:1px solid var(--v-line);border-bottom:1px solid var(--v-line)}.vela-roche .v-profile-tabs button{border:0;background:#fff;padding:13px 6px;font-size:12px;font-weight:850;color:var(--v-muted);position:relative}.vela-roche .v-profile-tabs button.is-active{color:#111}.vela-roche .v-profile-tabs button.is-active:after{content:"";position:absolute;left:24%;right:24%;bottom:0;height:2px;background:#111;border-radius:2px}.vela-roche .v-profile-tabbody{padding:14px}.vela-roche .v-editform{display:grid;gap:12px}.vela-roche .v-field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}.vela-roche .v-field input,.vela-roche .v-field textarea{width:100%;border:1px solid var(--v-line);background:#fff;border-radius:13px;padding:11px 12px;font-size:16px;color:#111;outline:none}.vela-roche .v-field textarea{min-height:88px;resize:vertical}.vela-roche .v-fieldpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-identity-card{border:1px solid var(--v-line);background:#fff;border-radius:18px;padding:12px;margin-top:10px}.vela-roche .v-identity-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-roche-compact{background:#fafafd;border:1px solid var(--v-line);border-radius:18px;padding:12px}.vela-roche .v-roche-persona{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid var(--v-line)}.vela-roche .v-roche-persona:first-of-type{border-top:0}.vela-roche .v-role-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-profile-empty{padding:42px 12px;text-align:center;color:var(--v-muted);font-size:12px;line-height:1.6}.vela-roche .v-settings-note{font-size:12px;line-height:1.65;color:var(--v-muted)}.vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
 </style>`;
   }
@@ -239,7 +250,7 @@
       <div class="v-mask" data-role="mask" data-action="close-drawer"></div>
       <aside class="v-drawer" data-role="drawer">
         <div class="v-drawer-main">
-          <button class="v-userhead" data-action="open-identities">
+          <button class="v-userhead" data-action="open-user-profile">
             <div class="v-userav">${avatarHTML(identity?.avatar || "", identity?.displayName || "U")}</div>
             <div class="v-usercopy">
               <b>${escapeHTML(identity?.displayName || "Vela User")}</b>
@@ -257,10 +268,10 @@
 
           <div class="v-drawer-section">
             <div class="v-drawer-label">Vela 设置</div>
-            <button class="v-drawer-item" data-action="noop"><span class="v-itemcopy"><span class="v-itemicon">✦</span><span>AI 生成预设</span></span><span>›</span></button>
-            <button class="v-drawer-item" data-action="noop"><span class="v-itemcopy"><span class="v-itemicon">↔</span><span>记忆互通</span></span><span>›</span></button>
-            <button class="v-drawer-item" data-action="noop"><span class="v-itemcopy"><span class="v-itemicon">◐</span><span>外观与主页风格</span></span><span>›</span></button>
-            <button class="v-drawer-item" data-action="noop"><span class="v-itemcopy"><span class="v-itemicon">⚙</span><span>平台设置</span></span><span>›</span></button>
+            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="presets"><span class="v-itemcopy"><span class="v-itemicon">✦</span><span>生成预设</span></span><span>›</span></button>
+            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="appearance"><span class="v-itemcopy"><span class="v-itemicon">◐</span><span>外观设置</span></span><span>›</span></button>
+            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="platform"><span class="v-itemcopy"><span class="v-itemicon">⚙</span><span>平台设置</span></span><span>›</span></button>
+            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="memory"><span class="v-itemcopy"><span class="v-itemicon">↔</span><span>记忆互通</span></span><span class="v-itembadge">稍后&nbsp; ›</span></button>
           </div>
         </div>
 
@@ -282,6 +293,9 @@
       <section class="v-subscreen" data-screen="message"></section>
       <section class="v-subscreen" data-screen="identities"></section>
       <section class="v-subscreen" data-screen="roles"></section>
+      <section class="v-subscreen" data-screen="profile"></section>
+      <section class="v-subscreen" data-screen="profile-edit"></section>
+      <section class="v-subscreen" data-screen="settings"></section>
       <div class="v-toast" data-role="toast"></div>
     `;
   }
@@ -384,17 +398,27 @@
                   id: channelId,
                   kind: "character",
                   sourceCharacterId: charId,
-                  name: displayName,
                   realName: String(char?.name || ""),
+                  name: displayName,
                   handle: normalizeHandle(char?.handle || ""),
                   avatar: String(char?.avatar || initials(displayName)),
                   bio: String(char?.bio || ""),
+                  banner: "",
+                  followers: 0,
+                  following: 0,
+                  profileCustomized: false,
                   live: Boolean(existing?.live),
                   title: String(existing?.title || ""),
                   viewers: Number(existing?.viewers || 0)
                 };
-                if (existing) Object.assign(existing, snapshot);
-                else state.channels.push(snapshot);
+                if (existing) {
+                  const custom = existing.profileCustomized ? {
+                    name: existing.name, handle: existing.handle, avatar: existing.avatar,
+                    bio: existing.bio, banner: existing.banner, followers: existing.followers,
+                    following: existing.following, profileCustomized: true
+                  } : {};
+                  Object.assign(existing, snapshot, custom);
+                } else state.channels.push(snapshot);
               }
             };
 
@@ -570,9 +594,89 @@
               host.innerHTML = state.liveChat.slice(-8).map(line => `<div class="v-chatline"><b>${escapeHTML(line.user)}</b><span>${escapeHTML(line.text)}</span></div>`).join("");
             };
 
-            const openChannel = (channel) => {
-              const liveBlock = channel.live ? `<article class="v-card"><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(channel.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(channel.title)}</div><div class="v-viewers">${formatViewers(channel.viewers)} 人正在观看</div></div></button></article>` : `<div class="v-empty">当前没有正在直播。<br>后续这里会显示预约直播。</div>`;
-              openScreen("channel", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="channel">‹</button><div class="v-meta"><strong>${escapeHTML(channel.name)}</strong><div class="v-hint">${escapeHTML(channel.handle)}</div></div><button class="v-action light" data-action="noop">编辑</button></header><div class="v-subbody"><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(channel.avatar, channel.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(channel.name)}</div><div class="v-sub">${escapeHTML(channel.handle || "未设置 @ID")} · 频道主页</div></div></div>${channel.bio ? `<div class="v-posttext">${escapeHTML(channel.bio)}</div>` : ""}${channel.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已连接 Roche 角色</div>` : ""}</div><div class="v-tabs"><button class="is-active">直播</button><button data-action="channel-replays">回放</button><button data-action="channel-community">社群</button></div><div data-role="channel-tab-body">${liveBlock}</div></div>`);
+            const getProfileEntity = (ownerType, id) => {
+              if (ownerType === "identity") return state.identities.find(x => String(x.id) === String(id)) || null;
+              return state.channels.find(x => String(x.id) === String(id)) || null;
+            };
+
+            const profileName = (entity, ownerType) => ownerType === "identity"
+              ? String(entity?.displayName || "Vela User")
+              : String(entity?.name || "频道");
+
+            const renderProfileTab = (ownerType, id, tab = "live") => {
+              const entity = getProfileEntity(ownerType, id);
+              const host = q('[data-screen="profile"] [data-role="profile-tab-body"]');
+              if (!entity || !host) return;
+              qa('[data-screen="profile"] [data-profile-tab]').forEach(btn => btn.classList.toggle('is-active', btn.dataset.profileTab === tab));
+              if (tab === "live") {
+                if (entity.live) {
+                  host.innerHTML = `<article class="v-card"><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(entity.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(entity.title || "正在直播")}</div><div class="v-viewers">${formatViewers(entity.viewers || 0)} 人正在观看</div></div></button></article>`;
+                } else {
+                  host.innerHTML = `<div class="v-profile-empty">当前没有正在直播。<br>以后预约直播也会出现在这里。</div>`;
+                }
+              } else if (tab === "replays") {
+                host.innerHTML = `<article class="v-card"><div class="v-name">周末晚上，随便聊会儿</div><div class="v-sub">8 月 31 日 21:06–23:18 · 2小时12分</div><div class="v-postimg" style="height:135px">▶</div><div class="v-engage"><span>最高 1.6 万人观看</span><span>直播回放</span></div></article>`;
+              } else {
+                host.innerHTML = `<article class="v-card"><div class="v-name">频道社群</div><p class="v-posttext">这里是频道自己的粉丝社群。后续加入时可以选择用哪个 Vela 身份进入。</p><button class="v-action light" data-action="noop">社群功能稍后接入</button></article>`;
+              }
+            };
+
+            const openProfile = (ownerType, id) => {
+              const entity = getProfileEntity(ownerType, id);
+              if (!entity) return;
+              const name = profileName(entity, ownerType);
+              const handle = normalizeHandle(entity.handle || "") || "@vela";
+              const banner = String(entity.banner || "");
+              const bannerHTML = isImageURL(banner) ? `<img src="${escapeHTML(banner)}" alt="">` : "";
+              openScreen("profile", `<div class="v-profile-shell"><header class="v-subhead"><button data-action="close-screen" data-screen-name="profile">‹</button><div class="v-meta"><strong>${escapeHTML(name)}</strong><div class="v-hint">${ownerType === "identity" ? "我的 Vela 主页" : "角色频道主页"}</div></div><button class="v-head-action" data-action="edit-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">编辑主页</button></header><div class="v-profile-banner">${bannerHTML}</div><div class="v-profile-info"><div class="v-profile-avatar">${avatarHTML(entity.avatar || "", name)}</div><div class="v-profile-main"><div class="v-profile-maincopy"><h2>${escapeHTML(name)}</h2><div class="v-profile-handle">${escapeHTML(handle)}</div></div></div><div class="v-profile-stats"><span><b>${Number(entity.followers || 0).toLocaleString("zh-CN")}</b> 粉丝</span><span><b>${Number(entity.following || 0).toLocaleString("zh-CN")}</b> 关注</span></div>${entity.bio ? `<div class="v-profile-bio">${escapeHTML(entity.bio)}</div>` : ""}${entity.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已关联 Roche 角色</div>` : ""}</div><div class="v-profile-tabs"><button class="is-active" data-action="profile-tab" data-profile-tab="live" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">直播</button><button data-action="profile-tab" data-profile-tab="replays" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">回放</button><button data-action="profile-tab" data-profile-tab="community" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">社群</button></div><div class="v-profile-tabbody" data-role="profile-tab-body"></div></div>`);
+              renderProfileTab(ownerType, entity.id, "live");
+            };
+
+            const openUserProfile = () => openProfile("identity", state.viewerIdentityId);
+            const openChannel = (channel) => openProfile("channel", channel.id);
+
+            const openProfileEditor = (ownerType, id) => {
+              const entity = getProfileEntity(ownerType, id);
+              if (!entity) return;
+              const name = profileName(entity, ownerType);
+              openScreen("profile-edit", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="profile-edit">‹</button><div class="v-meta"><strong>编辑主页</strong><div class="v-hint">${escapeHTML(name)} · 只影响 Vela 展示</div></div><button class="v-head-action" data-action="save-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">保存</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>主页背景图片 URL</label><input data-edit-field="banner" value="${escapeHTML(entity.banner || "")}" placeholder="https://..."></div><div class="v-field"><label>头像 URL / 文字占位</label><input data-edit-field="avatar" value="${escapeHTML(entity.avatar || "")}" placeholder="https://... 或 NN"></div><div class="v-field"><label>昵称</label><input data-edit-field="name" value="${escapeHTML(name)}" maxlength="40"></div><div class="v-field"><label>账号 @ID</label><input data-edit-field="handle" value="${escapeHTML(entity.handle || "")}" maxlength="40" placeholder="@vela_name"></div><div class="v-fieldpair"><div class="v-field"><label>粉丝数</label><input data-edit-field="followers" type="number" min="0" step="1" value="${Number(entity.followers || 0)}"></div><div class="v-field"><label>关注数</label><input data-edit-field="following" type="number" min="0" step="1" value="${Number(entity.following || 0)}"></div></div><div class="v-field"><label>签名 / 简介</label><textarea data-edit-field="bio" maxlength="300" placeholder="写点主页介绍…">${escapeHTML(entity.bio || "")}</textarea></div></div></div><p class="v-hint">角色主页的这些展示资料属于 Vela 自定义内容，不会反向修改 Roche 原角色资料。</p></div>`);
+            };
+
+            const saveProfileEditor = async (ownerType, id) => {
+              const entity = getProfileEntity(ownerType, id);
+              if (!entity) return;
+              const screen = q('[data-screen="profile-edit"]');
+              const get = (field) => screen?.querySelector(`[data-edit-field="${field}"]`)?.value ?? "";
+              const name = String(get("name") || "").trim() || profileName(entity, ownerType);
+              const handle = normalizeHandle(get("handle"));
+              const followers = Math.max(0, Math.floor(Number(get("followers") || 0)));
+              const following = Math.max(0, Math.floor(Number(get("following") || 0)));
+              if (ownerType === "identity") entity.displayName = name;
+              else entity.name = name;
+              entity.handle = handle;
+              entity.avatar = String(get("avatar") || "").trim() || initials(name);
+              entity.banner = String(get("banner") || "").trim();
+              entity.bio = String(get("bio") || "").trim();
+              entity.followers = Number.isFinite(followers) ? followers : 0;
+              entity.following = Number.isFinite(following) ? following : 0;
+              if (ownerType === "channel") entity.profileCustomized = true;
+              await persist();
+              mountMarkup(root, state);
+              rerender();
+              switchPage(state.activePage || "home");
+              openProfile(ownerType, id);
+              toast("主页已保存");
+            };
+
+            const openSettingsNote = (kind) => {
+              const map = {
+                presets: { title: "生成预设", text: "这里以后放用户可编辑的生成规则：直播内容与主播表现、观众弹幕、推荐直播、私信/商业合作、贴文与社群。平台会内置一套默认预设，用户也可以自己改。" },
+                appearance: { title: "外观设置", text: "主页装饰已经归到每个账号/角色自己的“编辑主页”里，所以这里仅保留 Vela 全局外观，例如明暗主题、界面密度、卡片圆角、直播间显示风格。" },
+                platform: { title: "平台设置", text: "这里以后放整个平台的运行选项，例如推荐刷新数量、陌生商务私信是否出现、平台活跃度、通知与数据清理。不会放角色个人主页设置。" },
+                memory: { title: "记忆互通", text: "这一项按计划最后再接。以后用于读取主聊天记忆、重要直播事件回传，以及是否让主聊天知道 Vela 的近期状态。" }
+              };
+              const item = map[kind] || map.platform;
+              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>${escapeHTML(item.title)}</strong><div class="v-hint">功能规划</div></div></header><div class="v-subbody"><div class="v-card"><p class="v-settings-note" style="margin:0">${escapeHTML(item.text)}</p></div></div>`);
             };
 
             const openMessage = (id) => {
@@ -590,32 +694,24 @@
               const owner = rocheRuntime.personas.find(p => String(p?.id) === ownerId) ||
                 (String(rocheRuntime.activePersona?.id || "") === ownerId ? rocheRuntime.activePersona : null);
               const rocheStatus = rocheRuntime.error
-                ? `<div class="v-linkstatus"><span class="v-dot"></span>读取失败：${escapeHTML(rocheRuntime.error)}</div>`
-                : `<div class="v-linkstatus"><span class="v-dot ${rocheRuntime.loaded ? "on" : ""}"></span>${rocheRuntime.loaded ? "已读取 Roche 用户资料" : "正在等待读取 Roche"}</div>`;
+                ? `读取失败：${escapeHTML(rocheRuntime.error)}`
+                : rocheRuntime.loaded ? "已读取 Roche 用户资料" : "正在读取 Roche";
 
-              const personaRows = rocheRuntime.personas.length
-                ? rocheRuntime.personas.map(p => {
-                    const id = String(p?.id || "");
-                    const name = displayProfileName(p);
-                    const selected = ownerId === id;
-                    return `<div class="v-row"><div class="v-author" style="flex:1"><div class="v-mini">${avatarHTML(p?.avatar || "", name)}</div><div class="v-meta"><b>${escapeHTML(name)}</b><small>${escapeHTML(normalizeHandle(p?.handle || "") || p?.name || "Roche 用户身份")}</small></div></div><button class="v-action ${selected ? "light" : ""}" data-action="bind-owner-persona" data-persona-id="${escapeHTML(id)}">${selected ? "已链接" : "设为主体"}</button></div>`;
-                  }).join("")
-                : `<div class="v-empty" style="padding:24px 8px">没有读取到 Roche 用户身份。</div>`;
+              const identitiesHTML = state.identities.map(item => {
+                const active = state.viewerIdentityId === item.id;
+                return `<div class="v-identity-card"><div class="v-author"><div class="v-mini">${avatarHTML(item.avatar || "", item.displayName)}</div><div class="v-meta"><div class="v-name">${escapeHTML(item.displayName || "Vela User")}</div><div class="v-sub">${escapeHTML(item.handle || "@vela")} · ${item.isAnonymous ? "匿名身份" : "公开身份"}</div></div>${active ? '<span class="v-pill" style="background:#111;color:#fff">当前</span>' : ''}</div><div class="v-identity-actions"><button class="v-action light" data-action="open-profile-by-id" data-owner-type="identity" data-owner-id="${escapeHTML(item.id)}">主页</button><button class="v-action light" data-action="edit-profile" data-owner-type="identity" data-owner-id="${escapeHTML(item.id)}">编辑主页</button>${active ? '' : `<button class="v-action" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">切换到此身份</button>`}</div></div>`;
+              }).join("");
 
-              openScreen("identities", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="identities">‹</button><div class="v-meta"><strong>身份与账号</strong><div class="v-hint">Roche 是后台主体，Vela 身份可以完全匿名</div></div><button class="v-action light" data-action="refresh-roche">刷新</button></header><div class="v-subbody">
-                <div class="v-card">
-                  <b>Roche 后台用户主体</b>
-                  <p class="v-hint">这里只决定 Vela 的后台归属与以后读取记忆时对应哪个用户身份，不会自动公开你的 Roche 资料。</p>
-                  ${rocheStatus}
-                  ${owner ? `<div class="v-linkbox"><div class="v-author"><div class="v-mini">${avatarHTML(owner?.avatar || "", displayProfileName(owner))}</div><div class="v-meta"><div class="v-name">${escapeHTML(displayProfileName(owner))}</div><div class="v-sub">当前后台主体</div></div></div></div>` : ""}
-                  ${personaRows}
-                  ${owner ? `<button class="v-action" style="margin-top:12px" data-action="create-identity-from-persona" data-persona-id="${escapeHTML(String(owner?.id || ""))}">使用这份 Roche 资料创建公开 Vela 身份</button>` : ""}
-                </div>
-                <div class="v-card">
-                  <b>我的 Vela 身份</b>
-                  <p class="v-hint">不要求先建“大号”。你可以只使用匿名身份，也可以同时拥有公开账号和多个小号。</p>
-                  ${state.identities.map(item => `<div class="v-row"><div><b>${escapeHTML(item.displayName)} · ${escapeHTML(item.handle)}</b><small>${item.isAnonymous ? "匿名身份" : "公开身份"}${item.sourcePersonaId ? " · 来自 Roche 资料" : ""}</small></div><button class="v-action ${state.viewerIdentityId === item.id ? "light" : ""}" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">${state.viewerIdentityId === item.id ? "使用中" : "切换"}</button></div>`).join("")}
-                </div>
+              const personaRows = rocheRuntime.personas.map(p => {
+                const id = String(p?.id || "");
+                const name = displayProfileName(p);
+                const selected = ownerId === id;
+                return `<div class="v-roche-persona"><div class="v-mini">${avatarHTML(p?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${selected ? "当前后台主体" : "Roche 用户身份"}</div></div><button class="v-action ${selected ? "light" : ""}" data-action="bind-owner-persona" data-persona-id="${escapeHTML(id)}">${selected ? "已关联" : "关联"}</button></div>`;
+              }).join("");
+
+              openScreen("identities", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="identities">‹</button><div class="v-meta"><strong>身份与账号</strong><div class="v-hint">先管理你在 Vela 里真正使用的身份</div></div><button class="v-head-action" data-action="refresh-roche">刷新</button></header><div class="v-subbody">
+                <div class="v-card"><b>我的 Vela 身份</b><p class="v-hint">当前身份决定你用哪个账号看直播、发弹幕、私信和开播。每个身份都有自己的主页。</p>${identitiesHTML}</div>
+                <div class="v-roche-compact"><div class="v-author"><div class="v-meta"><div class="v-name">Roche 后台关联</div><div class="v-sub">${rocheStatus}${owner ? ` · 当前：${escapeHTML(displayProfileName(owner))}` : ""}</div></div></div><p class="v-hint">这里仅决定后台归属，不会自动公开 Roche 用户资料。</p>${personaRows || '<div class="v-hint">没有读取到 Roche 用户身份。</div>'}${owner ? `<button class="v-action light" style="margin-top:10px" data-action="create-identity-from-persona" data-persona-id="${escapeHTML(String(owner.id || ""))}">用当前 Roche 资料新建 Vela 身份</button>` : ""}</div>
               </div>`);
             };
 
@@ -623,27 +719,18 @@
               const linkedIds = new Set(safeArray(state.rocheLink?.linkedCharacterIds).map(String));
               const status = rocheRuntime.error
                 ? `<div class="v-linkstatus"><span class="v-dot"></span>读取失败：${escapeHTML(rocheRuntime.error)}</div>`
-                : `<div class="v-linkstatus"><span class="v-dot ${rocheRuntime.loaded ? "on" : ""}"></span>${rocheRuntime.loaded ? `已读取 ${rocheRuntime.characters.length} 个 Roche 角色` : "正在等待读取 Roche 角色"}</div>`;
+                : `<div class="v-linkstatus"><span class="v-dot ${rocheRuntime.loaded ? "on" : ""}"></span>${rocheRuntime.loaded ? `已读取 ${rocheRuntime.characters.length} 个 Roche 角色` : "正在读取 Roche 角色"}</div>`;
 
               const rows = rocheRuntime.characters.length ? rocheRuntime.characters.map(char => {
                 const id = String(char?.id || "");
                 const name = displayProfileName(char);
                 const linked = linkedIds.has(id);
                 const cfg = state.roleCommerce[id] || { enabled: false, tendency: 35 };
-                return `<div class="v-rolecard">
-                  <div class="v-author">
-                    <div class="v-mini">${avatarHTML(char?.avatar || "", name)}</div>
-                    <div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${escapeHTML(char?.name || "")}${char?.handle ? ` · ${escapeHTML(normalizeHandle(char.handle))}` : ""}</div></div>
-                    <button class="v-action ${linked ? "light" : ""}" data-action="${linked ? "unlink-roche-character" : "link-roche-character"}" data-character-id="${escapeHTML(id)}">${linked ? "移除" : "加入 Vela"}</button>
-                  </div>
-                  ${linked ? `<div class="v-linkstatus"><span class="v-dot on"></span>角色频道已连接到 Roche</div>
-                    <div class="v-row"><div><b>角色自主商业合作</b><small>关闭时角色可以纯玩，不会被系统频繁塞广告。</small></div><button class="v-action ${cfg.enabled ? "" : "light"}" data-action="toggle-role-commerce" data-character-id="${escapeHTML(id)}">${cfg.enabled ? "已开启" : "已关闭"}</button></div>
-                    <div class="v-row"><div style="width:100%"><b>自主接单倾向 · <span data-role="commerce-value" data-character-id="${escapeHTML(id)}">${Number(cfg.tendency || 0)}%</span></b><small>以后交给 AI 综合人设判断，不是硬概率。</small><input data-role="commerce-range" data-character-id="${escapeHTML(id)}" type="range" min="0" max="100" value="${Number(cfg.tendency || 0)}" style="width:100%;margin-top:10px;accent-color:#111"></div></div>
-                    <div class="v-row"><div><b>第二频道 / 小号</b><small>默认不创建，后续可手动设计或让 AI 根据人设生成。</small></div><button class="v-action light" data-action="noop">设置</button></div>` : ""}
-                </div>`;
+                const channel = state.channels.find(x => String(x.sourceCharacterId || "") === id);
+                return `<div class="v-rolecard"><div class="v-author"><div class="v-mini">${avatarHTML(char?.avatar || "", name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${escapeHTML(char?.name || "")}${char?.handle ? ` · ${escapeHTML(normalizeHandle(char.handle))}` : ""}</div></div><button class="v-action ${linked ? "light" : ""}" data-action="${linked ? "unlink-roche-character" : "link-roche-character"}" data-character-id="${escapeHTML(id)}">${linked ? "移除" : "加入 Vela"}</button></div>${linked ? `<div class="v-role-actions"><button class="v-action" data-action="edit-profile" data-owner-type="channel" data-owner-id="${escapeHTML(channel?.id || `roche-char-${id}`)}">编辑主页</button><button class="v-action light" data-action="open-profile-by-id" data-owner-type="channel" data-owner-id="${escapeHTML(channel?.id || `roche-char-${id}`)}">查看主页</button></div><div class="v-row"><div><b>角色自主商业合作</b><small>关闭后这个角色可以纯玩，不会被系统主动塞商业任务。</small></div><button class="v-action ${cfg.enabled ? "" : "light"}" data-action="toggle-role-commerce" data-character-id="${escapeHTML(id)}">${cfg.enabled ? "已开启" : "已关闭"}</button></div><div class="v-row"><div style="width:100%"><b>自主接单倾向 · <span data-role="commerce-value" data-character-id="${escapeHTML(id)}">${Number(cfg.tendency || 0)}%</span></b><small>以后由 AI 结合人设判断，不是硬概率。</small><input data-role="commerce-range" data-character-id="${escapeHTML(id)}" type="range" min="0" max="100" value="${Number(cfg.tendency || 0)}" style="width:100%;margin-top:10px;accent-color:#111"></div></div><div class="v-row"><div><b>第二频道 / 小号</b><small>默认不创建，后续可以手动设计或让 AI 根据人设生成。</small></div><button class="v-action light" data-action="noop">设置</button></div>` : ""}</div>`;
               }).join("") : `<div class="v-empty">没有读取到 Roche 角色。<br>可以先点右上角“刷新”。</div>`;
 
-              openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">从 Roche 选择真正要加入 Vela 的角色</div></div><button class="v-action light" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">这里只读取 Roche 公开角色 API。加入后会建立 Vela 频道，但不会自动创建小号、开播或生成内容。</p>${status}${rows}</div></div>`);
+              openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">引入 Roche 角色后，在这里管理主页与商业合作</div></div><button class="v-head-action" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">加入角色后可以直接编辑他的 Vela 主页；主页装饰只保存在 Vela，不会修改 Roche 原人设资料。</p>${status}${rows}</div></div>`);
             };
 
             const rerender = () => {
@@ -732,6 +819,18 @@
                 openMessage(button.dataset.messageId);
               } else if (action === "close-screen") {
                 closeScreen(button.dataset.screenName);
+              } else if (action === "open-user-profile") {
+                closeDrawer(); openUserProfile();
+              } else if (action === "open-profile-by-id") {
+                openProfile(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
+              } else if (action === "edit-profile") {
+                openProfileEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
+              } else if (action === "save-profile") {
+                await saveProfileEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
+              } else if (action === "profile-tab") {
+                renderProfileTab(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.profileTab || "live");
+              } else if (action === "settings-note") {
+                closeDrawer(); openSettingsNote(button.dataset.settingsKind || "platform");
               } else if (action === "open-identities") {
                 closeDrawer(); openIdentities();
               } else if (action === "open-roles") {
@@ -795,7 +894,7 @@
                 mountMarkup(root, state); rerender(); switchPage(state.activePage || "home"); toast("身份已切换");
               } else if (action === "add-demo-identity") {
                 if (!state.identities.some(x => x.id === "public-main")) {
-                  state.identities.push({ id: "public-main", type: "public", displayName: "Nini Daily", handle: "@nini_daily", avatar: "ND", bio: "公开频道", isAnonymous: false });
+                  state.identities.push({ id: "public-main", type: "public", displayName: "Nini Daily", handle: "@nini_daily", avatar: "ND", bio: "公开频道", banner: "", followers: 0, following: 0, isAnonymous: false });
                   await persist(); openIdentities();
                 } else toast("示例公开身份已经存在");
               } else if (action === "toggle-role-commerce") {
