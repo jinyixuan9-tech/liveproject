@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.10";
+  const VERSION = "0.1.11";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -216,6 +216,7 @@
           { user: "Mika", avatar: "M", text: "the room already looks cozy", translation: "这个房间现在看起来已经很舒服了。" }
         ]
       },
+      postOverrides: {},
       liveSession: null,
       liveProgress: {},
       liveStats: {},
@@ -287,24 +288,25 @@
 /* 直播本体占视觉中心：完整 16:9，不再保留额外顶栏 */
 .vela-roche .v-live-stage{flex:0 0 auto;aspect-ratio:16/9!important;max-height:none!important;min-height:0!important;position:relative;border-radius:20px!important}
 .vela-roche .v-live-info{flex:0 0 auto;padding:11px 13px!important}
-.vela-roche .v-live-hud{position:absolute;z-index:6;left:12px;right:12px;top:12px;display:flex;align-items:center;gap:8px;pointer-events:none}
+.vela-roche .v-live-hud{position:absolute;z-index:6;left:14px;right:14px;top:14px;display:flex;align-items:center;gap:8px;pointer-events:none}
 .vela-roche .v-live-hud button,.vela-roche .v-live-hud .v-live-host{pointer-events:auto}
-.vela-roche .v-live-exit{width:38px;height:38px;border:0;border-radius:50%;background:rgba(18,18,22,.66);backdrop-filter:blur(10px);color:#fff;font-size:21px;display:grid;place-items:center;flex:0 0 auto}
-.vela-roche .v-live-host{display:flex;align-items:center;gap:7px;min-width:0;max-width:46%;padding:5px 8px 5px 5px;border-radius:20px;background:rgba(18,18,22,.62);backdrop-filter:blur(10px);color:#fff}
+.vela-roche .v-live-exit{width:36px;height:36px;border:0;border-radius:50%;background:rgba(18,18,22,.66);backdrop-filter:blur(10px);color:#fff;font-size:20px;display:grid;place-items:center;flex:0 0 auto}
+.vela-roche .v-live-host{display:flex;align-items:center;gap:7px;min-width:0;max-width:48%;padding:4px 8px 4px 4px;border-radius:20px;background:rgba(18,18,22,.62);backdrop-filter:blur(10px);color:#fff}
 .vela-roche .v-live-host-avatar{width:29px;height:29px;border-radius:50%;background:rgba(255,255,255,.18);overflow:hidden;display:grid;place-items:center;font-size:9px;font-weight:900;flex:0 0 auto}
 .vela-roche .v-live-host-avatar img{width:100%;height:100%;object-fit:cover;display:block}
 .vela-roche .v-live-host-copy{min-width:0}.vela-roche .v-live-host-name{font-size:10px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-live-viewers{font-size:9px;color:rgba(255,255,255,.76);white-space:nowrap}
 .vela-roche .v-gift-rank-trigger{margin-left:auto;min-width:0;max-width:42%;height:38px;border:0;border-radius:19px;padding:0 10px;background:rgba(18,18,22,.66);backdrop-filter:blur(10px);color:#fff;font-size:9px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vela-roche .v-live-stage-copy{position:absolute!important;z-index:5!important;left:14px!important;top:62px!important;right:auto!important;bottom:auto!important}
 .vela-roche .v-live-moment{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;margin:0;padding:9px 11px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(15,15,18,.74);backdrop-filter:blur(10px);color:#fff;box-shadow:0 8px 26px rgba(0,0,0,.16);max-height:42%;overflow:auto}
 .vela-roche .v-live-moment-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.68);margin-bottom:4px}
 .vela-roche .v-live-moment-text{font-size:12px;line-height:1.48;color:#fff}
 .vela-roche .v-live-moment .v-translate-btn{color:rgba(255,255,255,.72);margin-top:3px}
 .vela-roche .v-live-moment .v-translation{color:rgba(255,255,255,.82);border-left-color:rgba(255,255,255,.28)}
-/* 只有实时聊天区域滚动，上面的直播画面和标题不动 */
+/* 只有聊天室区域滚动，上面的直播画面和标题不动 */
 .vela-roche .v-chat-panel{flex:1 1 220px;min-height:150px;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important;padding:11px 13px!important}
 .vela-roche .v-chat-title{flex:0 0 auto;margin-bottom:4px}
 .vela-roche .v-chat-scroll{flex:1 1 auto;min-height:64px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
-.vela-roche .v-composer{flex:0 0 auto;display:grid!important;grid-template-columns:minmax(0,1fr) 38px 38px 38px!important;gap:7px!important;margin-top:7px!important}
+.vela-roche .v-composer{flex:0 0 auto;display:grid!important;grid-template-columns:minmax(0,1fr) 38px 38px!important;gap:7px!important;margin-top:7px!important}
 .vela-roche .v-composer input{min-height:38px!important;padding:8px 12px!important;border-radius:19px!important}
 .vela-roche .v-composer button{width:38px!important;height:38px!important;min-height:38px!important;border-radius:19px!important;padding:0!important;display:grid!important;place-items:center!important;font-size:14px!important}
 .vela-roche .v-composer .v-continue-mini{background:#111!important;color:#fff!important;font-size:18px!important;font-weight:900!important}
@@ -320,7 +322,7 @@
 .vela-roche .v-post-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px;font-weight:900}
 .vela-roche .v-post-composer .v-summon-mini{background:var(--v-soft);color:var(--v-text);font-size:17px}
 .vela-roche .v-comment-tools{display:flex;align-items:center;gap:10px;margin-top:5px}
-.vela-roche .v-comment-tools button{border:0;background:none;color:var(--v-muted);padding:0;font-size:10px;font-weight:800}
+.vela-roche .v-comment-tools button{border:0;background:none;color:var(--v-muted);padding:0;font-size:10px;font-weight:800}.vela-roche .v-comment-tools .v-translate-btn{margin:0!important}
 .vela-roche .v-post-footer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .vela-roche .v-post-footer-actions .v-action{margin-top:0!important}
 .vela-roche .v-delete-soft{background:#f3f3f6!important;color:#b3261e!important}
@@ -483,6 +485,7 @@
             state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
             state.communityPosts = safeArray(state.communityPosts);
             state.postReplies = { ...(createDefaultState().postReplies || {}), ...(state.postReplies || {}) };
+            state.postOverrides = { ...(state.postOverrides || {}) };
             state.liveProgress = { ...(state.liveProgress || {}) };
             state.liveStats = { ...(state.liveStats || {}) };
             state.liveChat = safeArray(state.liveChat);
@@ -541,6 +544,7 @@
                   platformSettings: state.platformSettings,
                   communityPosts: state.communityPosts,
                   postReplies: state.postReplies,
+                  postOverrides: state.postOverrides,
                   liveProgress: state.liveProgress,
                   liveStats: state.liveStats,
                   liveChat: state.liveChat
@@ -757,7 +761,7 @@
 
             const getHomeSamplePost = () => {
               const host = getHomeDemoHost();
-              return {
+              const base = {
                 id: "home-sample-post",
                 ownerType: "channel",
                 ownerId: host.id || "vela-demo-host",
@@ -771,14 +775,16 @@
                 likes: 913,
                 comments: safeArray(state.postReplies?.["home-sample-post"]).length
               };
+              return { ...base, ...(state.postOverrides?.[base.id] || {}) };
             };
 
             const translationHTML = (id, text) => text ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(id)}">翻译</button><div class="v-translation" data-translation-id="${escapeHTML(id)}" hidden>${escapeHTML(text)}</div>` : "";
 
             const renderSocialPostCard = (post, { compact = false } = {}) => {
+              post = { ...post, ...(state.postOverrides?.[String(post?.id || "")] || {}) };
               const imageHTML = isImageURL(post.image || "") ? `<img src="${escapeHTML(post.image)}" alt="">` : "✦";
               const trId = `post-card-${String(post.id || "post")}`;
-              return `<article class="v-card v-home-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.time || "刚刚")}</div></div></div><div class="v-social-text" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<button class="v-social-media" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${imageHTML}</button><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">◌ ${Number(post.comments || safeArray(state.postReplies?.[post.id]).length || 0)}</button></div></article>`;
+              return `<article class="v-card v-home-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.time || "刚刚")}</div></div></div><div class="v-social-text" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<button class="v-social-media" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${imageHTML}</button><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">◌ ${Number(post.comments || safeArray(state.postReplies?.[post.id]).length || 0)}</button><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button></div></article>`;
             };
 
             const renderHome = () => {
@@ -975,7 +981,7 @@
               getLiveProgress(currentLive);
               getLiveStats(currentLive);
               const own = isOwnLiveSession(currentLive);
-              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-hud"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host"><div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div></div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="send-live-chat" aria-label="发送" title="发送">➤</button><button class="v-continue-mini" data-action="continue-live" aria-label="继续观看直播" title="继续观看直播">↓</button></div></div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "直播还在进行中" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出并挂起直播</button><button class="v-danger" data-action="end-own-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-hud"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host"><div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div></div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="send-live-chat" aria-label="发送或继续直播" title="发送或继续直播">➤</button></div></div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-own-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-own-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
               renderLiveHUD();
@@ -993,7 +999,7 @@
               if (scroll) requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });
             };
 
-            const advanceLive = async ({ fromUser = false } = {}) => {
+            const advanceLive = async ({ fromUser = false, userText = "" } = {}) => {
               const live = state.liveSession;
               if (!live) return;
               const id = String(live.id || "live");
@@ -1005,14 +1011,33 @@
               progress.step = nextStep;
               progress.language = lang;
               if (fromUser) {
-                const reactions = {
-                  ko: { text: "새로운 채팅이 올라온 걸 보고 화면 쪽으로 시선을 잠깐 옮긴 뒤, 지금 하던 이야기를 자연스럽게 이어간다.", translation: "看到聊天区出现了新的发言，短暂把视线移向屏幕后，又自然地继续当前的话题。" },
-                  ja: { text: "新しいコメントに気づいて少し画面へ視線を向け、そのまま今の話題を自然に続ける。", translation: "注意到新的评论后，短暂看向屏幕，又自然地继续当前的话题。" },
-                  en: { text: "They notice a new message in chat, glance toward the screen for a moment, then naturally continue the current topic.", translation: "注意到聊天区的新消息后，短暂看向屏幕，又自然地继续当前的话题。" },
-                  zh: { text: "主播注意到聊天区刚刚有新的发言，视线在屏幕上停了一会儿，再顺着当前话题继续往下聊。", translation: "" }
-                };
-                progress.text = reactions[lang].text;
-                progress.translation = reactions[lang].translation;
+                const message = String(userText || "").trim();
+                progress.seenUserMessages = safeArray(progress.seenUserMessages);
+                if (message) {
+                  progress.seenUserMessages.push({ text: message, at: Date.now() });
+                  progress.seenUserMessages = progress.seenUserMessages.slice(-12);
+                  progress.lastSeenUserMessage = message;
+                }
+                const channel = state.channels.find(x => String(x.id) === String(live.id)) || null;
+                const personaHint = `${live?.contentStyle || ""} ${live?.fanProfile || ""} ${channel?.contentStyle || ""} ${channel?.fanProfile || ""}`;
+                let replyTendency = 0.42;
+                if (/(高冷|冷淡|寡言|少回复|不爱互动|安静)/.test(personaHint)) replyTendency = 0.18;
+                if (/(热情|活泼|爱聊天|宠粉|互动|话多)/.test(personaHint)) replyTendency = 0.72;
+                const visiblyResponds = Math.random() < replyTendency;
+                if (visiblyResponds) {
+                  const reactions = {
+                    ko: { text: "방금 올라온 채팅을 보고 잠깐 시선을 멈춘 뒤, 그 말에 자연스럽게 반응하며 이야기를 이어간다.", translation: "看到刚刚出现的弹幕后，视线停了一下，自然地对这句话作出反应并继续聊下去。" },
+                    ja: { text: "今流れたコメントに気づいて少し目を止め、その言葉に自然に反応しながら話を続ける。", translation: "注意到刚刚飘过的评论后稍微停了一下，自然地回应这句话并继续直播。" },
+                    en: { text: "They catch the new message, pause on it for a moment, and naturally respond before continuing the stream.", translation: "看到新的弹幕后稍微停了一下，自然地回应这句话，然后继续直播。" },
+                    zh: { text: "主播看到了刚刚那条弹幕，停了一下，自然地接住这句话后继续直播。", translation: "" }
+                  };
+                  progress.text = reactions[lang].text;
+                  progress.translation = reactions[lang].translation;
+                } else {
+                  // 角色已经看到了 user 弹幕，但是否读出/回应由人设决定；这一轮不强制回应。
+                  progress.text = next.text;
+                  progress.translation = next.translation;
+                }
               } else {
                 progress.text = next.text;
                 progress.translation = next.translation;
@@ -1043,6 +1068,7 @@
               const entity = getProfileEntity(saved.ownerType || "identity", saved.ownerId || "");
               return {
                 ...saved,
+                ...(state.postOverrides?.[id] || {}),
                 name: profileName(entity, saved.ownerType || "identity"),
                 handle: entity?.handle || "@vela",
                 avatar: entity?.avatar || "V",
@@ -1057,8 +1083,9 @@
               const replies = safeArray(state.postReplies?.[id]);
               host.innerHTML = replies.length ? replies.map((reply, index) => {
                 const trId = `post-comment-${id}-${index}`;
-                const canDelete = Boolean(reply?.isUser);
-                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-social-handle">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div>${translationHTML(trId, reply.translation || "")}${canDelete ? `<div class="v-comment-tools"><button data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>` : ""}</div></div>`;
+                const translateTool = reply.translation ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(trId)}">翻译</button>` : "";
+                const translationBody = reply.translation ? `<div class="v-translation" data-translation-id="${escapeHTML(trId)}" hidden>${escapeHTML(reply.translation)}</div>` : "";
+                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-social-handle">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div><div class="v-comment-tools">${translateTool}<button data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>${translationBody}</div></div>`;
               }).join("") : `<div class="v-hint" style="padding:12px 0">还没有评论。你可以先自己留言，或者点输入栏旁边的 ✦ 让这一批网友开始互动。</div>`;
               const counter = q('[data-screen="post"] [data-role="post-comment-count"]');
               if (counter) counter.textContent = String(replies.length);
@@ -1071,8 +1098,29 @@
               const trId = `post-detail-${String(post.id)}`;
               const saved = state.communityPosts.find(p => String(p.id) === String(post.id));
               const canDeletePost = Boolean(saved && saved.ownerType === "identity" && String(saved.ownerId || "") === String(state.viewerIdentityId || ""));
-              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer"><input data-role="post-comment-input" placeholder="写下评论…" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" aria-label="召唤回复" title="召唤回复">✦</button><button data-action="send-post-comment" data-post-id="${escapeHTML(post.id)}">➤</button></div>${canDeletePost ? `<div class="v-post-footer-actions"><button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button></div>` : ""}</article></div>`);
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer"><input data-role="post-comment-input" placeholder="写下评论…" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" aria-label="召唤回复" title="召唤回复">✦</button><button data-action="send-post-comment" data-post-id="${escapeHTML(post.id)}">➤</button></div>${canDeletePost ? `<div class="v-post-footer-actions"><button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button></div>` : ""}</article></div>`);
               renderPostComments(post.id);
+            };
+
+            const openEditPostEditor = (postId) => {
+              const post = getPostById(postId);
+              if (!post) return;
+              openScreen("post-editor", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post-editor">‹</button><div class="v-meta"><strong>编辑贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")}</div></div><button class="v-head-action" data-action="save-post-edit" data-post-id="${escapeHTML(post.id)}">保存</button></header><div class="v-subbody"><div class="v-card"><div class="v-field"><label>贴文内容</label><textarea data-post-edit-field="text" maxlength="1000" placeholder="写点什么……">${escapeHTML(post.text || "")}</textarea></div><div class="v-field" style="margin-top:12px"><label>配图 URL（可留空）</label><input data-post-edit-field="image" value="${escapeHTML(post.image || "")}" placeholder="https://..."></div><div class="v-field" style="margin-top:12px"><label>折叠翻译（可留空）</label><textarea data-post-edit-field="translation" maxlength="1000" placeholder="没有翻译可以留空">${escapeHTML(post.translation || "")}</textarea></div><p class="v-hint">编辑只修改这条 Vela 贴文，不会清空原有点赞、评论或发布时间。</p></div></div>`);
+            };
+
+            const saveEditedPost = async (postId) => {
+              const id = String(postId || "");
+              const screen = q('[data-screen="post-editor"]');
+              const text = String(screen?.querySelector('[data-post-edit-field="text"]')?.value || "").trim();
+              const image = String(screen?.querySelector('[data-post-edit-field="image"]')?.value || "").trim();
+              const translation = String(screen?.querySelector('[data-post-edit-field="translation"]')?.value || "").trim();
+              if (!text) { toast("贴文内容不能为空"); return; }
+              state.postOverrides[id] = { ...(state.postOverrides[id] || {}), text, image, translation };
+              await persist();
+              closeScreen("post-editor");
+              renderHome();
+              openPostDetail(id);
+              toast("贴文已更新");
             };
 
             const openHomePost = () => openPostDetail("home-sample-post");
@@ -1160,7 +1208,7 @@
               const id = String(postId || "");
               const index = Number(indexValue);
               const current = safeArray(state.postReplies[id]);
-              if (!Number.isInteger(index) || index < 0 || index >= current.length || !current[index]?.isUser) return;
+              if (!Number.isInteger(index) || index < 0 || index >= current.length) return;
               current.splice(index, 1);
               state.postReplies[id] = current;
               await persist();
@@ -1175,6 +1223,7 @@
               if (index < 0) return;
               const removed = state.communityPosts.splice(index, 1)[0];
               delete state.postReplies[id];
+              delete state.postOverrides[id];
               await persist();
               closeScreen("post");
               openProfile(removed.ownerType || "identity", removed.ownerId || state.viewerIdentityId);
@@ -1513,6 +1562,10 @@
                 await deletePostComment(button.dataset.postId || "", button.dataset.commentIndex);
               } else if (action === "delete-community-post") {
                 await deleteCommunityPost(button.dataset.postId || "");
+              } else if (action === "edit-post") {
+                openEditPostEditor(button.dataset.postId || "");
+              } else if (action === "save-post-edit") {
+                await saveEditedPost(button.dataset.postId || "");
               } else if (action === "open-community-post-editor") {
                 openCommunityPostEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || state.viewerIdentityId);
               } else if (action === "save-community-post") {
@@ -1547,7 +1600,7 @@
                 toast("已退出直播间，主播仍可能继续直播");
               } else if (action === "hang-own-live") {
                 closeScreen("live");
-                toast("直播已挂起，仍在继续直播");
+                toast("已退出直播间，直播仍在继续");
               } else if (action === "end-own-live") {
                 const live = state.liveSession;
                 if (live) {
@@ -1568,11 +1621,14 @@
               } else if (action === "send-live-chat") {
                 const input = q('[data-screen="live"] [data-role="live-input"]');
                 const text = String(input?.value || "").trim();
-                if (!text) { toast("先输入一条弹幕，或点 ↓ 继续观看"); return; }
-                const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
-                state.liveChat.push({ user: identity?.handle || "@user", avatar: identity?.avatar || "U", text, translation: "" });
-                input.value = "";
-                await advanceLive({ fromUser: true });
+                if (!text) {
+                  await advanceLive({ fromUser: false });
+                } else {
+                  const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
+                  state.liveChat.push({ user: identity?.handle || "@user", avatar: identity?.avatar || "U", text, translation: "", isUser: true });
+                  input.value = "";
+                  await advanceLive({ fromUser: true, userText: text });
+                }
               } else if (action === "toggle-gift-rank") {
                 q('[data-screen="live"] [data-role="gift-rank-panel"]')?.classList.toggle("is-open");
                 renderLiveHUD();
