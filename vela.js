@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.5";
+  const VERSION = "0.1.6";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -208,6 +208,14 @@
           unread: 2
         }
       ],
+      communityPosts: [],
+      postReplies: {
+        "home-sample-post": [
+          { user: "yoo_n", avatar: "Y", text: "조명 바뀌면 분위기 진짜 달라질 듯", translation: "换了灯光以后氛围应该真的会完全不一样。" },
+          { user: "Sato_Aki", avatar: "S", text: "次の配信も楽しみにしてる", translation: "也很期待下一次直播。" },
+          { user: "Mika", avatar: "M", text: "the room already looks cozy", translation: "这个房间现在看起来已经很舒服了。" }
+        ]
+      },
       liveSession: null,
       roleCommerce: {
         "char-aster": { enabled: true, tendency: 35 }
@@ -227,9 +235,9 @@
         activityLevel: 50
       },
       liveChat: [
-        { user: "yoo_n", text: "声音听着很舒服，今晚会播多久？" },
-        { user: "Sato_Aki", text: "刚进来，今天的气氛好安静。" },
-        { user: "Mika", text: "What song are you listening to?" }
+        { user: "yoo_n", avatar: "Y", text: "목소리 들으니까 진짜 편해진다. 오늘 얼마나 할 거야?", translation: "听到你的声音真的很放松。今晚会播多久？" },
+        { user: "Sato_Aki", avatar: "S", text: "今来た。今日はいつもより静かな感じだね", translation: "刚进来。今天感觉比平时安静一点。" },
+        { user: "Mika", avatar: "M", text: "What song are you listening to? It sounds nice", translation: "你在听什么歌？听起来很好听。" }
       ]
     };
   }
@@ -265,6 +273,9 @@
 .vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:var(--v-top-h);padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead>button:first-child{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px;flex:0 0 auto}.vela-roche .v-subhead .v-head-action{width:auto!important;height:34px!important;min-height:34px!important;padding:0 10px!important;border:0;border-radius:11px;background:#fff!important;color:#111!important;font-size:11px!important;font-weight:850!important;white-space:nowrap}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
 .vela-roche .v-profile-shell{padding-bottom:18px}.vela-roche .v-profile-banner{height:156px;background:linear-gradient(135deg,#d5d6dc,#f5f5f8);overflow:hidden;position:relative}.vela-roche .v-profile-banner img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-info{position:relative;padding:48px 16px 14px;background:var(--v-card)}.vela-roche .v-profile-avatar{width:84px;height:84px;border-radius:50%;border:4px solid var(--v-card);background:linear-gradient(135deg,#222,#888);color:#fff;display:grid;place-items:center;font-weight:900;font-size:18px;overflow:hidden;position:absolute;left:16px;top:-42px;margin:0}.vela-roche .v-profile-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-profile-main{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}.vela-roche .v-profile-maincopy{min-width:0;flex:1;padding-top:8px}.vela-roche .v-profile-maincopy h2{font-size:22px;line-height:1.2;margin:0 0 4px}.vela-roche .v-profile-handle{font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats{display:flex;gap:14px;margin-top:10px;font-size:12px;color:var(--v-muted)}.vela-roche .v-profile-stats b{color:var(--v-text);font-size:13px}.vela-roche .v-profile-bio{font-size:13px;line-height:1.55;margin-top:11px;white-space:pre-wrap}.vela-roche .v-profile-tabs{display:grid;grid-template-columns:repeat(3,1fr);background:var(--v-card);border-top:1px solid var(--v-line);border-bottom:1px solid var(--v-line)}.vela-roche .v-profile-tabs button{border:0;background:var(--v-card);padding:13px 6px;font-size:12px;font-weight:850;color:var(--v-muted);position:relative}.vela-roche .v-profile-tabs button.is-active{color:#111}.vela-roche .v-profile-tabs button.is-active:after{content:"";position:absolute;left:24%;right:24%;bottom:0;height:2px;background:#111;border-radius:2px}.vela-roche .v-profile-tabbody{padding:14px}.vela-roche .v-editform{display:grid;gap:12px}.vela-roche .v-field label{display:block;font-size:11px;font-weight:850;margin-bottom:6px}.vela-roche .v-field input,.vela-roche .v-field textarea,.vela-roche .v-field select{width:100%;border:1px solid var(--v-line);background:var(--v-card);border-radius:13px;padding:11px 12px;font-size:16px;color:var(--v-text);outline:none}.vela-roche .v-field textarea{min-height:88px;resize:vertical}.vela-roche .v-field select{min-height:44px}.vela-roche .v-fieldpair{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-identity-card{border:1px solid var(--v-line);background:#fff;border-radius:18px;padding:12px;margin-top:10px}.vela-roche .v-identity-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-roche-compact{background:#fafafd;border:1px solid var(--v-line);border-radius:18px;padding:12px}.vela-roche .v-roche-persona{display:flex;align-items:center;gap:9px;padding:9px 0;border-top:1px solid var(--v-line)}.vela-roche .v-roche-persona:first-of-type{border-top:0}.vela-roche .v-role-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:10px}.vela-roche .v-profile-empty{padding:42px 12px;text-align:center;color:var(--v-muted);font-size:12px;line-height:1.6}.vela-roche .v-settings-note{font-size:12px;line-height:1.65;color:var(--v-muted)}.vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
 .vela-roche .v-settings-group{background:var(--v-card);border-radius:20px;padding:14px;margin-bottom:12px}.vela-roche .v-settings-group h3{font-size:14px;margin:0 0 10px}.vela-roche .v-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--v-line)}.vela-roche .v-setting-row:first-of-type{border-top:0}.vela-roche .v-setting-row .v-meta{min-width:0}.vela-roche .v-switch{appearance:none;width:46px;height:28px;border-radius:16px;background:#d8d8de;position:relative;transition:.18s;flex:0 0 auto}.vela-roche .v-switch:after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.18s}.vela-roche .v-switch:checked{background:#111}.vela-roche .v-switch:checked:after{transform:translateX(18px)}.vela-roche .v-range{width:100%;accent-color:#111}.vela-roche .v-preset-box{white-space:pre-wrap;font-size:12px;line-height:1.65;color:var(--v-muted);background:var(--v-soft);border-radius:16px;padding:12px}.vela-roche .v-settings-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.vela-roche .v-social-avatar{width:42px;height:42px;border-radius:50%;background:var(--v-soft);display:grid;place-items:center;font-weight:900;overflow:hidden;flex:0 0 auto}.vela-roche .v-social-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-social-head{display:flex;align-items:center;gap:10px}.vela-roche .v-social-copy{min-width:0;flex:1}.vela-roche .v-social-name{font-size:14px;font-weight:900}.vela-roche .v-social-handle{font-size:11px;color:var(--v-muted);margin-top:2px}.vela-roche .v-social-text{font-size:14px;line-height:1.55;margin-top:10px;white-space:pre-wrap}.vela-roche .v-social-media{width:100%;height:190px;border:0;border-radius:18px;margin-top:10px;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.9),transparent 28%),linear-gradient(135deg,#d9dae1,#f5f5f8);display:grid;place-items:center;font-size:38px;color:var(--v-text);overflow:hidden}.vela-roche .v-social-media img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-social-actions{display:flex;gap:20px;align-items:center;margin-top:10px}.vela-roche .v-social-actions button{border:0;background:none;color:var(--v-muted);font-size:12px;padding:3px 0}.vela-roche .v-translate-btn{border:0;background:none;color:var(--v-muted);font-size:10px;font-weight:800;padding:3px 0;margin-top:4px}.vela-roche .v-translation{font-size:12px;line-height:1.55;color:var(--v-muted);margin-top:5px;padding-left:9px;border-left:2px solid var(--v-line);white-space:pre-wrap}.vela-roche .v-comment-list{border-top:1px solid var(--v-line);margin-top:14px;padding-top:5px}.vela-roche .v-comment{display:flex;gap:9px;padding:10px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-comment:last-child{border-bottom:0}.vela-roche .v-comment .v-social-avatar{width:34px;height:34px;font-size:11px}.vela-roche .v-comment-body{min-width:0;flex:1}.vela-roche .v-comment-name{font-size:11px;font-weight:900}.vela-roche .v-comment-text{font-size:12px;line-height:1.5;margin-top:3px}.vela-roche .v-community-compose{width:100%;border:1px dashed var(--v-line);background:var(--v-card);color:var(--v-text);border-radius:17px;padding:13px;text-align:left;font-size:12px;font-weight:850;margin-bottom:12px}
+.vela-roche .v-live-screen{background:var(--v-bg)!important;color:var(--v-text)!important}.vela-roche .v-live-screen .v-subhead{background:rgba(255,255,255,.96)!important;border-bottom-color:var(--v-line)!important;color:#111!important}.vela-roche .v-live-screen .v-subhead>button:first-child{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-screen .v-small-dark{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{border-radius:18px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.18),transparent 27%),linear-gradient(135deg,#1b1c20,#777a83);padding:12px;align-items:flex-start}.vela-roche .v-live-stage:after{background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.28))}.vela-roche .v-live-stage-copy{width:100%;display:flex;justify-content:space-between;align-items:flex-start}.vela-roche .v-live-info{background:var(--v-card);border-radius:18px;padding:13px;margin-top:9px}.vela-roche .v-live-info h2{font-size:17px;line-height:1.35;margin:0}.vela-roche .v-live-info p{font-size:11px;color:var(--v-muted);margin:5px 0 0}.vela-roche .v-chat-panel{margin-top:9px;background:var(--v-card);color:var(--v-text);border:1px solid var(--v-line);border-radius:18px;padding:13px}.vela-roche .v-chatline{display:flex;gap:8px;padding:8px 0}.vela-roche .v-chatline .v-social-avatar{width:31px;height:31px;font-size:10px}.vela-roche .v-chatline-body{min-width:0;flex:1}.vela-roche .v-chatline-head{font-size:10px;font-weight:900}.vela-roche .v-chatline-text{font-size:12px;line-height:1.45;margin-top:2px}.vela-roche .v-composer input{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-composer button{background:#111;color:#fff}.vela-roche .v-continue{background:#111;color:#fff}
+.vela-roche.is-dark .v-live-screen .v-subhead{background:rgba(25,26,32,.96)!important;color:#fff!important}.vela-roche.is-dark .v-live-screen .v-subhead>button:first-child,.vela-roche.is-dark .v-live-screen .v-small-dark{background:#292b33!important;color:#fff!important}.vela-roche.is-dark .v-social-media{background:linear-gradient(135deg,#25272f,#343741)}
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
 </style>`;
@@ -362,6 +373,7 @@
       <section class="v-subscreen" data-screen="profile-edit"></section>
       <section class="v-subscreen" data-screen="settings"></section>
       <section class="v-subscreen" data-screen="post"></section>
+      <section class="v-subscreen" data-screen="post-editor"></section>
       <section class="v-subscreen" data-screen="schedule-editor"></section>
       <section class="v-subscreen" data-screen="schedule-detail"></section>
       <div class="v-toast" data-role="toast"></div>
@@ -419,6 +431,8 @@
             state.appearance = { darkMode: false, topbarHeight: 62, bottombarHeight: 78, ...(state.appearance || {}) };
             state.platformSettings = { recommendationCount: 3, allowBusinessDM: true, activityLevel: 50, ...(state.platformSettings || {}) };
             state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
+            state.communityPosts = safeArray(state.communityPosts);
+            state.postReplies = { ...(createDefaultState().postReplies || {}), ...(state.postReplies || {}) };
             state.homeFilter = ["all","live","post"].includes(state.homeFilter) ? state.homeFilter : "all";
             state.businessDeals = {
               "biz-mellow": {
@@ -472,6 +486,8 @@
                   generationPreset: state.generationPreset,
                   appearance: state.appearance,
                   platformSettings: state.platformSettings,
+                  communityPosts: state.communityPosts,
+                  postReplies: state.postReplies,
                   liveChat: state.liveChat
                 });
               } catch (err) {
@@ -676,8 +692,10 @@
                 name: host.name || "Vela Channel",
                 handle: host.handle || "@vela_channel",
                 avatar: host.avatar || "V",
-                title: "今晚先不开主题，边整理东西边聊",
-                category: "首页直播样式预览 · 日常聊天",
+                title: "주말 밤, 그냥 같이 있을까",
+                titleTranslation: "周末的夜晚，就这样一起待着吗",
+                category: "별 주제 없이 정리하면서 이야기하는 밤",
+                categoryTranslation: "没有特别主题，边整理东西边聊天的夜晚。",
                 viewers: Number(host.viewers || 1260)
               };
             };
@@ -686,14 +704,26 @@
               const host = getHomeDemoHost();
               return {
                 id: "home-sample-post",
+                ownerType: "channel",
+                ownerId: host.id || "vela-demo-host",
                 name: host.name || "Vela Channel",
                 handle: host.handle || "@vela_channel",
                 avatar: host.avatar || "V",
-                text: "今天把直播间重新收拾了一遍。还差一点灯光，下一场应该会舒服很多。",
+                text: "오늘 방송방을 다시 정리했어. 조명이 아직 조금 부족하지만 다음 방송은 더 편할 것 같아.",
+                translation: "今天把直播间重新整理了一遍。灯光还差一点，不过下一场直播应该会舒服很多。",
+                image: "",
                 time: "18 分钟前",
                 likes: 913,
-                comments: 126
+                comments: safeArray(state.postReplies?.["home-sample-post"]).length
               };
+            };
+
+            const translationHTML = (id, text) => text ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(id)}">翻译</button><div class="v-translation" data-translation-id="${escapeHTML(id)}" hidden>${escapeHTML(text)}</div>` : "";
+
+            const renderSocialPostCard = (post, { compact = false } = {}) => {
+              const imageHTML = isImageURL(post.image || "") ? `<img src="${escapeHTML(post.image)}" alt="">` : "✦";
+              const trId = `post-card-${String(post.id || "post")}`;
+              return `<article class="v-card v-home-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.time || "刚刚")}</div></div></div><div class="v-social-text" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<button class="v-social-media" data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">${imageHTML}</button><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button data-action="open-post-by-id" data-post-id="${escapeHTML(post.id)}">◌ ${Number(post.comments || safeArray(state.postReplies?.[post.id]).length || 0)}</button></div></article>`;
             };
 
             const renderHome = () => {
@@ -703,10 +733,9 @@
               const live = getHomeSampleLive();
               const post = getHomeSamplePost();
 
-              const liveCard = `<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-home-live"><div class="v-author"><div class="v-mini">${avatarHTML(live.avatar, live.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(live.name)}${live.handle ? ` · ${escapeHTML(live.handle)}` : ""}</div><div class="v-sub">正在直播 · 点进去看直播间</div></div><span class="v-home-open">进入 ›</span></div><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(live.title)}</div><div class="v-viewers">${formatViewers(live.viewers)} 人正在观看</div></div></div></button></article>`;
-
-              const postCard = `<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-home-post"><div class="v-author"><div class="v-mini">${avatarHTML(post.avatar, post.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(post.name)}${post.handle ? ` · ${escapeHTML(post.handle)}` : ""}</div><div class="v-sub">${escapeHTML(post.time)} · 贴文</div></div><span class="v-home-open">查看 ›</span></div><div class="v-home-post-cover">✦</div><div class="v-posttext">${escapeHTML(post.text)}</div><div class="v-home-post-meta"><span>♡ ${post.likes}</span><span>◌ ${post.comments}</span></div></button></article>`;
-
+              const liveTrId = `home-live-title-${live.id}`;
+              const liveCard = `<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-home-live"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(live.avatar, live.name)}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(live.name)} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(live.handle || "")}</span></div><div class="v-social-handle">正在直播 · ${formatViewers(live.viewers)} 人观看</div></div></div><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(live.title)}</div><div class="v-viewers">${escapeHTML(live.category)}</div></div></div></button>${translationHTML(liveTrId, `${live.titleTranslation || ""}${live.categoryTranslation ? `\n${live.categoryTranslation}` : ""}`)}</article>`;
+              const postCard = renderSocialPostCard(post);
               host.innerHTML = filter === "live" ? liveCard : filter === "post" ? postCard : liveCard + postCard;
             };
 
@@ -746,20 +775,57 @@
               state.liveSession = live;
               const title = live.title || "正在直播";
               const hostName = live.name || live.handle || "主播";
-              openScreen("live", `<div class="v-live-screen" style="min-height:100%"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint" style="color:#aaa">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p></div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div data-role="live-chat-lines"></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
+              const liveTrId = `live-title-${String(live.id || "live")}`;
+              const liveTranslation = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
+              openScreen("live", `<div class="v-live-screen" style="min-height:100%"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div data-role="live-chat-lines"></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
               renderLiveChatLines();
             };
 
             const renderLiveChatLines = () => {
               const host = q('[data-screen="live"] [data-role="live-chat-lines"]');
               if (!host) return;
-              host.innerHTML = state.liveChat.slice(-8).map(line => `<div class="v-chatline"><b>${escapeHTML(line.user)}</b><span>${escapeHTML(line.text)}</span></div>`).join("");
+              const rows = state.liveChat.slice(-8);
+              host.innerHTML = rows.map((line, index) => {
+                const trId = `live-chat-${index}-${String(line.user || "viewer")}`;
+                return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user)}</div><div class="v-chatline-text">${escapeHTML(line.text)}</div>${translationHTML(trId, line.translation || "")}</div></div>`;
+              }).join("");
             };
 
-            const openHomePost = () => {
-              const post = getHomeSamplePost();
-              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name)} · ${escapeHTML(post.time)}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(post.avatar, post.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(post.name)}</div><div class="v-sub">${escapeHTML(post.handle || "")}</div></div></div><div class="v-post-detail-cover">✦</div><div class="v-posttext">${escapeHTML(post.text)}</div><div class="v-engage"><button class="v-action light" data-action="demo-like-post">♡ 喜欢</button><button class="v-action light" data-action="demo-comment-post">评论</button></div></article></div>`);
+            const getPostById = (postId) => {
+              const id = String(postId || "");
+              if (id === "home-sample-post") return getHomeSamplePost();
+              const saved = state.communityPosts.find(p => String(p.id) === id);
+              if (!saved) return null;
+              const entity = getProfileEntity(saved.ownerType || "identity", saved.ownerId || "");
+              return {
+                ...saved,
+                name: profileName(entity, saved.ownerType || "identity"),
+                handle: entity?.handle || "@vela",
+                avatar: entity?.avatar || "V",
+                comments: safeArray(state.postReplies?.[id]).length
+              };
             };
+
+            const renderPostComments = (postId) => {
+              const host = q('[data-screen="post"] [data-role="post-comments"]');
+              if (!host) return;
+              const replies = safeArray(state.postReplies?.[String(postId)]);
+              host.innerHTML = replies.length ? replies.map((reply, index) => {
+                const trId = `post-comment-${String(postId)}-${index}`;
+                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div><div class="v-comment-text">${escapeHTML(reply.text || "")}</div>${translationHTML(trId, reply.translation || "")}</div></div>`;
+              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有回复。可以点下面的「召唤回复」看看这一批网友会说什么。</div>`;
+            };
+
+            const openPostDetail = (postId) => {
+              const post = getPostById(postId);
+              if (!post) return;
+              const imageHTML = isImageURL(post.image || "") ? `<img src="${escapeHTML(post.image)}" alt="">` : "✦";
+              const trId = `post-detail-${String(post.id)}`;
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ ${safeArray(state.postReplies?.[String(post.id)]).length}</button></div><div class="v-comment-list" data-role="post-comments"></div><button class="v-action" style="margin-top:12px" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}">✦ 召唤回复</button></article></div>`);
+              renderPostComments(post.id);
+            };
+
+            const openHomePost = () => openPostDetail("home-sample-post");
 
             const getProfileEntity = (ownerType, id) => {
               if (ownerType === "identity") return state.identities.find(x => String(x.id) === String(id)) || null;
@@ -788,8 +854,49 @@
               } else if (tab === "replays") {
                 host.innerHTML = `<article class="v-card"><div class="v-name">周末晚上，随便聊会儿</div><div class="v-sub">8 月 31 日 21:06–23:18 · 2小时12分</div><div class="v-postimg" style="height:135px">▶</div><div class="v-engage"><span>最高 1.6 万人观看</span><span>直播回放</span></div></article>`;
               } else {
-                host.innerHTML = `<article class="v-card"><div class="v-name">频道社群</div><p class="v-posttext">这里是频道自己的粉丝社群。后续加入时可以选择用哪个 Vela 身份进入。</p><button class="v-action light" data-action="noop">社群功能稍后接入</button></article>`;
+                const ownPosts = state.communityPosts.filter(p => String(p.ownerType || "") === String(ownerType) && String(p.ownerId || "") === String(id));
+                const sample = ownerType === "channel" ? getHomeSamplePost() : null;
+                const cards = [sample, ...ownPosts].filter(Boolean).map(post => renderSocialPostCard({ ...post, comments: safeArray(state.postReplies?.[String(post.id)]).length })).join("");
+                const compose = ownerType === "identity" ? `<button class="v-community-compose" data-action="open-community-post-editor" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">＋ 发布一条贴文</button>` : "";
+                host.innerHTML = `${compose}${cards || '<div class="v-profile-empty">社群里还没有贴文。</div>'}`;
               }
+            };
+
+            const openCommunityPostEditor = (ownerType, ownerId) => {
+              const entity = getProfileEntity(ownerType, ownerId);
+              if (!entity) return;
+              openScreen("post-editor", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post-editor">‹</button><div class="v-meta"><strong>发布贴文</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))}</div></div><button class="v-head-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></header><div class="v-subbody"><div class="v-card"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-field" style="margin-top:12px"><label>配图 URL（可留空）</label><input data-post-field="image" placeholder="https://..."></div><p class="v-hint">发布后会出现在这个账号主页的「社群」里，并可以点「召唤回复」生成一批网友反应。</p></div></div>`);
+            };
+
+            const saveCommunityPost = async (ownerType, ownerId) => {
+              const screen = q('[data-screen="post-editor"]');
+              const text = String(screen?.querySelector('[data-post-field="text"]')?.value || "").trim();
+              const image = String(screen?.querySelector('[data-post-field="image"]')?.value || "").trim();
+              if (!text) { toast("先写一点贴文内容"); return; }
+              const id = `post-${Date.now().toString(36)}`;
+              state.communityPosts.unshift({ id, ownerType, ownerId, text, image, translation: "", time: "刚刚", likes: 0 });
+              state.postReplies[id] = [];
+              await persist();
+              closeScreen("post-editor");
+              openProfile(ownerType, ownerId);
+              renderProfileTab(ownerType, ownerId, "community");
+              toast("贴文已发布到社群");
+            };
+
+            const summonPostReplies = async (postId) => {
+              const id = String(postId || "");
+              const pool = [
+                { user: "luna_08", avatar: "L", text: "와 이 분위기 진짜 좋다", translation: "哇，这个氛围真的很好。" },
+                { user: "momo", avatar: "M", text: "次の配信もこの感じでお願い", translation: "下一场直播也请保持这种感觉。" },
+                { user: "cloudy", avatar: "C", text: "this feels so cozy honestly", translation: "说真的，这种感觉特别舒服。" },
+                { user: "익명", avatar: "익", text: "사진 아래쪽 조명 뭔지 궁금해", translation: "有点好奇照片下面那个灯是什么。" }
+              ];
+              const current = safeArray(state.postReplies[id]);
+              const next = pool.slice(current.length % pool.length, (current.length % pool.length) + 2);
+              state.postReplies[id] = [...current, ...next];
+              await persist();
+              renderPostComments(id);
+              toast("已生成一批新的回复");
             };
 
             const openScheduledLiveEditor = (identityId) => {
@@ -1066,10 +1173,27 @@
                 openLive(getHomeSampleLive());
               } else if (action === "open-home-post") {
                 openHomePost();
+              } else if (action === "open-post-by-id") {
+                openPostDetail(button.dataset.postId || "home-sample-post");
+              } else if (action === "toggle-translation") {
+                const target = String(button.dataset.translationTarget || "");
+                const el = qa('[data-translation-id]').find(node => String(node.dataset.translationId || "") === target);
+                if (el) {
+                  const isHidden = el.hasAttribute("hidden");
+                  if (isHidden) el.removeAttribute("hidden"); else el.setAttribute("hidden", "");
+                  button.textContent = isHidden ? "收起翻译" : "翻译";
+                }
               } else if (action === "demo-like-post") {
-                button.textContent = button.textContent.includes("已喜欢") ? "♡ 喜欢" : "♥ 已喜欢";
-              } else if (action === "demo-comment-post") {
-                toast("评论入口可以继续接真实互动");
+                const liked = button.dataset.liked === "1";
+                button.dataset.liked = liked ? "0" : "1";
+                const raw = Number((button.textContent.match(/\d+/) || [0])[0]);
+                button.textContent = `${liked ? "♡" : "♥"} ${Math.max(0, raw + (liked ? -1 : 1))}`;
+              } else if (action === "summon-post-replies") {
+                await summonPostReplies(button.dataset.postId || "");
+              } else if (action === "open-community-post-editor") {
+                openCommunityPostEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || state.viewerIdentityId);
+              } else if (action === "save-community-post") {
+                await saveCommunityPost(button.dataset.ownerType || "identity", button.dataset.ownerId || state.viewerIdentityId);
               } else if (action === "sheet-bg-close" && event.target === button) {
                 q('[data-role="publish-sheet"]')?.classList.remove("is-open");
               } else if (action === "open-channel") {
@@ -1095,10 +1219,10 @@
                 toast("已退出直播间，主播仍可能继续直播");
               } else if (action === "continue-live") {
                 const samples = [
-                  { user: "Jia", text: "刚才那句话我笑了好久。" },
-                  { user: "sleepycat", text: "主播刚刚是不是看到了那条弹幕？" },
-                  { user: "익명", text: "今天比平时安静一点。" },
-                  { user: "Mika", text: "keep going, this is nice" }
+                  { user: "Jia", avatar: "J", text: "아까 그 말 너무 웃겼어", translation: "刚才那句话真的笑死我了。" },
+                  { user: "sleepycat", avatar: "S", text: "主播刚刚是不是看到了那条弹幕？", translation: "" },
+                  { user: "익명", avatar: "익", text: "오늘 평소보다 좀 조용하네", translation: "今天比平时安静一点。" },
+                  { user: "Mika", avatar: "M", text: "keep going, this is nice", translation: "继续播吧，这样很好。" }
                 ];
                 state.liveChat.push(samples[Math.floor(Math.random() * samples.length)]);
                 renderLiveChatLines(); await persist();
@@ -1107,9 +1231,9 @@
                 const text = String(input?.value || "").trim();
                 if (!text) { toast("先输入一条弹幕，或点「继续观看直播」"); return; }
                 const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
-                state.liveChat.push({ user: identity?.handle || "@user", text });
+                state.liveChat.push({ user: identity?.handle || "@user", avatar: identity?.avatar || "U", text, translation: "" });
                 input.value = "";
-                state.liveChat.push({ user: "viewer_7", text: "主播会不会看到刚才那条？" });
+                state.liveChat.push({ user: "viewer_7", avatar: "V", text: "방금 그 댓글 본 것 같은데?", translation: "感觉主播刚刚是不是看到那条了？" });
                 renderLiveChatLines(); await persist();
               } else if (action === "gift-demo") {
                 toast("礼物面板将在业务版接入钱包余额");
