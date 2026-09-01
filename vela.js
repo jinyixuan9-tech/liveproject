@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.0";
+  const VERSION = "0.1.1";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -15,12 +15,43 @@
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#039;");
 
+  const normalizeHandle = (value = "") => {
+    const raw = String(value || "").trim();
+    if (!raw) return "";
+    return raw.startsWith("@") ? raw : `@${raw}`;
+  };
+
+  const initials = (value = "") => {
+    const clean = String(value || "").trim();
+    if (!clean) return "V";
+    return clean.slice(0, 2).toUpperCase();
+  };
+
+  const isImageURL = (value = "") => /^(https?:|data:image\/|blob:)/i.test(String(value || "").trim());
+
+  const avatarHTML = (value = "", fallback = "V") => {
+    const raw = String(value || "").trim();
+    if (isImageURL(raw)) {
+      return `<img src="${escapeHTML(raw)}" alt="" loading="lazy">`;
+    }
+    return escapeHTML(raw || initials(fallback));
+  };
+
+  const displayProfileName = (profile = {}) =>
+    String(profile?.handle || profile?.name || profile?.displayName || "未命名").trim();
+
+  const safeArray = (value) => Array.isArray(value) ? value : [];
+
   function createDefaultState() {
     return {
       activePage: "home",
       drawerOpen: false,
       publishOpen: false,
       viewerIdentityId: "alias-night",
+      rocheLink: {
+        ownerPersonaId: "",
+        linkedCharacterIds: []
+      },
       identities: [
         {
           id: "alias-night",
@@ -41,7 +72,9 @@
           avatar: "A",
           live: true,
           title: "今晚不赶时间，坐下来聊一会儿",
-          viewers: 4281
+          viewers: 4281,
+          bio: "Shell 演示频道",
+          isDemo: true
         },
         {
           id: "char-noir",
@@ -51,7 +84,9 @@
           avatar: "☾",
           live: false,
           title: "",
-          viewers: 0
+          viewers: 0,
+          bio: "Shell 演示频道",
+          isDemo: true
         }
       ],
       recommendedLives: [
@@ -156,9 +191,9 @@
 .vela-roche .v-rec-card{padding:0;overflow:hidden}.vela-roche .v-rec-cover{display:flex;align-items:flex-end;aspect-ratio:16/9;padding:14px;background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.4),transparent 26%),linear-gradient(135deg,#2a2b31,#8c8f99);color:#fff;position:relative}.vela-roche .v-rec-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(0,0,0,.55))}.vela-roche .v-rec-cover>*{position:relative;z-index:1}.vela-roche .v-rec-body{padding:12px 14px 14px;display:flex;gap:10px;align-items:center}.vela-roche .v-follow{border:0;background:#111;color:#fff;border-radius:12px;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-follow.is-on{background:#e9e9ee;color:#111}
 .vela-roche .v-msg{display:flex;align-items:center;gap:11px;padding:12px 2px;border-bottom:1px solid var(--v-line);border-top:0;border-left:0;border-right:0;background:none;width:100%;text-align:left;color:inherit}.vela-roche .v-msg:last-child{border-bottom:0}.vela-roche .v-preview{font-size:12px;color:var(--v-muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-unread{min-width:20px;height:20px;border-radius:10px;background:#111;color:#fff;font-size:10px;display:grid;place-items:center}.vela-roche .v-biz{font-size:9px;padding:3px 6px;border-radius:7px;background:#fff0d4;color:#925e00;margin-left:5px}.vela-roche .v-wallet{background:#111;color:#fff;border-radius:28px;padding:22px;margin:7px 0 16px}.vela-roche .v-balance-label{font-size:12px;opacity:.65}.vela-roche .v-balance{font-size:35px;font-weight:900;margin:7px 0 18px}.vela-roche .v-wallet-actions{display:flex;gap:8px}.vela-roche .v-wallet-actions button{flex:1;border:0;background:#fff;color:#111;border-radius:14px;padding:12px;font-weight:900}.vela-roche .v-tx{display:flex;justify-content:space-between;gap:12px;padding:13px 2px;border-bottom:1px solid var(--v-line);font-size:13px}.vela-roche .v-tx:last-child{border-bottom:0}.vela-roche .v-tx small{display:block;color:var(--v-muted);margin-top:3px}
 .vela-roche .v-nav{position:absolute;z-index:30;left:0;right:0;bottom:0;height:calc(78px + env(safe-area-inset-bottom,0px));padding-bottom:env(safe-area-inset-bottom,0px);display:grid;grid-template-columns:repeat(5,1fr);background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border-top:1px solid var(--v-line)}.vela-roche .v-nav button{border:0;background:none;color:#8b8b93;font-size:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-width:0;min-height:52px}.vela-roche .v-nav button b{font-size:20px;font-weight:500}.vela-roche .v-nav button.is-active{color:#111;font-weight:900}.vela-roche .v-nav .v-publish b{width:42px;height:42px;border-radius:15px;background:#111;color:#fff;display:grid;place-items:center;font-size:25px;margin-top:-13px;box-shadow:0 7px 18px rgba(0,0,0,.17)}
-.vela-roche .v-mask{position:absolute;z-index:50;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s}.vela-roche .v-mask.is-open{opacity:1;pointer-events:auto}.vela-roche .v-drawer{position:absolute;z-index:60;top:0;bottom:0;left:0;width:min(82%,340px);padding:24px 18px;background:#fff;transform:translateX(-102%);transition:transform .22s ease;overflow:auto}.vela-roche .v-drawer.is-open{transform:none}.vela-roche .v-userhead{display:flex;align-items:center;gap:12px;margin:16px 0 22px}.vela-roche .v-userav{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#111,#777);color:#fff;display:grid;place-items:center;font-weight:900}.vela-roche .v-userhead b{font-size:18px}.vela-roche .v-userhead span{display:block;color:var(--v-muted);font-size:12px;margin-top:3px}.vela-roche .v-drawer-item{width:100%;padding:14px 3px;border:0;border-bottom:1px solid var(--v-line);background:none;display:flex;justify-content:space-between;gap:10px;text-align:left;color:inherit;font-size:14px;font-weight:800;min-height:48px}
+.vela-roche .v-mask{position:absolute;z-index:50;inset:0;background:rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .18s}.vela-roche .v-mask.is-open{opacity:1;pointer-events:auto}.vela-roche .v-drawer{position:absolute;z-index:60;top:0;bottom:0;left:0;width:min(82%,340px);padding:24px 18px;background:#fff;transform:translateX(-102%);transition:transform .22s ease;overflow:auto}.vela-roche .v-drawer.is-open{transform:none}.vela-roche .v-userhead{display:flex;align-items:center;gap:12px;margin:16px 0 22px}.vela-roche .v-userav{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,#111,#777);color:#fff;display:grid;place-items:center;font-weight:900}.vela-roche .v-avatar img,.vela-roche .v-mini img,.vela-roche .v-userav img{width:100%;height:100%;object-fit:cover;border-radius:inherit;display:block}.vela-roche .v-userhead b{font-size:18px}.vela-roche .v-userhead span{display:block;color:var(--v-muted);font-size:12px;margin-top:3px}.vela-roche .v-drawer-item{width:100%;padding:14px 3px;border:0;border-bottom:1px solid var(--v-line);background:none;display:flex;justify-content:space-between;gap:10px;text-align:left;color:inherit;font-size:14px;font-weight:800;min-height:48px}
 .vela-roche .v-sheetmask{position:absolute;z-index:80;inset:0;background:rgba(0,0,0,.28);display:none;align-items:flex-end}.vela-roche .v-sheetmask.is-open{display:flex}.vela-roche .v-sheet{width:100%;max-height:82%;overflow:auto;background:#fff;border-radius:28px 28px 0 0;padding:13px 16px calc(24px + env(safe-area-inset-bottom,0px));overscroll-behavior:contain}.vela-roche .v-handle{width:42px;height:5px;border-radius:3px;background:#d2d2d7;margin:0 auto 15px}.vela-roche .v-create-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}.vela-roche .v-create{border:0;border-radius:18px;background:#f1f1f4;padding:17px;text-align:left;font-weight:900;min-height:92px}.vela-roche .v-create b{display:block;font-size:24px;margin-bottom:12px}.vela-roche .v-hint{font-size:11px;line-height:1.5;color:var(--v-muted)}
-.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:62px;padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead button{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}
+.vela-roche .v-subscreen{position:absolute;z-index:70;inset:0;background:var(--v-bg);transform:translateX(102%);transition:transform .22s ease;overflow:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}.vela-roche .v-subscreen.is-open{transform:none}.vela-roche .v-subhead{position:sticky;z-index:2;top:0;height:62px;padding:0 14px;display:flex;align-items:center;gap:10px;background:rgba(246,246,248,.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--v-line)}.vela-roche .v-subhead button{width:42px;height:42px;border:0;border-radius:14px;background:#fff;font-size:21px}.vela-roche .v-subbody{padding:14px 14px 28px}.vela-roche .v-tabs{display:flex;gap:8px;overflow:auto;margin-bottom:13px}.vela-roche .v-tabs button{border:0;border-radius:13px;background:#e9e9ee;padding:9px 12px;font-size:12px;font-weight:850}.vela-roche .v-tabs button.is-active{background:#111;color:#fff}.vela-roche .v-empty{padding:65px 14px;text-align:center;color:var(--v-muted);font-size:13px;line-height:1.6}.vela-roche .v-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-row:last-child{border-bottom:0}.vela-roche .v-row b{font-size:13px}.vela-roche .v-row small{display:block;color:var(--v-muted);font-size:11px;margin-top:3px}.vela-roche .v-action{border:0;border-radius:12px;background:#111;color:#fff;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-action.light{background:#efeff3;color:#111}.vela-roche .v-linkbox{border:1px solid var(--v-line);border-radius:18px;padding:12px;margin:10px 0;background:#fafafd}.vela-roche .v-linkstatus{display:flex;align-items:center;gap:7px;font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-dot{width:7px;height:7px;border-radius:50%;background:#b9b9c1;flex:0 0 auto}.vela-roche .v-dot.on{background:#38a169}.vela-roche .v-rolecard{border-top:1px solid var(--v-line);padding-top:12px;margin-top:12px}.vela-roche .v-rolecard:first-child{border-top:0;padding-top:0;margin-top:0}
 .vela-roche .v-live-screen{background:#0d0d10;color:#fff}.vela-roche .v-live-screen .v-subhead{background:rgba(13,13,16,.95);border-bottom-color:#26262c}.vela-roche .v-live-screen .v-subhead button{background:#24242a;color:#fff}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{aspect-ratio:16/9;border-radius:20px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.25),transparent 27%),linear-gradient(135deg,#1d1e24,#747783);position:relative;overflow:hidden;padding:14px;display:flex;align-items:flex-end}.vela-roche .v-live-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 43%,rgba(0,0,0,.56))}.vela-roche .v-live-stage-copy{position:relative;z-index:1}.vela-roche .v-live-stage h2{font-size:19px;line-height:1.3;margin:7px 0 4px}.vela-roche .v-live-stage p{margin:0;font-size:11px;opacity:.8}.vela-roche .v-chat-panel{margin-top:10px;background:#fff;color:#111;border-radius:22px;padding:13px}.vela-roche .v-chat-title{font-weight:900;margin-bottom:7px}.vela-roche .v-chatline{display:flex;gap:8px;padding:7px 0;font-size:12px;line-height:1.45}.vela-roche .v-chatline b{flex:0 0 auto}.vela-roche .v-composer{display:grid;grid-template-columns:1fr 44px 44px;gap:8px;margin-top:10px}.vela-roche .v-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:#efeff2;padding:11px 12px;font-size:16px}.vela-roche .v-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px}.vela-roche .v-continue{width:100%;margin-top:8px;border:0;border-radius:15px;background:#24242a;color:#fff;padding:12px;font-weight:900;min-height:44px}.vela-roche .v-toast{position:absolute;z-index:120;left:50%;bottom:calc(92px + env(safe-area-inset-bottom,0px));transform:translate(-50%,12px);background:#111;color:#fff;border-radius:13px;padding:10px 13px;font-size:11px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap;max-width:86%;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-toast.is-show{opacity:1;transform:translate(-50%,0)}
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
 </style>`;
@@ -203,7 +238,7 @@
       </nav>
       <div class="v-mask" data-role="mask" data-action="close-drawer"></div>
       <aside class="v-drawer" data-role="drawer">
-        <div class="v-userhead"><div class="v-userav">${escapeHTML(identity?.avatar || "U")}</div><div><b>${escapeHTML(identity?.displayName || "Vela User")}</b><span>${escapeHTML(identity?.handle || "@vela")}${identity?.isAnonymous ? " · 匿名身份" : ""}</span></div></div>
+        <div class="v-userhead"><div class="v-userav">${avatarHTML(identity?.avatar || "", identity?.displayName || "U")}</div><div><b>${escapeHTML(identity?.displayName || "Vela User")}</b><span>${escapeHTML(identity?.handle || "@vela")}${identity?.isAnonymous ? " · 匿名身份" : ""}</span></div></div>
         <button class="v-drawer-item" data-action="open-identities">身份与账号 <span>›</span></button>
         <button class="v-drawer-item" data-action="open-roles">角色与频道管理 <span>›</span></button>
         <button class="v-drawer-item" data-action="noop">AI 生成预设 <span>›</span></button>
@@ -260,6 +295,19 @@
               console.warn("[Vela] failed to load shell state", err);
             }
 
+            state.rocheLink = {
+              ownerPersonaId: String(state.rocheLink?.ownerPersonaId || ""),
+              linkedCharacterIds: safeArray(state.rocheLink?.linkedCharacterIds).map(id => String(id))
+            };
+
+            const rocheRuntime = {
+              loaded: false,
+              error: "",
+              activePersona: null,
+              personas: [],
+              characters: []
+            };
+
             mountMarkup(root, state);
 
             const q = (sel) => root.querySelector(sel);
@@ -270,6 +318,7 @@
               try {
                 await roche?.storage?.set?.("vela-shell-state", {
                   viewerIdentityId: state.viewerIdentityId,
+                  rocheLink: state.rocheLink,
                   identities: state.identities,
                   channels: state.channels,
                   recommendedLives: state.recommendedLives,
@@ -292,6 +341,127 @@
               toastTimer = setTimeout(() => el.classList.remove("is-show"), 1700);
             };
 
+
+            const syncLinkedChannelSnapshots = async () => {
+              const linkedIds = new Set(safeArray(state.rocheLink?.linkedCharacterIds).map(String));
+              if (!linkedIds.size) return;
+
+              for (const charId of linkedIds) {
+                let char = rocheRuntime.characters.find(x => String(x?.id) === charId) || null;
+                try {
+                  const full = await roche?.character?.get?.(charId);
+                  if (full) char = full;
+                } catch (_) {}
+                if (!char) continue;
+
+                const channelId = `roche-char-${charId}`;
+                const existing = state.channels.find(x => x.id === channelId);
+                const displayName = displayProfileName(char);
+                const snapshot = {
+                  id: channelId,
+                  kind: "character",
+                  sourceCharacterId: charId,
+                  name: displayName,
+                  realName: String(char?.name || ""),
+                  handle: normalizeHandle(char?.handle || ""),
+                  avatar: String(char?.avatar || initials(displayName)),
+                  bio: String(char?.bio || ""),
+                  live: Boolean(existing?.live),
+                  title: String(existing?.title || ""),
+                  viewers: Number(existing?.viewers || 0)
+                };
+                if (existing) Object.assign(existing, snapshot);
+                else state.channels.push(snapshot);
+              }
+            };
+
+            const refreshRocheData = async ({ announce = false, sync = true } = {}) => {
+              try {
+                const [activePersona, personas, characters] = await Promise.all([
+                  roche?.persona?.getActiveUserPersona?.(),
+                  roche?.persona?.getUserPersonas?.(),
+                  roche?.character?.list?.()
+                ]);
+
+                rocheRuntime.activePersona = activePersona || null;
+                rocheRuntime.personas = safeArray(personas);
+                rocheRuntime.characters = safeArray(characters);
+                rocheRuntime.loaded = true;
+                rocheRuntime.error = "";
+
+                if (!state.rocheLink.ownerPersonaId && activePersona?.id != null) {
+                  state.rocheLink.ownerPersonaId = String(activePersona.id);
+                }
+                if (sync) await syncLinkedChannelSnapshots();
+                await persist();
+                if (announce) toast("已重新读取 Roche 用户与角色");
+                return true;
+              } catch (err) {
+                rocheRuntime.loaded = true;
+                rocheRuntime.error = String(err?.message || err || "读取失败");
+                console.warn("[Vela] failed to read Roche persona/characters", err);
+                if (announce) toast("读取 Roche 用户或角色失败");
+                return false;
+              }
+            };
+
+            const linkCharacter = async (charId) => {
+              const id = String(charId || "");
+              if (!id) return;
+              let char = rocheRuntime.characters.find(x => String(x?.id) === id) || null;
+              try {
+                const full = await roche?.character?.get?.(id);
+                if (full) char = full;
+              } catch (_) {}
+              if (!char) {
+                toast("没有读取到这个 Roche 角色");
+                return;
+              }
+
+              if (!state.rocheLink.linkedCharacterIds.includes(id)) {
+                state.rocheLink.linkedCharacterIds.push(id);
+              }
+
+              // 第一次加入真实 Roche 角色后，移除 Shell 演示角色。
+              state.channels = state.channels.filter(ch => !ch.isDemo && !["char-aster", "char-noir"].includes(ch.id));
+
+              const channelId = `roche-char-${id}`;
+              const displayName = displayProfileName(char);
+              const existing = state.channels.find(x => x.id === channelId);
+              const snapshot = {
+                id: channelId,
+                kind: "character",
+                sourceCharacterId: id,
+                name: displayName,
+                realName: String(char?.name || ""),
+                handle: normalizeHandle(char?.handle || ""),
+                avatar: String(char?.avatar || initials(displayName)),
+                bio: String(char?.bio || ""),
+                live: Boolean(existing?.live),
+                title: String(existing?.title || ""),
+                viewers: Number(existing?.viewers || 0)
+              };
+              if (existing) Object.assign(existing, snapshot);
+              else state.channels.unshift(snapshot);
+
+              if (!state.roleCommerce[id]) {
+                state.roleCommerce[id] = { enabled: false, tendency: 35 };
+              }
+
+              await persist();
+              rerender();
+              toast(`${displayName} 已加入 Vela`);
+            };
+
+            const unlinkCharacter = async (charId) => {
+              const id = String(charId || "");
+              state.rocheLink.linkedCharacterIds = state.rocheLink.linkedCharacterIds.filter(x => String(x) !== id);
+              state.channels = state.channels.filter(ch => String(ch.sourceCharacterId || "") !== id);
+              await persist();
+              rerender();
+              toast("已从 Vela 移除角色频道");
+            };
+
             const closeDrawer = () => {
               q('[data-role="drawer"]')?.classList.remove("is-open");
               q('[data-role="mask"]')?.classList.remove("is-open");
@@ -307,10 +477,10 @@
               const host = q('[data-role="channel-strip"]');
               host.innerHTML = state.channels.map(ch => `
                 <button class="v-channel" data-action="open-channel" data-channel-id="${escapeHTML(ch.id)}">
-                  <div class="v-avatar-wrap"><div class="v-avatar">${escapeHTML(ch.avatar)}</div>${ch.live ? '<span class="v-live-dot">LIVE</span>' : ''}</div>
+                  <div class="v-avatar-wrap"><div class="v-avatar">${avatarHTML(ch.avatar, ch.name)}</div>${ch.live ? '<span class="v-live-dot">LIVE</span>' : ''}</div>
                   <div class="v-channel-name">${escapeHTML(ch.name)}</div>
                 </button>`).join("") + `
-                <button class="v-channel" data-action="noop"><div class="v-avatar-wrap"><div class="v-avatar">＋</div></div><div class="v-channel-name">添加角色</div></button>`;
+                <button class="v-channel" data-action="open-roles"><div class="v-avatar-wrap"><div class="v-avatar">＋</div></div><div class="v-channel-name">添加角色</div></button>`;
             };
 
             const renderSchedule = () => {
@@ -320,9 +490,16 @@
             };
 
             const renderHome = () => {
-              q('[data-role="home-feed"]').innerHTML = `
-                <article class="v-card"><div class="v-author"><div class="v-mini">A</div><div class="v-meta"><div class="v-name">Aster · @aster_room</div><div class="v-sub">刚刚开始直播 · 同镜合作</div></div><div>•••</div></div><button class="v-stage" data-action="open-live" data-live-id="char-aster"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">今晚不赶时间，坐下来聊一会儿</div><div class="v-viewers">4,281 人正在观看 · 公开直播</div></div></button><div class="v-engage"><span>♡ 2.8K</span><span>◌ 684</span><span>↗ 分享</span></div></article>
-                <article class="v-card"><div class="v-author"><div class="v-mini">☾</div><div class="v-meta"><div class="v-name">Noir · @noir_after5</div><div class="v-sub">18 分钟前</div></div><div>•••</div></div><div class="v-postimg">✦</div><div class="v-posttext">今天把直播间重新布置了一下。下次开播应该会更舒服一点。</div><div class="v-engage"><span>♡ 913</span><span>◌ 126</span><span>↗ 分享</span></div></article>`;
+              const host = q('[data-role="home-feed"]');
+              const cards = state.channels.map(ch => {
+                const handleText = ch.handle ? ` · ${escapeHTML(ch.handle)}` : "";
+                if (ch.live) {
+                  return `<article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(ch.avatar, ch.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(ch.name)}${handleText}</div><div class="v-sub">正在直播${ch.sourceCharacterId ? " · Roche 角色频道" : ""}</div></div><div>•••</div></div><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(ch.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(ch.title || "正在直播")}</div><div class="v-viewers">${formatViewers(ch.viewers || 0)} 人正在观看</div></div></button></article>`;
+                }
+                return `<article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(ch.avatar, ch.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(ch.name)}${handleText}</div><div class="v-sub">${ch.sourceCharacterId ? "已连接 Roche 角色" : "已关注频道"}</div></div><button class="v-action light" data-action="open-channel" data-channel-id="${escapeHTML(ch.id)}">主页</button></div>${ch.bio ? `<div class="v-posttext">${escapeHTML(ch.bio)}</div>` : ""}${ch.sourceCharacterId ? `<p class="v-hint">角色频道已经链接成功。下一阶段接入 AI 后，这里会出现角色生成的直播、贴文与社群动态。</p>` : ""}</article>`;
+              }).join("");
+
+              host.innerHTML = cards || `<div class="v-empty">还没有加入任何角色频道。<br><button class="v-action" style="margin-top:12px" data-action="open-roles">从 Roche 添加角色</button></div>`;
             };
 
             const renderRecommended = () => {
@@ -337,7 +514,7 @@
 
             const renderMessages = () => {
               q('[data-role="messages"]').innerHTML = state.messages.map(msg => `
-                <button class="v-msg" data-action="open-message" data-message-id="${escapeHTML(msg.id)}"><div class="v-mini">${escapeHTML(msg.avatar)}</div><div class="v-meta"><div class="v-name">${escapeHTML(msg.name)}${msg.badge ? `<span class="v-biz">${escapeHTML(msg.badge)}</span>` : ""}</div><div class="v-preview">${escapeHTML(msg.preview)}</div></div>${msg.unread ? `<span class="v-unread">${msg.unread}</span>` : ""}</button>`).join("");
+                <button class="v-msg" data-action="open-message" data-message-id="${escapeHTML(msg.id)}"><div class="v-mini">${avatarHTML(msg.avatar, msg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(msg.name)}${msg.badge ? `<span class="v-biz">${escapeHTML(msg.badge)}</span>` : ""}</div><div class="v-preview">${escapeHTML(msg.preview)}</div></div>${msg.unread ? `<span class="v-unread">${msg.unread}</span>` : ""}</button>`).join("");
             };
 
             const renderWallet = () => {
@@ -372,7 +549,7 @@
 
             const openChannel = (channel) => {
               const liveBlock = channel.live ? `<article class="v-card"><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(channel.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(channel.title)}</div><div class="v-viewers">${formatViewers(channel.viewers)} 人正在观看</div></div></button></article>` : `<div class="v-empty">当前没有正在直播。<br>后续这里会显示预约直播。</div>`;
-              openScreen("channel", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="channel">‹</button><div class="v-meta"><strong>${escapeHTML(channel.name)}</strong><div class="v-hint">${escapeHTML(channel.handle)}</div></div><button class="v-action light" data-action="noop">编辑</button></header><div class="v-subbody"><div class="v-card"><div class="v-author"><div class="v-mini">${escapeHTML(channel.avatar)}</div><div class="v-meta"><div class="v-name">${escapeHTML(channel.name)}</div><div class="v-sub">${escapeHTML(channel.handle)} · 频道主页</div></div></div></div><div class="v-tabs"><button class="is-active">直播</button><button data-action="channel-replays">回放</button><button data-action="channel-community">社群</button></div><div data-role="channel-tab-body">${liveBlock}</div></div>`);
+              openScreen("channel", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="channel">‹</button><div class="v-meta"><strong>${escapeHTML(channel.name)}</strong><div class="v-hint">${escapeHTML(channel.handle)}</div></div><button class="v-action light" data-action="noop">编辑</button></header><div class="v-subbody"><div class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(channel.avatar, channel.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(channel.name)}</div><div class="v-sub">${escapeHTML(channel.handle || "未设置 @ID")} · 频道主页</div></div></div>${channel.bio ? `<div class="v-posttext">${escapeHTML(channel.bio)}</div>` : ""}${channel.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已连接 Roche 角色</div>` : ""}</div><div class="v-tabs"><button class="is-active">直播</button><button data-action="channel-replays">回放</button><button data-action="channel-community">社群</button></div><div data-role="channel-tab-body">${liveBlock}</div></div>`);
             };
 
             const openMessage = (id) => {
@@ -386,12 +563,64 @@
             };
 
             const openIdentities = () => {
-              openScreen("identities", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="identities">‹</button><div><strong>身份与账号</strong><div class="v-hint">Vela 不强制创建公开大号</div></div></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">当前 Roche 用户只是后台真实主体。你可以只使用一个匿名身份，也可以以后再创建公开账号或更多关联身份。</p>${state.identities.map(item => `<div class="v-row"><div><b>${escapeHTML(item.displayName)} · ${escapeHTML(item.handle)}</b><small>${item.isAnonymous ? "匿名身份" : "公开身份"}</small></div><button class="v-action ${state.viewerIdentityId === item.id ? "light" : ""}" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">${state.viewerIdentityId === item.id ? "使用中" : "切换"}</button></div>`).join("")}<button class="v-action" style="margin-top:12px" data-action="add-demo-identity">＋ 创建一个示例公开身份</button></div></div>`);
+              const ownerId = String(state.rocheLink?.ownerPersonaId || "");
+              const owner = rocheRuntime.personas.find(p => String(p?.id) === ownerId) ||
+                (String(rocheRuntime.activePersona?.id || "") === ownerId ? rocheRuntime.activePersona : null);
+              const rocheStatus = rocheRuntime.error
+                ? `<div class="v-linkstatus"><span class="v-dot"></span>读取失败：${escapeHTML(rocheRuntime.error)}</div>`
+                : `<div class="v-linkstatus"><span class="v-dot ${rocheRuntime.loaded ? "on" : ""}"></span>${rocheRuntime.loaded ? "已读取 Roche 用户资料" : "正在等待读取 Roche"}</div>`;
+
+              const personaRows = rocheRuntime.personas.length
+                ? rocheRuntime.personas.map(p => {
+                    const id = String(p?.id || "");
+                    const name = displayProfileName(p);
+                    const selected = ownerId === id;
+                    return `<div class="v-row"><div class="v-author" style="flex:1"><div class="v-mini">${avatarHTML(p?.avatar || "", name)}</div><div class="v-meta"><b>${escapeHTML(name)}</b><small>${escapeHTML(normalizeHandle(p?.handle || "") || p?.name || "Roche 用户身份")}</small></div></div><button class="v-action ${selected ? "light" : ""}" data-action="bind-owner-persona" data-persona-id="${escapeHTML(id)}">${selected ? "已链接" : "设为主体"}</button></div>`;
+                  }).join("")
+                : `<div class="v-empty" style="padding:24px 8px">没有读取到 Roche 用户身份。</div>`;
+
+              openScreen("identities", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="identities">‹</button><div class="v-meta"><strong>身份与账号</strong><div class="v-hint">Roche 是后台主体，Vela 身份可以完全匿名</div></div><button class="v-action light" data-action="refresh-roche">刷新</button></header><div class="v-subbody">
+                <div class="v-card">
+                  <b>Roche 后台用户主体</b>
+                  <p class="v-hint">这里只决定 Vela 的后台归属与以后读取记忆时对应哪个用户身份，不会自动公开你的 Roche 资料。</p>
+                  ${rocheStatus}
+                  ${owner ? `<div class="v-linkbox"><div class="v-author"><div class="v-mini">${avatarHTML(owner?.avatar || "", displayProfileName(owner))}</div><div class="v-meta"><div class="v-name">${escapeHTML(displayProfileName(owner))}</div><div class="v-sub">当前后台主体</div></div></div></div>` : ""}
+                  ${personaRows}
+                  ${owner ? `<button class="v-action" style="margin-top:12px" data-action="create-identity-from-persona" data-persona-id="${escapeHTML(String(owner?.id || ""))}">使用这份 Roche 资料创建公开 Vela 身份</button>` : ""}
+                </div>
+                <div class="v-card">
+                  <b>我的 Vela 身份</b>
+                  <p class="v-hint">不要求先建“大号”。你可以只使用匿名身份，也可以同时拥有公开账号和多个小号。</p>
+                  ${state.identities.map(item => `<div class="v-row"><div><b>${escapeHTML(item.displayName)} · ${escapeHTML(item.handle)}</b><small>${item.isAnonymous ? "匿名身份" : "公开身份"}${item.sourcePersonaId ? " · 来自 Roche 资料" : ""}</small></div><button class="v-action ${state.viewerIdentityId === item.id ? "light" : ""}" data-action="switch-identity" data-identity-id="${escapeHTML(item.id)}">${state.viewerIdentityId === item.id ? "使用中" : "切换"}</button></div>`).join("")}
+                </div>
+              </div>`);
             };
 
             const openRoles = () => {
-              const config = state.roleCommerce["char-aster"] || { enabled: false, tendency: 0 };
-              openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div><strong>角色与频道管理</strong><div class="v-hint">主页、小号与商业合作</div></div></header><div class="v-subbody"><div class="v-card"><div class="v-author"><div class="v-mini">A</div><div class="v-meta"><div class="v-name">Aster</div><div class="v-sub">@aster_room</div></div></div><div class="v-row"><div><b>角色自主商业合作</b><small>关闭时角色可以纯玩，不会被系统频繁塞广告。</small></div><button class="v-action ${config.enabled ? "" : "light"}" data-action="toggle-role-commerce">${config.enabled ? "已开启" : "已关闭"}</button></div><div class="v-row"><div style="width:100%"><b>自主接单倾向 · <span data-role="commerce-value">${config.tendency}%</span></b><small>只是 AI 判断倾向，不是固定接单概率。</small><input data-role="commerce-range" type="range" min="0" max="100" value="${config.tendency}" style="width:100%;margin-top:10px;accent-color:#111"></div></div><div class="v-row"><div><b>第二频道 / 小号</b><small>默认不创建。后续可手动设计或让 AI 根据人设生成。</small></div><button class="v-action light" data-action="noop">设置</button></div></div></div>`);
+              const linkedIds = new Set(safeArray(state.rocheLink?.linkedCharacterIds).map(String));
+              const status = rocheRuntime.error
+                ? `<div class="v-linkstatus"><span class="v-dot"></span>读取失败：${escapeHTML(rocheRuntime.error)}</div>`
+                : `<div class="v-linkstatus"><span class="v-dot ${rocheRuntime.loaded ? "on" : ""}"></span>${rocheRuntime.loaded ? `已读取 ${rocheRuntime.characters.length} 个 Roche 角色` : "正在等待读取 Roche 角色"}</div>`;
+
+              const rows = rocheRuntime.characters.length ? rocheRuntime.characters.map(char => {
+                const id = String(char?.id || "");
+                const name = displayProfileName(char);
+                const linked = linkedIds.has(id);
+                const cfg = state.roleCommerce[id] || { enabled: false, tendency: 35 };
+                return `<div class="v-rolecard">
+                  <div class="v-author">
+                    <div class="v-mini">${avatarHTML(char?.avatar || "", name)}</div>
+                    <div class="v-meta"><div class="v-name">${escapeHTML(name)}</div><div class="v-sub">${escapeHTML(char?.name || "")}${char?.handle ? ` · ${escapeHTML(normalizeHandle(char.handle))}` : ""}</div></div>
+                    <button class="v-action ${linked ? "light" : ""}" data-action="${linked ? "unlink-roche-character" : "link-roche-character"}" data-character-id="${escapeHTML(id)}">${linked ? "移除" : "加入 Vela"}</button>
+                  </div>
+                  ${linked ? `<div class="v-linkstatus"><span class="v-dot on"></span>角色频道已连接到 Roche</div>
+                    <div class="v-row"><div><b>角色自主商业合作</b><small>关闭时角色可以纯玩，不会被系统频繁塞广告。</small></div><button class="v-action ${cfg.enabled ? "" : "light"}" data-action="toggle-role-commerce" data-character-id="${escapeHTML(id)}">${cfg.enabled ? "已开启" : "已关闭"}</button></div>
+                    <div class="v-row"><div style="width:100%"><b>自主接单倾向 · <span data-role="commerce-value" data-character-id="${escapeHTML(id)}">${Number(cfg.tendency || 0)}%</span></b><small>以后交给 AI 综合人设判断，不是硬概率。</small><input data-role="commerce-range" data-character-id="${escapeHTML(id)}" type="range" min="0" max="100" value="${Number(cfg.tendency || 0)}" style="width:100%;margin-top:10px;accent-color:#111"></div></div>
+                    <div class="v-row"><div><b>第二频道 / 小号</b><small>默认不创建，后续可手动设计或让 AI 根据人设生成。</small></div><button class="v-action light" data-action="noop">设置</button></div>` : ""}
+                </div>`;
+              }).join("") : `<div class="v-empty">没有读取到 Roche 角色。<br>可以先点右上角“刷新”。</div>`;
+
+              openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">从 Roche 选择真正要加入 Vela 的角色</div></div><button class="v-action light" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">这里只读取 Roche 公开角色 API。加入后会建立 Vela 频道，但不会自动创建小号、开播或生成内容。</p>${status}${rows}</div></div>`);
             };
 
             const rerender = () => {
@@ -403,6 +632,7 @@
               renderWallet();
             };
 
+            await refreshRocheData({ announce: false, sync: true });
             rerender();
 
             root.addEventListener("click", async (event) => {
@@ -475,6 +705,59 @@
                 closeDrawer(); openIdentities();
               } else if (action === "open-roles") {
                 closeDrawer(); openRoles();
+              } else if (action === "refresh-roche") {
+                await refreshRocheData({ announce: true, sync: true });
+                openIdentities();
+                rerender();
+              } else if (action === "refresh-roche-roles") {
+                await refreshRocheData({ announce: true, sync: true });
+                openRoles();
+                rerender();
+              } else if (action === "bind-owner-persona") {
+                state.rocheLink.ownerPersonaId = String(button.dataset.personaId || "");
+                await persist();
+                openIdentities();
+                toast("已链接 Roche 后台用户主体，不会公开资料");
+              } else if (action === "create-identity-from-persona") {
+                const personaId = String(button.dataset.personaId || "");
+                const persona = rocheRuntime.personas.find(p => String(p?.id) === personaId) ||
+                  (String(rocheRuntime.activePersona?.id || "") === personaId ? rocheRuntime.activePersona : null);
+                if (!persona) {
+                  toast("没有读取到这份 Roche 用户资料");
+                } else {
+                  const existing = state.identities.find(x => String(x.sourcePersonaId || "") === personaId);
+                  if (existing) {
+                    state.viewerIdentityId = existing.id;
+                    await persist();
+                    mountMarkup(root, state); rerender(); switchPage(state.activePage || "home");
+                    toast("这个公开身份已经存在，已切换");
+                  } else {
+                    const name = displayProfileName(persona);
+                    const cleanId = personaId.replace(/[^a-zA-Z0-9_-]/g, "").slice(-12) || Math.random().toString(36).slice(2, 8);
+                    const handle = normalizeHandle(persona?.handle || "") || `@vela_${cleanId.slice(-6)}`;
+                    const item = {
+                      id: `persona-${cleanId}`,
+                      type: "public",
+                      sourcePersonaId: personaId,
+                      displayName: name,
+                      handle,
+                      avatar: String(persona?.avatar || initials(name)),
+                      bio: String(persona?.bio || ""),
+                      isAnonymous: false
+                    };
+                    state.identities.push(item);
+                    state.viewerIdentityId = item.id;
+                    await persist();
+                    mountMarkup(root, state); rerender(); switchPage(state.activePage || "home");
+                    toast("已用 Roche 资料创建公开 Vela 身份");
+                  }
+                }
+              } else if (action === "link-roche-character") {
+                await linkCharacter(button.dataset.characterId);
+                openRoles();
+              } else if (action === "unlink-roche-character") {
+                await unlinkCharacter(button.dataset.characterId);
+                openRoles();
               } else if (action === "switch-identity") {
                 state.viewerIdentityId = button.dataset.identityId;
                 await persist();
@@ -485,7 +768,8 @@
                   await persist(); openIdentities();
                 } else toast("示例公开身份已经存在");
               } else if (action === "toggle-role-commerce") {
-                const cfg = state.roleCommerce["char-aster"] || (state.roleCommerce["char-aster"] = { enabled: false, tendency: 35 });
+                const charId = String(button.dataset.characterId || "");
+                const cfg = state.roleCommerce[charId] || (state.roleCommerce[charId] = { enabled: false, tendency: 35 });
                 cfg.enabled = !cfg.enabled; await persist(); openRoles();
               } else if (action === "channel-replays") {
                 const host = q('[data-screen="channel"] [data-role="channel-tab-body"]');
@@ -506,9 +790,10 @@
               const input = event.target;
               if (input?.matches?.('[data-role="commerce-range"]')) {
                 const value = Math.max(0, Math.min(100, Number(input.value || 0)));
-                const cfg = state.roleCommerce["char-aster"] || (state.roleCommerce["char-aster"] = { enabled: true, tendency: value });
+                const charId = String(input.dataset.characterId || "");
+                const cfg = state.roleCommerce[charId] || (state.roleCommerce[charId] = { enabled: true, tendency: value });
                 cfg.tendency = value;
-                const label = q('[data-screen="roles"] [data-role="commerce-value"]');
+                const label = qa('[data-screen="roles"] [data-role="commerce-value"]').find(el => String(el.dataset.characterId || "") === charId);
                 if (label) label.textContent = `${value}%`;
                 await persist();
               }
