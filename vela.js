@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.9";
+  const VERSION = "0.1.10";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -218,6 +218,7 @@
       },
       liveSession: null,
       liveProgress: {},
+      liveStats: {},
       roleCommerce: {
         "char-aster": { enabled: true, tendency: 35 }
       },
@@ -280,13 +281,20 @@
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 
 .vela-roche .v-subscreen[data-screen="live"]{overflow:hidden!important}
-.vela-roche .v-live-screen{height:100%;min-height:0!important;display:flex;flex-direction:column;overflow:hidden}
-.vela-roche .v-live-screen>.v-subhead{position:relative;top:auto;flex:0 0 var(--v-top-h)}
+.vela-roche .v-live-screen{height:100%;min-height:0!important;display:flex;flex-direction:column;overflow:hidden;background:var(--v-bg)!important;color:var(--v-text)!important}
 .vela-roche .v-live-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:10px 12px 10px!important}
 .vela-roche .v-live-fixed{flex:0 0 auto;min-height:0}
-/* 直播画面保持完整的横屏比例，不再被 34vh 强行压小 */
-.vela-roche .v-live-stage{flex:0 0 auto;aspect-ratio:16/9!important;max-height:none!important;min-height:0!important;position:relative}
+/* 直播本体占视觉中心：完整 16:9，不再保留额外顶栏 */
+.vela-roche .v-live-stage{flex:0 0 auto;aspect-ratio:16/9!important;max-height:none!important;min-height:0!important;position:relative;border-radius:20px!important}
 .vela-roche .v-live-info{flex:0 0 auto;padding:11px 13px!important}
+.vela-roche .v-live-hud{position:absolute;z-index:6;left:12px;right:12px;top:12px;display:flex;align-items:center;gap:8px;pointer-events:none}
+.vela-roche .v-live-hud button,.vela-roche .v-live-hud .v-live-host{pointer-events:auto}
+.vela-roche .v-live-exit{width:38px;height:38px;border:0;border-radius:50%;background:rgba(18,18,22,.66);backdrop-filter:blur(10px);color:#fff;font-size:21px;display:grid;place-items:center;flex:0 0 auto}
+.vela-roche .v-live-host{display:flex;align-items:center;gap:7px;min-width:0;max-width:46%;padding:5px 8px 5px 5px;border-radius:20px;background:rgba(18,18,22,.62);backdrop-filter:blur(10px);color:#fff}
+.vela-roche .v-live-host-avatar{width:29px;height:29px;border-radius:50%;background:rgba(255,255,255,.18);overflow:hidden;display:grid;place-items:center;font-size:9px;font-weight:900;flex:0 0 auto}
+.vela-roche .v-live-host-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.vela-roche .v-live-host-copy{min-width:0}.vela-roche .v-live-host-name{font-size:10px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-live-viewers{font-size:9px;color:rgba(255,255,255,.76);white-space:nowrap}
+.vela-roche .v-gift-rank-trigger{margin-left:auto;min-width:0;max-width:42%;height:38px;border:0;border-radius:19px;padding:0 10px;background:rgba(18,18,22,.66);backdrop-filter:blur(10px);color:#fff;font-size:9px;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vela-roche .v-live-moment{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;margin:0;padding:9px 11px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(15,15,18,.74);backdrop-filter:blur(10px);color:#fff;box-shadow:0 8px 26px rgba(0,0,0,.16);max-height:42%;overflow:auto}
 .vela-roche .v-live-moment-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.68);margin-bottom:4px}
 .vela-roche .v-live-moment-text{font-size:12px;line-height:1.48;color:#fff}
@@ -301,6 +309,12 @@
 .vela-roche .v-composer button{width:38px!important;height:38px!important;min-height:38px!important;border-radius:19px!important;padding:0!important;display:grid!important;place-items:center!important;font-size:14px!important}
 .vela-roche .v-composer .v-continue-mini{background:#111!important;color:#fff!important;font-size:18px!important;font-weight:900!important}
 .vela-roche.is-dark .v-composer .v-continue-mini{background:#f4f4f6!important;color:#111!important}
+.vela-roche .v-live-popover{position:absolute;z-index:30;inset:0;display:none;align-items:flex-start;justify-content:flex-end;padding:58px 16px 16px;background:rgba(0,0,0,.12)}
+.vela-roche .v-live-popover.is-open{display:flex}.vela-roche .v-live-popover-card{width:min(82%,300px);background:rgba(255,255,255,.98);color:#111;border-radius:18px;padding:12px;box-shadow:0 14px 42px rgba(0,0,0,.2)}
+.vela-roche .v-live-popover-title{display:flex;align-items:center;justify-content:space-between;font-size:12px;font-weight:900;margin-bottom:7px}.vela-roche .v-live-popover-title button{border:0;background:none;font-size:17px}
+.vela-roche .v-rank-row{display:flex;align-items:center;gap:8px;padding:8px 0;border-top:1px solid #ececf1;font-size:11px}.vela-roche .v-rank-row:first-of-type{border-top:0}.vela-roche .v-rank-no{width:20px;text-align:center;font-weight:900}.vela-roche .v-rank-user{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-rank-amount{font-weight:900}
+.vela-roche .v-gift-picker{position:absolute;z-index:31;left:12px;right:12px;bottom:12px;display:none;background:rgba(255,255,255,.98);color:#111;border-radius:20px;padding:12px;box-shadow:0 14px 42px rgba(0,0,0,.2)}.vela-roche .v-gift-picker.is-open{display:block}.vela-roche .v-gift-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:9px}.vela-roche .v-gift-grid button{border:0;background:#f1f1f4;color:#111;border-radius:13px;padding:10px 4px;font-size:11px;font-weight:900}.vela-roche .v-gift-balance{font-size:10px;color:#777}
+.vela-roche .v-live-exitmenu{position:absolute;z-index:32;inset:0;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(0,0,0,.28)}.vela-roche .v-live-exitmenu.is-open{display:flex}.vela-roche .v-live-exitcard{width:min(86%,310px);background:#fff;color:#111;border-radius:20px;padding:12px}.vela-roche .v-live-exitcard h3{font-size:14px;margin:2px 2px 10px}.vela-roche .v-live-exitcard button{width:100%;border:0;border-radius:13px;padding:11px;margin-top:7px;font-size:12px;font-weight:900}.vela-roche .v-live-exitcard .v-primary{background:#111;color:#fff}.vela-roche .v-live-exitcard .v-danger{background:#fff0ef;color:#b3261e}.vela-roche .v-live-exitcard .v-cancel{background:#f2f2f5;color:#111}
 .vela-roche .v-post-composer{display:grid;grid-template-columns:minmax(0,1fr) 42px 46px;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--v-line)}
 .vela-roche .v-post-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:var(--v-soft);color:var(--v-text);padding:11px 12px;font-size:16px;outline:none}
 .vela-roche .v-post-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px;font-weight:900}
@@ -470,6 +484,7 @@
             state.communityPosts = safeArray(state.communityPosts);
             state.postReplies = { ...(createDefaultState().postReplies || {}), ...(state.postReplies || {}) };
             state.liveProgress = { ...(state.liveProgress || {}) };
+            state.liveStats = { ...(state.liveStats || {}) };
             state.liveChat = safeArray(state.liveChat);
             state.homeFilter = ["all","live","post"].includes(state.homeFilter) ? state.homeFilter : "all";
             state.businessDeals = {
@@ -527,6 +542,7 @@
                   communityPosts: state.communityPosts,
                   postReplies: state.postReplies,
                   liveProgress: state.liveProgress,
+                  liveStats: state.liveStats,
                   liveChat: state.liveChat
                 });
               } catch (err) {
@@ -865,6 +881,81 @@
               return state.liveProgress[id];
             };
 
+            const isOwnLiveSession = (live) => {
+              const id = String(live?.id || "");
+              return id === "own-live" || id.startsWith("own-scheduled-") || live?.ownerType === "identity" || live?.isOwn === true;
+            };
+
+            const getLiveStats = (live) => {
+              const id = String(live?.id || "live");
+              if (!state.liveStats[id]) {
+                const followers = Math.max(0, Number(live?.followers || 0));
+                const activity = Math.max(0, Math.min(100, Number(state.platformSettings?.activityLevel ?? 50)));
+                const followerBase = followers > 0 ? Math.max(3, Math.round(followers * (0.025 + activity * 0.00018))) : 0;
+                const seedViewers = Math.max(1, Number(live?.viewers || followerBase || 36));
+                const baseViewers = followerBase || seedViewers;
+                const currentViewers = followers > 0 ? Math.max(1, Math.round((baseViewers + seedViewers) / 2)) : Math.round(seedViewers);
+                const scale = Math.max(1, Math.round(currentViewers / 1200));
+                state.liveStats[id] = {
+                  baseViewers,
+                  currentViewers,
+                  peakViewers: currentViewers,
+                  heat: 50,
+                  userGiftTotal: 0,
+                  gifts: [
+                    { user: "Mika", amount: 180 * scale },
+                    { user: "yoo_n", amount: 110 * scale },
+                    { user: "Sato_Aki", amount: 70 * scale }
+                  ]
+                };
+              }
+              return state.liveStats[id];
+            };
+
+            const getGiftRanking = (live) => {
+              const stats = getLiveStats(live);
+              const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
+              const ownHandle = String(identity?.handle || identity?.displayName || "@user");
+              const map = new Map();
+              safeArray(stats.gifts).forEach(item => map.set(String(item.user), (map.get(String(item.user)) || 0) + Number(item.amount || 0)));
+              if (Number(stats.userGiftTotal || 0) > 0) map.set(ownHandle, Number(stats.userGiftTotal || 0));
+              return [...map.entries()].map(([user, amount]) => ({ user, amount })).sort((a,b) => b.amount - a.amount);
+            };
+
+            const renderLiveHUD = () => {
+              const live = state.liveSession;
+              if (!live) return;
+              const stats = getLiveStats(live);
+              const viewers = q('[data-screen="live"] [data-role="live-viewers"]');
+              if (viewers) viewers.textContent = `${formatViewers(stats.currentViewers || 0)} 人正在观看`;
+              const trigger = q('[data-screen="live"] [data-role="gift-rank-trigger"]');
+              const ranking = getGiftRanking(live);
+              if (trigger) trigger.textContent = ranking.length ? `👑 ${ranking[0].user} · ¥${Math.round(ranking[0].amount)}` : "🎁 礼物榜";
+              const rows = q('[data-screen="live"] [data-role="gift-rank-rows"]');
+              if (rows) {
+                const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
+                const ownHandle = String(identity?.handle || identity?.displayName || "@user");
+                rows.innerHTML = ranking.slice(0,8).map((item,index) => `<div class="v-rank-row"><span class="v-rank-no">${index < 3 ? ["👑","2","3"][index] : index + 1}</span><span class="v-rank-user">${escapeHTML(item.user)}${item.user === ownHandle ? " · 你" : ""}</span><span class="v-rank-amount">¥${Math.round(item.amount).toLocaleString("zh-CN")}</span></div>`).join("") || '<div class="v-hint">本场还没有人送礼物。</div>';
+              }
+              const balance = q('[data-screen="live"] [data-role="gift-balance"]');
+              if (balance) balance.textContent = `钱包余额 ¥${Number(state.wallet?.balance || 0).toLocaleString("zh-CN", {maximumFractionDigits:2})}`;
+            };
+
+            const advanceViewerCount = (live, { heatBoost = 0 } = {}) => {
+              const stats = getLiveStats(live);
+              stats.heat = Math.max(0, Math.min(100, Number(stats.heat || 50) + Number(heatBoost || 0) - 1));
+              const base = Math.max(1, Number(stats.baseViewers || stats.currentViewers || 1));
+              const current = Math.max(1, Number(stats.currentViewers || base));
+              const swing = Math.max(1, Math.round(current * 0.055));
+              const heatPull = ((stats.heat - 50) / 50) * Math.max(1, Math.round(base * 0.025));
+              const delta = Math.round((Math.random() - 0.48) * swing * 2 + heatPull);
+              const low = Math.max(1, Math.round(base * 0.58));
+              const high = Math.max(low + 1, Math.round(base * 1.85));
+              stats.currentViewers = Math.max(low, Math.min(high, current + delta));
+              stats.peakViewers = Math.max(Number(stats.peakViewers || 0), stats.currentViewers);
+              return stats.currentViewers;
+            };
+
             const renderLiveMoment = () => {
               const live = state.liveSession;
               const host = q('[data-screen="live"] [data-role="live-moment"]');
@@ -876,14 +967,18 @@
 
             const openLive = (live) => {
               state.liveSession = { ...live };
-              const title = live.title || "正在直播";
-              const hostName = live.name || live.handle || "主播";
-              const liveTrId = `live-title-${String(live.id || "live")}`;
-              const liveTranslation = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
-              getLiveProgress(live);
-              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo" aria-label="礼物" title="礼物">🎁</button><button data-action="send-live-chat" aria-label="发送" title="发送">➤</button><button class="v-continue-mini" data-action="continue-live" aria-label="继续观看直播" title="继续观看直播">↓</button></div></div></div></div>`);
+              const currentLive = state.liveSession;
+              const title = currentLive.title || "正在直播";
+              const hostName = currentLive.name || currentLive.handle || "主播";
+              const liveTrId = `live-title-${String(currentLive.id || "live")}`;
+              const liveTranslation = [currentLive.titleTranslation, currentLive.categoryTranslation].filter(Boolean).join("\n");
+              getLiveProgress(currentLive);
+              getLiveStats(currentLive);
+              const own = isOwnLiveSession(currentLive);
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-hud"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host"><div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div></div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="send-live-chat" aria-label="发送" title="发送">➤</button><button class="v-continue-mini" data-action="continue-live" aria-label="继续观看直播" title="继续观看直播">↓</button></div></div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "直播还在进行中" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出并挂起直播</button><button class="v-danger" data-action="end-own-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
+              renderLiveHUD();
             };
 
             const renderLiveChatLines = () => {
@@ -933,8 +1028,10 @@
               ];
               const base = (nextStep * 2) % chatPool.length;
               state.liveChat.push(chatPool[base], chatPool[(base + 1) % chatPool.length]);
+              advanceViewerCount(live, { heatBoost: fromUser ? 2 : 0 });
               renderLiveMoment();
               renderLiveChatLines();
+              renderLiveHUD();
               await persist();
             };
 
@@ -1440,21 +1537,69 @@
                   }
                   renderRecommended(); renderChannels(); await persist();
                 }
+              } else if (action === "open-live-exit") {
+                q('[data-screen="live"] [data-role="live-exit-menu"]')?.classList.add("is-open");
+              } else if (action === "close-live-exit") {
+                q('[data-screen="live"] [data-role="live-exit-menu"]')?.classList.remove("is-open");
               } else if (action === "leave-live") {
                 closeScreen("live");
+                state.liveSession = null;
                 toast("已退出直播间，主播仍可能继续直播");
+              } else if (action === "hang-own-live") {
+                closeScreen("live");
+                toast("直播已挂起，仍在继续直播");
+              } else if (action === "end-own-live") {
+                const live = state.liveSession;
+                if (live) {
+                  const stats = getLiveStats(live);
+                  stats.ended = true;
+                  stats.endedAt = Date.now();
+                  const channel = state.channels.find(x => String(x.id) === String(live.id));
+                  if (channel) channel.live = false;
+                }
+                state.liveSession = null;
+                await persist();
+                closeScreen("live");
+                renderHome();
+                renderChannels();
+                toast("直播已结束，稍后会进入回放");
               } else if (action === "continue-live") {
                 await advanceLive({ fromUser: false });
               } else if (action === "send-live-chat") {
                 const input = q('[data-screen="live"] [data-role="live-input"]');
                 const text = String(input?.value || "").trim();
-                if (!text) { toast("先输入一条弹幕，或点「继续观看直播」"); return; }
+                if (!text) { toast("先输入一条弹幕，或点 ↓ 继续观看"); return; }
                 const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
                 state.liveChat.push({ user: identity?.handle || "@user", avatar: identity?.avatar || "U", text, translation: "" });
                 input.value = "";
                 await advanceLive({ fromUser: true });
+              } else if (action === "toggle-gift-rank") {
+                q('[data-screen="live"] [data-role="gift-rank-panel"]')?.classList.toggle("is-open");
+                renderLiveHUD();
+              } else if (action === "close-gift-rank") {
+                q('[data-screen="live"] [data-role="gift-rank-panel"]')?.classList.remove("is-open");
               } else if (action === "gift-demo") {
-                toast("礼物面板将在业务版接入钱包余额");
+                q('[data-screen="live"] [data-role="gift-picker"]')?.classList.add("is-open");
+                renderLiveHUD();
+              } else if (action === "close-gift-picker") {
+                q('[data-screen="live"] [data-role="gift-picker"]')?.classList.remove("is-open");
+              } else if (action === "send-live-gift") {
+                const amount = Math.max(0, Number(button.dataset.giftAmount || 0));
+                const live = state.liveSession;
+                if (!live || !amount) return;
+                if (Number(state.wallet?.balance || 0) < amount) { toast("钱包余额不足"); return; }
+                state.wallet.balance = Number(state.wallet.balance || 0) - amount;
+                state.wallet.transactions.unshift({ title: "直播送礼", note: live.handle || live.name || "直播间", amount: -amount });
+                const stats = getLiveStats(live);
+                stats.userGiftTotal = Number(stats.userGiftTotal || 0) + amount;
+                stats.heat = Math.min(100, Number(stats.heat || 50) + Math.min(18, amount / 80));
+                advanceViewerCount(live, { heatBoost: Math.min(10, amount / 120) });
+                state.liveChat.push({ user: "系统", avatar: "🎁", text: `${state.identities.find(x => x.id === state.viewerIdentityId)?.handle || "@user"} 送出了 ¥${amount} 的礼物`, translation: "" });
+                await persist();
+                renderLiveChatLines();
+                renderLiveHUD();
+                q('[data-screen="live"] [data-role="gift-picker"]')?.classList.remove("is-open");
+                toast(`已送出 ¥${amount}`);
               } else if (action === "open-message") {
                 openMessage(button.dataset.messageId);
               } else if (action === "toggle-business-task") {
