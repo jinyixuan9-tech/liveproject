@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.6";
+  const VERSION = "0.1.7";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -217,6 +217,7 @@
         ]
       },
       liveSession: null,
+      liveProgress: {},
       roleCommerce: {
         "char-aster": { enabled: true, tendency: 35 }
       },
@@ -277,6 +278,32 @@
 .vela-roche .v-live-screen{background:var(--v-bg)!important;color:var(--v-text)!important}.vela-roche .v-live-screen .v-subhead{background:rgba(255,255,255,.96)!important;border-bottom-color:var(--v-line)!important;color:#111!important}.vela-roche .v-live-screen .v-subhead>button:first-child{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-screen .v-small-dark{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{border-radius:18px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.18),transparent 27%),linear-gradient(135deg,#1b1c20,#777a83);padding:12px;align-items:flex-start}.vela-roche .v-live-stage:after{background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.28))}.vela-roche .v-live-stage-copy{width:100%;display:flex;justify-content:space-between;align-items:flex-start}.vela-roche .v-live-info{background:var(--v-card);border-radius:18px;padding:13px;margin-top:9px}.vela-roche .v-live-info h2{font-size:17px;line-height:1.35;margin:0}.vela-roche .v-live-info p{font-size:11px;color:var(--v-muted);margin:5px 0 0}.vela-roche .v-chat-panel{margin-top:9px;background:var(--v-card);color:var(--v-text);border:1px solid var(--v-line);border-radius:18px;padding:13px}.vela-roche .v-chatline{display:flex;gap:8px;padding:8px 0}.vela-roche .v-chatline .v-social-avatar{width:31px;height:31px;font-size:10px}.vela-roche .v-chatline-body{min-width:0;flex:1}.vela-roche .v-chatline-head{font-size:10px;font-weight:900}.vela-roche .v-chatline-text{font-size:12px;line-height:1.45;margin-top:2px}.vela-roche .v-composer input{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-composer button{background:#111;color:#fff}.vela-roche .v-continue{background:#111;color:#fff}
 .vela-roche.is-dark .v-live-screen .v-subhead{background:rgba(25,26,32,.96)!important;color:#fff!important}.vela-roche.is-dark .v-live-screen .v-subhead>button:first-child,.vela-roche.is-dark .v-live-screen .v-small-dark{background:#292b33!important;color:#fff!important}.vela-roche.is-dark .v-social-media{background:linear-gradient(135deg,#25272f,#343741)}
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
+
+.vela-roche .v-subscreen[data-screen="live"]{overflow:hidden!important}
+.vela-roche .v-live-screen{height:100%;min-height:0!important;display:flex;flex-direction:column;overflow:hidden}
+.vela-roche .v-live-screen>.v-subhead{position:relative;top:auto;flex:0 0 var(--v-top-h)}
+.vela-roche .v-live-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:10px 12px 10px!important}
+.vela-roche .v-live-fixed{flex:0 0 auto;min-height:0}
+.vela-roche .v-live-stage{flex:0 0 auto}
+.vela-roche .v-live-info{flex:0 0 auto}
+.vela-roche .v-live-moment{margin-top:10px;padding-top:10px;border-top:1px solid var(--v-line)}
+.vela-roche .v-live-moment-label{font-size:10px;font-weight:900;color:var(--v-muted);margin-bottom:4px}
+.vela-roche .v-live-moment-text{font-size:12px;line-height:1.5;color:var(--v-text)}
+.vela-roche .v-chat-panel{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important}
+.vela-roche .v-chat-title{flex:0 0 auto}
+.vela-roche .v-chat-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
+.vela-roche .v-composer,.vela-roche .v-continue{flex:0 0 auto}
+.vela-roche .v-post-composer{display:grid;grid-template-columns:1fr 46px;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--v-line)}
+.vela-roche .v-post-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:var(--v-soft);color:var(--v-text);padding:11px 12px;font-size:16px;outline:none}
+.vela-roche .v-post-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px;font-weight:900}
+.vela-roche .v-comment-tools{display:flex;align-items:center;gap:10px;margin-top:5px}
+.vela-roche .v-comment-tools button{border:0;background:none;color:var(--v-muted);padding:0;font-size:10px;font-weight:800}
+.vela-roche .v-post-footer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.vela-roche .v-post-footer-actions .v-action{margin-top:0!important}
+.vela-roche .v-delete-soft{background:#f3f3f6!important;color:#b3261e!important}
+.vela-roche.is-dark .v-post-composer button{background:#f4f4f6;color:#111}
+.vela-roche.is-dark .v-delete-soft{background:#24262d!important;color:#ff8f86!important}
+
 @media (max-width:360px){.vela-roche .v-main{padding-left:10px;padding-right:10px}.vela-roche .v-live-title{font-size:16px}.vela-roche .v-balance{font-size:30px}}
 </style>`;
   }
@@ -433,6 +460,8 @@
             state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
             state.communityPosts = safeArray(state.communityPosts);
             state.postReplies = { ...(createDefaultState().postReplies || {}), ...(state.postReplies || {}) };
+            state.liveProgress = { ...(state.liveProgress || {}) };
+            state.liveChat = safeArray(state.liveChat);
             state.homeFilter = ["all","live","post"].includes(state.homeFilter) ? state.homeFilter : "all";
             state.businessDeals = {
               "biz-mellow": {
@@ -488,6 +517,7 @@
                   platformSettings: state.platformSettings,
                   communityPosts: state.communityPosts,
                   postReplies: state.postReplies,
+                  liveProgress: state.liveProgress,
                   liveChat: state.liveChat
                 });
               } catch (err) {
@@ -771,24 +801,84 @@
               q(`[data-screen="${name}"]`)?.classList.remove("is-open");
             };
 
+            const liveMomentPool = [
+              { text: "主播把手边的东西往旁边挪了挪，重新靠回椅背，顺手看了一眼快速滚动的聊天。", translation: "" },
+              { text: "잠깐 물을 마시고 화면을 확인한 뒤, 아까 하던 이야기를 조금 더 이어간다.", translation: "喝了口水确认了一下画面后，又继续刚才的话题。" },
+              { text: "少し間を置いてコメントを眺め、気になった話題を拾ってゆっくり話し始める。", translation: "停了一会儿看了看评论，然后挑了一个感兴趣的话题慢慢聊起来。" },
+              { text: "主播换了个更舒服的姿势，房间里安静了一会儿，随后又自然地接着聊。", translation: "" }
+            ];
+
+            const getLiveProgress = (live) => {
+              const id = String(live?.id || "live");
+              if (!state.liveProgress[id]) {
+                state.liveProgress[id] = {
+                  step: 0,
+                  text: String(live?.moment || "主播正在继续当前的话题，偶尔低头看一眼实时聊天。"),
+                  translation: String(live?.momentTranslation || "")
+                };
+              }
+              return state.liveProgress[id];
+            };
+
+            const renderLiveMoment = () => {
+              const live = state.liveSession;
+              const host = q('[data-screen="live"] [data-role="live-moment"]');
+              if (!live || !host) return;
+              const progress = getLiveProgress(live);
+              const trId = `live-moment-${String(live.id || "live")}-${Number(progress.step || 0)}`;
+              host.innerHTML = `<div class="v-live-moment-label">直播进行中</div><div class="v-live-moment-text">${escapeHTML(progress.text || "")}</div>${translationHTML(trId, progress.translation || "")}`;
+            };
+
             const openLive = (live) => {
-              state.liveSession = live;
+              state.liveSession = { ...live };
               const title = live.title || "正在直播";
               const hostName = live.name || live.handle || "主播";
               const liveTrId = `live-title-${String(live.id || "live")}`;
               const liveTranslation = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
-              openScreen("live", `<div class="v-live-screen" style="min-height:100%"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div data-role="live-chat-lines"></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
+              getLiveProgress(live);
+              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}<div class="v-live-moment" data-role="live-moment"></div></div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
+              renderLiveMoment();
               renderLiveChatLines();
             };
 
             const renderLiveChatLines = () => {
               const host = q('[data-screen="live"] [data-role="live-chat-lines"]');
               if (!host) return;
-              const rows = state.liveChat.slice(-8);
+              const rows = state.liveChat.slice(-40);
               host.innerHTML = rows.map((line, index) => {
                 const trId = `live-chat-${index}-${String(line.user || "viewer")}`;
                 return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user)}</div><div class="v-chatline-text">${escapeHTML(line.text)}</div>${translationHTML(trId, line.translation || "")}</div></div>`;
               }).join("");
+              const scroll = q('[data-screen="live"] [data-role="live-chat-scroll"]');
+              if (scroll) requestAnimationFrame(() => { scroll.scrollTop = scroll.scrollHeight; });
+            };
+
+            const advanceLive = async ({ fromUser = false } = {}) => {
+              const live = state.liveSession;
+              if (!live) return;
+              const id = String(live.id || "live");
+              const progress = getLiveProgress(live);
+              const nextStep = Number(progress.step || 0) + 1;
+              const next = liveMomentPool[(nextStep - 1) % liveMomentPool.length];
+              progress.step = nextStep;
+              progress.text = fromUser
+                ? "主播注意到聊天区刚刚有新的发言，视线在屏幕上停了一会儿，再顺着当前话题继续往下聊。"
+                : next.text;
+              progress.translation = fromUser ? "" : next.translation;
+
+              const chatPool = [
+                { user: "Jia", avatar: "J", text: "아까 그 말 너무 웃겼어", translation: "刚才那句话真的笑死我了。" },
+                { user: "sleepycat", avatar: "S", text: "主播刚刚是不是看到了那条弹幕？", translation: "" },
+                { user: "익명", avatar: "익", text: "오늘 평소보다 좀 조용하네", translation: "今天比平时安静一点。" },
+                { user: "Mika", avatar: "M", text: "keep going, this is nice", translation: "继续播吧，这样很好。" },
+                { user: "Sato_Aki", avatar: "S", text: "今の話もう少し聞きたい", translation: "还想再听一点刚才那个话题。" },
+                { user: "yoo_n", avatar: "Y", text: "ㅋㅋㅋ 방금 표정 봤어?", translation: "哈哈哈你们刚刚看到那个表情了吗？" }
+              ];
+              const base = (nextStep * 2) % chatPool.length;
+              state.liveChat.push(chatPool[base], chatPool[(base + 1) % chatPool.length]);
+              renderLiveMoment();
+              renderLiveChatLines();
+              await persist();
             };
 
             const getPostById = (postId) => {
@@ -807,13 +897,17 @@
             };
 
             const renderPostComments = (postId) => {
+              const id = String(postId || "");
               const host = q('[data-screen="post"] [data-role="post-comments"]');
               if (!host) return;
-              const replies = safeArray(state.postReplies?.[String(postId)]);
+              const replies = safeArray(state.postReplies?.[id]);
               host.innerHTML = replies.length ? replies.map((reply, index) => {
-                const trId = `post-comment-${String(postId)}-${index}`;
-                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div><div class="v-comment-text">${escapeHTML(reply.text || "")}</div>${translationHTML(trId, reply.translation || "")}</div></div>`;
-              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有回复。可以点下面的「召唤回复」看看这一批网友会说什么。</div>`;
+                const trId = `post-comment-${id}-${index}`;
+                const canDelete = Boolean(reply?.isUser);
+                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-social-handle">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div>${translationHTML(trId, reply.translation || "")}${canDelete ? `<div class="v-comment-tools"><button data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>` : ""}</div></div>`;
+              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有评论。你可以先自己留言，或者点下面的「召唤回复」让这一批网友开始互动。</div>`;
+              const counter = q('[data-screen="post"] [data-role="post-comment-count"]');
+              if (counter) counter.textContent = String(replies.length);
             };
 
             const openPostDetail = (postId) => {
@@ -821,7 +915,9 @@
               if (!post) return;
               const imageHTML = isImageURL(post.image || "") ? `<img src="${escapeHTML(post.image)}" alt="">` : "✦";
               const trId = `post-detail-${String(post.id)}`;
-              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ ${safeArray(state.postReplies?.[String(post.id)]).length}</button></div><div class="v-comment-list" data-role="post-comments"></div><button class="v-action" style="margin-top:12px" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}">✦ 召唤回复</button></article></div>`);
+              const saved = state.communityPosts.find(p => String(p.id) === String(post.id));
+              const canDeletePost = Boolean(saved && saved.ownerType === "identity" && String(saved.ownerId || "") === String(state.viewerIdentityId || ""));
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer"><input data-role="post-comment-input" placeholder="写下评论…" maxlength="240"><button data-action="send-post-comment" data-post-id="${escapeHTML(post.id)}">➤</button></div><div class="v-post-footer-actions"><button class="v-action" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}">✦ 召唤回复</button>${canDeletePost ? `<button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button>` : ""}</div></article></div>`);
               renderPostComments(post.id);
             };
 
@@ -883,8 +979,58 @@
               toast("贴文已发布到社群");
             };
 
+            const sendPostComment = async (postId) => {
+              const id = String(postId || "");
+              const input = q('[data-screen="post"] [data-role="post-comment-input"]');
+              const textValue = String(input?.value || "").trim();
+              if (!textValue) { toast("先写一点评论"); return; }
+              const identity = state.identities.find(x => String(x.id) === String(state.viewerIdentityId)) || state.identities[0];
+              const current = safeArray(state.postReplies[id]);
+              current.push({
+                id: `comment-${Date.now().toString(36)}`,
+                user: identity?.handle || identity?.displayName || "@user",
+                avatar: identity?.avatar || initials(identity?.displayName || "U"),
+                text: textValue,
+                translation: "",
+                isUser: true,
+                identityId: identity?.id || state.viewerIdentityId
+              });
+              state.postReplies[id] = current;
+              if (input) input.value = "";
+              await persist();
+              renderPostComments(id);
+              renderHome();
+            };
+
+            const deletePostComment = async (postId, indexValue) => {
+              const id = String(postId || "");
+              const index = Number(indexValue);
+              const current = safeArray(state.postReplies[id]);
+              if (!Number.isInteger(index) || index < 0 || index >= current.length || !current[index]?.isUser) return;
+              current.splice(index, 1);
+              state.postReplies[id] = current;
+              await persist();
+              renderPostComments(id);
+              renderHome();
+              toast("评论已删除");
+            };
+
+            const deleteCommunityPost = async (postId) => {
+              const id = String(postId || "");
+              const index = state.communityPosts.findIndex(p => String(p.id) === id && p.ownerType === "identity" && String(p.ownerId || "") === String(state.viewerIdentityId || ""));
+              if (index < 0) return;
+              const removed = state.communityPosts.splice(index, 1)[0];
+              delete state.postReplies[id];
+              await persist();
+              closeScreen("post");
+              openProfile(removed.ownerType || "identity", removed.ownerId || state.viewerIdentityId);
+              renderProfileTab(removed.ownerType || "identity", removed.ownerId || state.viewerIdentityId, "community");
+              toast("贴文已删除");
+            };
+
             const summonPostReplies = async (postId) => {
               const id = String(postId || "");
+              const post = getPostById(id);
               const pool = [
                 { user: "luna_08", avatar: "L", text: "와 이 분위기 진짜 좋다", translation: "哇，这个氛围真的很好。" },
                 { user: "momo", avatar: "M", text: "次の配信もこの感じでお願い", translation: "下一场直播也请保持这种感觉。" },
@@ -892,10 +1038,27 @@
                 { user: "익명", avatar: "익", text: "사진 아래쪽 조명 뭔지 궁금해", translation: "有点好奇照片下面那个灯是什么。" }
               ];
               const current = safeArray(state.postReplies[id]);
-              const next = pool.slice(current.length % pool.length, (current.length % pool.length) + 2);
-              state.postReplies[id] = [...current, ...next];
+              const userComments = current.filter(item => item?.isUser);
+              const additions = [];
+              if (post?.ownerType === "channel" && userComments.length) {
+                const target = userComments[userComments.length - 1];
+                additions.push({
+                  id: `reply-${Date.now().toString(36)}-host`,
+                  user: post.handle || post.name || "主播",
+                  avatar: post.avatar || initials(post.name || "V"),
+                  text: "刚刚看到这条了，我也正想说这个。",
+                  translation: "",
+                  replyTo: target.user || "@user",
+                  isUser: false
+                });
+              }
+              const offset = current.filter(item => !item?.isUser).length % pool.length;
+              additions.push({ ...pool[offset], id: `reply-${Date.now().toString(36)}-1`, isUser: false });
+              additions.push({ ...pool[(offset + 1) % pool.length], id: `reply-${Date.now().toString(36)}-2`, isUser: false });
+              state.postReplies[id] = [...current, ...additions];
               await persist();
               renderPostComments(id);
+              renderHome();
               toast("已生成一批新的回复");
             };
 
@@ -1190,6 +1353,12 @@
                 button.textContent = `${liked ? "♡" : "♥"} ${Math.max(0, raw + (liked ? -1 : 1))}`;
               } else if (action === "summon-post-replies") {
                 await summonPostReplies(button.dataset.postId || "");
+              } else if (action === "send-post-comment") {
+                await sendPostComment(button.dataset.postId || "");
+              } else if (action === "delete-post-comment") {
+                await deletePostComment(button.dataset.postId || "", button.dataset.commentIndex);
+              } else if (action === "delete-community-post") {
+                await deleteCommunityPost(button.dataset.postId || "");
               } else if (action === "open-community-post-editor") {
                 openCommunityPostEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || state.viewerIdentityId);
               } else if (action === "save-community-post") {
@@ -1218,14 +1387,7 @@
                 closeScreen("live");
                 toast("已退出直播间，主播仍可能继续直播");
               } else if (action === "continue-live") {
-                const samples = [
-                  { user: "Jia", avatar: "J", text: "아까 그 말 너무 웃겼어", translation: "刚才那句话真的笑死我了。" },
-                  { user: "sleepycat", avatar: "S", text: "主播刚刚是不是看到了那条弹幕？", translation: "" },
-                  { user: "익명", avatar: "익", text: "오늘 평소보다 좀 조용하네", translation: "今天比平时安静一点。" },
-                  { user: "Mika", avatar: "M", text: "keep going, this is nice", translation: "继续播吧，这样很好。" }
-                ];
-                state.liveChat.push(samples[Math.floor(Math.random() * samples.length)]);
-                renderLiveChatLines(); await persist();
+                await advanceLive({ fromUser: false });
               } else if (action === "send-live-chat") {
                 const input = q('[data-screen="live"] [data-role="live-input"]');
                 const text = String(input?.value || "").trim();
@@ -1233,8 +1395,7 @@
                 const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
                 state.liveChat.push({ user: identity?.handle || "@user", avatar: identity?.avatar || "U", text, translation: "" });
                 input.value = "";
-                state.liveChat.push({ user: "viewer_7", avatar: "V", text: "방금 그 댓글 본 것 같은데?", translation: "感觉主播刚刚是不是看到那条了？" });
-                renderLiveChatLines(); await persist();
+                await advanceLive({ fromUser: true });
               } else if (action === "gift-demo") {
                 toast("礼物面板将在业务版接入钱包余额");
               } else if (action === "open-message") {
@@ -1405,6 +1566,20 @@
                 openLive({ id: "own-live", name: identity?.displayName || "我的频道", handle: identity?.handle || "@me", title: "我的直播间", category: "主播控制台 Shell", viewers: 357 });
               } else if (action === "wallet-demo" || action === "biz-demo" || action === "noop") {
                 toast("这个入口会在下一阶段接真实业务逻辑");
+              }
+            });
+
+            root.addEventListener("keydown", async (event) => {
+              if (event.key !== "Enter" || event.shiftKey) return;
+              const target = event.target;
+              if (target?.matches?.('[data-role="post-comment-input"]')) {
+                event.preventDefault();
+                const button = q('[data-screen="post"] [data-action="send-post-comment"]');
+                if (button) await sendPostComment(button.dataset.postId || "");
+              } else if (target?.matches?.('[data-role="live-input"]')) {
+                event.preventDefault();
+                const button = q('[data-screen="live"] [data-action="send-live-chat"]');
+                button?.click();
               }
             });
 
