@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.18";
+  const VERSION = "0.1.19";
   const VELA_ICON = "data:image/png;base64,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";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
@@ -61,6 +61,7 @@
       subscriptions: {},
       subscriptionProfiles: {},
       communityChats: {},
+      communitySettings: {},
       dmThreads: {},
       pendingOwnLiveInput: null,
       drawerOpen: false,
@@ -210,6 +211,7 @@
           id: "biz-mellow",
           avatar: "M",
           name: "Mellow Studio",
+          handle: "@mellow_studio",
           badge: "合作邀约",
           preview: "Mellow Studio · Cloud Mist 香氛机合作邀约",
           unread: 1
@@ -218,6 +220,7 @@
           id: "aster-dm",
           avatar: "A",
           name: "Aster",
+          handle: "@aster_room",
           badge: "",
           relationship: "mutual",
           channelId: "char-aster",
@@ -459,6 +462,72 @@
 .vela-roche .v-own-subscription-tools h3{font-size:16px;margin:0}.vela-roche .v-own-subscription-tools p{font-size:10px;color:var(--v-muted);margin:3px 0 0}
 .vela-roche .v-own-subscription-tools button{border:0;border-radius:11px;background:var(--v-soft);color:var(--v-text);padding:8px 9px;font-size:9px;font-weight:900;white-space:nowrap}
 
+
+/* v0.1.19 · unified DM / community chat */
+.vela-roche .v-chat-screen{height:100%;min-height:0;display:flex;flex-direction:column;background:var(--v-bg)}
+.vela-roche .v-chat-head{position:sticky;top:0;z-index:5;height:var(--v-top-h);padding:0 11px;display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:8px;background:rgba(242,242,247,.94);backdrop-filter:blur(18px);border-bottom:1px solid var(--v-line)}
+.vela-roche .v-chat-back,.vela-roche .v-chat-headicon{width:36px;height:36px;border:0;border-radius:12px;background:var(--v-card);color:var(--v-text);display:grid;place-items:center;font-size:19px}
+.vela-roche .v-chat-headcopy{min-width:0;text-align:center}
+.vela-roche .v-chat-headcopy strong{display:block;font-size:13px;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vela-roche .v-chat-headcopy small{display:block;margin-top:3px;font-size:9px;font-weight:650;color:var(--v-muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vela-roche .v-chat-headactions{display:flex;align-items:center;gap:5px}
+.vela-roche .v-chat-headicon{font-size:14px;background:transparent}
+.vela-roche .v-chat-headicon.is-edit{font-size:13px;font-weight:900}
+.vela-roche .v-chat-topmenu{position:absolute;z-index:10;right:10px;top:calc(var(--v-top-h) - 6px);min-width:142px;padding:6px;background:rgba(255,255,255,.96);backdrop-filter:blur(18px);border:1px solid var(--v-line);border-radius:14px;box-shadow:0 12px 35px rgba(0,0,0,.14);display:none}
+.vela-roche .v-chat-topmenu.is-open{display:block}
+.vela-roche .v-chat-topmenu button{width:100%;border:0;background:none;border-radius:10px;padding:9px 10px;text-align:left;color:var(--v-red);font-size:10px;font-weight:900}
+.vela-roche .v-chat-body{flex:1;min-height:0;overflow:auto;padding:11px 12px 88px;-webkit-overflow-scrolling:touch}
+.vela-roche .v-chat-timestamp{text-align:center;color:var(--v-muted);font-size:8.5px;font-weight:750;margin:10px 0 9px}
+.vela-roche .v-chat-row{display:flex;align-items:flex-end;gap:7px;margin:7px 0}
+.vela-roche .v-chat-row.is-me{justify-content:flex-end}
+.vela-roche .v-chat-row .v-social-avatar{width:28px;height:28px;font-size:9px}
+.vela-roche .v-chat-stack{max-width:min(78%,430px);min-width:0}
+.vela-roche .v-chat-sender{font-size:8px;color:var(--v-muted);font-weight:850;margin:0 0 3px 4px}
+.vela-roche .v-chat-row.is-me .v-chat-sender{text-align:right;margin:0 4px 3px 0}
+.vela-roche .v-chat-bubble{background:var(--v-card);color:var(--v-text);border:1px solid var(--v-line);border-radius:17px 17px 17px 6px;padding:9px 11px;font-size:12px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.vela-roche .v-chat-row.is-me .v-chat-bubble{background:#111;color:#fff;border-color:#111;border-radius:17px 17px 6px 17px}
+.vela-roche .v-chat-bubble .v-translate-btn{display:block;margin-top:5px;color:var(--v-muted)}
+.vela-roche .v-chat-row.is-me .v-chat-bubble .v-translate-btn{color:rgba(255,255,255,.65)}
+.vela-roche .v-chat-bubble .v-translation{margin-top:5px;font-size:10px}
+.vela-roche .v-chat-row.is-me .v-chat-bubble .v-translation{color:rgba(255,255,255,.78);border-left-color:rgba(255,255,255,.28)}
+.vela-roche .v-chat-card{width:min(86%,450px);margin:9px auto;background:var(--v-card);border:1px solid var(--v-line);border-radius:18px;padding:12px;box-shadow:0 4px 16px rgba(0,0,0,.04)}
+.vela-roche .v-chat-card-head{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.vela-roche .v-chat-card-type{font-size:9px;font-weight:950;color:var(--v-muted)}
+.vela-roche .v-chat-card-status{font-size:8px;font-weight:900;border-radius:8px;padding:4px 6px;background:var(--v-soft);color:var(--v-muted)}
+.vela-roche .v-chat-card-status.is-ok{background:#e8f7ee;color:#21834a}.vela-roche .v-chat-card-status.is-no{background:#fff0f1;color:var(--v-red)}
+.vela-roche .v-chat-card-title{font-size:14px;font-weight:950;line-height:1.3;margin-top:8px}
+.vela-roche .v-chat-card-meta{display:grid;gap:4px;margin-top:8px;font-size:10px;line-height:1.45;color:var(--v-muted)}
+.vela-roche .v-chat-card-meta b{color:var(--v-text);font-weight:850}
+.vela-roche .v-chat-card-actions{display:flex;gap:7px;margin-top:10px}
+.vela-roche .v-chat-card-actions button{flex:1;border:0;border-radius:11px;min-height:36px;font-size:9px;font-weight:900;background:var(--v-blue);color:#fff}
+.vela-roche .v-chat-card-actions button.is-light{background:var(--v-soft);color:var(--v-text)}
+.vela-roche .v-chat-card-actions button.is-danger{background:rgba(255,59,48,.10);color:var(--v-red)}
+.vela-roche .v-chat-composer-wrap{position:absolute;z-index:8;left:10px;right:10px;bottom:calc(9px + env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:6px;padding:6px;background:rgba(255,255,255,.92);backdrop-filter:blur(18px);border:1px solid var(--v-line);border-radius:22px;box-shadow:0 9px 28px rgba(0,0,0,.11)}
+.vela-roche .v-chat-composer-wrap input{flex:1;min-width:0;border:0;background:transparent;color:var(--v-text);font-size:16px;padding:7px 8px;outline:none}
+.vela-roche .v-chat-composer-wrap button{width:38px;height:38px;border:0;border-radius:16px;display:grid;place-items:center;font-weight:950}
+.vela-roche .v-chat-plus{background:var(--v-soft);color:var(--v-text);font-size:20px}.vela-roche .v-chat-summon{background:#111;color:#fff;font-size:17px}
+.vela-roche .v-chat-summon.is-loading{opacity:.5;pointer-events:none}
+.vela-roche .v-chat-tool-grid{display:grid;gap:8px}
+.vela-roche .v-chat-tool-grid button{width:100%;border:0;border-radius:16px;background:var(--v-card);color:var(--v-text);padding:13px;text-align:left;font-size:12px;font-weight:900;border:1px solid var(--v-line)}
+.vela-roche .v-chat-tool-grid button small{display:block;color:var(--v-muted);font-size:9px;font-weight:650;margin-top:3px}
+.vela-roche .v-tool-form{display:grid;gap:11px}
+.vela-roche .v-tool-note{font-size:9px;line-height:1.5;color:var(--v-muted)}
+.vela-roche .v-community-announcement{width:min(92%,500px);margin:5px auto 10px;padding:8px 10px;border-radius:13px;background:var(--v-soft);font-size:9px;line-height:1.45;color:var(--v-muted)}
+.vela-roche .v-community-card-msg{width:min(88%,460px);margin:9px auto;border-radius:18px;background:var(--v-card);border:1px solid var(--v-line);padding:12px}
+.vela-roche .v-community-card-msg .v-kicker{font-size:8px;color:var(--v-muted);font-weight:950}
+.vela-roche .v-community-card-msg h4{font-size:13px;margin:7px 0 5px}.vela-roche .v-community-card-msg p{font-size:10px;line-height:1.45;color:var(--v-muted);margin:0}
+.vela-roche .v-poll-options{display:grid;gap:6px;margin-top:9px}.vela-roche .v-poll-options button{border:0;border-radius:11px;background:var(--v-soft);color:var(--v-text);min-height:36px;padding:7px 9px;text-align:left;font-size:10px;font-weight:800;display:flex;justify-content:space-between;gap:8px}
+.vela-roche .v-poll-options button.is-voted{background:var(--v-blue-soft);color:var(--v-blue)}
+.vela-roche .v-lottery-action{margin-top:9px;width:100%;border:0;border-radius:11px;background:var(--v-blue);color:#fff;min-height:37px;font-size:10px;font-weight:900}
+.vela-roche .v-community-edit-grid{display:grid;gap:12px}
+.vela-roche .v-community-preview{display:flex;align-items:center;gap:10px;padding:11px;background:var(--v-card);border:1px solid var(--v-line);border-radius:18px}
+.vela-roche .v-community-preview .v-social-avatar{width:54px;height:54px}
+.vela-roche .v-community-botchecks{display:grid;gap:7px}.vela-roche .v-community-check{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:10px;padding:8px 0;border-top:1px solid var(--v-line)}.vela-roche .v-community-check:first-child{border-top:0}
+.vela-roche .v-appointment-card{margin:18px;background:var(--v-card);border-radius:22px;padding:16px;border:1px solid var(--v-line)}
+.vela-roche .v-appointment-card h3{font-size:18px;margin:0 0 7px}.vela-roche .v-appointment-card p{font-size:11px;line-height:1.55;color:var(--v-muted)}
+.vela-roche .v-appointment-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:13px}.vela-roche .v-appointment-actions button{border:0;border-radius:13px;min-height:42px;font-size:10px;font-weight:900}.vela-roche .v-appointment-actions .v-go{background:var(--v-blue);color:#fff}.vela-roche .v-appointment-actions .v-later{background:var(--v-soft);color:var(--v-text)}
+.vela-roche.is-dark .v-chat-head{background:rgba(16,17,22,.94)}.vela-roche.is-dark .v-chat-topmenu,.vela-roche.is-dark .v-chat-composer-wrap{background:rgba(25,26,32,.94)}
+
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 
 .vela-roche .v-subscreen[data-screen="live"]{overflow:hidden!important}
@@ -684,6 +753,10 @@
       <section class="v-subscreen" data-screen="publish-live"></section>
       <section class="v-subscreen" data-screen="restricted-editor"></section>
       <section class="v-subscreen" data-screen="invite-guest"></section>
+      <section class="v-subscreen" data-screen="replay"></section>
+      <section class="v-subscreen" data-screen="subscription-settings"></section>
+      <section class="v-subscreen" data-screen="community-settings"></section>
+      <section class="v-subscreen" data-screen="appointment-reminder"></section>
       <div class="v-toast" data-role="toast"></div>
     `;
   }
@@ -752,6 +825,7 @@
             state.subscriptions = { ...(state.subscriptions || {}) };
             state.subscriptionProfiles = { ...(state.subscriptionProfiles || {}) };
             state.communityChats = { ...(state.communityChats || {}) };
+            state.communitySettings = { ...(state.communitySettings || {}) };
             state.dmThreads = { ...(state.dmThreads || {}) };
             state.messages = safeArray(state.messages);
             state.pendingOwnLiveInput = state.pendingOwnLiveInput && typeof state.pendingOwnLiveInput === "object" ? state.pendingOwnLiveInput : null;
@@ -808,6 +882,7 @@
                   subscriptions: state.subscriptions,
                   subscriptionProfiles: state.subscriptionProfiles,
                   communityChats: state.communityChats,
+                  communitySettings: state.communitySettings,
                   dmThreads: state.dmThreads,
                   messages: state.messages,
                   pendingOwnLiveInput: state.pendingOwnLiveInput,
@@ -875,6 +950,7 @@
                   liveSchedule: String(existing?.liveSchedule || ""),
                   liveAutonomy: String(existing?.liveAutonomy || "flexible"),
                   profileCustomized: false,
+                  scheduledLive: existing?.scheduledLive || null,
                   live: Boolean(existing?.live),
                   title: String(existing?.title || ""),
                   viewers: Number(existing?.viewers || 0)
@@ -1140,31 +1216,92 @@
 
             const communityChatKey = (ownerType, ownerId, tier) => `${String(ownerType)}:${String(ownerId)}:${tier === "paid" ? "paid" : "free"}`;
 
+            const isOwnCommunity = (ownerType, ownerId) => {
+              if (ownerType === "identity") return String(ownerId) === String(state.viewerIdentityId);
+              const channel = state.channels.find(ch => String(ch.id) === String(ownerId));
+              return Boolean(channel?.sourceCharacterId && safeArray(state.rocheLink?.linkedCharacterIds).map(String).includes(String(channel.sourceCharacterId)));
+            };
+
+            const getCommunitySettings = (ownerType, ownerId, tier) => {
+              const key = communityChatKey(ownerType, ownerId, tier);
+              const entity = getProfileEntity(ownerType, ownerId);
+              const subCfg = getSubscriptionProfile(ownerType, ownerId)[tier === "paid" ? "paid" : "free"];
+              const current = state.communitySettings[key] || {};
+              const normalized = {
+                avatar: String(current.avatar || entity?.avatar || ""),
+                name: String(current.name || subCfg.communityName || `${profileName(entity, ownerType)}社群`),
+                announcement: String(current.announcement || ""),
+                fanName: String(current.fanName || (tier === "paid" ? "会员" : "粉丝")),
+                botEnabled: current.botEnabled !== false,
+                botScheduled: current.botScheduled !== false,
+                botLive: current.botLive !== false,
+                botLottery: current.botLottery !== false,
+                fanProfile: String(current.fanProfile || entity?.fanProfile || "喜欢主播日常、直播讨论与轻松聊天。"),
+                chatStyle: String(current.chatStyle || "自然闲聊、直播讨论、偶尔接梗，不要求每个人都围着主播。")
+              };
+              state.communitySettings[key] = normalized;
+              return normalized;
+            };
+
+            const stableHash = (value) => {
+              let h = 2166136261;
+              const text = String(value || "");
+              for (let i = 0; i < text.length; i += 1) {
+                h ^= text.charCodeAt(i);
+                h = Math.imul(h, 16777619);
+              }
+              return Math.abs(h >>> 0);
+            };
+
+            const getCommunityStats = (ownerType, ownerId, tier) => {
+              const entity = getProfileEntity(ownerType, ownerId);
+              const followers = Math.max(24, Number(entity?.followers || 0));
+              const seed = stableHash(communityChatKey(ownerType, ownerId, tier));
+              const ratio = (tier === "paid" ? 0.055 : 0.18) + (seed % 14) / 100;
+              const members = Math.max(tier === "paid" ? 8 : 16, Math.round(followers * ratio));
+              const activity = Math.max(4, Math.min(98, Number(state.platformSettings?.activityLevel || 50)));
+              const timeSeed = Math.floor(Date.now() / 60000);
+              const activeRatio = 0.018 + (activity / 100) * 0.06;
+              const active = Math.max(1, Math.min(members, Math.round(members * activeRatio + ((seed + timeSeed) % 7))));
+              return { members, active };
+            };
+
             const renderMessages = () => {
               const host = q('[data-role="messages"]');
               qa('[data-dm-tab]').forEach(btn => btn.classList.toggle("is-active", btn.dataset.dmTab === state.dmTab));
+
               if (state.dmTab === "community") {
+                const ownGroups = [];
                 const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId));
-                const ownCfg = getSubscriptionProfile("identity", state.viewerIdentityId);
-                const ownRows = identity ? ["free","paid"].map(tier => {
-                  const cfg = ownCfg[tier];
-                  return `<button class="v-community-entry" data-action="open-community-chat" data-owner-type="identity" data-owner-id="${escapeHTML(identity.id)}" data-tier="${tier}"><div class="v-social-avatar">${avatarHTML(identity.avatar || "", identity.displayName || "V")}</div><div class="v-meta"><div class="v-name">${escapeHTML(cfg.communityName || "我的社群")}</div><div class="v-community-owner">你是群主 · ${escapeHTML(identity.handle || "")}</div></div><span class="v-community-tier-dot ${tier === "paid" ? "is-paid" : "is-free"}">${tier === "paid" ? `${escapeHTML(cfg.emoji || "◆")} 付费` : `${escapeHTML(cfg.emoji || "◇")} 免费`}</span></button>`;
-                }).join("") : "";
+                if (identity) {
+                  ["free","paid"].forEach(tier => ownGroups.push({ ownerType: "identity", ownerId: identity.id, tier, entity: identity }));
+                }
+                state.channels.filter(ch => isOwnCommunity("channel", ch.id)).forEach(ch => {
+                  ["free","paid"].forEach(tier => ownGroups.push({ ownerType: "channel", ownerId: ch.id, tier, entity: ch }));
+                });
 
-                const joinedRows = state.channels.flatMap(ch => {
-                  const sub = state.subscriptions?.[String(ch.id)] || "none";
-                  if (sub === "none") return [];
-                  const cfg = getSubscriptionProfile("channel", ch.id);
-                  const tiers = sub === "paid" ? ["free","paid"] : ["free"];
-                  return tiers.map(tier => {
-                    const t = cfg[tier];
-                    return `<button class="v-community-entry" data-action="open-community-chat" data-owner-type="channel" data-owner-id="${escapeHTML(ch.id)}" data-tier="${tier}"><div class="v-social-avatar">${avatarHTML(ch.avatar || "", ch.name || "V")}</div><div class="v-meta"><div class="v-name">${escapeHTML(t.communityName || `${ch.name || "频道"}社群`)}</div><div class="v-community-owner">群主 · ${escapeHTML(ch.name || ch.handle || "频道")}</div></div><span class="v-community-tier-dot ${tier === "paid" ? "is-paid" : "is-free"}">${tier === "paid" ? `${escapeHTML(t.emoji || "◆")} 付费` : `${escapeHTML(t.emoji || "◇")} 免费`}</span></button>`;
+                const ownKeys = new Set(ownGroups.map(g => communityChatKey(g.ownerType, g.ownerId, g.tier)));
+                const joinedGroups = [];
+                Object.entries(state.subscriptions || {}).forEach(([channelId, sub]) => {
+                  const ch = state.channels.find(item => String(item.id) === String(channelId));
+                  if (!ch || isOwnCommunity("channel", ch.id)) return;
+                  const tiers = sub === "paid" ? ["free","paid"] : sub === "free" ? ["free"] : [];
+                  tiers.forEach(tier => {
+                    const key = communityChatKey("channel", ch.id, tier);
+                    if (!ownKeys.has(key)) joinedGroups.push({ ownerType: "channel", ownerId: ch.id, tier, entity: ch });
                   });
-                }).join("");
+                });
 
-                host.innerHTML = `${ownRows ? `<div class="v-community-section-title">我的社群</div><div class="v-community-list">${ownRows}</div>` : ""}<div class="v-community-section-title">我加入的社群</div>${joinedRows ? `<div class="v-community-list">${joinedRows}</div>` : `<div class="v-profile-empty">还没有加入其他主播的社群。<br>订阅入口只在对应主播主页。</div>`}`;
+                const rowHTML = group => {
+                  const cfg = getCommunitySettings(group.ownerType, group.ownerId, group.tier);
+                  const stats = getCommunityStats(group.ownerType, group.ownerId, group.tier);
+                  return `<button class="v-community-entry" data-action="open-community-chat" data-owner-type="${escapeHTML(group.ownerType)}" data-owner-id="${escapeHTML(group.ownerId)}" data-tier="${escapeHTML(group.tier)}"><div class="v-social-avatar">${avatarHTML(cfg.avatar || group.entity?.avatar || "", cfg.name || "V")}</div><div class="v-meta"><div class="v-name">${escapeHTML(cfg.name)}</div><div class="v-community-owner">${stats.members.toLocaleString("zh-CN")} 人 · ${stats.active.toLocaleString("zh-CN")} 人正在聊天</div></div><span class="v-community-tier-dot ${group.tier === "paid" ? "is-paid" : "is-free"}">${group.tier === "paid" ? "付费" : "免费"}</span></button>`;
+                };
+
+                host.innerHTML = `<div class="v-community-section-title">我的社群</div><div class="v-community-list">${ownGroups.map(rowHTML).join("") || '<div class="v-profile-empty">还没有自己的社群。</div>'}</div><div class="v-community-section-title">我加入的社群</div>${joinedGroups.length ? `<div class="v-community-list">${joinedGroups.map(rowHTML).join("")}</div>` : `<div class="v-profile-empty">还没有加入其他主播的社群。<br>订阅入口只在对应主播主页。</div>`}`;
                 return;
               }
+
               host.innerHTML = `<div class="v-card">${state.messages.map(msg => {
                 const rel = getDMRelationshipBadge(msg);
                 return `<button class="v-msg" data-action="open-message" data-message-id="${escapeHTML(msg.id)}"><div class="v-mini">${avatarHTML(msg.avatar, msg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(msg.name)}<span class="v-relation ${rel.cls}">${escapeHTML(rel.text)}</span></div><div class="v-preview">${escapeHTML(msg.preview || "暂无消息")}</div></div>${msg.unread ? `<span class="v-unread">${msg.unread}</span>` : ""}</button>`;
@@ -1790,7 +1927,7 @@
                 const blocks = [];
 
                 if (entity.scheduledLive) {
-                  const scheduledInner = `<div class="v-kicker">置顶 · 预约直播</div><div class="v-live-title">${escapeHTML(entity.scheduledLive.title || "预约直播")}</div><div class="v-sub" style="margin-top:6px">${escapeHTML(entity.scheduledLive.dateText || "未设置时间")}</div>`;
+                  const scheduledInner = `<div class="v-kicker">置顶 · 预约直播</div><div class="v-live-title">${escapeHTML(entity.scheduledLive.title || "预约直播")}</div><div class="v-sub" style="margin-top:6px">${escapeHTML(entity.scheduledLive.dateText || "未设置时间")}${entity.scheduledLive.sourceType ? ` · 来自${entity.scheduledLive.sourceType === "business" ? "商务合作" : "直播邀约"}` : ""}</div>`;
                   const manage = ownerType === "identity"
                     ? `<div class="v-inline-manage"><button data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">编辑</button><button class="is-danger" data-action="cancel-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">删除</button></div>`
                     : "";
@@ -2059,6 +2196,7 @@
               identity.title = title;
               identity.activeLive = { ...live };
               identity.scheduledLive = null;
+              pushCommunityBotEvent("identity", identity.id, "live", { title: live.title, text: "直播已经开始。" });
               state.liveProgress[live.id] = undefined;
               state.liveStats[live.id] = undefined;
               state.liveChat = [];
@@ -2434,29 +2572,83 @@
               toast("订阅方案已保存");
             };
 
-            const openCommunityChat = (ownerType, ownerId, tier) => {
-              const entity = getProfileEntity(ownerType, ownerId);
-              if (!entity) return;
-              const cfg = getSubscriptionProfile(ownerType, ownerId)[tier === "paid" ? "paid" : "free"];
-              const key = communityChatKey(ownerType, ownerId, tier);
-              state.communityChats[key] = safeArray(state.communityChats[key]);
-              const rows = state.communityChats[key];
-              const lines = rows.length ? rows.map(line => `<div class="v-group-line"><div class="v-social-avatar">${avatarHTML(line.avatar || "", line.name || "V")}</div><div class="v-group-bubble"><b>${escapeHTML(line.name || "成员")}</b><div>${escapeHTML(line.text || "")}</div></div></div>`).join("") : `<div class="v-group-empty">群聊已经建立。<br>这里不会自动替任何人发言。</div>`;
-              openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div class="v-meta"><strong>${escapeHTML(cfg.communityName || "订阅社群")}</strong><div class="v-hint">群主 · ${escapeHTML(profileName(entity, ownerType))}</div></div></header><div class="v-subbody v-group-chat"><div class="v-group-lines">${lines}</div><div class="v-group-composer"><input data-role="community-message-input" data-community-key="${escapeHTML(key)}" placeholder="发消息到群聊…" maxlength="500"><button data-action="send-community-message" data-community-key="${escapeHTML(key)}">➤</button></div></div>`);
+            const formatChatTimestamp = (value) => {
+              const date = new Date(Number(value || Date.now()));
+              const now = new Date();
+              const sameDay = date.getFullYear() === now.getFullYear() && date.getMonth() === now.getMonth() && date.getDate() === now.getDate();
+              const time = date.toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit", hour12: false });
+              return sameDay ? `今天 ${time}` : `${date.getMonth() + 1}月${date.getDate()}日 ${time}`;
             };
 
-            const sendCommunityMessage = async (key) => {
-              const input = q('[data-screen="message"] [data-role="community-message-input"]');
-              const text = String(input?.value || "").trim();
-              if (!text) return;
-              const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
-              state.communityChats[key] = safeArray(state.communityChats[key]);
-              state.communityChats[key].push({ name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, at: Date.now(), isUser: true });
-              state.communityChats[key] = state.communityChats[key].slice(-200);
-              if (input) input.value = "";
-              await persist();
-              const [ownerType, ownerId, tier] = String(key).split(":");
-              openCommunityChat(ownerType, ownerId, tier);
+            const threadTimeHTML = (rows, index) => {
+              const current = Number(rows[index]?.at || Date.now());
+              const prev = index > 0 ? Number(rows[index - 1]?.at || 0) : 0;
+              return index === 0 || current - prev > 10 * 60 * 1000
+                ? `<div class="v-chat-timestamp">${escapeHTML(formatChatTimestamp(current))}</div>`
+                : "";
+            };
+
+            const renderChatBubble = (item, { group = false } = {}) => {
+              const mine = item.sender === "user" || item.isUser;
+              const trId = `chat-${String(item.id || item.at || Math.random())}`;
+              return `<div class="v-chat-row ${mine ? "is-me" : ""}">${mine ? "" : `<div class="v-social-avatar">${avatarHTML(item.avatar || "", item.name || "V")}</div>`}<div class="v-chat-stack">${group || item.name ? `<div class="v-chat-sender">${escapeHTML(item.name || (mine ? "你" : "成员"))}</div>` : ""}<div class="v-chat-bubble">${escapeHTML(item.text || "")}${item.translation ? translationHTML(trId, item.translation) : ""}</div></div></div>`;
+            };
+
+            const statusLabel = status => status === "accepted" ? "已接受" : status === "declined" ? "已婉拒" : status === "cancelled" ? "已取消" : status === "filled" ? "已填写" : "待确认";
+
+            const renderDMToolCard = (item, messageId) => {
+              const incoming = item.direction === "incoming";
+              const status = String(item.status || "pending");
+              if (item.kind === "live_invite") {
+                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">直播邀约</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "一起直播")}</div><div class="v-chat-card-meta"><div>时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>内容 <b>${escapeHTML(item.content || "一起聊聊")}</b></div><div>方式 <b>${item.mode === "same-room" ? "线下同镜" : "线上联播"}</b></div><div>主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div></div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒</button></div>` : status === "pending" ? `<div class="v-chat-card-actions"><button class="is-light" data-action="cancel-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">取消邀约</button></div>` : ""}</div>`;
+              }
+              if (item.kind === "business") {
+                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">商务合作</span><span class="v-chat-card-status ${status === "accepted" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || "合作方案")}</div><div class="v-chat-card-meta"><div>合作内容 <b>${escapeHTML(item.content || "")}</b></div>${item.includesLive ? `<div>直播时间 <b>${escapeHTML(item.dateText || "待定")}</b></div><div>直播主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div>` : `<div>形式 <b>非直播合作</b></div>`}</div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒</button></div>` : status === "pending" ? `<div class="v-chat-card-actions"><button class="is-light" data-action="cancel-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">取消方案</button></div>` : ""}</div>`;
+              }
+              if (item.kind === "winner_form") {
+                return `<div class="v-chat-card"><div class="v-chat-card-head"><span class="v-chat-card-type">中奖信息填写</span><span class="v-chat-card-status ${status === "filled" ? "is-ok" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.prize || "中奖礼物")}</div><div class="v-chat-card-meta"><div>${escapeHTML(item.note || "请填写领奖所需的信息。")}</div>${item.reply ? `<div>已提交 <b>${escapeHTML(item.reply)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<div class="v-chat-card-actions"><button data-action="fill-winner-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">填写信息</button></div>` : ""}</div>`;
+              }
+              return "";
+            };
+
+            const renderDirectThread = (messageId) => {
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              if (!msg) return;
+              state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]);
+              const rows = state.dmThreads[messageId];
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              const handle = String(channel?.handle || msg.handle || (msg.name ? `@${String(msg.name).toLowerCase().replace(/\s+/g, "_")}` : "@vela"));
+              const rowHTML = rows.map((item, index) => `${threadTimeHTML(rows, index)}${item.kind && item.kind !== "text" ? renderDMToolCard(item, messageId) : renderChatBubble(item)}`).join("");
+              openScreen("message", `<div class="v-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="清除聊天">🗑︎</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap"><input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}">➤</button></div></div>`);
+              requestAnimationFrame(() => {
+                const body = q('[data-screen="message"] [data-role="chat-body"]');
+                if (body) body.scrollTop = body.scrollHeight;
+              });
+            };
+
+            const ensureDMThreadSeed = (msg) => {
+              state.dmThreads[msg.id] = safeArray(state.dmThreads[msg.id]);
+              if (!state.dmThreads[msg.id].length && msg.preview && !msg.outboundToChannel) {
+                state.dmThreads[msg.id].push({
+                  id: `seed-${msg.id}`,
+                  kind: "text",
+                  sender: "other",
+                  name: msg.name || "对方",
+                  avatar: msg.avatar || "",
+                  text: msg.preview,
+                  translation: "",
+                  at: Date.now() - 2 * 60 * 1000
+                });
+              }
+            };
+
+            const openMessage = (id) => {
+              const msg = state.messages.find(x => String(x.id) === String(id));
+              if (!msg) return;
+              ensureDMThreadSeed(msg);
+              msg.unread = 0;
+              renderDirectThread(msg.id);
+              persist();
             };
 
             const messageChannel = async (channelId) => {
@@ -2464,12 +2656,13 @@
               if (!channel) return;
               let msg = state.messages.find(item => String(item.channelId || "") === String(channel.id) && item.outboundToChannel);
               if (!msg) {
-                msg = { id: `channel-dm-${String(channel.id)}`, avatar: channel.avatar || "", name: channel.name || channel.handle || "频道", badge: "", channelId: channel.id, outboundToChannel: true, preview: "", unread: 0 };
+                msg = { id: `channel-dm-${String(channel.id)}`, avatar: channel.avatar || "", name: channel.name || channel.handle || "频道", handle: channel.handle || "", badge: "", channelId: channel.id, outboundToChannel: true, preview: "", unread: 0 };
                 state.messages.unshift(msg);
               }
               state.dmThreads[msg.id] = safeArray(state.dmThreads[msg.id]);
               await persist();
-              openMessage(msg.id);
+              renderMessages();
+              renderDirectThread(msg.id);
             };
 
             const sendDirectMessage = async (messageId) => {
@@ -2479,13 +2672,540 @@
               if (!msg || !text) return;
               const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
               state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]);
-              state.dmThreads[messageId].push({ sender: "user", name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, at: Date.now() });
-              state.dmThreads[messageId] = state.dmThreads[messageId].slice(-200);
+              state.dmThreads[messageId].push({ id: `dm-${Date.now().toString(36)}`, kind: "text", sender: "user", name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, translation: "", at: Date.now(), isUser: true });
+              state.dmThreads[messageId] = state.dmThreads[messageId].slice(-240);
               msg.preview = text;
               if (input) input.value = "";
               await persist();
               renderMessages();
-              openMessage(messageId);
+              renderDirectThread(messageId);
+            };
+
+            const extractJSON = (text) => {
+              const raw = String(text || "").trim().replace(/^```(?:json)?\s*/i, "").replace(/\s*```$/i, "");
+              try { return JSON.parse(raw); } catch (_) {}
+              const first = raw.indexOf("{"), last = raw.lastIndexOf("}");
+              if (first >= 0 && last > first) {
+                try { return JSON.parse(raw.slice(first, last + 1)); } catch (_) {}
+              }
+              const a = raw.indexOf("["), b = raw.lastIndexOf("]");
+              if (a >= 0 && b > a) {
+                try { return JSON.parse(raw.slice(a, b + 1)); } catch (_) {}
+              }
+              return null;
+            };
+
+            const runVelaAI = async (messages) => {
+              try {
+                const result = await roche?.ai?.chat?.({ messages, temperature: 0.85 });
+                return String(result?.text || result?.content || "");
+              } catch (err) {
+                console.warn("[Vela] AI summon failed", err);
+                return "";
+              }
+            };
+
+            const getChannelPersonaText = (channel) => {
+              if (!channel?.sourceCharacterId) return "";
+              const char = rocheRuntime.characters.find(item => String(item?.id) === String(channel.sourceCharacterId));
+              return String(char?.persona || char?.prompt || char?.description || char?.bio || "");
+            };
+
+            const fallbackDirectReply = (msg) => {
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              if (channel?.sourceCharacterId || msg.name === "Aster") {
+                return { text: "응, 나도 방금 그 얘기 계속 생각하고 있었어. 조금 더 얘기해도 될 것 같아.", translation: "嗯，我刚刚也一直在想那件事。感觉还可以再聊一会儿。" };
+              }
+              if (String(msg.badge || "") === "合作邀约") {
+                return { text: "我们可以先把合作方向聊清楚，确认合适以后再发正式合作卡。", translation: "" };
+              }
+              return { text: "我刚刚还在想这个，没事的话可以继续聊。", translation: "" };
+            };
+
+            const createScheduleFromCard = async (messageId, card) => {
+              if (!(card.kind === "live_invite" || (card.kind === "business" && card.includesLive))) return;
+              const host = getProfileEntity(card.hostOwnerType, card.hostOwnerId);
+              if (!host) return;
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              const peerChannel = state.channels.find(ch => String(ch.id) === String(msg?.channelId || ""));
+              const viewer = state.identities.find(item => String(item.id) === String(state.viewerIdentityId));
+              const participants = [
+                viewer ? { ownerType: "identity", id: viewer.id, name: viewer.displayName || viewer.handle || "user" } : null,
+                peerChannel ? { ownerType: "channel", id: peerChannel.id, name: peerChannel.name || peerChannel.handle || "频道" } : null
+              ].filter(Boolean);
+              host.scheduledLive = {
+                title: String(card.title || (card.kind === "business" ? "商务合作直播" : "联播预约")),
+                dateText: String(card.dateText || "时间待定"),
+                scheduledAt: Number(card.scheduledAt || 0),
+                cover: String(card.cover || ""),
+                content: String(card.content || ""),
+                mode: String(card.mode || "online"),
+                sourceMessageId: String(messageId),
+                sourceCardId: String(card.id),
+                sourceType: String(card.kind),
+                hostOwnerType: String(card.hostOwnerType),
+                hostOwnerId: String(card.hostOwnerId),
+                participantIds: participants.map(p => p.id),
+                participants
+              };
+              await persist();
+              pushCommunityBotEvent(card.hostOwnerType, card.hostOwnerId, "scheduled", {
+                title: host.scheduledLive.title,
+                dateText: host.scheduledLive.dateText,
+                sourceMessageId: messageId
+              });
+              armAppointmentTimer();
+            };
+
+            const findDMCard = (messageId, cardId) => {
+              const rows = safeArray(state.dmThreads?.[String(messageId)]);
+              return rows.find(item => String(item.id) === String(cardId));
+            };
+
+            const acceptDMCard = async (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              if (!card || card.status === "accepted") return;
+              card.status = "accepted";
+              card.acceptedAt = Date.now();
+              await createScheduleFromCard(messageId, card);
+              await persist();
+              renderDirectThread(messageId);
+              toast(card.kind === "live_invite" ? "已接受直播邀约，预约已关联到主场主页" : "合作已接受");
+            };
+
+            const declineDMCard = async (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              if (!card) return;
+              card.status = "declined";
+              await persist();
+              renderDirectThread(messageId);
+            };
+
+            const cancelDMCard = async (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              if (!card) return;
+              card.status = "cancelled";
+              await persist();
+              renderDirectThread(messageId);
+            };
+
+            const summonDirectMessage = async (messageId) => {
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              if (!msg) return;
+              const button = q(`[data-screen="message"] [data-action="summon-direct-message"][data-message-id="${String(messageId).replace(/"/g, '\\"')}"]`);
+              button?.classList.add("is-loading");
+              const thread = safeArray(state.dmThreads[messageId]);
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              const persona = getChannelPersonaText(channel);
+              const history = thread.slice(-18).map(item => {
+                if (item.kind && item.kind !== "text") return `[${item.kind}] ${item.title || item.content || item.prize || ""} / status=${item.status || "pending"}`;
+                return `${item.sender === "user" ? "USER" : "OTHER"}: ${item.text || ""}`;
+              }).join("\n");
+              const pendingOutgoing = thread.filter(item => item.direction === "outgoing" && item.status === "pending" && ["live_invite","business"].includes(item.kind)).slice(-1)[0];
+              const system = `你正在模拟 Vela 私信中 USER 之外的对方。绝对禁止替 USER 发言、行动、做决定。Enter 只发送 USER 自己写的内容，小飞机召唤时即使 USER 没有新消息，对方也可以自然继续说自己的事，不需要强行围着 USER。对方身份：${msg.name || "对方"} ${channel?.handle || msg.handle || ""}。${persona ? `角色设定：${persona}` : ""}
+
+请返回严格 JSON。普通消息：
+{"type":"message","text":"对方实际发出的消息","translation":"若 text 不是中文则给中文翻译，否则空字符串","acceptCardId":""}
+只有在非常自然、符合身份和上下文时，才可以主动发直播邀约或商务卡：
+{"type":"live_invite","title":"标题","content":"直播内容","dateText":"时间文字","scheduledAt":"YYYY-MM-DDTHH:mm","mode":"online|same-room","host":"counterpart|user","text":"可选附言","translation":""}
+或
+{"type":"business","title":"合作标题","content":"合作内容","includesLive":true,"dateText":"时间文字","scheduledAt":"YYYY-MM-DDTHH:mm","host":"counterpart|user","text":"可选附言","translation":""}
+如果对方自然同意 USER 已经发出的待确认卡，可以在普通 message JSON 里把 acceptCardId 写成卡片 ID：${pendingOutgoing?.id || "无待确认卡"}。不要自动替 USER 接受任何东西。`;
+              const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近私信：\n${history || "目前还没有聊天。请对方自然开启或继续话题。"}` }]);
+              let data = extractJSON(aiText);
+              if (!data || typeof data !== "object" || Array.isArray(data)) {
+                const fallback = fallbackDirectReply(msg);
+                data = { type: "message", ...fallback };
+              }
+
+              if (data.acceptCardId && pendingOutgoing && String(data.acceptCardId) === String(pendingOutgoing.id)) {
+                pendingOutgoing.status = "accepted";
+                await createScheduleFromCard(messageId, pendingOutgoing);
+              }
+
+              if (data.type === "live_invite" || data.type === "business") {
+                const incoming = {
+                  id: `dmcard-${Date.now().toString(36)}`,
+                  kind: data.type === "business" ? "business" : "live_invite",
+                  direction: "incoming",
+                  status: "pending",
+                  sender: "other",
+                  name: msg.name || "对方",
+                  avatar: msg.avatar || "",
+                  title: String(data.title || (data.type === "business" ? "合作方案" : "一起直播")),
+                  content: String(data.content || ""),
+                  mode: data.mode === "same-room" ? "same-room" : "online",
+                  includesLive: data.type === "business" ? data.includesLive !== false : true,
+                  dateText: String(data.dateText || (data.scheduledAt ? formatDateTextFromInput(data.scheduledAt) : "时间待定")),
+                  scheduledAt: data.scheduledAt && !Number.isNaN(new Date(data.scheduledAt).getTime()) ? new Date(data.scheduledAt).getTime() : 0,
+                  at: Date.now()
+                };
+                if (String(data.host) === "counterpart" && channel) {
+                  incoming.hostOwnerType = "channel";
+                  incoming.hostOwnerId = channel.id;
+                  incoming.hostLabel = `${channel.name || "对方"}的直播间`;
+                } else {
+                  incoming.hostOwnerType = "identity";
+                  incoming.hostOwnerId = state.viewerIdentityId;
+                  incoming.hostLabel = "你的直播间";
+                }
+                state.dmThreads[messageId].push(incoming);
+                if (data.text) {
+                  state.dmThreads[messageId].push({ id: `dm-${Date.now().toString(36)}-after`, kind: "text", sender: "other", name: msg.name || "对方", avatar: msg.avatar || "", text: String(data.text), translation: String(data.translation || ""), at: Date.now() + 1 });
+                }
+              } else {
+                state.dmThreads[messageId].push({ id: `dm-${Date.now().toString(36)}`, kind: "text", sender: "other", name: msg.name || "对方", avatar: msg.avatar || "", text: String(data.text || fallbackDirectReply(msg).text), translation: String(data.translation || ""), at: Date.now() });
+              }
+              state.dmThreads[messageId] = state.dmThreads[messageId].slice(-240);
+              msg.preview = String(data.text || data.title || msg.preview || "");
+              await persist();
+              renderMessages();
+              renderDirectThread(messageId);
+            };
+
+            const openDMPlus = (messageId) => {
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              if (!sheet || !host) return;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发送到私信</h3><button data-action="close-publish-sheet">×</button></div><div class="v-chat-tool-grid"><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="live_invite">直播邀约<small>填写直播时间、内容、联播方式和主场频道</small></button><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="business">商务合作<small>正常聊完以后再发正式合作卡</small></button><button data-action="open-dm-tool-form" data-message-id="${escapeHTML(messageId)}" data-tool-type="winner_form">中奖信息填写<small>让中奖粉丝提交领奖所需的虚拟信息</small></button></div>`;
+              sheet.classList.add("is-open");
+            };
+
+            const dateInputDefault = () => {
+              const date = new Date(Date.now() + 60 * 60 * 1000);
+              const local = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+              return local.toISOString().slice(0, 16);
+            };
+
+            const formatDateTextFromInput = value => {
+              if (!value) return "时间待定";
+              const date = new Date(value);
+              if (Number.isNaN(date.getTime())) return String(value);
+              return `${date.getMonth() + 1}/${date.getDate()} · ${String(date.getHours()).padStart(2,"0")}:${String(date.getMinutes()).padStart(2,"0")}`;
+            };
+
+            const openDMToolForm = (messageId, toolType) => {
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              if (!msg) return;
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              if (!sheet || !host) return;
+              const hostOptions = `<option value="user">我的直播间</option>${channel ? `<option value="counterpart">${escapeHTML(channel.name || "对方")}的直播间</option>` : ""}`;
+
+              if (toolType === "live_invite") {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>直播邀约</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>直播时间</label><input type="datetime-local" data-dm-tool-field="scheduledAt" value="${dateInputDefault()}"></div><div class="v-field"><label>直播标题</label><input data-dm-tool-field="title" maxlength="90" placeholder="一起播什么？"></div><div class="v-field"><label>直播内容</label><textarea data-dm-tool-field="content" maxlength="500" placeholder="大概聊什么、做什么"></textarea></div><div class="v-fieldpair"><div class="v-field"><label>联播方式</label><select data-dm-tool-field="mode"><option value="online">线上联播</option><option value="same-room">线下同镜</option></select></div><div class="v-field"><label>主场频道</label><select data-dm-tool-field="host">${hostOptions}</select></div></div><div class="v-tool-note">接受后才会生成预约直播，并自动挂到主场主播的主页。</div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="live_invite">发送邀约</button></div>`;
+              } else if (toolType === "business") {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>商务合作</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>合作标题</label><input data-dm-tool-field="title" maxlength="90" placeholder="合作项目 / 品牌 / 企划"></div><div class="v-field"><label>合作内容</label><textarea data-dm-tool-field="content" maxlength="650" placeholder="合作要求、内容方向等"></textarea></div><div class="v-field"><label>是否包含直播任务</label><select data-dm-tool-field="includesLive"><option value="yes">包含直播</option><option value="no">不包含直播</option></select></div><div class="v-field"><label>直播时间（有直播时）</label><input type="datetime-local" data-dm-tool-field="scheduledAt" value="${dateInputDefault()}"></div><div class="v-field"><label>直播主场（有直播时）</label><select data-dm-tool-field="host">${hostOptions}</select></div><div class="v-tool-note">只有“包含直播”的商务合作接受后会生成主页预约直播。</div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="business">发送合作卡</button></div>`;
+              } else {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>中奖信息填写</h3><button data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>奖品</label><input data-dm-tool-field="prize" maxlength="90" placeholder="中奖礼物"></div><div class="v-field"><label>填写说明</label><textarea data-dm-tool-field="note" maxlength="350" placeholder="例如：请填写领奖联系方式和收件备注"></textarea></div><button class="v-action" data-action="send-dm-tool-card" data-message-id="${escapeHTML(messageId)}" data-tool-type="winner_form">发送填写卡</button></div>`;
+              }
+              sheet.classList.add("is-open");
+            };
+
+            const sendDMToolCard = async (messageId, toolType) => {
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              const sheet = q('[data-role="publish-sheet"]');
+              if (!msg || !sheet) return;
+              const read = name => String(sheet.querySelector(`[data-dm-tool-field="${name}"]`)?.value || "").trim();
+              const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || ""));
+              const card = {
+                id: `dmcard-${Date.now().toString(36)}`,
+                kind: toolType,
+                direction: "outgoing",
+                status: "pending",
+                sender: "user",
+                name: state.identities.find(i => String(i.id) === String(state.viewerIdentityId))?.displayName || "user",
+                avatar: state.identities.find(i => String(i.id) === String(state.viewerIdentityId))?.avatar || "",
+                at: Date.now()
+              };
+              if (toolType === "live_invite" || toolType === "business") {
+                const title = read("title"), content = read("content");
+                if (!title || !content) { toast("先把标题和内容填完整"); return; }
+                card.title = title;
+                card.content = content;
+                card.includesLive = toolType === "live_invite" ? true : read("includesLive") !== "no";
+                card.mode = read("mode") === "same-room" ? "same-room" : "online";
+                const dateValue = read("scheduledAt");
+                card.scheduledAt = dateValue ? new Date(dateValue).getTime() : 0;
+                card.dateText = formatDateTextFromInput(dateValue);
+                const hostChoice = read("host");
+                if (hostChoice === "counterpart" && channel) {
+                  card.hostOwnerType = "channel";
+                  card.hostOwnerId = channel.id;
+                  card.hostLabel = `${channel.name || "对方"}的直播间`;
+                } else {
+                  card.hostOwnerType = "identity";
+                  card.hostOwnerId = state.viewerIdentityId;
+                  card.hostLabel = "你的直播间";
+                }
+              } else {
+                card.prize = read("prize") || "中奖礼物";
+                card.note = read("note") || "请填写领奖所需的信息。";
+              }
+              state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]);
+              state.dmThreads[messageId].push(card);
+              msg.preview = toolType === "live_invite" ? "[直播邀约]" : toolType === "business" ? "[商务合作]" : "[中奖信息填写]";
+              sheet.classList.remove("is-open");
+              await persist();
+              renderMessages();
+              renderDirectThread(messageId);
+            };
+
+            const fillWinnerCard = (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              if (!card) return;
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              if (!sheet || !host) return;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>填写中奖信息</h3><button data-action="close-publish-sheet">×</button></div><div class="v-tool-form"><div class="v-field"><label>领奖联系方式 / 备注</label><textarea data-winner-reply maxlength="500" placeholder="填写虚拟领奖信息或备注"></textarea></div><button class="v-action" data-action="save-winner-reply" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(cardId)}">提交</button></div>`;
+              sheet.classList.add("is-open");
+            };
+
+            const saveWinnerReply = async (messageId, cardId) => {
+              const card = findDMCard(messageId, cardId);
+              const input = q('[data-role="publish-sheet"] [data-winner-reply]');
+              const value = String(input?.value || "").trim();
+              if (!card || !value) { toast("先填写信息"); return; }
+              card.reply = value;
+              card.status = "filled";
+              q('[data-role="publish-sheet"]')?.classList.remove("is-open");
+              await persist();
+              renderDirectThread(messageId);
+            };
+
+            const clearDirectChat = async (messageId) => {
+              if (typeof window.confirm === "function" && !window.confirm("清除这段私信的全部聊天记录？")) return;
+              state.dmThreads[messageId] = [];
+              const msg = state.messages.find(item => String(item.id) === String(messageId));
+              if (msg) msg.preview = "";
+              await persist();
+              renderMessages();
+              renderDirectThread(messageId);
+            };
+
+            const openCommunityChat = (ownerType, ownerId, tier) => {
+              const entity = getProfileEntity(ownerType, ownerId);
+              if (!entity) return;
+              const key = communityChatKey(ownerType, ownerId, tier);
+              const own = isOwnCommunity(ownerType, ownerId);
+              const cfg = getCommunitySettings(ownerType, ownerId, tier);
+              const stats = getCommunityStats(ownerType, ownerId, tier);
+              state.communityChats[key] = safeArray(state.communityChats[key]);
+              const rows = state.communityChats[key];
+              const rowHTML = rows.map((item, index) => `${threadTimeHTML(rows, index)}${renderCommunityItem(item, key, own)}`).join("");
+              openScreen("message", `<div class="v-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(cfg.name)} · ${stats.members.toLocaleString("zh-CN")}人</strong><small>${stats.active.toLocaleString("zh-CN")}人正在聊天</small></div><div class="v-chat-headactions">${own ? `<button class="v-chat-headicon is-edit" data-action="edit-community" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="${escapeHTML(tier)}">编辑</button>` : ""}<button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="清除聊天">🗑︎</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-community-chat" data-community-key="${escapeHTML(key)}" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="${escapeHTML(tier)}">${own ? "清空全部聊天记录" : "清空本地聊天记录"}</button></div></header><div class="v-chat-body" data-role="chat-body">${cfg.announcement ? `<div class="v-community-announcement">公告 · ${escapeHTML(cfg.announcement)}</div>` : ""}${rowHTML || '<div class="v-group-empty">群聊已经建立。<br>Enter 只发送你的消息，小飞机会让群成员自己交流。</div>'}</div><div class="v-chat-composer-wrap"><input data-role="community-message-input" data-community-key="${escapeHTML(key)}" placeholder="发消息… · Enter发送" maxlength="600">${own ? `<button class="v-chat-plus" data-action="open-community-plus" data-community-key="${escapeHTML(key)}">＋</button>` : ""}<button class="v-chat-summon" data-action="summon-community-chat" data-community-key="${escapeHTML(key)}">➤</button></div></div>`);
+              requestAnimationFrame(() => {
+                const body = q('[data-screen="message"] [data-role="chat-body"]');
+                if (body) body.scrollTop = body.scrollHeight;
+              });
+            };
+
+            const renderCommunityItem = (item, key, own) => {
+              if (item.kind === "poll") {
+                const total = safeArray(item.votes).reduce((sum, n) => sum + Number(n || 0), 0);
+                return `<div class="v-community-card-msg"><div class="v-kicker">群内投票</div><h4>${escapeHTML(item.question || "投票")}</h4><p>${escapeHTML(item.note || "")}</p><div class="v-poll-options">${safeArray(item.options).map((opt, index) => {
+                  const count = Number(item.votes?.[index] || 0);
+                  const voted = safeArray(item.myVotes).includes(index);
+                  return `<button class="${voted ? "is-voted" : ""}" data-action="vote-community-poll" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}" data-option-index="${index}" ${own ? "disabled" : ""}><span>${escapeHTML(opt)}</span><span>${count}${total ? ` · ${Math.round(count / total * 100)}%` : ""}</span></button>`;
+                }).join("")}</div></div>`;
+              }
+              if (item.kind === "lottery") {
+                return `<div class="v-community-card-msg"><div class="v-kicker">${item.botPosted ? "🤖 助手机器人 · 群内抽奖" : "群内抽奖"}</div><h4>${escapeHTML(item.prize || "抽奖")}</h4><p>${escapeHTML(item.note || "")}<br>${Number(item.winners || 1)} 人中奖 · ${Number(item.joinedCount || 0)} 人已参与</p>${own ? `<button class="v-lottery-action" disabled>已发布</button>` : `<button class="v-lottery-action" data-action="join-community-lottery" data-community-key="${escapeHTML(key)}" data-card-id="${escapeHTML(item.id)}">${item.joined ? "已参与" : "参与抽奖"}</button>`}</div>`;
+              }
+              if (item.kind === "bot_card") {
+                const label = item.eventType === "scheduled" ? "📅 预约直播" : item.eventType === "live" ? "🔴 已开播" : "🤖 社群助手";
+                return `<div class="v-community-card-msg"><div class="v-kicker">${escapeHTML(label)}</div><h4>${escapeHTML(item.title || "频道通知")}</h4><p>${escapeHTML(item.text || item.dateText || "")}</p></div>`;
+              }
+              return renderChatBubble(item, { group: true });
+            };
+
+            const sendCommunityMessage = async (key) => {
+              const input = q('[data-screen="message"] [data-role="community-message-input"]');
+              const text = String(input?.value || "").trim();
+              if (!text) return;
+              const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
+              state.communityChats[key] = safeArray(state.communityChats[key]);
+              state.communityChats[key].push({ id: `group-${Date.now().toString(36)}`, kind: "text", sender: "user", name: identity?.displayName || identity?.handle || "user", avatar: identity?.avatar || "", text, translation: "", at: Date.now(), isUser: true });
+              state.communityChats[key] = state.communityChats[key].slice(-300);
+              if (input) input.value = "";
+              await persist();
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const fallbackGroupReplies = (cfg) => [
+              { name: `${cfg.fanName || "粉丝"}_01`, text: "我刚刚也在想这个哈哈，群里今天好热闹。", translation: "" },
+              { name: `${cfg.fanName || "粉丝"}_02`, text: "다음 방송도 이런 분위기면 좋겠다", translation: "下次直播也是这种氛围就好了。" }
+            ];
+
+            const summonCommunityChat = async (key) => {
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              const entity = getProfileEntity(ownerType, ownerId);
+              if (!entity) return;
+              const cfg = getCommunitySettings(ownerType, ownerId, tier);
+              const rows = safeArray(state.communityChats[key]);
+              const history = rows.slice(-22).map(item => item.kind === "text" ? `${item.sender === "user" ? "USER" : item.name || "成员"}: ${item.text || ""}` : `[${item.kind}] ${item.question || item.prize || item.title || ""}`).join("\n");
+              const system = `你正在模拟 Vela 订阅社群中除 USER 之外的群成员。绝对禁止替 USER 发言、行动、投票或决定。小飞机表示“继续群聊”，即使 USER 没有新消息，也让群成员彼此自然交流，不必围着 USER。
+群主：${profileName(entity, ownerType)}
+粉丝称呼：${cfg.fanName}
+粉丝画像：${cfg.fanProfile}
+聊天内容倾向：${cfg.chatStyle}
+返回严格 JSON 数组，1~3 条，例如：
+[{"name":"成员昵称","text":"消息","translation":"如果不是中文则给中文翻译，否则空字符串"}]
+成员风格要有差异，不要每轮所有人都说话。`;
+              const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近群聊：\n${history || "群里暂时安静，让成员自然开启一个话题。"}` }]);
+              let data = extractJSON(aiText);
+              if (!Array.isArray(data)) data = fallbackGroupReplies(cfg);
+              data.slice(0, 3).forEach((item, index) => {
+                state.communityChats[key].push({
+                  id: `group-ai-${Date.now().toString(36)}-${index}`,
+                  kind: "text",
+                  sender: "other",
+                  name: String(item?.name || `${cfg.fanName || "粉丝"}_${index + 1}`),
+                  avatar: initials(item?.name || cfg.fanName || "F"),
+                  text: String(item?.text || "群里继续聊了起来。"),
+                  translation: String(item?.translation || ""),
+                  at: Date.now() + index
+                });
+              });
+              state.communityChats[key] = state.communityChats[key].slice(-300);
+              await persist();
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const openCommunityPlus = (key) => {
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              if (!isOwnCommunity(ownerType, ownerId)) return;
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              if (!sheet || !host) return;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>群内工具</h3><button data-action="close-publish-sheet">×</button></div><div class="v-chat-tool-grid"><button data-action="open-community-tool-form" data-community-key="${escapeHTML(key)}" data-tool-type="lottery">群内抽奖<small>发布奖品、人数和参与说明</small></button><button data-action="open-community-tool-form" data-community-key="${escapeHTML(key)}" data-tool-type="poll">群内投票<small>让大家帮你决定下次播什么</small></button></div>`;
+              sheet.classList.add("is-open");
+            };
+
+            const openCommunityToolForm = (key, toolType) => {
+              const sheet = q('[data-role="publish-sheet"]');
+              const host = q('[data-role="publish-sheet-content"]');
+              if (!sheet || !host) return;
+              if (toolType === "lottery") {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>群内抽奖</h3><button data-action="open-community-plus" data-community-key="${escapeHTML(key)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>奖品</label><input data-community-tool-field="prize" maxlength="90" placeholder="奖品名称"></div><div class="v-field"><label>中奖人数</label><input data-community-tool-field="winners" type="number" min="1" max="100" value="1"></div><div class="v-field"><label>参与说明</label><textarea data-community-tool-field="note" maxlength="400" placeholder="参与截止、规则、备注"></textarea></div><button class="v-action" data-action="publish-community-tool" data-community-key="${escapeHTML(key)}" data-tool-type="lottery">发布抽奖</button></div>`;
+              } else {
+                host.innerHTML = `<div class="v-publish-sheet-title"><h3>群内投票</h3><button data-action="open-community-plus" data-community-key="${escapeHTML(key)}">‹</button></div><div class="v-tool-form"><div class="v-field"><label>投票问题</label><input data-community-tool-field="question" maxlength="120" placeholder="下次播什么？"></div><div class="v-field"><label>选项（每行一个，2~6项）</label><textarea data-community-tool-field="options" maxlength="420" placeholder="夜间杂谈&#10;游戏直播&#10;一起看电影"></textarea></div><div class="v-field"><label>投票说明</label><textarea data-community-tool-field="note" maxlength="260" placeholder="可留空"></textarea></div><button class="v-action" data-action="publish-community-tool" data-community-key="${escapeHTML(key)}" data-tool-type="poll">发布投票</button></div>`;
+              }
+              sheet.classList.add("is-open");
+            };
+
+            const publishCommunityTool = async (key, toolType) => {
+              const sheet = q('[data-role="publish-sheet"]');
+              if (!sheet) return;
+              const read = name => String(sheet.querySelector(`[data-community-tool-field="${name}"]`)?.value || "").trim();
+              state.communityChats[key] = safeArray(state.communityChats[key]);
+              if (toolType === "lottery") {
+                const prize = read("prize");
+                if (!prize) { toast("先填写奖品"); return; }
+                const [ownerType, ownerId, tier] = String(key).split(":");
+                const cfg = getCommunitySettings(ownerType, ownerId, tier);
+                state.communityChats[key].push({ id: `lottery-${Date.now().toString(36)}`, kind: "lottery", sender: cfg.botEnabled && cfg.botLottery ? "bot" : "owner", botPosted: Boolean(cfg.botEnabled && cfg.botLottery), prize, winners: Math.max(1, Math.min(100, Number(read("winners") || 1))), note: read("note"), joinedCount: 0, joined: false, at: Date.now() });
+              } else {
+                const question = read("question");
+                const options = read("options").split(/\n+/).map(x => x.trim()).filter(Boolean).slice(0, 6);
+                if (!question || options.length < 2) { toast("至少填写两个投票选项"); return; }
+                state.communityChats[key].push({ id: `poll-${Date.now().toString(36)}`, kind: "poll", sender: "owner", question, options, votes: options.map(() => 0), myVotes: [], note: read("note"), at: Date.now() });
+              }
+              q('[data-role="publish-sheet"]')?.classList.remove("is-open");
+              await persist();
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const voteCommunityPoll = async (key, cardId, optionIndex) => {
+              const card = safeArray(state.communityChats[key]).find(item => String(item.id) === String(cardId));
+              const index = Number(optionIndex);
+              if (!card || card.kind !== "poll" || !Number.isInteger(index) || index < 0 || index >= safeArray(card.options).length) return;
+              card.votes = safeArray(card.votes).length === card.options.length ? card.votes : card.options.map((_, i) => Number(card.votes?.[i] || 0));
+              card.myVotes = safeArray(card.myVotes);
+              if (card.myVotes.includes(index)) return;
+              card.myVotes = [index];
+              card.votes[index] = Number(card.votes[index] || 0) + 1;
+              await persist();
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const joinCommunityLottery = async (key, cardId) => {
+              const card = safeArray(state.communityChats[key]).find(item => String(item.id) === String(cardId));
+              if (!card || card.kind !== "lottery" || card.joined) return;
+              card.joined = true;
+              card.joinedCount = Number(card.joinedCount || 0) + 1;
+              await persist();
+              const [ownerType, ownerId, tier] = String(key).split(":");
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const clearCommunityChat = async (key, ownerType, ownerId, tier) => {
+              const own = isOwnCommunity(ownerType, ownerId);
+              const wording = own ? "清空这个社群的全部聊天记录？" : "清空你本地看到的这段社群聊天记录？";
+              if (typeof window.confirm === "function" && !window.confirm(wording)) return;
+              state.communityChats[key] = [];
+              await persist();
+              openCommunityChat(ownerType, ownerId, tier);
+            };
+
+            const openCommunitySettings = (ownerType, ownerId, tier) => {
+              if (!isOwnCommunity(ownerType, ownerId)) return;
+              const entity = getProfileEntity(ownerType, ownerId);
+              const cfg = getCommunitySettings(ownerType, ownerId, tier);
+              if (!entity) return;
+              openScreen("community-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="community-settings">‹</button><div class="v-meta"><strong>编辑社群</strong><div class="v-hint">${tier === "paid" ? "付费订阅社群" : "免费订阅社群"}</div></div><button class="v-head-action" data-action="save-community-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="${escapeHTML(tier)}">保存</button></header><div class="v-subbody"><div class="v-community-edit-grid"><div class="v-community-preview"><div class="v-social-avatar" data-role="community-avatar-preview">${avatarHTML(cfg.avatar || entity.avatar || "", cfg.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(cfg.name)}</div><div class="v-sub">${escapeHTML(cfg.fanName)} · 社群设置</div></div></div><div class="v-card"><div class="v-editform"><div class="v-field"><label>群头像</label><input type="file" accept="image/*" data-community-avatar-file><input type="hidden" data-community-field="avatar" value="${escapeHTML(cfg.avatar || "")}"></div><div class="v-field"><label>群名</label><input data-community-field="name" maxlength="48" value="${escapeHTML(cfg.name)}"></div><div class="v-field"><label>群公告</label><textarea data-community-field="announcement" maxlength="600">${escapeHTML(cfg.announcement)}</textarea></div><div class="v-field"><label>粉丝名</label><input data-community-field="fanName" maxlength="24" value="${escapeHTML(cfg.fanName)}"></div><div class="v-field"><label>粉丝画像</label><textarea data-community-field="fanProfile" maxlength="800">${escapeHTML(cfg.fanProfile)}</textarea></div><div class="v-field"><label>聊天内容 / 氛围</label><textarea data-community-field="chatStyle" maxlength="800">${escapeHTML(cfg.chatStyle)}</textarea></div></div></div><div class="v-card"><div class="v-name">机器人助手</div><div class="v-community-botchecks"><label class="v-community-check"><span>启用机器人助手</span><input class="v-switch" type="checkbox" data-community-field="botEnabled" ${cfg.botEnabled ? "checked" : ""}></label><label class="v-community-check"><span>推送预约直播</span><input class="v-switch" type="checkbox" data-community-field="botScheduled" ${cfg.botScheduled ? "checked" : ""}></label><label class="v-community-check"><span>推送普通开播</span><input class="v-switch" type="checkbox" data-community-field="botLive" ${cfg.botLive ? "checked" : ""}></label><label class="v-community-check"><span>推送群内抽奖</span><input class="v-switch" type="checkbox" data-community-field="botLottery" ${cfg.botLottery ? "checked" : ""}></label></div></div></div></div>`);
+            };
+
+            const saveCommunitySettings = async (ownerType, ownerId, tier) => {
+              const screen = q('[data-screen="community-settings"]');
+              if (!screen || !isOwnCommunity(ownerType, ownerId)) return;
+              const key = communityChatKey(ownerType, ownerId, tier);
+              const read = name => String(screen.querySelector(`[data-community-field="${name}"]`)?.value || "").trim();
+              const checked = name => Boolean(screen.querySelector(`[data-community-field="${name}"]`)?.checked);
+              const current = getCommunitySettings(ownerType, ownerId, tier);
+              state.communitySettings[key] = {
+                ...current,
+                avatar: read("avatar"),
+                name: read("name") || current.name,
+                announcement: read("announcement"),
+                fanName: read("fanName") || current.fanName,
+                fanProfile: read("fanProfile"),
+                chatStyle: read("chatStyle"),
+                botEnabled: checked("botEnabled"),
+                botScheduled: checked("botScheduled"),
+                botLive: checked("botLive"),
+                botLottery: checked("botLottery")
+              };
+              await persist();
+              closeScreen("community-settings");
+              openCommunityChat(ownerType, ownerId, tier);
+              renderMessages();
+            };
+
+            const pushCommunityBotEvent = (ownerType, ownerId, eventType, payload = {}) => {
+              ["free","paid"].forEach(tier => {
+                const key = communityChatKey(ownerType, ownerId, tier);
+                const cfg = getCommunitySettings(ownerType, ownerId, tier);
+                if (!cfg.botEnabled) return;
+                if (eventType === "scheduled" && !cfg.botScheduled) return;
+                if (eventType === "live" && !cfg.botLive) return;
+                state.communityChats[key] = safeArray(state.communityChats[key]);
+                state.communityChats[key].push({
+                  id: `bot-${eventType}-${Date.now().toString(36)}-${tier}`,
+                  kind: "bot_card",
+                  sender: "bot",
+                  eventType,
+                  title: String(payload.title || (eventType === "live" ? "直播已经开始" : "新的预约直播")),
+                  text: String(payload.text || payload.dateText || ""),
+                  dateText: String(payload.dateText || ""),
+                  at: Date.now()
+                });
+                state.communityChats[key] = state.communityChats[key].slice(-300);
+              });
             };
 
             const continueSubscription = (channelId) => {
@@ -2504,28 +3224,6 @@
               renderMessages();
               renderProfileTab("identity", state.viewerIdentityId, "subscriptions");
               toast("已取消订阅");
-            };
-
-            const openMessage = (id) => {
-              const msg = state.messages.find(x => x.id === id);
-              if (!msg) return;
-              if (id === "biz-mellow") {
-                const deal = state.businessDeals?.[id] || {};
-                const accepted = Boolean(deal.accepted);
-                const expanded = Boolean(deal.expanded);
-                openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div><strong>${escapeHTML(deal.brandName || "Mellow Studio")}</strong><div class="v-hint">品牌合作</div></div></header><div class="v-subbody">
-                  <div class="v-brand-card"><div class="v-name" style="font-size:18px">${escapeHTML(deal.brandName || "Mellow Studio")}</div><div class="v-brand-style">${escapeHTML(deal.brandStyle || "生活方式品牌")}</div><div class="v-product-box"><b>${escapeHTML(deal.productName || "合作商品")}</b><p>${escapeHTML(deal.productDescription || "")}</p></div>
-                    <button class="v-task-toggle" data-action="toggle-business-task" data-message-id="${escapeHTML(id)}"><span>合作任务</span><span>${expanded ? "收起⌃" : "展开⌄"}</span></button>
-                    ${expanded ? `<div class="v-task-detail"><div class="v-row"><div><b>直播时间</b><small>${escapeHTML(deal.dateText || "")}</small></div><span class="v-pill" style="background:${accepted ? "#111" : "var(--v-soft)"};color:${accepted ? "#fff" : "var(--v-text)"}">${accepted ? "已接受" : "待确认"}</span></div><div class="v-row"><div><b>合作要求</b><small>${escapeHTML(deal.deliverables || "")}</small></div></div><div class="v-row"><div><b>定金</b><small>接受合作后进入日程</small></div><b>¥${Number(deal.deposit || 0).toLocaleString("zh-CN")}</b></div><div class="v-row"><div><b>尾款</b><small>完成直播任务后结算</small></div><b>¥${Number(deal.balance || 0).toLocaleString("zh-CN")}</b></div>${accepted ? `<button class="v-action light" style="margin:12px 0" data-action="go-home-from-task">已加入首页日程</button>` : `<button class="v-action" style="margin:12px 0" data-action="accept-business-task" data-message-id="${escapeHTML(id)}">接受合作并加入日程</button>`}</div>` : ""}
-                  </div>
-                </div>`);
-              } else {
-                const rows = safeArray(state.dmThreads[id]);
-                const rel = getDMRelationshipBadge(msg);
-                const initial = msg.preview && !rows.length && !msg.outboundToChannel ? `<div class="v-group-line"><div class="v-social-avatar">${avatarHTML(msg.avatar || "", msg.name || "V")}</div><div class="v-group-bubble"><b>${escapeHTML(msg.name || "")}</b><div>${escapeHTML(msg.preview)}</div></div></div>` : "";
-                const lines = rows.map(line => `<div class="v-group-line"><div class="v-social-avatar">${avatarHTML(line.avatar || "", line.name || "V")}</div><div class="v-group-bubble"><b>${escapeHTML(line.name || "user")}</b><div>${escapeHTML(line.text || "")}</div></div></div>`).join("");
-                openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div class="v-meta"><strong>${escapeHTML(msg.name)} <span class="v-relation ${rel.cls}">${escapeHTML(rel.text)}</span></strong><div class="v-hint">Vela 私信</div></div></header><div class="v-subbody v-group-chat"><div class="v-group-lines">${initial}${lines || (!initial ? '<div class="v-group-empty">还没有消息。</div>' : '')}</div><div class="v-dm-composer"><input data-role="dm-input" placeholder="发送私信…" maxlength="500"><button data-action="send-direct-message" data-message-id="${escapeHTML(id)}">➤</button></div></div>`);
-              }
             };
 
             const openIdentities = () => {
@@ -2572,6 +3270,96 @@
               openScreen("roles", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="roles">‹</button><div class="v-meta"><strong>角色与频道管理</strong><div class="v-hint">引入 Roche 角色后，在这里管理主页与商业合作</div></div><button class="v-head-action" data-action="refresh-roche-roles">刷新</button></header><div class="v-subbody"><div class="v-card"><p class="v-hint" style="margin-top:0">加入角色后可以直接编辑他的 Vela 主页；主页装饰只保存在 Vela，不会修改 Roche 原人设资料。</p>${status}${rows}</div></div>`);
             };
 
+            let appointmentTimer = null;
+            let appointmentReminderShown = false;
+
+            const viewerAppointments = () => {
+              const viewerId = String(state.viewerIdentityId || "");
+              const rows = [];
+              state.identities.forEach(entity => {
+                const item = entity.scheduledLive;
+                if (!item) return;
+                const participants = safeArray(item.participantIds);
+                if (String(entity.id) === viewerId || participants.includes(viewerId)) rows.push({ ownerType: "identity", ownerId: entity.id, entity, item });
+              });
+              state.channels.forEach(entity => {
+                const item = entity.scheduledLive;
+                if (!item) return;
+                if (safeArray(item.participantIds).includes(viewerId)) rows.push({ ownerType: "channel", ownerId: entity.id, entity, item });
+              });
+              return rows.sort((a, b) => {
+                const av = Number(a.item.scheduledAt || Number.MAX_SAFE_INTEGER);
+                const bv = Number(b.item.scheduledAt || Number.MAX_SAFE_INTEGER);
+                return av - bv;
+              });
+            };
+
+            const openAppointmentReminder = (entry, due = false) => {
+              if (!entry?.item) return;
+              const item = entry.item;
+              const hostName = profileName(entry.entity, entry.ownerType);
+              openScreen("appointment-reminder", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="appointment-reminder">‹</button><div class="v-meta"><strong>${due ? "直播时间到了" : "预约提醒"}</strong><div class="v-hint">${escapeHTML(item.dateText || "时间待定")}</div></div></header><div class="v-appointment-card"><h3>${escapeHTML(item.title || "预约直播")}</h3><p>主场：${escapeHTML(hostName)}<br>${escapeHTML(item.content || "")}${item.mode ? `<br>${item.mode === "same-room" ? "线下同镜" : "线上联播"}` : ""}</p><div class="v-appointment-actions"><button class="v-go" data-action="${due ? "go-appointment-live" : "view-appointment-host"}" data-owner-type="${escapeHTML(entry.ownerType)}" data-owner-id="${escapeHTML(entry.ownerId)}">${due ? "进入直播间" : "查看预约"}</button><button class="v-later" data-action="close-screen" data-screen-name="appointment-reminder">稍后</button></div></div>`);
+            };
+
+            const checkAppointmentReminder = ({ entry = false } = {}) => {
+              const rows = viewerAppointments();
+              if (!rows.length) return;
+              const now = Date.now();
+              const due = rows.find(x => Number(x.item.scheduledAt || 0) > 0 && Number(x.item.scheduledAt) <= now + 60 * 1000);
+              if (due) {
+                openAppointmentReminder(due, true);
+                return;
+              }
+              if (entry && !appointmentReminderShown) {
+                appointmentReminderShown = true;
+                openAppointmentReminder(rows[0], false);
+              }
+            };
+
+            const armAppointmentTimer = () => {
+              if (appointmentTimer) clearTimeout(appointmentTimer);
+              const rows = viewerAppointments().filter(x => Number(x.item.scheduledAt || 0) > Date.now());
+              if (!rows.length) return;
+              const delay = Math.max(0, Math.min(2147480000, Number(rows[0].item.scheduledAt) - Date.now()));
+              appointmentTimer = setTimeout(() => checkAppointmentReminder({ entry: false }), delay);
+            };
+
+            const startAppointmentHostLive = async (ownerType, ownerId) => {
+              const entity = getProfileEntity(ownerType, ownerId);
+              const item = entity?.scheduledLive;
+              if (!entity || !item) return;
+              if (ownerType === "channel") {
+                const live = {
+                  ...entity,
+                  id: entity.id,
+                  ownerType: "channel",
+                  ownerId: entity.id,
+                  title: item.title || "预约直播",
+                  category: item.content || "预约直播",
+                  mode: item.mode || "solo",
+                  startedAt: Date.now(),
+                  live: true,
+                  viewers: Math.max(1, Number(entity.viewers || 0))
+                };
+                entity.live = true;
+                entity.title = live.title;
+                entity.scheduledLive = null;
+                pushCommunityBotEvent("channel", entity.id, "live", { title: live.title, text: "直播已经开始，点击频道即可进入。" });
+                await persist();
+                openLive(live);
+              } else {
+                const live = { id: `own-scheduled-${entity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: entity.id, isOwn: true, name: entity.displayName || "我的频道", handle: entity.handle || "@me", avatar: entity.avatar || "U", followers: Number(entity.followers || 0), title: item.title || "我的直播间", category: item.content || "预约直播", cover: item.cover || "", viewers: 0, mode: item.mode || "solo", accessMode: "public", ageRequirement: "none", startedAt: Date.now() };
+                entity.live = true;
+                entity.activeLive = { ...live };
+                entity.scheduledLive = null;
+                state.liveChat = [];
+                state.pendingLiveUserMessage = null;
+                pushCommunityBotEvent("identity", entity.id, "live", { title: live.title, text: "直播已经开始。" });
+                await persist();
+                openLive(live);
+              }
+            };
+
             const rerender = () => {
               renderChannels();
               renderSchedule();
@@ -2583,6 +3371,8 @@
 
             await refreshRocheData({ announce: false, sync: true });
             rerender();
+            armAppointmentTimer();
+            setTimeout(() => checkAppointmentReminder({ entry: true }), 420);
 
             root.addEventListener("click", async (event) => {
               const button = event.target.closest("button,[data-action]");
@@ -2832,6 +3622,54 @@
                 await sendCommunityMessage(button.dataset.communityKey || "");
               } else if (action === "send-direct-message") {
                 await sendDirectMessage(button.dataset.messageId || "");
+              } else if (action === "summon-direct-message") {
+                await summonDirectMessage(button.dataset.messageId || "");
+              } else if (action === "open-dm-plus") {
+                openDMPlus(button.dataset.messageId || "");
+              } else if (action === "open-dm-tool-form") {
+                openDMToolForm(button.dataset.messageId || "", button.dataset.toolType || "live_invite");
+              } else if (action === "send-dm-tool-card") {
+                await sendDMToolCard(button.dataset.messageId || "", button.dataset.toolType || "live_invite");
+              } else if (action === "accept-dm-card") {
+                await acceptDMCard(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "decline-dm-card") {
+                await declineDMCard(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "cancel-dm-card") {
+                await cancelDMCard(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "fill-winner-card") {
+                fillWinnerCard(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "save-winner-reply") {
+                await saveWinnerReply(button.dataset.messageId || "", button.dataset.cardId || "");
+              } else if (action === "toggle-chat-topmenu") {
+                q('[data-screen="message"] [data-role="chat-topmenu"]')?.classList.toggle("is-open");
+              } else if (action === "clear-direct-chat") {
+                await clearDirectChat(button.dataset.messageId || "");
+              } else if (action === "summon-community-chat") {
+                await summonCommunityChat(button.dataset.communityKey || "");
+              } else if (action === "open-community-plus") {
+                openCommunityPlus(button.dataset.communityKey || "");
+              } else if (action === "open-community-tool-form") {
+                openCommunityToolForm(button.dataset.communityKey || "", button.dataset.toolType || "poll");
+              } else if (action === "publish-community-tool") {
+                await publishCommunityTool(button.dataset.communityKey || "", button.dataset.toolType || "poll");
+              } else if (action === "vote-community-poll") {
+                await voteCommunityPoll(button.dataset.communityKey || "", button.dataset.cardId || "", button.dataset.optionIndex || "0");
+              } else if (action === "join-community-lottery") {
+                await joinCommunityLottery(button.dataset.communityKey || "", button.dataset.cardId || "");
+              } else if (action === "clear-community-chat") {
+                await clearCommunityChat(button.dataset.communityKey || "", button.dataset.ownerType || "channel", button.dataset.ownerId || "", button.dataset.tier || "free");
+              } else if (action === "edit-community") {
+                openCommunitySettings(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.tier || "free");
+              } else if (action === "save-community-settings") {
+                await saveCommunitySettings(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.tier || "free");
+              } else if (action === "view-appointment-host") {
+                closeScreen("appointment-reminder");
+                openProfile(button.dataset.ownerType || "channel", button.dataset.ownerId || "");
+              } else if (action === "go-appointment-live") {
+                closeScreen("appointment-reminder");
+                await startAppointmentHostLive(button.dataset.ownerType || "channel", button.dataset.ownerId || "");
+              } else if (action === "close-publish-sheet") {
+                q('[data-role="publish-sheet"]')?.classList.remove("is-open");
               } else if (action === "open-replay") {
                 openReplayDetail(button.dataset.replayId || "");
               } else if (action === "delete-replay") {
@@ -2862,6 +3700,7 @@
                   identity.live = true;
                   identity.activeLive = { ...live };
                   identity.scheduledLive = null;
+                  pushCommunityBotEvent("identity", identity.id, "live", { title: live.title, text: "直播已经开始。" });
                   state.liveChat = [];
                   state.pendingLiveUserMessage = null;
                   await persist();
@@ -2979,6 +3818,12 @@
               } else if (target?.matches?.('[data-role="host-live-input"]')) {
                 event.preventDefault();
                 await sendHostStageInput();
+              } else if (target?.matches?.('[data-role="dm-input"]')) {
+                event.preventDefault();
+                await sendDirectMessage(target.dataset.messageId || "");
+              } else if (target?.matches?.('[data-role="community-message-input"]')) {
+                event.preventDefault();
+                await sendCommunityMessage(target.dataset.communityKey || "");
               }
             });
 
@@ -3004,6 +3849,15 @@
                   if (url) url.value = "";
                   setPublishImagePreview("post", value);
                 } catch (err) { toast(String(err?.message || err || "读取图片失败")); }
+              } else if (input?.matches?.('[data-community-avatar-file]')) {
+                try {
+                  const value = await readLocalImage(input.files?.[0]);
+                  if (!value) return;
+                  const hidden = q('[data-screen="community-settings"] [data-community-field="avatar"]');
+                  if (hidden) hidden.value = value;
+                  const preview = q('[data-screen="community-settings"] [data-role="community-avatar-preview"]');
+                  if (preview) preview.innerHTML = `<img src="${escapeHTML(value)}" alt="">`;
+                } catch (err) { toast(String(err?.message || err || "读取头像失败")); }
               }
             });
 
