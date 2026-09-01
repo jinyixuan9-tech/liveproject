@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.14";
+  const VERSION = "0.1.15";
   const VELA_ICON = "data:image/png;base64,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";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
@@ -274,7 +274,7 @@
   function styles() {
     return `
 <style data-vela-style>
-.vela-roche{--v-bg:#f6f9fd;--v-card:#fff;--v-text:#111827;--v-muted:#748096;--v-line:#e5ebf3;--v-soft:#eef4fb;--v-blue:#1769d2;--v-blue-soft:#e8f1ff;--v-red:#ef4056;--v-live:var(--v-red);--v-top-h:62px;--v-bottom-h:78px;position:relative;width:100%;height:100%;min-height:0;background:var(--v-bg);color:var(--v-text);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;isolation:isolate}
+.vela-roche{--v-bg:#f2f2f7;--v-card:#fff;--v-text:#111111;--v-muted:#8e8e93;--v-line:rgba(60,60,67,.16);--v-soft:#f2f2f7;--v-blue:#007aff;--v-blue-soft:#eaf3ff;--v-red:#ff3b30;--v-live:var(--v-red);--v-top-h:62px;--v-bottom-h:78px;position:relative;width:100%;height:100%;min-height:0;background:var(--v-bg);color:var(--v-text);overflow:hidden;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;-webkit-tap-highlight-color:transparent;isolation:isolate}
 .vela-roche *{box-sizing:border-box}.vela-roche button,.vela-roche input,.vela-roche textarea{font:inherit}.vela-roche button{cursor:pointer}.vela-roche .v-top{position:absolute;z-index:20;left:0;right:0;top:0;height:var(--v-top-h);padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,246,248,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.035)}
 .vela-roche .v-brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900}.vela-roche .v-logo{width:30px;height:30px;border-radius:10px;background:#fff;display:grid;place-items:center;overflow:hidden;border:1px solid var(--v-line)}.vela-roche .v-logo img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-plainbtn{width:42px;height:42px;border:0;border-radius:14px;background:#fff;color:#111;font-size:19px;display:grid;place-items:center}.vela-roche .v-top-actions{display:flex;gap:7px}
 .vela-roche .v-main{position:absolute;inset:var(--v-top-h) 0 calc(var(--v-bottom-h) + env(safe-area-inset-bottom,0px));overflow:auto;overscroll-behavior:contain;padding:12px 14px 24px;-webkit-overflow-scrolling:touch}.vela-roche .v-page{display:none}.vela-roche .v-page.is-active{display:block}.vela-roche .v-title{display:flex;justify-content:space-between;align-items:flex-end;margin:5px 2px 13px;font-size:22px;font-weight:900}.vela-roche .v-title small{font-size:11px;color:var(--v-muted);font-weight:700}
@@ -292,7 +292,78 @@
 .vela-roche .v-settings-group{background:var(--v-card);border-radius:20px;padding:14px;margin-bottom:12px}.vela-roche .v-settings-group h3{font-size:14px;margin:0 0 10px}.vela-roche .v-setting-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--v-line)}.vela-roche .v-setting-row:first-of-type{border-top:0}.vela-roche .v-setting-row .v-meta{min-width:0}.vela-roche .v-switch{appearance:none;width:46px;height:28px;border-radius:16px;background:#d8d8de;position:relative;transition:.18s;flex:0 0 auto}.vela-roche .v-switch:after{content:"";position:absolute;width:22px;height:22px;left:3px;top:3px;border-radius:50%;background:#fff;transition:.18s}.vela-roche .v-switch:checked{background:#111}.vela-roche .v-switch:checked:after{transform:translateX(18px)}.vela-roche .v-range{width:100%;accent-color:var(--v-blue)}.vela-roche .v-preset-box{white-space:pre-wrap;font-size:12px;line-height:1.65;color:var(--v-muted);background:var(--v-soft);border-radius:16px;padding:12px}.vela-roche .v-settings-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
 .vela-roche .v-social-avatar{width:42px;height:42px;border-radius:50%;background:var(--v-soft);display:grid;place-items:center;font-weight:900;overflow:hidden;flex:0 0 auto}.vela-roche .v-social-avatar img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-social-head{display:flex;align-items:center;gap:10px}.vela-roche .v-social-copy{min-width:0;flex:1}.vela-roche .v-social-name{font-size:14px;font-weight:900}.vela-roche .v-social-handle{font-size:11px;color:var(--v-muted);margin-top:2px}.vela-roche .v-social-text{font-size:14px;line-height:1.55;margin-top:10px;white-space:pre-wrap}.vela-roche .v-social-media{width:100%;height:190px;border:0;border-radius:18px;margin-top:10px;background:radial-gradient(circle at 70% 20%,rgba(255,255,255,.9),transparent 28%),linear-gradient(135deg,#d9dae1,#f5f5f8);display:grid;place-items:center;font-size:38px;color:var(--v-text);overflow:hidden}.vela-roche .v-social-media img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-social-actions{display:flex;gap:20px;align-items:center;margin-top:10px}.vela-roche .v-social-actions button{border:0;background:none;color:var(--v-muted);font-size:12px;padding:3px 0}.vela-roche .v-translate-btn{border:0;background:none;color:var(--v-muted);font-size:10px;font-weight:800;padding:3px 0;margin-top:4px}.vela-roche .v-translation{font-size:12px;line-height:1.55;color:var(--v-muted);margin-top:5px;padding-left:9px;border-left:2px solid var(--v-line);white-space:pre-wrap}.vela-roche .v-comment-list{border-top:1px solid var(--v-line);margin-top:14px;padding-top:5px}.vela-roche .v-comment{display:flex;gap:9px;padding:10px 0;border-bottom:1px solid var(--v-line)}.vela-roche .v-comment:last-child{border-bottom:0}.vela-roche .v-comment .v-social-avatar{width:34px;height:34px;font-size:11px}.vela-roche .v-comment-body{min-width:0;flex:1}.vela-roche .v-comment-name{font-size:11px;font-weight:900}.vela-roche .v-comment-text{font-size:12px;line-height:1.5;margin-top:3px}.vela-roche .v-community-compose{width:100%;border:1px dashed var(--v-line);background:var(--v-card);color:var(--v-text);border-radius:17px;padding:13px;text-align:left;font-size:12px;font-weight:850;margin-bottom:12px}
 .vela-roche .v-live-screen{background:var(--v-bg)!important;color:var(--v-text)!important}.vela-roche .v-live-screen .v-subhead{background:rgba(255,255,255,.96)!important;border-bottom-color:var(--v-line)!important;color:#111!important}.vela-roche .v-live-screen .v-subhead>button:first-child{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-screen .v-small-dark{background:#f0f0f3!important;color:#111!important}.vela-roche .v-live-body{padding:10px 12px 28px}.vela-roche .v-live-stage{border-radius:18px;background:radial-gradient(circle at 70% 15%,rgba(255,255,255,.18),transparent 27%),linear-gradient(135deg,#1b1c20,#777a83);padding:12px;align-items:flex-start}.vela-roche .v-live-stage:after{background:linear-gradient(rgba(0,0,0,.08),rgba(0,0,0,.28))}.vela-roche .v-live-stage-copy{width:100%;display:flex;justify-content:space-between;align-items:flex-start}.vela-roche .v-live-info{background:var(--v-card);border-radius:18px;padding:13px;margin-top:9px}.vela-roche .v-live-info h2{font-size:17px;line-height:1.35;margin:0}.vela-roche .v-live-info p{font-size:11px;color:var(--v-muted);margin:5px 0 0}.vela-roche .v-chat-panel{margin-top:9px;background:var(--v-card);color:var(--v-text);border:1px solid var(--v-line);border-radius:18px;padding:13px}.vela-roche .v-chatline{display:flex;gap:8px;padding:8px 0}.vela-roche .v-chatline .v-social-avatar{width:31px;height:31px;font-size:10px}.vela-roche .v-chatline-body{min-width:0;flex:1}.vela-roche .v-chatline-head{font-size:10px;font-weight:900}.vela-roche .v-chatline-text{font-size:12px;line-height:1.45;margin-top:2px}.vela-roche .v-composer input{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-composer button{background:#111;color:#fff}.vela-roche .v-continue{background:#111;color:#fff}
+
+.vela-roche.is-dark .v-sheet{background:#101116!important}
+.vela-roche.is-dark .v-ios-group,.vela-roche.is-dark .v-ios-media-card,.vela-roche.is-dark .v-replay-card,.vela-roche.is-dark .v-replay-summary,.vela-roche.is-dark .v-replay-event,.vela-roche.is-dark .v-replay-chat{background:var(--v-card)}
+.vela-roche.is-dark .v-ios-media-preview{background:linear-gradient(145deg,#20242b,#2c313b)}
+.vela-roche.is-dark .v-publish-sheet-actions{background:linear-gradient(transparent,#101116 28%)}
+
 .vela-roche.is-dark .v-live-screen .v-subhead{background:rgba(25,26,32,.96)!important;color:#fff!important}.vela-roche.is-dark .v-live-screen .v-subhead>button:first-child,.vela-roche.is-dark .v-live-screen .v-small-dark{background:#292b33!important;color:#fff!important}.vela-roche.is-dark .v-social-media{background:linear-gradient(135deg,#25272f,#343741)}
+
+/* v0.1.15 · iOS-like surface polish */
+.vela-roche .v-sheet{background:#f2f2f7!important;border-radius:28px 28px 0 0!important;padding-left:14px!important;padding-right:14px!important}
+.vela-roche .v-sheet .v-handle{background:#c7c7cc!important;width:36px!important;height:5px!important}
+.vela-roche .v-publish-sheet-title{min-height:42px;margin-bottom:10px!important}
+.vela-roche .v-publish-sheet-title h3{font-size:17px!important;font-weight:800!important;letter-spacing:-.01em}
+.vela-roche .v-publish-sheet-title button{width:34px;height:34px;border-radius:17px!important;background:rgba(118,118,128,.12)!important;color:var(--v-text)!important;display:grid;place-items:center}
+.vela-roche .v-ios-publish{display:grid;gap:12px}
+.vela-roche .v-ios-group{background:var(--v-card);border-radius:20px;overflow:hidden;border:0;box-shadow:0 .5px 0 rgba(60,60,67,.08)}
+.vela-roche .v-ios-group .v-field{padding:11px 13px;border-top:1px solid var(--v-line)}
+.vela-roche .v-ios-group .v-field:first-child{border-top:0}
+.vela-roche .v-ios-group .v-field label{font-size:11px;color:var(--v-muted);margin-bottom:6px}
+.vela-roche .v-ios-group .v-field input,.vela-roche .v-ios-group .v-field textarea,.vela-roche .v-ios-group .v-field select{border:0!important;background:transparent!important;border-radius:0!important;padding:2px 0!important;min-height:30px!important;font-size:16px!important}
+.vela-roche .v-ios-group .v-field textarea{min-height:72px!important}
+.vela-roche .v-ios-media-card{background:var(--v-card);border-radius:20px;padding:12px}
+.vela-roche .v-ios-media-preview{height:168px;border-radius:16px;background:linear-gradient(145deg,#edf4ff,#f8f9fc);display:grid;place-items:center;overflow:hidden;position:relative;color:var(--v-blue)}
+.vela-roche .v-ios-media-preview img{width:100%;height:100%;object-fit:cover;display:block}
+.vela-roche .v-ios-media-placeholder{display:grid;place-items:center;gap:6px;color:var(--v-muted);font-size:11px}
+.vela-roche .v-ios-media-placeholder b{width:38px;height:38px;border-radius:19px;background:var(--v-blue);color:#fff;display:grid;place-items:center;font-size:24px;font-weight:500}
+.vela-roche .v-ios-media-actions{display:grid;grid-template-columns:1fr auto;gap:8px;margin-top:10px}
+.vela-roche .v-ios-media-picker{position:relative;min-height:42px;border-radius:13px;background:var(--v-blue-soft);color:var(--v-blue);display:flex;align-items:center;justify-content:center;gap:7px;font-size:12px;font-weight:800;overflow:hidden}
+.vela-roche .v-ios-media-picker input[type=file]{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;opacity:0!important;cursor:pointer!important;pointer-events:auto!important}
+.vela-roche .v-ios-media-remove{min-width:72px;border:0;border-radius:13px;background:rgba(118,118,128,.12);color:var(--v-muted);font-size:11px;font-weight:800;padding:0 12px}
+.vela-roche .v-ios-url{margin-top:9px;background:rgba(118,118,128,.08);border-radius:13px;padding:9px 11px}
+.vela-roche .v-ios-url label{display:block;font-size:10px;color:var(--v-muted);margin-bottom:5px}
+.vela-roche .v-ios-url input{width:100%;border:0;background:transparent;color:var(--v-text);font-size:15px;outline:none}
+.vela-roche .v-publish-sheet-actions{position:sticky;bottom:0;padding:8px 0 calc(3px + env(safe-area-inset-bottom,0px));background:linear-gradient(transparent,#f2f2f7 28%)}
+.vela-roche .v-publish-sheet-actions .v-action{border-radius:14px!important;min-height:46px!important}
+.vela-roche .v-primary-red{background:var(--v-blue)!important;color:#fff!important}
+.vela-roche .v-live-info{padding:8px 11px!important;border-radius:15px!important;margin-top:7px!important}
+.vela-roche .v-live-info-head{margin-bottom:4px!important;gap:5px!important}
+.vela-roche .v-live-info-head .v-badge{padding:4px 6px!important;border-radius:7px!important;font-size:8px!important}
+.vela-roche .v-live-info-head .v-cohost-pill{padding:4px 7px!important;border-radius:8px!important;font-size:9px!important}
+.vela-roche .v-live-info h2{font-size:15px!important;line-height:1.28!important;margin:0!important}
+.vela-roche .v-live-info p{font-size:10px!important;line-height:1.35!important;margin:3px 0 0!important;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.vela-roche .v-live-info .v-translate-btn{margin-top:2px!important}
+.vela-roche .v-remote-grid{position:absolute;z-index:2;inset:0;display:grid!important;gap:1px;background:rgba(255,255,255,.13);pointer-events:none}
+.vela-roche .v-remote-grid[data-count="2"]{grid-template-columns:1fr 1fr}
+.vela-roche .v-remote-grid[data-count="3"]{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.vela-roche .v-remote-grid[data-count="3"] .v-remote-pane:first-child{grid-row:1 / span 2}
+.vela-roche .v-remote-grid[data-count="4"]{grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+.vela-roche .v-remote-pane{position:relative!important;min-width:0;background:linear-gradient(150deg,#252a33,#4c5668)!important;padding:58px 9px 10px!important;display:flex!important;align-items:flex-end!important}
+.vela-roche .v-remote-pane:nth-child(2n){background:linear-gradient(150deg,#313743,#5d687b)!important}
+.vela-roche .v-remote-pane-label{position:absolute!important;left:9px!important;top:58px!important;z-index:4;max-width:calc(100% - 18px);background:rgba(15,15,18,.58);backdrop-filter:blur(8px);border-radius:15px;padding:4px 7px 4px 4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vela-roche .v-remote-pane-event{position:relative;z-index:4;width:100%;max-height:42%;overflow:auto;border-radius:13px;background:rgba(15,15,18,.72);backdrop-filter:blur(10px);padding:8px 9px;color:#fff}
+.vela-roche .v-remote-event-label{font-size:8px;font-weight:900;color:rgba(255,255,255,.66);margin-bottom:3px}
+.vela-roche .v-remote-event-text{font-size:10.5px;line-height:1.42}
+.vela-roche .v-remote-event-empty{font-size:9px;color:rgba(255,255,255,.58)}
+.vela-roche .v-live-stage.is-remote .v-live-moment{display:none!important}
+.vela-roche .v-live-stage.is-remote:after{z-index:1}
+.vela-roche .v-replay-card{width:100%;border:0;background:var(--v-card);color:var(--v-text);text-align:left;border-radius:20px;padding:12px;margin-bottom:10px}
+.vela-roche .v-replay-cover{height:130px;border-radius:15px;background:linear-gradient(145deg,#e8eef8,#f8f8fa);overflow:hidden;display:grid;place-items:center;font-size:34px;margin-top:9px}
+.vela-roche .v-replay-cover img{width:100%;height:100%;object-fit:cover}
+.vela-roche .v-replay-actions{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:9px}
+.vela-roche .v-replay-actions span{font-size:10px;color:var(--v-muted)}
+.vela-roche .v-replay-actions button{border:0;background:rgba(255,59,48,.10);color:var(--v-red);border-radius:10px;padding:6px 8px;font-size:9px;font-weight:800}
+.vela-roche .v-replay-summary{background:var(--v-card);border-radius:18px;padding:12px;margin-bottom:10px}
+.vela-roche .v-replay-timeline{display:grid;gap:8px}
+.vela-roche .v-replay-event{background:var(--v-card);border-radius:16px;padding:10px 11px}
+.vela-roche .v-replay-event-head{font-size:9px;color:var(--v-muted);font-weight:800;margin-bottom:4px}
+.vela-roche .v-replay-event-text{font-size:12px;line-height:1.5;white-space:pre-wrap}
+.vela-roche .v-replay-chat{background:var(--v-card);border-radius:18px;padding:10px 12px;margin-top:12px}
+.vela-roche .v-replay-chat .v-chatline{border-bottom:1px solid var(--v-line)}
+.vela-roche .v-replay-chat .v-chatline:last-child{border-bottom:0}
+
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
 
 .vela-roche .v-subscreen[data-screen="live"]{overflow:hidden!important}
@@ -1029,15 +1100,40 @@
                   step: 0,
                   text: String(live?.moment || first.text),
                   translation: String(live?.momentTranslation || first.translation || ""),
-                  language: lang
+                  language: lang,
+                  timeline: [],
+                  participantEvents: {}
                 };
               }
-              return state.liveProgress[id];
+              const progress = state.liveProgress[id];
+              progress.timeline = safeArray(progress.timeline);
+              progress.participantEvents = { ...(progress.participantEvents || {}) };
+              return progress;
             };
 
             const isOwnLiveSession = (live) => {
               const id = String(live?.id || "");
               return id === "own-live" || id.startsWith("own-scheduled-") || live?.ownerType === "identity" || live?.isOwn === true;
+            };
+
+            const getLiveGuests = (live) => {
+              const direct = safeArray(live?.participants).map(item => ({
+                id: String(item?.id || ""),
+                name: String(item?.name || item?.handle || "嘉宾"),
+                handle: String(item?.handle || ""),
+                avatar: String(item?.avatar || initials(item?.name || "嘉宾"))
+              })).filter(item => item.id);
+              if (direct.length) return direct.slice(0, 3);
+              if (live?.cohostId) {
+                const ch = state.channels.find(item => String(item.id) === String(live.cohostId));
+                return [{ id: String(live.cohostId), name: String(ch?.name || live.cohostName || "嘉宾"), handle: String(ch?.handle || live.cohostHandle || ""), avatar: String(ch?.avatar || live.cohostAvatar || initials(ch?.name || live.cohostName || "嘉宾")) }];
+              }
+              return [];
+            };
+
+            const getLiveParticipants = (live) => {
+              const host = { id: `host:${String(live?.ownerId || live?.id || "host")}`, name: String(live?.name || live?.handle || "主播"), handle: String(live?.handle || ""), avatar: String(live?.avatar || initials(live?.name || "主播")), isUser: Boolean(isOwnLiveSession(live)) };
+              return [host, ...getLiveGuests(live)].slice(0, 4);
             };
 
             const getLiveStats = (live) => {
@@ -1112,9 +1208,36 @@
 
             const renderLiveMoment = () => {
               const live = state.liveSession;
-              const host = q('[data-screen="live"] [data-role="live-moment"]');
-              if (!live || !host) return;
+              if (!live) return;
               const progress = getLiveProgress(live);
+              const participants = getLiveParticipants(live);
+              const mode = live.mode || (participants.length > 1 ? "remote" : "solo");
+              if (mode === "remote" && participants.length > 1) {
+                participants.forEach((participant, index) => {
+                  const host = qa('[data-screen="live"] [data-role="participant-event"]').find(node => String(node.dataset.participantId || "") === String(participant.id));
+                  if (!host) return;
+                  const event = index === 0 ? progress.userStageEvent : progress.participantEvents?.[String(participant.id)];
+                  if (!event) {
+                    host.innerHTML = `<div class="v-remote-event-empty">${index === 0 && isOwnLiveSession(live) ? "你发送的说话 / 动作会显示在这里" : "等待这一轮的语言 / 动作…"}</div>`;
+                    return;
+                  }
+                  const label = `${participant.name} · ${event.mode === "action" ? "动作" : "说话"}`;
+                  const trId = `remote-${String(live.id)}-${String(participant.id)}-${Number(event.at || 0)}`;
+                  host.innerHTML = `<div class="v-remote-event-label">${escapeHTML(label)}</div><div class="v-remote-event-text">${escapeHTML(event.text || "")}</div>${translationHTML(trId, event.translation || "")}`;
+                });
+                return;
+              }
+              const host = q('[data-screen="live"] [data-role="live-moment"]');
+              if (!host) return;
+              const timeline = safeArray(progress.timeline).slice(-4);
+              if (mode === "same-room" && timeline.length) {
+                host.innerHTML = timeline.map((event, idx) => {
+                  const trId = `same-room-${String(live.id)}-${Number(event.at || idx)}`;
+                  const label = `${event.actorName || "主播"} · ${event.mode === "action" ? "动作" : "说话"}`;
+                  return `<div class="v-own-stage-event"><div class="v-own-stage-event-label">${escapeHTML(label)}</div><div class="v-own-stage-event-text">${escapeHTML(event.text || "")}</div>${translationHTML(trId, event.translation || "")}</div>`;
+                }).join("");
+                return;
+              }
               const trId = `live-moment-${String(live.id || "live")}-${Number(progress.step || 0)}`;
               const ownEvent = progress.userStageEvent ? `<div class="v-own-stage-event"><div class="v-own-stage-event-label">${progress.userStageEvent.mode === "action" ? "user · 动作" : "user · 说话"}</div><div class="v-own-stage-event-text">${escapeHTML(progress.userStageEvent.text || "")}</div></div>` : "";
               host.innerHTML = `${ownEvent}<div class="v-live-moment-label">直播进行中</div><div class="v-live-moment-text">${escapeHTML(progress.text || "")}</div>${translationHTML(trId, progress.translation || "")}`;
@@ -1130,27 +1253,23 @@
               getLiveProgress(currentLive);
               getLiveStats(currentLive);
               const own = isOwnLiveSession(currentLive);
-              const mode = currentLive.mode || (currentLive.cohostId ? (currentLive.cohostMode === "inperson" ? "same-room" : "remote") : "solo");
+              const guests = getLiveGuests(currentLive);
+              const mode = currentLive.mode || (guests.length ? (currentLive.cohostMode === "inperson" ? "same-room" : "remote") : "solo");
               currentLive.mode = mode;
+              currentLive.participants = guests;
+              const participants = getLiveParticipants(currentLive);
               const coverHTML = isImageURL(currentLive.cover || "") ? `<img class="v-live-cover-bg" src="${escapeHTML(currentLive.cover)}" alt="">` : "";
-              const channelCohost = currentLive.cohostId ? state.channels.find(ch => String(ch.id) === String(currentLive.cohostId)) : null;
-              const cohost = channelCohost || (currentLive.cohostId ? {
-                id: currentLive.cohostId,
-                name: currentLive.cohostName || "嘉宾",
-                handle: currentLive.cohostHandle || "",
-                avatar: currentLive.cohostAvatar || initials(currentLive.cohostName || "嘉宾")
-              } : null);
-              const remoteGrid = own && mode === "remote" && cohost ? `<div class="v-remote-grid"><div class="v-remote-pane"><div class="v-remote-pane-label"><div class="v-social-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><span>${escapeHTML(hostName)}</span></div></div><div class="v-remote-pane"><div class="v-remote-pane-label"><div class="v-social-avatar">${avatarHTML(cohost.avatar || "", cohost.name || "嘉宾")}</div><span>${escapeHTML(cohost.name || "嘉宾")}</span></div></div></div>` : "";
-              const multiHost = Boolean(cohost && (mode === "same-room" || mode === "remote"));
-              const participants = multiHost
-                ? `<div class="v-live-participants"><div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-avatar">${avatarHTML(cohost.avatar || "", cohost.name || "嘉宾")}</div></div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)} + ${escapeHTML(cohost.name || "嘉宾")}</div><div class="v-live-viewers" data-role="live-viewers"></div></div>`
-                : `<div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div>`;
+              const multiHost = participants.length > 1;
+              const remoteGrid = mode === "remote" && multiHost ? `<div class="v-remote-grid" data-count="${participants.length}">${participants.map(participant => `<div class="v-remote-pane"><div class="v-remote-pane-label"><div class="v-social-avatar">${avatarHTML(participant.avatar || "", participant.name || "V")}</div><span>${escapeHTML(participant.name || "参与者")}</span></div><div class="v-remote-pane-event" data-role="participant-event" data-participant-id="${escapeHTML(String(participant.id))}"></div></div>`).join("")}</div>` : "";
+              const participantAvatars = participants.map(p => `<div class="v-live-host-avatar">${avatarHTML(p.avatar || "", p.name || "V")}</div>`).join("");
+              const participantNames = participants.map(p => p.name || "参与者").join(" + ");
+              const participantsHUD = multiHost ? `<div class="v-live-participants">${participantAvatars}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(participantNames)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div>` : `<div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div>`;
               const accessLabel = currentLive.accessMode === "free" ? "免费订阅" : currentLive.accessMode === "paid" ? "付费订阅" : "公开直播";
               const ageLabel = currentLive.ageRequirement === "18+" ? " · 18+" : "";
-              const modeLabel = cohost ? ` · ${mode === "same-room" ? "线下同镜" : "线上联播"}` : "";
+              const modeLabel = guests.length ? ` · ${mode === "same-room" ? "线下同镜" : "线上联播"}` : "";
               const viewerComposer = `<div class="v-composer"><input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="gift-demo" aria-label="送礼物" title="送礼物">🎁</button><button data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播">➤</button></div>`;
-              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话…" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">➤</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤">✦</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话/动作，不自动召唤。</span><button data-action="open-invite-guest">＋ 邀请嘉宾</button></div></div>`;
-              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}${remoteGrid}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participants}</div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
+              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话…" maxlength="500"><button data-action="send-host-stage-input" aria-label="发送到直播画面">➤</button><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤">✦</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span><button data-action="open-invite-guest">＋ 邀请嘉宾${guests.length ? ` · ${participants.length}/4` : ""}</button></div></div>`;
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""} ${mode === "remote" && multiHost ? "is-remote" : ""}">${coverHTML}${remoteGrid}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div><button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><h2>${escapeHTML(title)}</h2><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="10">🎁 ¥10</button><button data-action="send-live-gift" data-gift-amount="50">🎁 ¥50</button><button data-action="send-live-gift" data-gift-amount="200">🎁 ¥200</button><button data-action="send-live-gift" data-gift-amount="1000">👑 ¥1000</button></div></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${own ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
               renderLiveHUD();
@@ -1229,8 +1348,11 @@
               if (!text) { toast("先输入说话或动作"); return; }
               const mode = String(input?.dataset.mode || "speech") === "action" ? "action" : "speech";
               const progress = getLiveProgress(live);
-              progress.userStageEvent = { text, mode, at: Date.now() };
-              state.pendingOwnLiveInput = { liveId: String(live.id || "live"), text, mode, at: Date.now() };
+              const at = Date.now();
+              progress.userStageEvent = { text, mode, at };
+              progress.timeline.push({ actorType: "user", actorId: String(live.ownerId || state.viewerIdentityId || "user"), actorName: String(live.name || "user"), mode, text, translation: "", at });
+              progress.timeline = progress.timeline.slice(-120);
+              state.pendingOwnLiveInput = { liveId: String(live.id || "live"), text, mode, at };
               if (input) input.value = "";
               await persist();
               renderLiveMoment();
@@ -1256,22 +1378,33 @@
               const next = pool[(nextStep - 1) % pool.length];
               progress.step = nextStep;
               progress.language = lang;
-              if (fromUser && isOwnLiveSession(live)) {
+              if (isOwnLiveSession(live)) {
                 const message = String(userText || "").trim();
-                progress.seenUserStageEvents = safeArray(progress.seenUserStageEvents);
-                if (message) {
+                if (fromUser && message) {
+                  progress.seenUserStageEvents = safeArray(progress.seenUserStageEvents);
                   progress.seenUserStageEvents.push({ text: message, at: Date.now() });
                   progress.seenUserStageEvents = progress.seenUserStageEvents.slice(-12);
                   progress.lastSeenUserStageEvent = message;
                 }
-                const cohost = live.cohostId ? state.channels.find(ch => String(ch.id) === String(live.cohostId)) : null;
-                if (cohost) {
-                  progress.text = live.mode === "same-room"
-                    ? `${cohost.name || "嘉宾"}注意到刚刚的说话或动作，按自己的节奏在同一个镜头里作出反应。`
-                    : `${cohost.name || "嘉宾"}从另一侧画面注意到刚刚的内容，按自己的节奏决定是否接话。`;
-                  progress.translation = "";
+                const guests = getLiveGuests(live);
+                if (guests.length) {
+                  progress.participantEvents = { ...(progress.participantEvents || {}) };
+                  const start = nextStep % guests.length;
+                  const responderCount = guests.length >= 3 && nextStep % 3 === 0 ? 2 : 1;
+                  for (let offset = 0; offset < responderCount; offset += 1) {
+                    const guest = guests[(start + offset) % guests.length];
+                    if (!guest) continue;
+                    const text = live.mode === "same-room"
+                      ? `${guest.name || "嘉宾"}在同一个镜头里注意到现场变化，按自己的节奏接住话题或做出反应。`
+                      : `${guest.name || "嘉宾"}在自己的画面里注意到这一轮的内容，按自己的节奏决定接话还是继续手上的动作。`;
+                    const event = { mode: offset % 2 ? "action" : "speech", text, translation: "", at: Date.now() };
+                    progress.participantEvents[String(guest.id)] = event;
+                    progress.timeline.push({ actorType: "character", actorId: String(guest.id), actorName: String(guest.name || "嘉宾"), ...event });
+                  }
+                  progress.timeline = progress.timeline.slice(-120);
+                  progress.text = next.text;
+                  progress.translation = next.translation;
                 } else {
-                  // 单人主播模式下不替 user 继续说话或行动，只推进观众与直播环境。
                   progress.text = next.text;
                   progress.translation = next.translation;
                 }
@@ -1306,6 +1439,14 @@
               } else {
                 progress.text = next.text;
                 progress.translation = next.translation;
+              }
+
+              if (!isOwnLiveSession(live)) {
+                progress.timeline.push({ actorType: "character", actorId: String(live.id || "character"), actorName: String(live.name || live.handle || "主播"), mode: "speech", text: String(progress.text || ""), translation: String(progress.translation || ""), at: Date.now() });
+                progress.timeline = progress.timeline.slice(-120);
+              } else if (!getLiveGuests(live).length) {
+                progress.timeline.push({ actorType: "environment", actorId: "stream", actorName: "直播进行中", mode: "action", text: String(progress.text || ""), translation: String(progress.translation || ""), at: Date.now() });
+                progress.timeline = progress.timeline.slice(-120);
               }
 
               const chatPool = [
@@ -1424,7 +1565,7 @@
                 }
               } else if (tab === "replays") {
                 const replayItems = state.liveReplays.filter(item => String(item.ownerType || "") === String(ownerType) && String(item.ownerId || "") === String(id));
-                host.innerHTML = replayItems.length ? replayItems.map(item => `<article class="v-card"><div class="v-name">${escapeHTML(item.title || "直播回放")}</div><div class="v-sub">${escapeHTML(item.endedText || "刚刚结束")} · ${escapeHTML(item.topic || "直播")}</div><div class="v-postimg" style="height:135px;overflow:hidden">${isImageURL(item.cover || "") ? `<img src="${escapeHTML(item.cover)}" alt="" style="width:100%;height:100%;object-fit:cover">` : "▶"}</div><div class="v-engage"><span>最高 ${formatViewers(item.peakViewers || 0)} 人观看</span><span>直播回放</span></div></article>`).join("") : `<div class="v-profile-empty">还没有直播回放。</div>`;
+                host.innerHTML = replayItems.length ? replayItems.map(item => `<article class="v-replay-card"><button style="all:unset;display:block;width:100%;cursor:pointer" data-action="open-replay" data-replay-id="${escapeHTML(item.id)}"><div class="v-name">${escapeHTML(item.title || "直播回放")}</div><div class="v-sub">${escapeHTML(item.endedText || "刚刚结束")} · ${escapeHTML(item.topic || "直播")}</div><div class="v-replay-cover">${isImageURL(item.cover || "") ? `<img src="${escapeHTML(item.cover)}" alt="">` : "▶"}</div></button><div class="v-replay-actions"><span>最高 ${formatViewers(item.peakViewers || 0)} 人观看 · ${safeArray(item.participants).length + 1} 人出镜</span><button data-action="delete-replay" data-replay-id="${escapeHTML(item.id)}">删除回放</button></div></article>`).join("") : `<div class="v-profile-empty">还没有直播回放。</div>`;
               } else {
                 const ownPosts = state.communityPosts.filter(p => String(p.ownerType || "") === String(ownerType) && String(p.ownerId || "") === String(id));
                 const sample = ownerType === "channel" ? getHomeSamplePost() : null;
@@ -1440,7 +1581,7 @@
               const sheet = q('[data-role="publish-sheet"]');
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-publish-sheet-form"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-field"><label>配图</label><div class="v-publish-banner" data-role="post-image-preview" style="height:150px">▣</div><div class="v-media-preview-actions"><label class="v-upload-btn">从相册上传<input type="file" accept="image/*" data-post-image-file></label><button data-action="clear-post-image">移除图片</button></div><input type="hidden" data-post-field="image" value=""></div><div class="v-field"><label>或者填写图片 URL（可留空）</label><input data-post-image-url placeholder="https://..."></div><div class="v-access-row"><div class="v-field"><label>可见范围</label><select data-post-field="accessMode"><option value="public">公开</option><option value="free">免费订阅</option><option value="paid">付费订阅</option></select></div><div class="v-field"><label>年龄限制</label><select data-post-field="ageRequirement"><option value="none">无限制</option><option value="18+">18+</option></select></div></div></div><div class="v-publish-note" style="margin-top:11px">发布后会关联到当前主页「贴文」。限定内容已经合并进可见范围，不再单独发布。</div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="post-image-preview"><div class="v-ios-media-placeholder"><b>＋</b><span>可选配图</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">▣ 选择照片<input type="file" accept="image/*" data-post-image-file></label><button class="v-ios-media-remove" data-action="clear-post-image">移除</button></div><input type="hidden" data-post-field="image" value=""><div class="v-ios-url"><label>图片 URL（备用）</label><input data-post-image-url placeholder="https://..."></div></div><div class="v-ios-group"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-access-row"><div class="v-field"><label>可见范围</label><select data-post-field="accessMode"><option value="public">公开</option><option value="free">免费订阅</option><option value="paid">付费订阅</option></select></div><div class="v-field"><label>年龄限制</label><select data-post-field="ageRequirement"><option value="none">无限制</option><option value="18+">18+</option></select></div></div></div><div class="v-publish-note">发布后会同步到当前主页「贴文」和首页内容流。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -1561,7 +1702,7 @@
               const selector = kind === "live" ? '[data-role="live-cover-preview"]' : '[data-role="post-image-preview"]';
               const preview = q(`[data-role="publish-sheet"] ${selector}`);
               if (!preview) return;
-              preview.innerHTML = isImageURL(value) ? `<img src="${escapeHTML(value)}" alt="">` : (kind === "live" ? "◒" : "▣");
+              preview.innerHTML = isImageURL(value) ? `<img src="${escapeHTML(value)}" alt="">` : `<div class="v-ios-media-placeholder"><b>＋</b><span>${kind === "live" ? "直播封面" : "可选配图"}</span></div>`;
             };
 
             const renderPublishMenu = () => {
@@ -1576,7 +1717,7 @@
               const identity = state.identities.find(x => String(x.id) === String(state.viewerIdentityId)) || state.identities[0];
               if (!identity || !host) return;
               const roles = state.channels.filter(ch => ch.kind === "character" || ch.sourceCharacterId).map(ch => `<option value="${escapeHTML(ch.id)}">${escapeHTML(ch.name || ch.handle || "角色")}</option>`).join("");
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>开始直播</h3><button data-action="render-publish-menu">‹</button></div><div class="v-publish-banner" data-role="live-cover-preview">◒</div><div class="v-media-preview-actions"><label class="v-upload-btn">从相册上传<input type="file" accept="image/*" data-live-cover-file></label><button data-action="clear-live-cover">移除封面</button></div><input type="hidden" data-live-publish-field="cover" value=""><div class="v-publish-sheet-form" style="margin-top:12px"><div class="v-field"><label>或者填写直播封面 URL（可留空）</label><input data-live-cover-url placeholder="https://..."></div><div class="v-field"><label>直播标题</label><input data-live-publish-field="title" maxlength="90" placeholder="给这场直播起个标题"></div><div class="v-field"><label>直播主题</label><textarea data-live-publish-field="topic" maxlength="500" placeholder="今天准备播什么、聊什么"></textarea></div><div class="v-field"><label>联动嘉宾</label><select data-live-publish-field="cohostId"><option value="">无 · 单人直播</option>${roles}</select></div><div class="v-field"><label>联动方式</label><select data-live-publish-field="cohostMode"><option value="online">线上联播 / 分屏</option><option value="inperson">线下同镜 / 同一画面</option></select></div><div class="v-access-row"><div class="v-field"><label>观看权限</label><select data-live-publish-field="accessMode"><option value="public">公开</option><option value="free">免费订阅</option><option value="paid">付费订阅</option></select></div><div class="v-field"><label>年龄限制</label><select data-live-publish-field="ageRequirement"><option value="none">无限制</option><option value="18+">18+</option></select></div></div></div><div class="v-publish-note" style="margin-top:11px">公开直播所有路人可进入；免费订阅用于增长订阅；付费订阅用于频道付费会员。年龄限制与订阅层级分开设置。</div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action primary-red" data-action="start-prepared-live">开始直播</button></div>`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>开始直播</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="live-cover-preview"><div class="v-ios-media-placeholder"><b>＋</b><span>直播封面</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">▣ 选择照片<input type="file" accept="image/*" data-live-cover-file></label><button class="v-ios-media-remove" data-action="clear-live-cover">移除</button></div><input type="hidden" data-live-publish-field="cover" value=""><div class="v-ios-url"><label>封面 URL（备用）</label><input data-live-cover-url placeholder="https://..."></div></div><div class="v-ios-group"><div class="v-field"><label>直播标题</label><input data-live-publish-field="title" maxlength="90" placeholder="给这场直播起个标题"></div><div class="v-field"><label>直播主题</label><textarea data-live-publish-field="topic" maxlength="500" placeholder="今天准备播什么、聊什么"></textarea></div><div class="v-field"><label>首位联动嘉宾</label><select data-live-publish-field="cohostId"><option value="">无 · 单人直播</option>${roles}</select></div><div class="v-field"><label>联动方式</label><select data-live-publish-field="cohostMode"><option value="online">线上联播 · 分屏</option><option value="inperson">线下同镜 · 同一画面</option></select></div><div class="v-access-row"><div class="v-field"><label>观看权限</label><select data-live-publish-field="accessMode"><option value="public">公开</option><option value="free">免费订阅</option><option value="paid">付费订阅</option></select></div><div class="v-field"><label>年龄限制</label><select data-live-publish-field="ageRequirement"><option value="none">无限制</option><option value="18+">18+</option></select></div></div></div><div class="v-publish-note">开播后仍可继续邀请嘉宾；同时出镜最多 4 人（含 user）。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action primary-red" data-action="start-prepared-live">开始直播</button></div>`;
               sheet?.classList.add("is-open");
             };
 
@@ -1613,8 +1754,10 @@
                 cohostAvatar: cohost?.avatar || "",
                 cohostMode: cohost ? cohostMode : "",
                 mode: cohost ? (cohostMode === "inperson" ? "same-room" : "remote") : "solo",
+                participants: cohost ? [{ id: cohost.id, name: cohost.name || cohost.handle || "嘉宾", handle: cohost.handle || "", avatar: cohost.avatar || initials(cohost.name || "嘉宾") }] : [],
                 accessMode,
-                ageRequirement
+                ageRequirement,
+                startedAt: Date.now()
               };
               identity.live = true;
               identity.title = title;
@@ -1635,9 +1778,13 @@
             const openInviteGuest = () => {
               const live = state.liveSession;
               if (!live || !isOwnLiveSession(live)) return;
-              const roles = state.channels.filter(ch => ch.kind === "character" || ch.sourceCharacterId);
+              const guests = getLiveGuests(live);
+              if (guests.length >= 3) { toast("这场直播已经有 4 人同时出镜"); return; }
+              const used = new Set(guests.map(g => String(g.id)));
+              const roles = state.channels.filter(ch => (ch.kind === "character" || ch.sourceCharacterId) && !used.has(String(ch.id)));
               const rows = roles.map(ch => `<option value="${escapeHTML(ch.id)}">${escapeHTML(ch.name || ch.handle || "角色")}</option>`).join("");
-              openScreen("invite-guest", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="invite-guest">‹</button><div class="v-meta"><strong>邀请嘉宾</strong><div class="v-hint">直播进行中也可以加人</div></div><button class="v-head-action" data-action="confirm-invite-guest">邀请</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>选择角色</label><select data-invite-field="cohostId"><option value="">请选择</option>${rows}</select></div><div class="v-field"><label>联动方式</label><select data-invite-field="cohostMode"><option value="online">线上连麦</option><option value="inperson">同镜直播 / 一起线下播</option></select></div></div><p class="v-hint">这一版先直接完成邀请并更新直播间；后面接 AI 后再让角色按人设决定是否接受。</p></div></div>`);
+              const fixedMode = guests.length ? (live.mode === "same-room" ? "inperson" : "online") : "";
+              openScreen("invite-guest", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="invite-guest">‹</button><div class="v-meta"><strong>邀请嘉宾</strong><div class="v-hint">当前 ${guests.length + 1}/4 人</div></div><button class="v-head-action" data-action="confirm-invite-guest">邀请</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>选择角色</label><select data-invite-field="cohostId"><option value="">请选择</option>${rows}</select></div><div class="v-field"><label>联动方式</label><select data-invite-field="cohostMode" ${fixedMode ? "disabled" : ""}><option value="online" ${fixedMode === "online" ? "selected" : ""}>线上连麦</option><option value="inperson" ${fixedMode === "inperson" ? "selected" : ""}>同镜直播 / 一起线下播</option></select></div></div><p class="v-hint">${fixedMode ? "已有嘉宾后，本场联播方式保持不变。" : "首位嘉宾会决定这场直播是线上分屏还是线下同镜。"} 同时出镜最多 4 人。</p></div></div>`);
             };
 
             const confirmInviteGuest = async () => {
@@ -1645,21 +1792,28 @@
               if (!live || !isOwnLiveSession(live)) return;
               const screen = q('[data-screen="invite-guest"]');
               const cohostId = String(screen?.querySelector('[data-invite-field="cohostId"]')?.value || "");
-              const mode = String(screen?.querySelector('[data-invite-field="cohostMode"]')?.value || "online");
+              const selectedMode = String(screen?.querySelector('[data-invite-field="cohostMode"]')?.value || "online");
               const cohost = state.channels.find(ch => String(ch.id) === cohostId);
               if (!cohost) { toast("先选择一个角色"); return; }
-              live.cohostId = cohost.id;
-              live.cohostName = cohost.name || cohost.handle || "嘉宾";
-              live.cohostHandle = cohost.handle || "";
-              live.cohostAvatar = cohost.avatar || initials(live.cohostName);
-              live.cohostMode = mode === "inperson" ? "inperson" : "online";
-              live.mode = live.cohostMode === "inperson" ? "same-room" : "remote";
+              const guests = getLiveGuests(live);
+              if (guests.some(g => String(g.id) === String(cohost.id))) { toast("这个角色已经在直播里"); return; }
+              if (guests.length >= 3) { toast("同时出镜最多 4 人"); return; }
+              const nextMode = guests.length ? live.mode : (selectedMode === "inperson" ? "same-room" : "remote");
+              const nextGuest = { id: cohost.id, name: cohost.name || cohost.handle || "嘉宾", handle: cohost.handle || "", avatar: cohost.avatar || initials(cohost.name || "嘉宾") };
+              live.participants = [...guests, nextGuest].slice(0, 3);
+              live.mode = nextMode;
+              live.cohostMode = nextMode === "same-room" ? "inperson" : "online";
+              const first = live.participants[0];
+              live.cohostId = first?.id || "";
+              live.cohostName = first?.name || "";
+              live.cohostHandle = first?.handle || "";
+              live.cohostAvatar = first?.avatar || "";
               const identity = state.identities.find(x => String(x.id) === String(live.ownerId || state.viewerIdentityId));
-              if (identity?.activeLive) identity.activeLive = { ...identity.activeLive, cohostId: live.cohostId, cohostName: live.cohostName, cohostHandle: live.cohostHandle, cohostAvatar: live.cohostAvatar, cohostMode: live.cohostMode, mode: live.mode };
+              if (identity?.activeLive) identity.activeLive = { ...identity.activeLive, participants: live.participants.map(item => ({ ...item })), cohostId: live.cohostId, cohostName: live.cohostName, cohostHandle: live.cohostHandle, cohostAvatar: live.cohostAvatar, cohostMode: live.cohostMode, mode: live.mode };
               await persist();
               closeScreen("invite-guest");
               openLive(live);
-              toast("嘉宾已加入本场直播");
+              toast(`嘉宾已加入 · 当前 ${live.participants.length + 1}/4 人`);
             };
 
             const openRestrictedPublisher = () => {
@@ -1803,6 +1957,37 @@
               toast("主页已保存");
             };
 
+            const openReplayDetail = (replayId) => {
+              const replay = state.liveReplays.find(item => String(item.id) === String(replayId));
+              if (!replay) return;
+              const timeline = safeArray(replay.timeline);
+              const chat = safeArray(replay.chat);
+              const participants = safeArray(replay.participants);
+              const modeLabel = replay.mode === "remote" ? "线上联播" : replay.mode === "same-room" ? "线下同镜" : "单人直播";
+              const eventHTML = timeline.length ? timeline.map((event, index) => {
+                const trId = `replay-event-${String(replay.id)}-${index}`;
+                const label = `${event.actorName || (event.actorType === "user" ? "user" : "角色")} · ${event.mode === "action" ? "动作" : "说话"}`;
+                return `<div class="v-replay-event"><div class="v-replay-event-head">${escapeHTML(label)}</div><div class="v-replay-event-text">${escapeHTML(event.text || "")}</div>${translationHTML(trId, event.translation || "")}</div>`;
+              }).join("") : `<div class="v-profile-empty">这场回放还没有保存逐轮内容。</div>`;
+              const chatHTML = chat.length ? chat.map((line, index) => {
+                const trId = `replay-chat-${String(replay.id)}-${index}`;
+                return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user || "viewer")}</div><div class="v-chatline-text">${escapeHTML(line.text || "")}</div>${translationHTML(trId, line.translation || "")}</div></div>`;
+              }).join("") : `<div class="v-profile-empty">这场回放没有保存聊天室内容。</div>`;
+              openScreen("replay", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="replay">‹</button><div class="v-meta"><strong>直播回放</strong><div class="v-hint">${escapeHTML(replay.endedText || "已结束")}</div></div><button class="v-head-action" style="color:var(--v-red)!important" data-action="delete-replay" data-replay-id="${escapeHTML(replay.id)}">删除</button></header><div class="v-subbody"><div class="v-replay-summary"><div class="v-name">${escapeHTML(replay.title || "直播回放")}</div><div class="v-sub" style="margin-top:4px">${escapeHTML(replay.topic || "直播")} · ${escapeHTML(modeLabel)} · 最高 ${formatViewers(replay.peakViewers || 0)} 人观看</div>${participants.length ? `<div class="v-sub" style="margin-top:5px">参与：${escapeHTML(participants.map(p => p.name || "嘉宾").join("、"))}</div>` : ""}</div><div class="v-title" style="font-size:15px;margin-top:4px">直播内容</div><div class="v-replay-timeline">${eventHTML}</div><div class="v-title" style="font-size:15px;margin-top:14px">聊天室</div><div class="v-replay-chat">${chatHTML}</div></div>`);
+            };
+
+            const deleteReplay = async (replayId) => {
+              const index = state.liveReplays.findIndex(item => String(item.id) === String(replayId));
+              if (index < 0) return;
+              if (typeof window.confirm === "function" && !window.confirm("删除这条直播回放？")) return;
+              const removed = state.liveReplays.splice(index, 1)[0];
+              await persist();
+              if (q('[data-screen="replay"]')?.classList.contains("is-open")) closeScreen("replay");
+              const profile = q('[data-screen="profile"]');
+              if (profile?.classList.contains("is-open")) renderProfileTab(removed.ownerType || "identity", removed.ownerId || state.viewerIdentityId, "replays");
+              toast("回放已删除");
+            };
+
             const endCurrentLive = async () => {
               const live = state.liveSession;
               if (!live) return;
@@ -1832,6 +2017,7 @@
                 if (rec) rec.live = false;
               }
               if (replayOwnerType && replayOwnerId) {
+                const progress = getLiveProgress(live);
                 state.liveReplays.unshift({
                   id: `replay-${Date.now().toString(36)}`,
                   ownerType: replayOwnerType,
@@ -1839,7 +2025,15 @@
                   title: live.title || "直播回放",
                   topic: live.category || "直播",
                   cover: live.cover || "",
+                  mode: live.mode || "solo",
+                  participants: getLiveGuests(live).map(item => ({ ...item })),
+                  accessMode: live.accessMode || "public",
+                  ageRequirement: live.ageRequirement || "none",
+                  startedAt: Number(live.startedAt || Date.now()),
                   peakViewers: Number(stats.peakViewers || stats.currentViewers || 0),
+                  gifts: safeArray(stats.gifts).map(item => ({ ...item })),
+                  timeline: safeArray(progress.timeline).map(item => ({ ...item })),
+                  chat: safeArray(state.liveChat).map(item => ({ ...item })),
                   endedAt: Date.now(),
                   endedText: "刚刚结束"
                 });
@@ -2220,6 +2414,10 @@
                 await saveProfileEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
               } else if (action === "profile-tab") {
                 renderProfileTab(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.profileTab || "live");
+              } else if (action === "open-replay") {
+                openReplayDetail(button.dataset.replayId || "");
+              } else if (action === "delete-replay") {
+                await deleteReplay(button.dataset.replayId || "");
               } else if (action === "create-scheduled-live") {
                 closeScreen("schedule-detail");
                 openScheduledLiveEditor(button.dataset.identityId || state.viewerIdentityId);
@@ -2242,7 +2440,7 @@
                 if (identity?.scheduledLive) {
                   const item = identity.scheduledLive;
                   closeScreen("schedule-detail");
-                  const live = { id: `own-scheduled-${identity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: identity.id, isOwn: true, name: identity.displayName || "我的频道", handle: identity.handle || "@me", avatar: identity.avatar || "U", followers: Number(identity.followers || 0), title: item.title || "我的直播间", category: "预约直播", cover: item.cover || "", viewers: 0, mode: "solo", accessMode: "public", ageRequirement: "none" };
+                  const live = { id: `own-scheduled-${identity.id}-${Date.now().toString(36)}`, ownerType: "identity", ownerId: identity.id, isOwn: true, name: identity.displayName || "我的频道", handle: identity.handle || "@me", avatar: identity.avatar || "U", followers: Number(identity.followers || 0), title: item.title || "我的直播间", category: "预约直播", cover: item.cover || "", viewers: 0, mode: "solo", accessMode: "public", ageRequirement: "none", startedAt: Date.now() };
                   identity.live = true;
                   identity.activeLive = { ...live };
                   identity.scheduledLive = null;
