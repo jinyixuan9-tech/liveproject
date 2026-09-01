@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.4";
+  const VERSION = "0.1.5";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -55,6 +55,7 @@
   function createDefaultState() {
     return {
       activePage: "home",
+      homeFilter: "all",
       drawerOpen: false,
       publishOpen: false,
       viewerIdentityId: "alias-night",
@@ -78,6 +79,7 @@
           identityVisibility: "hidden",
           contentStyle: "",
           fanProfile: "",
+          scheduledLive: null,
           isAnonymous: true
         }
       ],
@@ -158,11 +160,27 @@
         }
       ],
       schedule: {
-        visible: true,
-        dateText: "9/12 · 20:00",
-        title: "Mellow Studio 合作直播",
-        detail: "展示新品一次 + 挂合作链接 · 已收定金 ¥800",
-        type: "合作直播"
+        visible: false,
+        source: "",
+        messageId: "",
+        dateText: "",
+        title: "",
+        detail: "",
+        type: ""
+      },
+      businessDeals: {
+        "biz-mellow": {
+          accepted: false,
+          expanded: false,
+          brandName: "Mellow Studio",
+          brandStyle: "极简生活方式 · 香氛与桌面美学",
+          productName: "Cloud Mist 香氛机",
+          productDescription: "主打柔和雾化与安静桌面场景的小型香氛机，希望在自然聊天过程中完成一次真实使用展示。",
+          dateText: "9/12 · 20:00",
+          deliverables: "直播中自然展示产品一次，并挂合作链接",
+          deposit: 800,
+          balance: 2400
+        }
       },
       wallet: {
         balance: 12680.4,
@@ -178,7 +196,7 @@
           avatar: "M",
           name: "Mellow Studio",
           badge: "合作邀约",
-          preview: "你好，我们想邀请你在 9/12 的直播里展示新品……",
+          preview: "Mellow Studio · Cloud Mist 香氛机合作邀约",
           unread: 1
         },
         {
@@ -235,8 +253,9 @@
 .vela-roche *{box-sizing:border-box}.vela-roche button,.vela-roche input,.vela-roche textarea{font:inherit}.vela-roche button{cursor:pointer}.vela-roche .v-top{position:absolute;z-index:20;left:0;right:0;top:0;height:var(--v-top-h);padding:0 14px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,246,248,.95);backdrop-filter:blur(16px);border-bottom:1px solid rgba(0,0,0,.035)}
 .vela-roche .v-brand{display:flex;align-items:center;gap:10px;font-size:20px;font-weight:900}.vela-roche .v-logo{width:28px;height:28px;border-radius:10px;background:#111;color:#fff;display:grid;place-items:center;font-size:13px}.vela-roche .v-plainbtn{width:42px;height:42px;border:0;border-radius:14px;background:#fff;color:#111;font-size:19px;display:grid;place-items:center}.vela-roche .v-top-actions{display:flex;gap:7px}
 .vela-roche .v-main{position:absolute;inset:var(--v-top-h) 0 calc(var(--v-bottom-h) + env(safe-area-inset-bottom,0px));overflow:auto;overscroll-behavior:contain;padding:12px 14px 24px;-webkit-overflow-scrolling:touch}.vela-roche .v-page{display:none}.vela-roche .v-page.is-active{display:block}.vela-roche .v-title{display:flex;justify-content:space-between;align-items:flex-end;margin:5px 2px 13px;font-size:22px;font-weight:900}.vela-roche .v-title small{font-size:11px;color:var(--v-muted);font-weight:700}
-.vela-roche .v-channels{display:flex;gap:12px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.vela-roche .v-channels::-webkit-scrollbar{display:none}.vela-roche .v-channel{width:64px;flex:0 0 auto;text-align:center;border:0;background:none;color:inherit;padding:0}.vela-roche .v-avatar-wrap{position:relative;width:58px;height:58px;border-radius:20px;padding:2px;background:linear-gradient(135deg,#111,#aaa);margin:auto}.vela-roche .v-avatar{width:100%;height:100%;display:grid;place-items:center;border-radius:18px;background:linear-gradient(135deg,#dadbe1,#fff);font-weight:900;font-size:18px}.vela-roche .v-live-dot{position:absolute;right:-4px;bottom:-3px;background:var(--v-live);color:#fff;border:3px solid var(--v-bg);border-radius:8px;font-size:8px;font-weight:900;padding:2px 5px}.vela-roche .v-channel-name{font-size:11px;font-weight:750;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vela-roche .v-channels{display:flex;gap:12px;overflow-x:auto;padding:2px 0 11px;scrollbar-width:none}.vela-roche .v-channels::-webkit-scrollbar{display:none}.vela-roche .v-channel{width:64px;flex:0 0 auto;text-align:center;border:0;background:none;color:inherit;padding:0}.vela-roche .v-avatar-wrap{position:relative;width:58px;height:58px;border-radius:50%;padding:2px;background:linear-gradient(135deg,#111,#aaa);margin:auto}.vela-roche .v-avatar{width:100%;height:100%;display:grid;place-items:center;border-radius:50%;background:linear-gradient(135deg,#dadbe1,#fff);font-weight:900;font-size:18px;overflow:hidden}.vela-roche .v-live-dot{position:absolute;right:-4px;bottom:-3px;background:var(--v-live);color:#fff;border:3px solid var(--v-bg);border-radius:8px;font-size:8px;font-weight:900;padding:2px 5px}.vela-roche .v-channel-name{font-size:11px;font-weight:750;margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .vela-roche .v-schedule{background:#111;color:#fff;border-radius:22px;padding:13px 14px;margin:4px 0 13px}.vela-roche .v-schedule-top,.vela-roche .v-schedule-main{display:flex;align-items:center;justify-content:space-between;gap:10px}.vela-roche .v-kicker{font-size:10px;opacity:.62;font-weight:800}.vela-roche .v-schedule-time{font-size:17px;font-weight:900;margin-top:3px}.vela-roche .v-pill{font-size:10px;background:#fff;color:#111;border-radius:9px;padding:5px 8px;font-weight:900}.vela-roche .v-schedule-main{margin-top:10px}.vela-roche .v-schedule-icon{width:38px;height:38px;border-radius:13px;background:#2a2a30;display:grid;place-items:center;font-weight:900}.vela-roche .v-schedule-copy{flex:1;min-width:0}.vela-roche .v-schedule-copy b{display:block;font-size:13px}.vela-roche .v-schedule-copy span{display:block;font-size:11px;opacity:.68;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-small-dark{border:0;background:#2a2a30;color:#fff;border-radius:12px;padding:9px 11px;font-size:11px;font-weight:850;min-height:38px}
+.vela-roche .v-home-card{overflow:hidden}.vela-roche .v-home-card-hit{width:100%;border:0;background:none;color:inherit;text-align:left;padding:0}.vela-roche .v-home-post-cover{height:178px;border-radius:19px;margin-top:12px;background:radial-gradient(circle at 72% 24%,rgba(255,255,255,.9),transparent 24%),linear-gradient(135deg,#d8d8df,#f4f4f7);display:grid;place-items:center;font-size:38px}.vela-roche .v-home-post-meta{display:flex;gap:14px;margin-top:10px;color:var(--v-muted);font-size:11px}.vela-roche .v-home-open{font-size:10px;color:var(--v-muted);font-weight:800}.vela-roche .v-task-toggle{width:100%;border:0;background:var(--v-soft);color:var(--v-text);border-radius:15px;padding:12px 13px;display:flex;align-items:center;justify-content:space-between;font-weight:900;margin-top:12px}.vela-roche .v-task-detail{margin-top:8px;border:1px solid var(--v-line);border-radius:16px;padding:0 13px;background:var(--v-card)}.vela-roche .v-brand-card{background:var(--v-card);border-radius:22px;padding:15px;margin-bottom:12px}.vela-roche .v-brand-style{font-size:11px;color:var(--v-muted);margin-top:4px}.vela-roche .v-product-box{margin-top:13px;background:var(--v-soft);border-radius:16px;padding:12px}.vela-roche .v-product-box b{font-size:13px}.vela-roche .v-product-box p{font-size:12px;line-height:1.55;color:var(--v-muted);margin:6px 0 0}.vela-roche .v-scheduled-card{width:100%;border:0;background:#111;color:#fff;border-radius:20px;padding:15px;text-align:left}.vela-roche .v-scheduled-card .v-sub{color:rgba(255,255,255,.68)}.vela-roche .v-profile-actions{display:flex;gap:8px;margin-top:12px}.vela-roche .v-profile-actions button{border:0;border-radius:12px;padding:9px 11px;font-size:11px;font-weight:900}.vela-roche .v-post-detail-cover{height:220px;border-radius:22px;background:radial-gradient(circle at 68% 18%,rgba(255,255,255,.86),transparent 28%),linear-gradient(135deg,#d5d6de,#f5f5f8);display:grid;place-items:center;font-size:52px;margin-top:12px}
 .vela-roche .v-filters{display:flex;gap:8px;margin:9px 0 14px}.vela-roche .v-chip{border:0;border-radius:14px;background:#e9e9ee;padding:9px 14px;font-size:12px;font-weight:850;color:#111}.vela-roche .v-chip.is-active{background:#111;color:#fff}.vela-roche .v-card{background:#fff;border-radius:24px;padding:14px;margin-bottom:14px}.vela-roche .v-author{display:flex;align-items:center;gap:10px}.vela-roche .v-mini{width:41px;height:41px;border-radius:14px;background:#ececf1;display:grid;place-items:center;font-weight:900}.vela-roche .v-meta{min-width:0;flex:1}.vela-roche .v-name{font-size:14px;font-weight:900}.vela-roche .v-sub{font-size:11px;color:var(--v-muted);margin-top:2px}.vela-roche .v-stage{display:flex;align-items:flex-end;width:100%;aspect-ratio:16/9;margin-top:12px;padding:14px;border:0;border-radius:20px;background:radial-gradient(circle at 72% 16%,rgba(255,255,255,.34),transparent 29%),linear-gradient(135deg,#1b1b22,#7a7d88);color:#fff;text-align:left;overflow:hidden;position:relative}.vela-roche .v-stage:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 38%,rgba(0,0,0,.48))}.vela-roche .v-stage-copy{position:relative;z-index:1}.vela-roche .v-badge{display:inline-block;background:var(--v-live);padding:5px 8px;border-radius:8px;font-size:9px;font-weight:900;margin-bottom:7px}.vela-roche .v-live-title{font-size:18px;font-weight:900;line-height:1.25}.vela-roche .v-viewers{font-size:11px;opacity:.82;margin-top:4px}.vela-roche .v-engage{display:flex;gap:14px;margin-top:10px;color:#555;font-size:12px}.vela-roche .v-postimg{height:170px;border-radius:19px;margin-top:12px;background:linear-gradient(135deg,#d7d8df,#fafafd);display:grid;place-items:center;font-size:42px}.vela-roche .v-posttext{font-size:14px;line-height:1.55;margin-top:10px}
 .vela-roche .v-rec-card{padding:0;overflow:hidden}.vela-roche .v-rec-cover{display:flex;align-items:flex-end;aspect-ratio:16/9;padding:14px;background:radial-gradient(circle at 75% 15%,rgba(255,255,255,.4),transparent 26%),linear-gradient(135deg,#2a2b31,#8c8f99);color:#fff;position:relative}.vela-roche .v-rec-cover:after{content:"";position:absolute;inset:0;background:linear-gradient(transparent 42%,rgba(0,0,0,.55))}.vela-roche .v-rec-cover>*{position:relative;z-index:1}.vela-roche .v-rec-body{padding:12px 14px 14px;display:flex;gap:10px;align-items:center}.vela-roche .v-follow{border:0;background:#111;color:#fff;border-radius:12px;padding:9px 12px;font-size:11px;font-weight:900;min-height:38px}.vela-roche .v-follow.is-on{background:#e9e9ee;color:#111}
 .vela-roche .v-msg{display:flex;align-items:center;gap:11px;padding:12px 2px;border-bottom:1px solid var(--v-line);border-top:0;border-left:0;border-right:0;background:none;width:100%;text-align:left;color:inherit}.vela-roche .v-msg:last-child{border-bottom:0}.vela-roche .v-preview{font-size:12px;color:var(--v-muted);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.vela-roche .v-unread{min-width:20px;height:20px;border-radius:10px;background:#111;color:#fff;font-size:10px;display:grid;place-items:center}.vela-roche .v-biz{font-size:9px;padding:3px 6px;border-radius:7px;background:#fff0d4;color:#925e00;margin-left:5px}.vela-roche .v-wallet{background:#111;color:#fff;border-radius:28px;padding:22px;margin:7px 0 16px}.vela-roche .v-balance-label{font-size:12px;opacity:.65}.vela-roche .v-balance{font-size:35px;font-weight:900;margin:7px 0 18px}.vela-roche .v-wallet-actions{display:flex;gap:8px}.vela-roche .v-wallet-actions button{flex:1;border:0;background:#fff;color:#111;border-radius:14px;padding:12px;font-weight:900}.vela-roche .v-tx{display:flex;justify-content:space-between;gap:12px;padding:13px 2px;border-bottom:1px solid var(--v-line);font-size:13px}.vela-roche .v-tx:last-child{border-bottom:0}.vela-roche .v-tx small{display:block;color:var(--v-muted);margin-top:3px}
@@ -268,7 +287,7 @@
           <div class="v-title">首页 <small>关注中的频道</small></div>
           <div class="v-channels" data-role="channel-strip"></div>
           <div data-role="schedule"></div>
-          <div class="v-filters"><button class="v-chip is-active">全部</button><button class="v-chip">正在直播</button><button class="v-chip">贴文</button></div>
+          <div class="v-filters"><button class="v-chip" data-action="home-filter" data-home-filter="all">全部</button><button class="v-chip" data-action="home-filter" data-home-filter="live">正在直播</button><button class="v-chip" data-action="home-filter" data-home-filter="post">贴文</button></div>
           <div data-role="home-feed"></div>
         </section>
         <section class="v-page" data-page="discover">
@@ -342,6 +361,9 @@
       <section class="v-subscreen" data-screen="profile"></section>
       <section class="v-subscreen" data-screen="profile-edit"></section>
       <section class="v-subscreen" data-screen="settings"></section>
+      <section class="v-subscreen" data-screen="post"></section>
+      <section class="v-subscreen" data-screen="schedule-editor"></section>
+      <section class="v-subscreen" data-screen="schedule-detail"></section>
       <div class="v-toast" data-role="toast"></div>
     `;
   }
@@ -372,6 +394,7 @@
                   ...saved,
                   wallet: { ...state.wallet, ...(saved.wallet || {}) },
                   roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) },
+                  businessDeals: { ...state.businessDeals, ...(saved.businessDeals || {}) },
                   generationPreset: { ...state.generationPreset, ...(saved.generationPreset || {}) },
                   appearance: { ...state.appearance, ...(saved.appearance || {}) },
                   platformSettings: { ...state.platformSettings, ...(saved.platformSettings || {}) }
@@ -387,7 +410,7 @@
             };
             state.identities = safeArray(state.identities).map(item => ({
               accountRole: "alias", faceMode: "hidden", identityVisibility: item?.isAnonymous ? "hidden" : "public",
-              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, ...item
+              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, scheduledLive: null, ...item
             }));
             state.channels = safeArray(state.channels).map(item => ({
               accountRole: "primary", faceMode: "mixed", identityVisibility: "partial",
@@ -396,6 +419,28 @@
             state.appearance = { darkMode: false, topbarHeight: 62, bottombarHeight: 78, ...(state.appearance || {}) };
             state.platformSettings = { recommendationCount: 3, allowBusinessDM: true, activityLevel: 50, ...(state.platformSettings || {}) };
             state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
+            state.homeFilter = ["all","live","post"].includes(state.homeFilter) ? state.homeFilter : "all";
+            state.businessDeals = {
+              "biz-mellow": {
+                accepted: false, expanded: false, brandName: "Mellow Studio",
+                brandStyle: "极简生活方式 · 香氛与桌面美学",
+                productName: "Cloud Mist 香氛机",
+                productDescription: "主打柔和雾化与安静桌面场景的小型香氛机，希望在自然聊天过程中完成一次真实使用展示。",
+                dateText: "9/12 · 20:00",
+                deliverables: "直播中自然展示产品一次，并挂合作链接",
+                deposit: 800, balance: 2400
+              },
+              ...(state.businessDeals || {})
+            };
+            state.schedule = {
+              visible: false, source: "", messageId: "", dateText: "", title: "", detail: "", type: "",
+              ...(state.schedule || {})
+            };
+            // v0.1.4 以前的 Mellow Studio 日程只是 Shell 占位。升级后默认隐藏，只有真正接受合作才出现。
+            if (state.schedule.visible && !state.schedule.source && state.schedule.title === "Mellow Studio 合作直播") {
+              state.schedule = { visible: false, source: "", messageId: "", dateText: "", title: "", detail: "", type: "" };
+              if (state.businessDeals["biz-mellow"]) state.businessDeals["biz-mellow"].accepted = false;
+            }
 
             const rocheRuntime = {
               loaded: false,
@@ -422,6 +467,8 @@
                   schedule: state.schedule,
                   wallet: state.wallet,
                   roleCommerce: state.roleCommerce,
+                  businessDeals: state.businessDeals,
+                  homeFilter: state.homeFilter,
                   generationPreset: state.generationPreset,
                   appearance: state.appearance,
                   platformSettings: state.platformSettings,
@@ -612,20 +659,55 @@
             const renderSchedule = () => {
               const host = q('[data-role="schedule"]');
               if (!state.schedule?.visible) { host.innerHTML = ""; return; }
-              host.innerHTML = `<div class="v-schedule"><div class="v-schedule-top"><div><div class="v-kicker">即将开始 · 已加入日程</div><div class="v-schedule-time">${escapeHTML(state.schedule.dateText)}</div></div><span class="v-pill">${escapeHTML(state.schedule.type)}</span></div><div class="v-schedule-main"><div class="v-schedule-icon">M</div><div class="v-schedule-copy"><b>${escapeHTML(state.schedule.title)}</b><span>${escapeHTML(state.schedule.detail)}</span></div><button class="v-small-dark" data-action="open-message" data-message-id="biz-mellow">查看任务</button></div></div>`;
+              const messageId = String(state.schedule.messageId || "biz-mellow");
+              host.innerHTML = `<div class="v-schedule"><div class="v-schedule-top"><div><div class="v-kicker">即将开始 · 已加入日程</div><div class="v-schedule-time">${escapeHTML(state.schedule.dateText)}</div></div><span class="v-pill">${escapeHTML(state.schedule.type || "直播")}</span></div><div class="v-schedule-main"><div class="v-schedule-icon">M</div><div class="v-schedule-copy"><b>${escapeHTML(state.schedule.title)}</b><span>${escapeHTML(state.schedule.detail)}</span></div><button class="v-small-dark" data-action="open-message" data-message-id="${escapeHTML(messageId)}">查看任务</button></div></div>`;
+            };
+
+            const getHomeDemoHost = () => {
+              const first = state.channels[0];
+              if (first) return first;
+              return { id: "vela-demo-host", name: "Vela Channel", handle: "@vela_channel", avatar: "V", viewers: 1260 };
+            };
+
+            const getHomeSampleLive = () => {
+              const host = getHomeDemoHost();
+              return {
+                id: "home-sample-live",
+                name: host.name || "Vela Channel",
+                handle: host.handle || "@vela_channel",
+                avatar: host.avatar || "V",
+                title: "今晚先不开主题，边整理东西边聊",
+                category: "首页直播样式预览 · 日常聊天",
+                viewers: Number(host.viewers || 1260)
+              };
+            };
+
+            const getHomeSamplePost = () => {
+              const host = getHomeDemoHost();
+              return {
+                id: "home-sample-post",
+                name: host.name || "Vela Channel",
+                handle: host.handle || "@vela_channel",
+                avatar: host.avatar || "V",
+                text: "今天把直播间重新收拾了一遍。还差一点灯光，下一场应该会舒服很多。",
+                time: "18 分钟前",
+                likes: 913,
+                comments: 126
+              };
             };
 
             const renderHome = () => {
               const host = q('[data-role="home-feed"]');
-              const cards = state.channels.map(ch => {
-                const handleText = ch.handle ? ` · ${escapeHTML(ch.handle)}` : "";
-                if (ch.live) {
-                  return `<article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(ch.avatar, ch.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(ch.name)}${handleText}</div><div class="v-sub">正在直播${ch.sourceCharacterId ? " · Roche 角色频道" : ""}</div></div><div>•••</div></div><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(ch.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(ch.title || "正在直播")}</div><div class="v-viewers">${formatViewers(ch.viewers || 0)} 人正在观看</div></div></button></article>`;
-                }
-                return `<article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(ch.avatar, ch.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(ch.name)}${handleText}</div><div class="v-sub">${ch.sourceCharacterId ? "已连接 Roche 角色" : "已关注频道"}</div></div><button class="v-action light" data-action="open-channel" data-channel-id="${escapeHTML(ch.id)}">主页</button></div>${ch.bio ? `<div class="v-posttext">${escapeHTML(ch.bio)}</div>` : ""}${ch.sourceCharacterId ? `<p class="v-hint">角色频道已经链接成功。下一阶段接入 AI 后，这里会出现角色生成的直播、贴文与社群动态。</p>` : ""}</article>`;
-              }).join("");
+              const filter = ["all","live","post"].includes(state.homeFilter) ? state.homeFilter : "all";
+              qa('[data-home-filter]').forEach(btn => btn.classList.toggle("is-active", btn.dataset.homeFilter === filter));
+              const live = getHomeSampleLive();
+              const post = getHomeSamplePost();
 
-              host.innerHTML = cards || `<div class="v-empty">还没有加入任何角色频道。<br><button class="v-action" style="margin-top:12px" data-action="open-roles">从 Roche 添加角色</button></div>`;
+              const liveCard = `<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-home-live"><div class="v-author"><div class="v-mini">${avatarHTML(live.avatar, live.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(live.name)}${live.handle ? ` · ${escapeHTML(live.handle)}` : ""}</div><div class="v-sub">正在直播 · 点进去看直播间</div></div><span class="v-home-open">进入 ›</span></div><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(live.title)}</div><div class="v-viewers">${formatViewers(live.viewers)} 人正在观看</div></div></div></button></article>`;
+
+              const postCard = `<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-home-post"><div class="v-author"><div class="v-mini">${avatarHTML(post.avatar, post.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(post.name)}${post.handle ? ` · ${escapeHTML(post.handle)}` : ""}</div><div class="v-sub">${escapeHTML(post.time)} · 贴文</div></div><span class="v-home-open">查看 ›</span></div><div class="v-home-post-cover">✦</div><div class="v-posttext">${escapeHTML(post.text)}</div><div class="v-home-post-meta"><span>♡ ${post.likes}</span><span>◌ ${post.comments}</span></div></button></article>`;
+
+              host.innerHTML = filter === "live" ? liveCard : filter === "post" ? postCard : liveCard + postCard;
             };
 
             const renderRecommended = () => {
@@ -674,6 +756,11 @@
               host.innerHTML = state.liveChat.slice(-8).map(line => `<div class="v-chatline"><b>${escapeHTML(line.user)}</b><span>${escapeHTML(line.text)}</span></div>`).join("");
             };
 
+            const openHomePost = () => {
+              const post = getHomeSamplePost();
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name)} · ${escapeHTML(post.time)}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-author"><div class="v-mini">${avatarHTML(post.avatar, post.name)}</div><div class="v-meta"><div class="v-name">${escapeHTML(post.name)}</div><div class="v-sub">${escapeHTML(post.handle || "")}</div></div></div><div class="v-post-detail-cover">✦</div><div class="v-posttext">${escapeHTML(post.text)}</div><div class="v-engage"><button class="v-action light" data-action="demo-like-post">♡ 喜欢</button><button class="v-action light" data-action="demo-comment-post">评论</button></div></article></div>`);
+            };
+
             const getProfileEntity = (ownerType, id) => {
               if (ownerType === "identity") return state.identities.find(x => String(x.id) === String(id)) || null;
               return state.channels.find(x => String(x.id) === String(id)) || null;
@@ -691,14 +778,49 @@
               if (tab === "live") {
                 if (entity.live) {
                   host.innerHTML = `<article class="v-card"><button class="v-stage" data-action="open-live" data-live-id="${escapeHTML(entity.id)}"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(entity.title || "正在直播")}</div><div class="v-viewers">${formatViewers(entity.viewers || 0)} 人正在观看</div></div></button></article>`;
+                } else if (ownerType === "identity" && entity.scheduledLive) {
+                  host.innerHTML = `<article class="v-card"><button class="v-scheduled-card" data-action="open-scheduled-live" data-identity-id="${escapeHTML(entity.id)}"><div class="v-kicker">已预约直播</div><div class="v-live-title" style="margin-top:6px">${escapeHTML(entity.scheduledLive.title || "预约直播")}</div><div class="v-sub" style="margin-top:7px">${escapeHTML(entity.scheduledLive.dateText || "未设置时间")} · 点开查看</div></button></article><div class="v-profile-actions"><button class="v-action light" data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">编辑预约</button></div>`;
+                } else if (ownerType === "identity") {
+                  host.innerHTML = `<div class="v-profile-empty">当前没有正在直播。<br><button class="v-action" style="margin-top:12px" data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">＋ 预约直播</button></div>`;
                 } else {
-                  host.innerHTML = `<div class="v-profile-empty">当前没有正在直播。<br>以后预约直播也会出现在这里。</div>`;
+                  host.innerHTML = `<div class="v-profile-empty">当前没有正在直播。</div>`;
                 }
               } else if (tab === "replays") {
                 host.innerHTML = `<article class="v-card"><div class="v-name">周末晚上，随便聊会儿</div><div class="v-sub">8 月 31 日 21:06–23:18 · 2小时12分</div><div class="v-postimg" style="height:135px">▶</div><div class="v-engage"><span>最高 1.6 万人观看</span><span>直播回放</span></div></article>`;
               } else {
                 host.innerHTML = `<article class="v-card"><div class="v-name">频道社群</div><p class="v-posttext">这里是频道自己的粉丝社群。后续加入时可以选择用哪个 Vela 身份进入。</p><button class="v-action light" data-action="noop">社群功能稍后接入</button></article>`;
               }
+            };
+
+            const openScheduledLiveEditor = (identityId) => {
+              const identity = state.identities.find(x => String(x.id) === String(identityId));
+              if (!identity) return;
+              const item = identity.scheduledLive || {};
+              openScreen("schedule-editor", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="schedule-editor">‹</button><div class="v-meta"><strong>预约直播</strong><div class="v-hint">${escapeHTML(identity.displayName || "我的频道")}</div></div><button class="v-head-action" data-action="save-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">保存</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>直播标题</label><input data-schedule-field="title" maxlength="80" value="${escapeHTML(item.title || "")}" placeholder="这场直播准备聊什么？"></div><div class="v-field"><label>直播时间</label><input data-schedule-field="dateText" maxlength="60" value="${escapeHTML(item.dateText || "")}" placeholder="例如：9/12 · 20:00"></div><div class="v-field"><label>封面 URL（可留空）</label><input data-schedule-field="cover" value="${escapeHTML(item.cover || "")}" placeholder="https://..."></div></div></div><p class="v-hint">预约只显示在这个 Vela 身份的主页里；真正开播后会切换为 LIVE 状态。</p></div>`);
+            };
+
+            const saveScheduledLive = async (identityId) => {
+              const identity = state.identities.find(x => String(x.id) === String(identityId));
+              if (!identity) return;
+              const screen = q('[data-screen="schedule-editor"]');
+              const title = String(screen?.querySelector('[data-schedule-field="title"]')?.value || "").trim();
+              const dateText = String(screen?.querySelector('[data-schedule-field="dateText"]')?.value || "").trim();
+              const cover = String(screen?.querySelector('[data-schedule-field="cover"]')?.value || "").trim();
+              if (!title || !dateText) { toast("先填写直播标题和时间"); return; }
+              identity.scheduledLive = { title, dateText, cover };
+              await persist();
+              closeScreen("schedule-editor");
+              openProfile("identity", identity.id);
+              renderProfileTab("identity", identity.id, "live");
+              toast("直播预约已保存");
+            };
+
+            const openScheduledLiveDetail = (identityId) => {
+              const identity = state.identities.find(x => String(x.id) === String(identityId));
+              const item = identity?.scheduledLive;
+              if (!identity || !item) return;
+              const coverHTML = isImageURL(item.cover || "") ? `<img src="${escapeHTML(item.cover)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` : `<div style="font-size:40px">●</div>`;
+              openScreen("schedule-detail", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="schedule-detail">‹</button><div class="v-meta"><strong>预约直播</strong><div class="v-hint">${escapeHTML(identity.displayName || "我的频道")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-postimg" style="height:150px;overflow:hidden">${coverHTML}</div><div class="v-name" style="margin-top:12px">${escapeHTML(item.title)}</div><div class="v-sub" style="margin-top:5px">${escapeHTML(item.dateText)}</div><div class="v-settings-actions"><button class="v-action" data-action="start-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">开始直播</button><button class="v-action light" data-action="create-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">编辑预约</button><button class="v-action light" data-action="cancel-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">取消预约</button></div></article></div>`);
             };
 
             const openProfile = (ownerType, id) => {
@@ -839,7 +961,15 @@
               const msg = state.messages.find(x => x.id === id);
               if (!msg) return;
               if (id === "biz-mellow") {
-                openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div><strong>Mellow Studio</strong><div class="v-hint">合作邀约</div></div></header><div class="v-subbody"><div class="v-card"><p style="margin-top:0">你好，我们想邀请你的频道在 9/12 的直播中展示新品，并挂一个合作链接。</p><div class="v-row"><div><b>合作直播</b><small>9/12 · 20:00</small></div><span class="v-pill" style="background:#111;color:#fff">已排期</span></div><div class="v-row"><div><b>定金</b><small>确认后预付</small></div><b>¥800</b></div><div class="v-row"><div><b>尾款</b><small>完成任务后结算</small></div><b>¥2,400</b></div><button class="v-action" data-action="biz-demo">查看合作任务</button></div></div>`);
+                const deal = state.businessDeals?.[id] || {};
+                const accepted = Boolean(deal.accepted);
+                const expanded = Boolean(deal.expanded);
+                openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div><strong>${escapeHTML(deal.brandName || "Mellow Studio")}</strong><div class="v-hint">品牌合作</div></div></header><div class="v-subbody">
+                  <div class="v-brand-card"><div class="v-name" style="font-size:18px">${escapeHTML(deal.brandName || "Mellow Studio")}</div><div class="v-brand-style">${escapeHTML(deal.brandStyle || "生活方式品牌")}</div><div class="v-product-box"><b>${escapeHTML(deal.productName || "合作商品")}</b><p>${escapeHTML(deal.productDescription || "")}</p></div>
+                    <button class="v-task-toggle" data-action="toggle-business-task" data-message-id="${escapeHTML(id)}"><span>合作任务</span><span>${expanded ? "收起⌃" : "展开⌄"}</span></button>
+                    ${expanded ? `<div class="v-task-detail"><div class="v-row"><div><b>直播时间</b><small>${escapeHTML(deal.dateText || "")}</small></div><span class="v-pill" style="background:${accepted ? "#111" : "var(--v-soft)"};color:${accepted ? "#fff" : "var(--v-text)"}">${accepted ? "已接受" : "待确认"}</span></div><div class="v-row"><div><b>合作要求</b><small>${escapeHTML(deal.deliverables || "")}</small></div></div><div class="v-row"><div><b>定金</b><small>接受合作后进入日程</small></div><b>¥${Number(deal.deposit || 0).toLocaleString("zh-CN")}</b></div><div class="v-row"><div><b>尾款</b><small>完成直播任务后结算</small></div><b>¥${Number(deal.balance || 0).toLocaleString("zh-CN")}</b></div>${accepted ? `<button class="v-action light" style="margin:12px 0" data-action="go-home-from-task">已加入首页日程</button>` : `<button class="v-action" style="margin:12px 0" data-action="accept-business-task" data-message-id="${escapeHTML(id)}">接受合作并加入日程</button>`}</div>` : ""}
+                  </div>
+                </div>`);
               } else {
                 openScreen("message", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="message">‹</button><div><strong>${escapeHTML(msg.name)}</strong><div class="v-hint">Vela 私信</div></div></header><div class="v-subbody"><div class="v-card"><p>${escapeHTML(msg.preview)}</p><p class="v-hint">正式版这里会接入角色主动私信、匿名身份试探和账号认知状态。</p></div></div>`);
               }
@@ -928,6 +1058,18 @@
                 }
               } else if (action === "open-publish") {
                 q('[data-role="publish-sheet"]')?.classList.add("is-open");
+              } else if (action === "home-filter") {
+                state.homeFilter = ["all","live","post"].includes(button.dataset.homeFilter) ? button.dataset.homeFilter : "all";
+                renderHome();
+                await persist();
+              } else if (action === "open-home-live") {
+                openLive(getHomeSampleLive());
+              } else if (action === "open-home-post") {
+                openHomePost();
+              } else if (action === "demo-like-post") {
+                button.textContent = button.textContent.includes("已喜欢") ? "♡ 喜欢" : "♥ 已喜欢";
+              } else if (action === "demo-comment-post") {
+                toast("评论入口可以继续接真实互动");
               } else if (action === "sheet-bg-close" && event.target === button) {
                 q('[data-role="publish-sheet"]')?.classList.remove("is-open");
               } else if (action === "open-channel") {
@@ -973,6 +1115,38 @@
                 toast("礼物面板将在业务版接入钱包余额");
               } else if (action === "open-message") {
                 openMessage(button.dataset.messageId);
+              } else if (action === "toggle-business-task") {
+                const id = String(button.dataset.messageId || "");
+                const deal = state.businessDeals?.[id];
+                if (deal) {
+                  deal.expanded = !deal.expanded;
+                  await persist();
+                  openMessage(id);
+                }
+              } else if (action === "accept-business-task") {
+                const id = String(button.dataset.messageId || "");
+                const deal = state.businessDeals?.[id];
+                if (deal) {
+                  deal.accepted = true;
+                  deal.expanded = true;
+                  state.schedule = {
+                    visible: true,
+                    source: "business",
+                    messageId: id,
+                    dateText: String(deal.dateText || ""),
+                    title: `${deal.brandName || "品牌"} 合作直播`,
+                    detail: `${deal.productName || "合作商品"} · ${deal.deliverables || "合作任务"}`,
+                    type: "合作直播"
+                  };
+                  await persist();
+                  renderSchedule();
+                  openMessage(id);
+                  toast("合作已接受，直播日程已加入首页");
+                }
+              } else if (action === "go-home-from-task") {
+                closeScreen("message");
+                switchPage("home");
+                const main = q(".v-main"); if (main) main.scrollTop = 0;
               } else if (action === "close-screen") {
                 closeScreen(button.dataset.screenName);
               } else if (action === "open-user-profile") {
@@ -985,6 +1159,30 @@
                 await saveProfileEditor(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
               } else if (action === "profile-tab") {
                 renderProfileTab(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.profileTab || "live");
+              } else if (action === "create-scheduled-live") {
+                closeScreen("schedule-detail");
+                openScheduledLiveEditor(button.dataset.identityId || state.viewerIdentityId);
+              } else if (action === "save-scheduled-live") {
+                await saveScheduledLive(button.dataset.identityId || state.viewerIdentityId);
+              } else if (action === "open-scheduled-live") {
+                openScheduledLiveDetail(button.dataset.identityId || state.viewerIdentityId);
+              } else if (action === "cancel-scheduled-live") {
+                const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
+                if (identity) {
+                  identity.scheduledLive = null;
+                  await persist();
+                  closeScreen("schedule-detail");
+                  openProfile("identity", identity.id);
+                  renderProfileTab("identity", identity.id, "live");
+                  toast("已取消预约");
+                }
+              } else if (action === "start-scheduled-live") {
+                const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
+                if (identity?.scheduledLive) {
+                  const item = identity.scheduledLive;
+                  closeScreen("schedule-detail");
+                  openLive({ id: `own-scheduled-${identity.id}`, name: identity.displayName || "我的频道", handle: identity.handle || "@me", title: item.title || "我的直播间", category: "我的预约直播", viewers: 0 });
+                }
               } else if (action === "settings-note") {
                 closeDrawer(); openSettingsNote(button.dataset.settingsKind || "platform");
               } else if (action === "save-generation-settings") {
