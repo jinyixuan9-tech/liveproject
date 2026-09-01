@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.8";
+  const VERSION = "0.1.9";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -284,17 +284,23 @@
 .vela-roche .v-live-screen>.v-subhead{position:relative;top:auto;flex:0 0 var(--v-top-h)}
 .vela-roche .v-live-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:10px 12px 10px!important}
 .vela-roche .v-live-fixed{flex:0 0 auto;min-height:0}
-.vela-roche .v-live-stage{flex:0 0 auto;max-height:34vh;min-height:190px;position:relative}
+/* 直播画面保持完整的横屏比例，不再被 34vh 强行压小 */
+.vela-roche .v-live-stage{flex:0 0 auto;aspect-ratio:16/9!important;max-height:none!important;min-height:0!important;position:relative}
 .vela-roche .v-live-info{flex:0 0 auto;padding:11px 13px!important}
-.vela-roche .v-live-moment{position:absolute;z-index:3;left:12px;right:12px;bottom:12px;margin:0;padding:10px 11px;border:1px solid rgba(255,255,255,.15);border-radius:14px;background:rgba(15,15,18,.76);backdrop-filter:blur(10px);color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.vela-roche .v-live-moment{position:absolute;z-index:3;left:14px;right:14px;bottom:14px;margin:0;padding:9px 11px;border:1px solid rgba(255,255,255,.14);border-radius:15px;background:rgba(15,15,18,.74);backdrop-filter:blur(10px);color:#fff;box-shadow:0 8px 26px rgba(0,0,0,.16);max-height:42%;overflow:auto}
 .vela-roche .v-live-moment-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.68);margin-bottom:4px}
 .vela-roche .v-live-moment-text{font-size:12px;line-height:1.48;color:#fff}
 .vela-roche .v-live-moment .v-translate-btn{color:rgba(255,255,255,.72);margin-top:3px}
 .vela-roche .v-live-moment .v-translation{color:rgba(255,255,255,.82);border-left-color:rgba(255,255,255,.28)}
-.vela-roche .v-chat-panel{flex:1 1 220px;min-height:180px;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important}
-.vela-roche .v-chat-title{flex:0 0 auto}
-.vela-roche .v-chat-scroll{flex:1 1 auto;min-height:82px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
-.vela-roche .v-composer,.vela-roche .v-continue{flex:0 0 auto}
+/* 只有实时聊天区域滚动，上面的直播画面和标题不动 */
+.vela-roche .v-chat-panel{flex:1 1 220px;min-height:150px;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important;padding:11px 13px!important}
+.vela-roche .v-chat-title{flex:0 0 auto;margin-bottom:4px}
+.vela-roche .v-chat-scroll{flex:1 1 auto;min-height:64px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
+.vela-roche .v-composer{flex:0 0 auto;display:grid!important;grid-template-columns:minmax(0,1fr) 38px 38px 38px!important;gap:7px!important;margin-top:7px!important}
+.vela-roche .v-composer input{min-height:38px!important;padding:8px 12px!important;border-radius:19px!important}
+.vela-roche .v-composer button{width:38px!important;height:38px!important;min-height:38px!important;border-radius:19px!important;padding:0!important;display:grid!important;place-items:center!important;font-size:14px!important}
+.vela-roche .v-composer .v-continue-mini{background:#111!important;color:#fff!important;font-size:18px!important;font-weight:900!important}
+.vela-roche.is-dark .v-composer .v-continue-mini{background:#f4f4f6!important;color:#111!important}
 .vela-roche .v-post-composer{display:grid;grid-template-columns:minmax(0,1fr) 42px 46px;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--v-line)}
 .vela-roche .v-post-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:var(--v-soft);color:var(--v-text);padding:11px 12px;font-size:16px;outline:none}
 .vela-roche .v-post-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px;font-weight:900}
@@ -875,7 +881,7 @@
               const liveTrId = `live-title-${String(live.id || "live")}`;
               const liveTranslation = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
               getLiveProgress(live);
-              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo" aria-label="礼物" title="礼物">🎁</button><button data-action="send-live-chat" aria-label="发送" title="发送">➤</button><button class="v-continue-mini" data-action="continue-live" aria-label="继续观看直播" title="继续观看直播">↓</button></div></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
             };
