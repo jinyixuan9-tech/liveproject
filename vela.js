@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.1.7";
+  const VERSION = "0.1.8";
 
   if (!window.RochePlugin || typeof window.RochePlugin.register !== "function") {
     console.warn("[Vela] RochePlugin.register is unavailable.");
@@ -284,18 +284,21 @@
 .vela-roche .v-live-screen>.v-subhead{position:relative;top:auto;flex:0 0 var(--v-top-h)}
 .vela-roche .v-live-body{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;padding:10px 12px 10px!important}
 .vela-roche .v-live-fixed{flex:0 0 auto;min-height:0}
-.vela-roche .v-live-stage{flex:0 0 auto}
-.vela-roche .v-live-info{flex:0 0 auto}
-.vela-roche .v-live-moment{margin-top:10px;padding-top:10px;border-top:1px solid var(--v-line)}
-.vela-roche .v-live-moment-label{font-size:10px;font-weight:900;color:var(--v-muted);margin-bottom:4px}
-.vela-roche .v-live-moment-text{font-size:12px;line-height:1.5;color:var(--v-text)}
-.vela-roche .v-chat-panel{flex:1;min-height:0;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important}
+.vela-roche .v-live-stage{flex:0 0 auto;max-height:34vh;min-height:190px;position:relative}
+.vela-roche .v-live-info{flex:0 0 auto;padding:11px 13px!important}
+.vela-roche .v-live-moment{position:absolute;z-index:3;left:12px;right:12px;bottom:12px;margin:0;padding:10px 11px;border:1px solid rgba(255,255,255,.15);border-radius:14px;background:rgba(15,15,18,.76);backdrop-filter:blur(10px);color:#fff;box-shadow:0 8px 28px rgba(0,0,0,.18)}
+.vela-roche .v-live-moment-label{font-size:9px;font-weight:900;color:rgba(255,255,255,.68);margin-bottom:4px}
+.vela-roche .v-live-moment-text{font-size:12px;line-height:1.48;color:#fff}
+.vela-roche .v-live-moment .v-translate-btn{color:rgba(255,255,255,.72);margin-top:3px}
+.vela-roche .v-live-moment .v-translation{color:rgba(255,255,255,.82);border-left-color:rgba(255,255,255,.28)}
+.vela-roche .v-chat-panel{flex:1 1 220px;min-height:180px;display:flex;flex-direction:column;overflow:hidden;margin-bottom:0!important}
 .vela-roche .v-chat-title{flex:0 0 auto}
-.vela-roche .v-chat-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
+.vela-roche .v-chat-scroll{flex:1 1 auto;min-height:82px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch;padding-right:3px}
 .vela-roche .v-composer,.vela-roche .v-continue{flex:0 0 auto}
-.vela-roche .v-post-composer{display:grid;grid-template-columns:1fr 46px;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--v-line)}
+.vela-roche .v-post-composer{display:grid;grid-template-columns:minmax(0,1fr) 42px 46px;gap:7px;margin-top:12px;padding-top:12px;border-top:1px solid var(--v-line)}
 .vela-roche .v-post-composer input{width:100%;min-width:0;border:0;border-radius:15px;background:var(--v-soft);color:var(--v-text);padding:11px 12px;font-size:16px;outline:none}
 .vela-roche .v-post-composer button{border:0;border-radius:15px;background:#111;color:#fff;min-height:44px;font-weight:900}
+.vela-roche .v-post-composer .v-summon-mini{background:var(--v-soft);color:var(--v-text);font-size:17px}
 .vela-roche .v-comment-tools{display:flex;align-items:center;gap:10px;margin-top:5px}
 .vela-roche .v-comment-tools button{border:0;background:none;color:var(--v-muted);padding:0;font-size:10px;font-weight:800}
 .vela-roche .v-post-footer-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
@@ -801,20 +804,56 @@
               q(`[data-screen="${name}"]`)?.classList.remove("is-open");
             };
 
-            const liveMomentPool = [
-              { text: "主播把手边的东西往旁边挪了挪，重新靠回椅背，顺手看了一眼快速滚动的聊天。", translation: "" },
-              { text: "잠깐 물을 마시고 화면을 확인한 뒤, 아까 하던 이야기를 조금 더 이어간다.", translation: "喝了口水确认了一下画面后，又继续刚才的话题。" },
-              { text: "少し間を置いてコメントを眺め、気になった話題を拾ってゆっくり話し始める。", translation: "停了一会儿看了看评论，然后挑了一个感兴趣的话题慢慢聊起来。" },
-              { text: "主播换了个更舒服的姿势，房间里安静了一会儿，随后又自然地接着聊。", translation: "" }
-            ];
+            const liveMomentPools = {
+              ko: [
+                { text: "손에 있던 물건을 옆으로 치우고 의자에 기대 앉아, 빠르게 올라가는 채팅을 잠깐 바라본다.", translation: "把手边的东西挪到一旁，重新靠回椅背，短暂看了一眼快速滚动的聊天。" },
+                { text: "잠깐 물을 마시고 화면을 확인한 뒤, 아까 하던 이야기를 조금 더 이어간다.", translation: "喝了口水确认了一下画面后，又继续刚才的话题。" },
+                { text: "채팅을 천천히 훑어보다가 눈에 들어온 이야기를 골라 자연스럽게 말을 이어간다.", translation: "慢慢扫过聊天区后，挑了一个注意到的话题，自然地继续聊下去。" },
+                { text: "조금 더 편한 자세로 바꿔 앉고 잠시 조용해졌다가, 다시 가볍게 이야기를 시작한다.", translation: "换了个更舒服的姿势，安静了一会儿后，又轻松地继续聊起来。" }
+              ],
+              ja: [
+                { text: "手元のものを少し横に寄せ、椅子にもたれながら流れていくコメントを眺めている。", translation: "把手边的东西稍微挪开，靠着椅子看着不断滚动的评论。" },
+                { text: "少し水を飲んで画面を確認し、さっきの話題をそのまま続けている。", translation: "喝了口水确认画面后，继续刚才的话题。" },
+                { text: "コメントをゆっくり眺め、気になった話題を拾って自然に話し始める。", translation: "慢慢看了看评论，挑起一个感兴趣的话题自然地聊起来。" },
+                { text: "座り方を少し変えて静かな間を置き、それからまたゆっくり話を続ける。", translation: "换了个坐姿，安静了一小会儿，然后又慢慢继续聊。" }
+              ],
+              en: [
+                { text: "They move a few things aside, lean back in the chair, and glance at the fast-moving chat.", translation: "把手边的东西挪开，靠回椅背，看了一眼快速滚动的聊天。" },
+                { text: "After taking a sip of water and checking the screen, they continue the same story from a moment ago.", translation: "喝了口水确认画面后，又继续刚才的话题。" },
+                { text: "They scan the comments for a moment, pick up one interesting topic, and keep talking naturally.", translation: "看了一会儿评论，挑了一个感兴趣的话题，自然地继续聊。" },
+                { text: "They shift into a more comfortable position, let the room go quiet for a moment, then start talking again.", translation: "换了个更舒服的姿势，安静了一会儿后，又继续聊起来。" }
+              ],
+              zh: [
+                { text: "主播把手边的东西往旁边挪了挪，重新靠回椅背，顺手看了一眼快速滚动的聊天。", translation: "" },
+                { text: "主播喝了口水确认了一下画面，又顺着刚才的话题继续聊下去。", translation: "" },
+                { text: "主播慢慢扫过聊天区，挑了一个注意到的话题，自然地接着往下说。", translation: "" },
+                { text: "主播换了个更舒服的姿势，房间里安静了一会儿，随后又自然地接着聊。", translation: "" }
+              ]
+            };
+
+            const detectLiveLanguage = (live) => {
+              const explicit = String(live?.language || live?.lang || "").toLowerCase();
+              if (explicit.startsWith("ko")) return "ko";
+              if (explicit.startsWith("ja")) return "ja";
+              if (explicit.startsWith("en")) return "en";
+              if (explicit.startsWith("zh")) return "zh";
+              const sample = `${live?.title || ""} ${live?.category || ""}`;
+              if (/[가-힣]/.test(sample)) return "ko";
+              if (/[ぁ-んァ-ン]/.test(sample)) return "ja";
+              if (/^[\x00-\x7F\s\p{P}]+$/u.test(sample) && /[A-Za-z]/.test(sample)) return "en";
+              return "zh";
+            };
 
             const getLiveProgress = (live) => {
               const id = String(live?.id || "live");
               if (!state.liveProgress[id]) {
+                const lang = detectLiveLanguage(live);
+                const first = liveMomentPools[lang][0];
                 state.liveProgress[id] = {
                   step: 0,
-                  text: String(live?.moment || "主播正在继续当前的话题，偶尔低头看一眼实时聊天。"),
-                  translation: String(live?.momentTranslation || "")
+                  text: String(live?.moment || first.text),
+                  translation: String(live?.momentTranslation || first.translation || ""),
+                  language: lang
                 };
               }
               return state.liveProgress[id];
@@ -836,7 +875,7 @@
               const liveTrId = `live-title-${String(live.id || "live")}`;
               const liveTranslation = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
               getLiveProgress(live);
-              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}<div class="v-live-moment" data-role="live-moment"></div></div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><header class="v-subhead"><button data-action="leave-live">×</button><div class="v-social-avatar" style="width:36px;height:36px">${avatarHTML(live.avatar || "", hostName)}</div><div class="v-meta"><strong>${escapeHTML(hostName)}</strong><div class="v-hint">${formatViewers(live.viewers || 0)} 人正在观看</div></div><button class="v-small-dark" data-action="gift-demo">🎁</button></header><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage"><div class="v-live-stage-copy"><span class="v-badge">LIVE</span></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(live.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}</div></div><div class="v-chat-panel"><div class="v-chat-title">实时聊天</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div><div class="v-composer"><input data-role="live-input" placeholder="发送消息…" maxlength="120"><button data-action="gift-demo">🎁</button><button data-action="send-live-chat">➤</button></div><button class="v-continue" data-action="continue-live">↻ 继续观看直播</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
             };
@@ -859,12 +898,24 @@
               const id = String(live.id || "live");
               const progress = getLiveProgress(live);
               const nextStep = Number(progress.step || 0) + 1;
-              const next = liveMomentPool[(nextStep - 1) % liveMomentPool.length];
+              const lang = progress.language || detectLiveLanguage(live);
+              const pool = liveMomentPools[lang] || liveMomentPools.zh;
+              const next = pool[(nextStep - 1) % pool.length];
               progress.step = nextStep;
-              progress.text = fromUser
-                ? "主播注意到聊天区刚刚有新的发言，视线在屏幕上停了一会儿，再顺着当前话题继续往下聊。"
-                : next.text;
-              progress.translation = fromUser ? "" : next.translation;
+              progress.language = lang;
+              if (fromUser) {
+                const reactions = {
+                  ko: { text: "새로운 채팅이 올라온 걸 보고 화면 쪽으로 시선을 잠깐 옮긴 뒤, 지금 하던 이야기를 자연스럽게 이어간다.", translation: "看到聊天区出现了新的发言，短暂把视线移向屏幕后，又自然地继续当前的话题。" },
+                  ja: { text: "新しいコメントに気づいて少し画面へ視線を向け、そのまま今の話題を自然に続ける。", translation: "注意到新的评论后，短暂看向屏幕，又自然地继续当前的话题。" },
+                  en: { text: "They notice a new message in chat, glance toward the screen for a moment, then naturally continue the current topic.", translation: "注意到聊天区的新消息后，短暂看向屏幕，又自然地继续当前的话题。" },
+                  zh: { text: "主播注意到聊天区刚刚有新的发言，视线在屏幕上停了一会儿，再顺着当前话题继续往下聊。", translation: "" }
+                };
+                progress.text = reactions[lang].text;
+                progress.translation = reactions[lang].translation;
+              } else {
+                progress.text = next.text;
+                progress.translation = next.translation;
+              }
 
               const chatPool = [
                 { user: "Jia", avatar: "J", text: "아까 그 말 너무 웃겼어", translation: "刚才那句话真的笑死我了。" },
@@ -905,7 +956,7 @@
                 const trId = `post-comment-${id}-${index}`;
                 const canDelete = Boolean(reply?.isUser);
                 return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-social-handle">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div>${translationHTML(trId, reply.translation || "")}${canDelete ? `<div class="v-comment-tools"><button data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>` : ""}</div></div>`;
-              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有评论。你可以先自己留言，或者点下面的「召唤回复」让这一批网友开始互动。</div>`;
+              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有评论。你可以先自己留言，或者点输入栏旁边的 ✦ 让这一批网友开始互动。</div>`;
               const counter = q('[data-screen="post"] [data-role="post-comment-count"]');
               if (counter) counter.textContent = String(replies.length);
             };
@@ -917,7 +968,7 @@
               const trId = `post-detail-${String(post.id)}`;
               const saved = state.communityPosts.find(p => String(p.id) === String(post.id));
               const canDeletePost = Boolean(saved && saved.ownerType === "identity" && String(saved.ownerId || "") === String(state.viewerIdentityId || ""));
-              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer"><input data-role="post-comment-input" placeholder="写下评论…" maxlength="240"><button data-action="send-post-comment" data-post-id="${escapeHTML(post.id)}">➤</button></div><div class="v-post-footer-actions"><button class="v-action" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}">✦ 召唤回复</button>${canDeletePost ? `<button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button>` : ""}</div></article></div>`);
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div></div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}<div class="v-social-media">${imageHTML}</div><div class="v-social-actions"><button data-action="demo-like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer"><input data-role="post-comment-input" placeholder="写下评论…" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" aria-label="召唤回复" title="召唤回复">✦</button><button data-action="send-post-comment" data-post-id="${escapeHTML(post.id)}">➤</button></div>${canDeletePost ? `<div class="v-post-footer-actions"><button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button></div>` : ""}</article></div>`);
               renderPostComments(post.id);
             };
 
