@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.18";
+  const VERSION = "0.2.19";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -1917,7 +1917,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 const batch = normalizeRecommendedAIItems(recommendedRows, count, aliasCandidates);
                 if (nsfwBatch) batch.forEach(item => { item.nsfw = true; });
                 if (!batch.length) { toast(`推荐生成失败 · ${String(aiText || "").trim() ? "没有解析到可用直播" : shortVelaAIError("AI 返回为空")}`); return; }
-                state.recommendedLives = [...safeArray(state.recommendedLives), ...batch];
+                state.recommendedLives = [...batch, ...safeArray(state.recommendedLives)];
                 await persist(); renderRecommended();
                 const countNote = batch.length < count ? `（本次有效 ${batch.length}/${count}）` : "";
                 toast(selectedTopics.length ? `已按「${selectedTopics.join(" / ")}」新增 ${batch.length} 个推荐直播${countNote}` : `新增 ${batch.length} 个推荐直播${countNote}`);
