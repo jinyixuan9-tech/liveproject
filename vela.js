@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.13";
+  const VERSION = "0.2.14";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -1777,7 +1777,7 @@ ${translationRulePrompt()}
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${now.toString()}
 候选频道：${JSON.stringify(summaries)}` }]);
                 const parsedHome = extractJSON(aiText);
-                if (!Array.isArray(parsedHome)) { toast("首页生成失败，请再试一次"); return; }
+                if (!Array.isArray(parsedHome)) { toast(`首页生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`); return; }
                 const items = normalizeHomeAIItems(parsedHome, candidates);
                 let added = 0;
                 items.forEach((item,index) => {
@@ -1846,7 +1846,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${new Date().toString()}
 允许的角色副号候选：${JSON.stringify(aliasSummary)}` }]);
                 const batch = normalizeRecommendedAIItems(extractJSON(aiText), count, aliasCandidates);
-                if (batch.length !== count) { toast("推荐生成失败，请再试一次"); return; }
+                if (batch.length !== count) { toast(`推荐生成失败 · ${String(aiText || "").trim() ? "返回数量/格式不正确" : shortVelaAIError("AI 返回为空")}`); return; }
                 state.recommendedLives = [...safeArray(state.recommendedLives), ...batch];
                 await persist(); renderRecommended(); toast(selectedTopics.length ? `已按「${selectedTopics.join(" / ")}」新增 ${batch.length} 个推荐直播` : `新增 ${batch.length} 个推荐直播`);
               } finally {
@@ -1871,7 +1871,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 if (!Array.isArray(data)) {
                   await persist();
                   renderMessages();
-                  toast("Mellow Studio 已保留；其他 DM 生成失败，请再试一次");
+                  toast(`Mellow Studio 已保留；DM 生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`);
                   return;
                 }
                 const existingHandles = new Set(state.messages.map(item => String(item?.handle || "").toLowerCase()).filter(Boolean));
@@ -4089,27 +4089,47 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               return null;
             };
 
+            const normalizeVelaAIText = result => {
+              if (result == null) return "";
+              if (typeof result === "string") return result;
+              if (typeof result?.text === "string") return result.text;
+              if (typeof result?.content === "string") return result.content;
+              if (typeof result?.message === "string") return result.message;
+              if (typeof result?.output === "string") return result.output;
+              if (typeof result?.output_text === "string") return result.output_text;
+              if (Array.isArray(result?.content)) return result.content.map(part => typeof part === "string" ? part : String(part?.text || part?.content || "")).join("");
+              if (typeof result?.message?.content === "string") return result.message.content;
+              if (typeof result?.choices?.[0]?.message?.content === "string") return result.choices[0].message.content;
+              return "";
+            };
+            const isTransientVelaAIError = err => /temporarily unavailable|try again later|overloaded|rate limit|status 429|status 502|status 503|status 504/i.test(String(err?.message || err || ""));
+            const shortVelaAIError = fallback => String(lastVelaAIError || fallback || "未知错误").replace(/\s+/g," ").trim().slice(0,120);
             const runVelaAI = async (messages) => {
               lastVelaAIError = "";
-              try {
-                if (typeof roche?.ai?.chat !== "function") throw new Error("Roche AI chat is unavailable");
-                const result = await roche.ai.chat({ messages, temperature: 0.85 });
-                const content = result?.content;
-                const text = typeof result === "string" ? result
-                  : typeof result?.text === "string" ? result.text
-                  : typeof content === "string" ? content
-                  : Array.isArray(content) ? content.map(part => typeof part === "string" ? part : String(part?.text || part?.content || "")).join("")
-                  : typeof result?.message?.content === "string" ? result.message.content
-                  : typeof result?.choices?.[0]?.message?.content === "string" ? result.choices[0].message.content
-                  : typeof result?.output_text === "string" ? result.output_text
-                  : "";
-                if (!String(text || "").trim()) lastVelaAIError = "AI 返回为空";
-                return String(text || "");
-              } catch (err) {
-                lastVelaAIError = String(err?.message || err || "AI 接口调用失败");
-                console.warn("[Vela] AI summon failed", err);
+              if (typeof roche?.ai?.chat !== "function") {
+                lastVelaAIError = "roche.ai.chat 不可用";
                 return "";
               }
+              let lastError = null;
+              for (let attempt = 0; attempt < 3; attempt += 1) {
+                try {
+                  const result = await roche.ai.chat({ messages, temperature: 0.85 });
+                  const text = normalizeVelaAIText(result);
+                  if (!String(text || "").trim()) {
+                    lastVelaAIError = "Roche AI 已返回，但 result.text / content 为空";
+                    return "";
+                  }
+                  return String(text);
+                } catch (err) {
+                  lastError = err;
+                  lastVelaAIError = String(err?.message || err || "AI 接口调用失败");
+                  console.warn(`[Vela] Roche AI call failed · attempt ${attempt + 1}`, err);
+                  if (!isTransientVelaAIError(err) || attempt >= 2) break;
+                  await new Promise(resolve => setTimeout(resolve, 700 * (attempt + 1)));
+                }
+              }
+              if (lastError && isTransientVelaAIError(lastError)) lastVelaAIError = `Roche 当前模型暂时不可用，已自动重试 2 次 · ${String(lastError?.message || lastError)}`;
+              return "";
             };
 
             const getChannelPersonaText = (channel) => {
@@ -4243,9 +4263,9 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 如果最近出现 [business_revision]，你可以继续讨论；若同意 USER 的修改，必须重新发一张新的 business 卡，内容采用双方最后确认的版本。
 如果对方自然同意 USER 已经发出的待确认卡，可以在普通 message JSON 里把 acceptCardId 写成卡片 ID：${pendingOutgoing?.id || "无待确认卡"}。不要自动替 USER 接受任何东西。`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`最近私信：\n${history || "目前还没有聊天。请对方自然开启或继续话题。"}` }]);
-                if (!String(aiText || "").trim()) { removeTyping(); renderDirectThread(messageId); toast(lastVelaAIError && lastVelaAIError !== "AI 返回为空" ? "对方生成失败 · AI 接口调用失败" : "对方生成失败 · AI 返回为空"); return; }
+                if (!String(aiText || "").trim()) { removeTyping(); renderDirectThread(messageId); toast(`对方生成失败 · ${shortVelaAIError("AI 返回为空")}`); return; }
                 const data = extractJSON(aiText);
-                if (!data || typeof data !== "object" || Array.isArray(data)) { removeTyping(); renderDirectThread(messageId); toast("对方生成失败 · 回复格式解析失败"); return; }
+                if (!data || typeof data !== "object" || Array.isArray(data)) { removeTyping(); renderDirectThread(messageId); toast(`对方生成失败 · 回复格式解析失败 · ${String(aiText || "").replace(/\s+/g," ").slice(0,72)}`); return; }
                 removeTyping();
                 if (data.acceptCardId && pendingOutgoing && String(data.acceptCardId) === String(pendingOutgoing.id)) { pendingOutgoing.status = "accepted"; await createScheduleFromCard(messageId, pendingOutgoing); }
                 const otherAvatar = msg.external || msg.strangerKind ? STRANGER_AVATAR : (msg.avatar || "");
@@ -4264,11 +4284,11 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 msg.preview = String(data.text || data.title || msg.preview || "");
                 await persist(); renderMessages(); renderDirectThread(messageId);
               } catch (err) {
-                console.warn("[Vela] DM generation failed", err);
+                console.warn("[Vela] DM reply processing failed", err);
                 removeTyping();
                 await persist();
-                renderDirectThread(messageId);
-                toast("对方生成失败，请再试一次");
+                try { renderDirectThread(messageId); } catch (renderErr) { console.warn("[Vela] DM recovery render failed", renderErr); }
+                toast(`私信处理失败 · ${String(err?.message || err || "未知错误").replace(/\s+/g," ").slice(0,110)}`);
               } finally {
                 removeTyping();
                 dmReplyPending.delete(messageId);
@@ -4605,9 +4625,9 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 [{"role":"member","name":"成员昵称","text":"消息","translation":"按翻译规则填写"}]
 ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输出 {"role":"owner","text":"群主消息","translation":""}；不要每轮都让群主出现。' : '这是 USER 自己的社群：禁止输出 role=owner，不能替 USER 说话。'}成员风格要有差异，不要每轮所有人都说话。`;
               const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近群聊：\n${history || "群里暂时安静，让成员自然开启一个话题。"}` }]);
-              if (!String(aiText || "").trim()) { toast(lastVelaAIError && lastVelaAIError !== "AI 返回为空" ? "社群生成失败 · AI 接口调用失败" : "社群生成失败 · AI 返回为空"); return; }
+              if (!String(aiText || "").trim()) { toast(`社群生成失败 · ${shortVelaAIError("AI 返回为空")}`); return; }
               let data = extractJSON(aiText);
-              if (!Array.isArray(data)) { toast("社群生成失败 · 回复格式解析失败"); return; }
+              if (!Array.isArray(data)) { toast(`社群生成失败 · 回复格式解析失败 · ${String(aiText || "").replace(/\s+/g," ").slice(0,72)}`); return; }
               data.slice(0, 3).forEach((item, index) => {
                 const ownerReply = ownerType === "channel" && item?.role === "owner";
                 state.communityChats[key].push({
@@ -4626,8 +4646,8 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               await persist();
               openCommunityChat(ownerType, ownerId, tier);
               } catch (err) {
-                console.warn("[Vela] community reply generation failed", err);
-                toast("社群生成失败，请再试一次");
+                console.warn("[Vela] community reply processing failed", err);
+                toast(`社群处理失败 · ${String(err?.message || err || "未知错误").replace(/\s+/g," ").slice(0,110)}`);
               } finally {
                 removeTyping();
                 communityReplyPending.delete(key);
@@ -5436,6 +5456,20 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               }
             });
             root.addEventListener("pointercancel", () => { dmSwipe = null; });
+
+            // Roche mobile shells may occasionally swallow synthetic click on the three top refresh controls.
+            // Handle pointerup directly, then suppress the duplicate click when the browser does emit one.
+            root.addEventListener("pointerup", event => {
+              const refreshButton = event.target.closest?.('[data-action="refresh-home"],[data-action="refresh-recommended"],[data-action="refresh-messages"]');
+              if (!refreshButton || !root.contains(refreshButton) || refreshButton.disabled) return;
+              const action = String(refreshButton.dataset.action || "");
+              suppressClickUntil = Date.now() + 320;
+              event.preventDefault?.();
+              event.stopPropagation?.();
+              if (action === "refresh-home") void refreshHomeFeedContent();
+              else if (action === "refresh-recommended") void refreshRecommendedLives([]);
+              else if (action === "refresh-messages") void refreshDirectMessages();
+            });
 
             root.addEventListener("click", async (event) => {
               if (Date.now() < suppressClickUntil) { event.preventDefault(); event.stopPropagation(); return; }
