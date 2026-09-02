@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.12";
+  const VERSION = "0.2.13";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -75,6 +75,8 @@
       subscriptionsByIdentity: {},
       follows: {},
       followDefaultsInitialized: false,
+      followDefaultsV0213: false,
+      appointmentReminderMuteDate: "",
       subscriptionProfiles: {},
       postInteractionIdentity: {},
       communityInteractionIdentity: {},
@@ -733,6 +735,11 @@
 .vela-roche .v-rec-topic-note{font-size:10px;line-height:1.55;color:var(--v-muted);margin-bottom:12px}.vela-roche .v-rec-topic-grid{display:flex;flex-wrap:wrap;gap:8px}.vela-roche .v-rec-topic-chip{border:0;border-radius:14px;background:var(--v-soft);color:var(--v-text);padding:9px 12px;font-size:11px;font-weight:850}.vela-roche .v-rec-topic-chip.is-active{background:#111;color:#fff}
 .vela-roche .v-language-scale{display:flex;justify-content:space-between;color:var(--v-muted);font-size:8px;font-weight:750;margin-top:4px}
 .vela-roche .v-live-summary-card.v-live-summary-compact{width:min(84%,320px);padding:18px 16px;text-align:center}.vela-roche .v-live-summary-card.v-live-summary-compact h3{font-size:17px;margin:0}.vela-roche .v-live-summary-card.v-live-summary-compact p{margin:8px 0 0;color:var(--v-muted);font-size:12px;line-height:1.55}.vela-roche .v-live-summary-card.v-live-summary-compact .v-live-summary-close{min-height:44px;font-size:12px;margin-top:16px}
+/* v0.2.13 · centered reminders / confirmations / profile follow */
+.vela-roche .v-profile-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}.vela-roche .v-profile-follow{border:0;border-radius:12px;background:var(--v-soft);color:var(--v-text);padding:8px 11px;font-size:10px;font-weight:900;white-space:nowrap}.vela-roche .v-profile-follow.is-on{background:#111;color:#fff}
+.vela-roche .v-subscreen[data-screen="appointment-reminder"],.vela-roche .v-subscreen[data-screen="live-summary"]{transform:none!important;display:flex!important;align-items:center;justify-content:center;padding:18px;background:rgba(20,20,24,.32)!important;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .18s ease!important;overflow:hidden!important}.vela-roche .v-subscreen[data-screen="appointment-reminder"].is-open,.vela-roche .v-subscreen[data-screen="live-summary"].is-open{opacity:1;visibility:visible;pointer-events:auto}
+.vela-roche .v-center-modal-backdrop{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;padding:18px}.vela-roche .v-appointment-card,.vela-roche .v-confirm-card{width:min(94%,390px);margin:0!important;background:var(--v-card);border:1px solid var(--v-line);border-radius:24px;padding:17px;box-shadow:0 22px 70px rgba(0,0,0,.22)}.vela-roche .v-appointment-card .v-kicker,.vela-roche .v-confirm-card .v-kicker{margin-bottom:7px}.vela-roche .v-appointment-actions{display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:7px!important;margin-top:14px}.vela-roche .v-appointment-actions button{min-width:0!important;padding:0 7px!important;white-space:nowrap}.vela-roche .v-appointment-actions .v-today{background:#111;color:#fff}.vela-roche .v-confirm-card h3{font-size:17px;margin:0 0 7px}.vela-roche .v-confirm-card p{font-size:11px;line-height:1.6;color:var(--v-muted);margin:0}.vela-roche .v-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px}.vela-roche .v-confirm-actions button{border:0;border-radius:13px;min-height:42px;font-size:11px;font-weight:900}.vela-roche .v-confirm-actions .is-cancel{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-confirm-actions .is-danger{background:#fff0f1;color:var(--v-red)}
+.vela-roche .v-readonly-link{background:var(--v-soft)!important;color:var(--v-muted)!important}
 </style>`;
   }
 
@@ -978,6 +985,8 @@
             state.subscriptionsByIdentity = { ...(state.subscriptionsByIdentity || {}) };
             state.follows = { ...(state.follows || {}) };
             state.followDefaultsInitialized = Boolean(state.followDefaultsInitialized);
+            state.followDefaultsV0213 = Boolean(state.followDefaultsV0213);
+            state.appointmentReminderMuteDate = String(state.appointmentReminderMuteDate || "");
             state.dmInteractionIdentity = { ...(state.dmInteractionIdentity || {}) };
             state.liveInteractionIdentity = { ...(state.liveInteractionIdentity || {}) };
             const legacySubscriptionOwner = String(state.viewerIdentityId || state.identities[0]?.id || "");
@@ -1067,7 +1076,9 @@
             let toastTimer = null;
             const generationBusy = { home:false, recommended:false, messages:false };
             const dmReplyPending = new Set();
+            const communityReplyPending = new Set();
             const communityGenerationBusy = new Set();
+            let lastVelaAIError = "";
             const communityLazyTimers = new Map();
 
             const persist = async () => {
@@ -1372,6 +1383,13 @@
               setFollowing("channel", channel.id, "identity", identity.id, true);
               if (!alreadyA) { channel.followers = Math.max(0, Number(channel.followers || 0) + 1); identity.following = Math.max(0, Number(identity.following || 0) + 1); }
               if (!alreadyB) { channel.following = Math.max(0, Number(channel.following || 0) + 1); identity.followers = Math.max(0, Number(identity.followers || 0) + 1); }
+            };
+            const migrateExistingPrimaryMutualFollows = async () => {
+              if (state.followDefaultsV0213) return;
+              state.channels.filter(channel => channel?.accountRole !== "alias" && Boolean(channel?.sourceCharacterId)).forEach(ensureDefaultMutualFollow);
+              state.followDefaultsInitialized = true;
+              state.followDefaultsV0213 = true;
+              await persist();
             };
             const maybeSilentCharacterFollowAlias = () => {
               if (Math.random() >= 0.04) return;
@@ -3484,7 +3502,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const dateText = String(screen?.querySelector('[data-schedule-field="dateText"]')?.value || "").trim();
               const cover = String(screen?.querySelector('[data-schedule-field="cover"]')?.value || "").trim();
               if (!title || !dateText) { toast("先填写直播标题和时间"); return; }
-              identity.scheduledLive = { title, dateText, cover };
+              identity.scheduledLive = { ...(identity.scheduledLive || {}), title, dateText, cover };
               await persist();
               closeScreen("schedule-editor");
               openProfile("identity", identity.id);
@@ -3507,8 +3525,12 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const handle = normalizeHandle(entity.handle || "") || "@vela";
               const banner = String(entity.banner || "");
               const bannerHTML = isImageURL(banner) ? `<img src="${escapeHTML(banner)}" alt="">` : "";
-              const messageButton = ownerType === "channel" ? `<button class="v-profile-message" data-action="message-channel" data-channel-id="${escapeHTML(entity.id)}">私信</button>` : "";
-              openScreen("profile", `<div class="v-profile-shell"><header class="v-subhead"><button data-action="close-screen" data-screen-name="profile">‹</button><div class="v-meta"><strong>${escapeHTML(name)}</strong><div class="v-hint">${ownerType === "identity" ? "我的 Vela 主页" : "角色频道主页"}</div></div><button class="v-head-action" data-action="edit-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">编辑主页</button></header><div class="v-profile-banner">${bannerHTML}</div><div class="v-profile-info"><div class="v-profile-avatar ${entity.live || entity.activeLive ? "is-live-profile" : ""}">${avatarHTML(entity.avatar || "", name)}</div><div class="v-profile-main"><div class="v-profile-maincopy"><h2>${escapeHTML(name)}</h2><div class="v-profile-handle">${escapeHTML(handle)}</div></div>${messageButton}</div><div class="v-profile-stats"><span><b>${Number(entity.followers || 0).toLocaleString("zh-CN")}</b> 粉丝</span><span><b>${Number(entity.following || 0).toLocaleString("zh-CN")}</b> 关注</span></div>${entity.bio ? `<div class="v-profile-bio">${escapeHTML(entity.bio)}</div>` : ""}${entity.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已关联 Roche 角色</div>` : ""}</div><div class="v-profile-tabs"><button class="is-active" data-action="profile-tab" data-profile-tab="activity" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">动态</button><button data-action="profile-tab" data-profile-tab="replays" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">回放</button><button data-action="profile-tab" data-profile-tab="subscriptions" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">订阅</button></div><div class="v-profile-tabbody" data-role="profile-tab-body"></div></div>`);
+              const viewer = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
+              const viewerFollows = ownerType === "channel" && viewer ? isFollowing("identity", viewer.id, "channel", entity.id) : false;
+              const channelFollows = ownerType === "channel" && viewer ? isFollowing("channel", entity.id, "identity", viewer.id) : false;
+              const followLabel = viewerFollows && channelFollows ? "互关" : viewerFollows ? "已关注" : channelFollows ? "关注了你" : "关注";
+              const profileActions = ownerType === "channel" ? `<div class="v-profile-actions"><button class="v-profile-follow ${viewerFollows ? "is-on" : ""}" data-action="toggle-profile-follow" data-channel-id="${escapeHTML(entity.id)}">${escapeHTML(followLabel)}</button><button class="v-profile-message" data-action="message-channel" data-channel-id="${escapeHTML(entity.id)}">私信</button></div>` : "";
+              openScreen("profile", `<div class="v-profile-shell"><header class="v-subhead"><button data-action="close-screen" data-screen-name="profile">‹</button><div class="v-meta"><strong>${escapeHTML(name)}</strong><div class="v-hint">${ownerType === "identity" ? "我的 Vela 主页" : "角色频道主页"}</div></div><button class="v-head-action" data-action="edit-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">编辑主页</button></header><div class="v-profile-banner">${bannerHTML}</div><div class="v-profile-info"><div class="v-profile-avatar ${entity.live || entity.activeLive ? "is-live-profile" : ""}">${avatarHTML(entity.avatar || "", name)}</div><div class="v-profile-main"><div class="v-profile-maincopy"><h2>${escapeHTML(name)}</h2><div class="v-profile-handle">${escapeHTML(handle)}</div></div>${profileActions}</div><div class="v-profile-stats"><span><b>${Number(entity.followers || 0).toLocaleString("zh-CN")}</b> 粉丝</span><span><b>${Number(entity.following || 0).toLocaleString("zh-CN")}</b> 关注</span></div>${entity.bio ? `<div class="v-profile-bio">${escapeHTML(entity.bio)}</div>` : ""}${entity.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已关联 Roche 角色</div>` : ""}</div><div class="v-profile-tabs"><button class="is-active" data-action="profile-tab" data-profile-tab="activity" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">动态</button><button data-action="profile-tab" data-profile-tab="replays" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">回放</button><button data-action="profile-tab" data-profile-tab="subscriptions" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">订阅</button></div><div class="v-profile-tabbody" data-role="profile-tab-body"></div></div>`);
               renderProfileTab(ownerType, entity.id, "activity");
             };
 
@@ -3926,7 +3948,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const mine = item.sender === "user" || item.isUser;
               const trId = `chat-${String(item.id || item.at || Math.random())}`;
               const role = item.role === "owner" || item.sender === "owner" ? `<span class="v-role-title is-owner">博主</span>` : item.role === "bot" || item.sender === "bot" ? `<span class="v-role-title is-bot">机器人</span>` : "";
-              const title = group || item.name ? `<div class="v-chat-sender">${role}${escapeHTML(item.name || (mine ? "你" : "成员"))}</div>` : "";
+              const title = group && !item.typing ? `<div class="v-chat-sender">${role}${escapeHTML(item.name || (mine ? "你" : "成员"))}</div>` : "";
               const longpress = item.id && threadKey && !item.typing ? ` data-longpress="delete-chat-item" data-thread-type="${escapeHTML(threadType)}" data-thread-key="${escapeHTML(threadKey)}" data-item-id="${escapeHTML(item.id)}"` : "";
               const canTranslateDM = threadType === "dm" && !mine && Boolean(item.translation || item.needsTranslation || textNeedsSimplifiedTranslation(item.text, item.locale));
               const dmTranslation = threadType === "dm" && canTranslateDM
@@ -3941,6 +3963,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             };
 
             const statusLabel = status => status === "completed" ? "已完成" : status === "accepted" ? "已接受" : status === "declined" ? "已婉拒" : status === "cancelled" ? "已取消" : status === "filled" ? "已填写" : status === "revising" ? "修改确认中" : "待确认";
+            const hasScheduleForCard = (messageId, cardId) => [...state.identities, ...state.channels].some(entity => String(entity?.scheduledLive?.sourceMessageId || "") === String(messageId || "") && String(entity?.scheduledLive?.sourceCardId || "") === String(cardId || ""));
 
             const renderDMToolCard = (item, messageId) => {
               const incoming = item.direction === "incoming";
@@ -3954,7 +3977,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 const longpress = ` data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"`;
                 const price = Number(item.productPriceCNY || 0) > 0 ? `<div>商品售价 <b>${escapeHTML(formatCash(Number(item.productPriceCNY)))}</b></div>` : "";
                 const pay = amounts.total > 0 ? `<div>定金 <b>${escapeHTML(formatCash(amounts.deposit))}${item.depositPaid ? " · 已到账" : ""}</b></div><div>尾款 <b>${escapeHTML(formatCash(amounts.balance))}${item.balancePaid ? " · 已到账" : ""}</b></div>` : "";
-                return `<div class="v-chat-card is-business"${longpress}><div class="v-chat-card-head"><span class="v-chat-card-type">商务合作 · ${escapeHTML(item.brandName || "品牌")}</span><span class="v-chat-card-status ${status === "accepted" || status === "completed" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || item.productName || "直播合作方案")}</div><div class="v-chat-card-meta"><div>产品 / 项目 <b>${escapeHTML(item.productName || item.title || "合作项目")}</b></div>${price}<div>合作内容 <b>${escapeHTML(item.content || item.deliverables || "")}</b></div><div>直播时间 <b>${escapeHTML(item.dateText || formatBusinessWindow(item.scheduledAt, item.endsAt))}</b></div><div>直播主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div><div>合作总费用 <b>${escapeHTML(money)}</b></div>${pay}${item.adCopy ? `<div>广告词 <b>${escapeHTML(item.adCopy)}</b></div>` : ""}${item.adLink ? `<div>广告链接 <b>${escapeHTML(item.adLink)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<button class="v-chat-card-edit" data-action="edit-business-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">需要改动？编辑后回传给对方确认</button><div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受并预定直播</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒直播</button></div>` : ""}</div>`;
+                return `<div class="v-chat-card is-business"${longpress}><div class="v-chat-card-head"><span class="v-chat-card-type">商务合作 · ${escapeHTML(item.brandName || "品牌")}</span><span class="v-chat-card-status ${status === "accepted" || status === "completed" ? "is-ok" : status === "declined" ? "is-no" : ""}">${statusLabel(status)}</span></div><div class="v-chat-card-title">${escapeHTML(item.title || item.productName || "直播合作方案")}</div><div class="v-chat-card-meta"><div>产品 / 项目 <b>${escapeHTML(item.productName || item.title || "合作项目")}</b></div>${price}<div>合作内容 <b>${escapeHTML(item.content || item.deliverables || "")}</b></div><div>直播时间 <b>${escapeHTML(item.dateText || formatBusinessWindow(item.scheduledAt, item.endsAt))}</b></div><div>直播主场 <b>${escapeHTML(item.hostLabel || "待确认")}</b></div><div>合作总费用 <b>${escapeHTML(money)}</b></div>${pay}${item.adCopy ? `<div>广告词 <b>${escapeHTML(item.adCopy)}</b></div>` : ""}${item.adLink ? `<div>广告链接 <b>${escapeHTML(item.adLink)}</b></div>` : ""}</div>${status === "pending" && incoming ? `<button class="v-chat-card-edit" data-action="edit-business-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">需要改动？编辑后回传给对方确认</button><div class="v-chat-card-actions"><button data-action="accept-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">接受并预定直播</button><button class="is-light" data-action="decline-dm-card" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">婉拒直播</button></div>` : status === "accepted" && item.includesLive && !hasScheduleForCard(messageId, item.id) ? `<div class="v-chat-card-actions"><button data-action="recreate-business-schedule" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(item.id)}">重新创建预约直播</button></div>` : ""}</div>`;
               }
               if (item.kind === "business_revision") {
                 const longpress = ` data-longpress="delete-chat-item" data-thread-type="dm" data-thread-key="${escapeHTML(messageId)}" data-item-id="${escapeHTML(item.id)}"`;
@@ -3978,7 +4001,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const selectedIdentity = state.identities.find(item => String(item.id) === rememberedIdentity) || state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
               if (selectedIdentity) state.dmInteractionIdentity[String(messageId)] = String(selectedIdentity.id);
               const identityPicker = identityPickerHTML(state.identities, selectedIdentity?.id, "dm-identity-select", `data-message-id="${escapeHTML(messageId)}"`);
-              openScreen("message", `<div class="v-chat-screen v-dm-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="清除聊天">🗑︎</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}">${planeIconHTML()}</button></div></div>`);
+              openScreen("message", `<div class="v-chat-screen v-dm-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="更多" title="更多">⋯</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}">${planeIconHTML()}</button></div></div>`);
               requestAnimationFrame(() => {
                 const body = q('[data-screen="message"] [data-role="chat-body"]');
                 if (body) body.scrollTop = body.scrollHeight;
@@ -4030,6 +4053,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               state.dmThreads[msg.id] = safeArray(state.dmThreads[msg.id]);
               await persist();
               renderMessages();
+              closeScreen("profile");
               renderDirectThread(msg.id);
             };
 
@@ -4066,10 +4090,23 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             };
 
             const runVelaAI = async (messages) => {
+              lastVelaAIError = "";
               try {
-                const result = await roche?.ai?.chat?.({ messages, temperature: 0.85 });
-                return String(result?.text || result?.content || "");
+                if (typeof roche?.ai?.chat !== "function") throw new Error("Roche AI chat is unavailable");
+                const result = await roche.ai.chat({ messages, temperature: 0.85 });
+                const content = result?.content;
+                const text = typeof result === "string" ? result
+                  : typeof result?.text === "string" ? result.text
+                  : typeof content === "string" ? content
+                  : Array.isArray(content) ? content.map(part => typeof part === "string" ? part : String(part?.text || part?.content || "")).join("")
+                  : typeof result?.message?.content === "string" ? result.message.content
+                  : typeof result?.choices?.[0]?.message?.content === "string" ? result.choices[0].message.content
+                  : typeof result?.output_text === "string" ? result.output_text
+                  : "";
+                if (!String(text || "").trim()) lastVelaAIError = "AI 返回为空";
+                return String(text || "");
               } catch (err) {
+                lastVelaAIError = String(err?.message || err || "AI 接口调用失败");
                 console.warn("[Vela] AI summon failed", err);
                 return "";
               }
@@ -4126,6 +4163,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const end = start ? (rawEnd > start ? rawEnd : start + 2 * 3600000) : rawEnd;
               card.endsAt = end;
               card.dateText = card.kind === "business" ? formatBusinessWindow(start, end) : String(card.dateText || "时间待定");
+              if (card.kind === "business") { card.scheduleDeletedAt = 0; card.scheduleLinkedAt = Date.now(); }
               host.scheduledLive = {
                 title:String(card.title || (card.kind === "business" ? "商务合作直播" : "联播预约")), dateText:String(card.dateText || "时间待定"), scheduledAt:start, endsAt:end, cover:String(card.cover || ""), content:String(card.content || ""), mode:String(card.mode || "online"), sourceMessageId:String(messageId), sourceCardId:String(card.id), sourceType:String(card.kind), hostOwnerType:String(card.hostOwnerType), hostOwnerId:String(card.hostOwnerId), participantIds:participants.map(p => p.id), participants,
                 business: card.kind === "business" ? { brandName:String(card.brandName || ""), productName:String(card.productName || ""), productPriceCNY:Math.max(0,Number(card.productPriceCNY || 0)), totalFeeCNY:amounts.total, cashAmountCNY:amounts.total, depositCNY:amounts.deposit, balanceCNY:amounts.balance, deliverables:String(card.deliverables || card.content || ""), adCopy:String(card.adCopy || ""), adLink:String(card.adLink || ""), sourceMessageId:String(messageId), sourceCardId:String(card.id || ""), scheduledAt:start, endsAt:end } : null
@@ -4205,8 +4243,9 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 如果最近出现 [business_revision]，你可以继续讨论；若同意 USER 的修改，必须重新发一张新的 business 卡，内容采用双方最后确认的版本。
 如果对方自然同意 USER 已经发出的待确认卡，可以在普通 message JSON 里把 acceptCardId 写成卡片 ID：${pendingOutgoing?.id || "无待确认卡"}。不要自动替 USER 接受任何东西。`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`最近私信：\n${history || "目前还没有聊天。请对方自然开启或继续话题。"}` }]);
+                if (!String(aiText || "").trim()) { removeTyping(); renderDirectThread(messageId); toast(lastVelaAIError && lastVelaAIError !== "AI 返回为空" ? "对方生成失败 · AI 接口调用失败" : "对方生成失败 · AI 返回为空"); return; }
                 const data = extractJSON(aiText);
-                if (!data || typeof data !== "object" || Array.isArray(data)) { removeTyping(); await persist(); renderDirectThread(messageId); toast("对方生成失败，请再试一次"); return; }
+                if (!data || typeof data !== "object" || Array.isArray(data)) { removeTyping(); renderDirectThread(messageId); toast("对方生成失败 · 回复格式解析失败"); return; }
                 removeTyping();
                 if (data.acceptCardId && pendingOutgoing && String(data.acceptCardId) === String(pendingOutgoing.id)) { pendingOutgoing.status = "accepted"; await createScheduleFromCard(messageId, pendingOutgoing); }
                 const otherAvatar = msg.external || msg.strangerKind ? STRANGER_AVATAR : (msg.avatar || "");
@@ -4355,7 +4394,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const channel = state.channels.find(ch => String(ch.id) === String(msg.channelId || "")); if (!sheet || !host) return;
               const hostCurrent = card.hostOwnerType === "channel" ? "counterpart" : "user";
               const amounts = businessAmounts(card);
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>修改合作卡</h3><button data-action="close-publish-sheet">×</button></div><div class="v-tool-form"><div class="v-field"><label>品牌 / 公司</label><input data-business-edit="brandName" value="${escapeHTML(card.brandName || msg.name || "")}" maxlength="60"></div><div class="v-field"><label>产品 / 项目</label><input data-business-edit="productName" value="${escapeHTML(card.productName || "")}" maxlength="90"></div><div class="v-field"><label>商品售价 · CNY（可空）</label><input type="number" min="0" step="1" data-business-edit="productPriceCNY" value="${Number(card.productPriceCNY || 0)}"></div><div class="v-field"><label>合作标题</label><input data-business-edit="title" value="${escapeHTML(card.title || "")}" maxlength="100"></div><div class="v-field"><label>直播要求 / 交付内容</label><textarea data-business-edit="content" maxlength="800">${escapeHTML(card.content || card.deliverables || "")}</textarea></div><div class="v-fieldpair"><div class="v-field"><label>开始时间</label><input type="datetime-local" data-business-edit="scheduledAt" value="${localDateTimeValue(card.scheduledAt) || dateInputDefault()}"></div><div class="v-field"><label>结束时间</label><input type="datetime-local" data-business-edit="endsAt" value="${localDateTimeValue(card.endsAt)}"></div></div><div class="v-fieldpair"><div class="v-field"><label>合作总费用 · CNY</label><input type="number" min="0" step="1" data-business-edit="totalFeeCNY" value="${amounts.total}"></div><div class="v-field"><label>直播主场</label><select data-business-edit="host"><option value="user" ${hostCurrent === "user" ? "selected" : ""}>我的直播间</option>${channel ? `<option value="counterpart" ${hostCurrent === "counterpart" ? "selected" : ""}>${escapeHTML(channel.name || "对方")}的直播间</option>` : ""}</select></div></div><div class="v-fieldpair"><div class="v-field"><label>定金</label><input type="number" min="0" step="1" data-business-edit="depositCNY" value="${amounts.deposit}"></div><div class="v-field"><label>尾款</label><input type="number" min="0" step="1" data-business-edit="balanceCNY" value="${amounts.balance}"></div></div><div class="v-field"><label>广告词</label><textarea data-business-edit="adCopy" maxlength="500">${escapeHTML(card.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input data-business-edit="adLink" value="${escapeHTML(card.adLink || "")}" placeholder="https://..."></div><div class="v-tool-note">修改后会回传给品牌确认；对方同意后应重新发最终合作卡。</div><button class="v-action" data-action="send-business-revision" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(cardId)}">把修改发给对方确认</button></div>`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>修改合作卡</h3><button data-action="close-publish-sheet">×</button></div><div class="v-tool-form"><div class="v-field"><label>品牌 / 公司</label><input data-business-edit="brandName" value="${escapeHTML(card.brandName || msg.name || "")}" maxlength="60"></div><div class="v-field"><label>产品 / 项目</label><input data-business-edit="productName" value="${escapeHTML(card.productName || "")}" maxlength="90"></div><div class="v-field"><label>商品售价 · CNY（可空）</label><input type="number" min="0" step="1" data-business-edit="productPriceCNY" value="${Number(card.productPriceCNY || 0)}"></div><div class="v-field"><label>合作标题</label><input data-business-edit="title" value="${escapeHTML(card.title || "")}" maxlength="100"></div><div class="v-field"><label>直播要求 / 交付内容</label><textarea data-business-edit="content" maxlength="800">${escapeHTML(card.content || card.deliverables || "")}</textarea></div><div class="v-fieldpair"><div class="v-field"><label>开始时间</label><input type="datetime-local" data-business-edit="scheduledAt" value="${localDateTimeValue(card.scheduledAt) || dateInputDefault()}"></div><div class="v-field"><label>结束时间</label><input type="datetime-local" data-business-edit="endsAt" value="${localDateTimeValue(card.endsAt)}"></div></div><div class="v-fieldpair"><div class="v-field"><label>合作总费用 · CNY</label><input type="number" min="0" step="1" data-business-edit="totalFeeCNY" value="${amounts.total}"></div><div class="v-field"><label>直播主场</label><select data-business-edit="host"><option value="user" ${hostCurrent === "user" ? "selected" : ""}>我的直播间</option>${channel ? `<option value="counterpart" ${hostCurrent === "counterpart" ? "selected" : ""}>${escapeHTML(channel.name || "对方")}的直播间</option>` : ""}</select></div></div><div class="v-fieldpair"><div class="v-field"><label>定金</label><input type="number" min="0" step="1" data-business-edit="depositCNY" value="${amounts.deposit}"></div><div class="v-field"><label>尾款</label><input type="number" min="0" step="1" data-business-edit="balanceCNY" value="${amounts.balance}"></div></div><div class="v-field"><label>广告词</label><textarea data-business-edit="adCopy" maxlength="500">${escapeHTML(card.adCopy || "")}</textarea></div><div class="v-field"><label>广告链接</label><input class="v-readonly-link" data-business-edit="adLink" value="${escapeHTML(card.adLink || "")}" readonly></div><div class="v-tool-note">修改后会回传给品牌确认；对方同意后应重新发最终合作卡。</div><button class="v-action" data-action="send-business-revision" data-message-id="${escapeHTML(messageId)}" data-card-id="${escapeHTML(cardId)}">把修改发给对方确认</button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -4369,7 +4408,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               let endsAt = endValue ? new Date(endValue).getTime() : 0; if (scheduledAt && (!endsAt || endsAt <= scheduledAt)) endsAt = scheduledAt + 2*3600000;
               const total = Math.max(0, Number(read("totalFeeCNY") || 0)), deposit = Math.max(0, Math.min(total, Number(read("depositCNY") || 0))), balance = Math.max(0, total - deposit);
               const hostChoice = read("host"); original.status = "revising";
-              const revision = { id:`bizrev-${Date.now().toString(36)}`, kind:"business_revision", direction:"outgoing", status:"pending", sender:"user", name:state.identities.find(i => String(i.id) === String(state.viewerIdentityId))?.displayName || "user", brandName:read("brandName"), productName:read("productName"), productPriceCNY:Math.max(0,Number(read("productPriceCNY")||0)), title:read("title") || original.title || "合作修改", content:read("content"), deliverables:read("content"), totalFeeCNY:total, cashAmountCNY:total, depositCNY:Math.min(total,deposit), balanceCNY:balance, adCopy:read("adCopy"), adLink:read("adLink"), scheduledAt, endsAt, dateText:formatBusinessWindow(scheduledAt,endsAt), hostOwnerType:hostChoice === "counterpart" && channel ? "channel" : "identity", hostOwnerId:hostChoice === "counterpart" && channel ? channel.id : state.viewerIdentityId, hostLabel:hostChoice === "counterpart" && channel ? `${channel.name || "对方"}的直播间` : "你的直播间", at:Date.now() };
+              const revision = { id:`bizrev-${Date.now().toString(36)}`, kind:"business_revision", direction:"outgoing", status:"pending", sender:"user", name:state.identities.find(i => String(i.id) === String(state.viewerIdentityId))?.displayName || "user", brandName:read("brandName"), productName:read("productName"), productPriceCNY:Math.max(0,Number(read("productPriceCNY")||0)), title:read("title") || original.title || "合作修改", content:read("content"), deliverables:read("content"), totalFeeCNY:total, cashAmountCNY:total, depositCNY:Math.min(total,deposit), balanceCNY:balance, adCopy:read("adCopy"), adLink:String(original.adLink || ""), scheduledAt, endsAt, dateText:formatBusinessWindow(scheduledAt,endsAt), hostOwnerType:hostChoice === "counterpart" && channel ? "channel" : "identity", hostOwnerId:hostChoice === "counterpart" && channel ? channel.id : state.viewerIdentityId, hostLabel:hostChoice === "counterpart" && channel ? `${channel.name || "对方"}的直播间` : "你的直播间", at:Date.now() };
               state.dmThreads[messageId] = safeArray(state.dmThreads[messageId]); state.dmThreads[messageId].push(revision); msg.preview = "[合作修改已回传]"; sheet.classList.remove("is-open"); await persist(); renderMessages(); renderDirectThread(messageId);
             };
 
@@ -4536,9 +4575,20 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 
 
             const summonCommunityChat = async (key) => {
-              const [ownerType, ownerId, tier] = String(key).split(":");
+              key = String(key || "");
+              if (!key || communityReplyPending.has(key)) return;
+              const [ownerType, ownerId, tier] = key.split(":");
               const entity = getProfileEntity(ownerType, ownerId);
               if (!entity) return;
+              communityReplyPending.add(key);
+              const typingToken = `community-typing-${Date.now().toString(36)}`;
+              const body = q('[data-screen="message"] [data-role="chat-body"]');
+              if (body && String(q('[data-screen="message"] [data-role="community-message-input"]')?.dataset?.communityKey || "") === key) {
+                body.insertAdjacentHTML("beforeend", `<div data-community-typing="${escapeHTML(typingToken)}">${renderChatBubble({ id:typingToken, kind:"text", sender:"other", name:"", avatar:STRANGER_AVATAR, text:"", typing:true, at:Date.now() }, { group:true, threadKey:key, threadType:"community" })}</div>`);
+                requestAnimationFrame(() => { body.scrollTop = body.scrollHeight; });
+              }
+              const removeTyping = () => q(`[data-community-typing="${CSS.escape(typingToken)}"]`)?.remove();
+              try {
               const cfg = getCommunitySettings(ownerType, ownerId, tier);
               const rows = safeArray(state.communityChats[key]);
               const history = rows.slice(-22).map(item => item.kind === "text" ? `${item.sender === "user" ? "USER" : item.name || "成员"}: ${item.text || ""}` : `[${item.kind}] ${item.question || item.prize || item.title || ""}`).join("\n");
@@ -4555,8 +4605,9 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 [{"role":"member","name":"成员昵称","text":"消息","translation":"按翻译规则填写"}]
 ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输出 {"role":"owner","text":"群主消息","translation":""}；不要每轮都让群主出现。' : '这是 USER 自己的社群：禁止输出 role=owner，不能替 USER 说话。'}成员风格要有差异，不要每轮所有人都说话。`;
               const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近群聊：\n${history || "群里暂时安静，让成员自然开启一个话题。"}` }]);
+              if (!String(aiText || "").trim()) { toast(lastVelaAIError && lastVelaAIError !== "AI 返回为空" ? "社群生成失败 · AI 接口调用失败" : "社群生成失败 · AI 返回为空"); return; }
               let data = extractJSON(aiText);
-              if (!Array.isArray(data)) { toast("社群生成失败，请再试一次"); return; }
+              if (!Array.isArray(data)) { toast("社群生成失败 · 回复格式解析失败"); return; }
               data.slice(0, 3).forEach((item, index) => {
                 const ownerReply = ownerType === "channel" && item?.role === "owner";
                 state.communityChats[key].push({
@@ -4574,6 +4625,13 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               state.communityChats[key] = state.communityChats[key].slice(-300);
               await persist();
               openCommunityChat(ownerType, ownerId, tier);
+              } catch (err) {
+                console.warn("[Vela] community reply generation failed", err);
+                toast("社群生成失败，请再试一次");
+              } finally {
+                removeTyping();
+                communityReplyPending.delete(key);
+              }
             };
 
             const openCommunityPlus = (key) => {
@@ -5169,14 +5227,16 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               });
             };
 
+            const localDateKey = (date = new Date()) => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
             const openAppointmentReminder = (entry, due = false) => {
-              if (!entry?.item) return;
+              if (!entry?.item || state.appointmentReminderMuteDate === localDateKey()) return;
               const item = entry.item, hostName = profileName(entry.entity, entry.ownerType), biz = item.business || null;
               const label = biz ? `商务合作 · ${biz.brandName || "品牌"}${biz.productName ? ` · ${biz.productName}` : ""}` : (item.mode === "same-room" ? "线下同镜" : "线上联播");
-              openScreen("appointment-reminder", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="appointment-reminder">‹</button><div class="v-meta"><strong>${due ? "直播时间到了" : "预约提醒"}</strong><div class="v-hint">${escapeHTML(item.dateText || "时间待定")}</div></div></header><div class="v-appointment-card"><h3>${escapeHTML(item.title || "预约直播")}</h3><p>主场：${escapeHTML(hostName)}<br>${escapeHTML(label)}<br>${escapeHTML(item.content || "")}</p><div class="v-appointment-actions"><button class="v-go" data-action="${due ? "go-appointment-live" : "view-appointment-host"}" data-owner-type="${escapeHTML(entry.ownerType)}" data-owner-id="${escapeHTML(entry.ownerId)}">${due ? "进入直播间" : "查看预约"}</button><button class="v-later" data-action="close-screen" data-screen-name="appointment-reminder">稍后</button></div></div>`);
+              openScreen("appointment-reminder", `<div class="v-center-modal-backdrop"><div class="v-appointment-card"><div class="v-kicker">${due ? "直播时间到了" : "预约提醒"} · ${escapeHTML(item.dateText || "时间待定")}</div><h3>${escapeHTML(item.title || "预约直播")}</h3><p>主场：${escapeHTML(hostName)}<br>${escapeHTML(label)}${item.content ? `<br>${escapeHTML(item.content)}` : ""}</p><div class="v-appointment-actions"><button class="v-go" data-action="view-appointment-host" data-owner-type="${escapeHTML(entry.ownerType)}" data-owner-id="${escapeHTML(entry.ownerId)}">查看预约</button><button class="v-later" data-action="appointment-reminder-later">稍后</button><button class="v-today" data-action="mute-appointment-reminders-today">本日不再提醒</button></div></div></div>`);
             };
 
             const checkAppointmentReminder = ({ entry = false } = {}) => {
+              if (state.appointmentReminderMuteDate === localDateKey()) return;
               const rows = viewerAppointments(); if (!rows.length) return;
               const now = Date.now();
               const due = rows.find(x => { const start=Number(x.item.scheduledAt||0), end=Number(x.item.endsAt || (start ? start+2*3600000 : 0)); return start && now >= start-60000 && (!end || now <= end); });
@@ -5259,6 +5319,30 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               }
             };
 
+            const openScheduleDeleteConfirm = identityId => {
+              const identity = state.identities.find(item => String(item.id) === String(identityId || ""));
+              const item = identity?.scheduledLive;
+              if (!identity || !item) return;
+              const business = item.sourceType === "business" || Boolean(item.business?.sourceCardId);
+              openScreen("live-summary", `<div class="v-center-modal-backdrop"><div class="v-confirm-card"><div class="v-kicker">删除预约直播</div><h3>确认删除这个预约直播吗？</h3><p>${business ? "删除后不会取消对应商务合作；你仍可以从 DM 里的商务合作卡重新创建预约直播。" : "删除后这条预约将从主页移除。"}</p><div class="v-confirm-actions"><button class="is-cancel" data-action="close-schedule-delete-confirm">取消</button><button class="is-danger" data-action="confirm-delete-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">确认删除</button></div></div></div>`);
+            };
+            const deleteScheduledLiveConfirmed = async identityId => {
+              const identity = state.identities.find(item => String(item.id) === String(identityId || ""));
+              const item = identity?.scheduledLive;
+              if (!identity || !item) { closeScreen("live-summary"); return; }
+              if (item.sourceMessageId && item.sourceCardId) {
+                const card = findDMCard(item.sourceMessageId, item.sourceCardId);
+                if (card?.kind === "business" && card.status !== "completed") card.scheduleDeletedAt = Date.now();
+              }
+              identity.scheduledLive = null;
+              await persist();
+              closeScreen("live-summary");
+              closeScreen("schedule-detail");
+              openProfile("identity", identity.id);
+              renderProfileTab("identity", identity.id, "activity");
+              toast("预约直播已删除");
+            };
+
             const rerender = () => {
               renderChannels();
               renderSchedule();
@@ -5269,6 +5353,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
             };
 
             await refreshRocheData({ announce: false, sync: true });
+            await migrateExistingPrimaryMutualFollows();
             ensureMellowBusinessDemo();
             await persist();
             rerender();
@@ -5744,8 +5829,16 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "save-community-settings") {
                 await saveCommunitySettings(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.tier || "paid");
               } else if (action === "view-appointment-host") {
+                const ownerType = button.dataset.ownerType || "channel", ownerId = button.dataset.ownerId || "";
                 closeScreen("appointment-reminder");
-                openProfile(button.dataset.ownerType || "channel", button.dataset.ownerId || "");
+                if (ownerType === "identity") openScheduledLiveDetail(ownerId);
+                else { openProfile(ownerType, ownerId); renderProfileTab(ownerType, ownerId, "activity"); }
+              } else if (action === "appointment-reminder-later") {
+                closeScreen("appointment-reminder");
+              } else if (action === "mute-appointment-reminders-today") {
+                state.appointmentReminderMuteDate = localDateKey();
+                await persist();
+                closeScreen("appointment-reminder");
               } else if (action === "go-appointment-live") {
                 closeScreen("appointment-reminder");
                 await startAppointmentHostLive(button.dataset.ownerType || "channel", button.dataset.ownerId || "");
@@ -5763,14 +5856,20 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "open-scheduled-live") {
                 openScheduledLiveDetail(button.dataset.identityId || state.viewerIdentityId);
               } else if (action === "cancel-scheduled-live") {
-                const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
-                if (identity) {
-                  identity.scheduledLive = null;
+                openScheduleDeleteConfirm(button.dataset.identityId || "");
+              } else if (action === "close-schedule-delete-confirm") {
+                closeScreen("live-summary");
+              } else if (action === "confirm-delete-scheduled-live") {
+                await deleteScheduledLiveConfirmed(button.dataset.identityId || "");
+              } else if (action === "recreate-business-schedule") {
+                const messageId = String(button.dataset.messageId || ""), cardId = String(button.dataset.cardId || "");
+                const card = findDMCard(messageId, cardId);
+                if (card?.kind === "business" && card.status === "accepted") {
+                  await createScheduleFromCard(messageId, card);
                   await persist();
-                  closeScreen("schedule-detail");
-                  openProfile("identity", identity.id);
-                  renderProfileTab("identity", identity.id, "activity");
-                  toast("已取消预约");
+                  renderDirectThread(messageId);
+                  renderHome();
+                  toast("已从商务合作方案重新创建预约直播");
                 }
               } else if (action === "start-scheduled-live") {
                 const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
