@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.19";
+  const VERSION = "0.2.20";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -463,7 +463,7 @@
 
 
 /* v0.2.2 · account cap / live compact cards / bottom icon polish */
-.vela-roche .v-nav-icon{width:25px;height:25px;object-fit:contain;display:block;flex:0 0 auto}.vela-roche .v-nav button[data-nav="wallet"] .v-nav-icon{width:23px;height:23px}
+.vela-roche .v-nav-icon{width:25px;height:25px;object-fit:contain;display:block;flex:0 0 auto}.vela-roche .v-nav button[data-nav="wallet"] .v-nav-icon{width:20px;height:20px}
 .vela-roche .v-nav button{gap:3px!important}
 .vela-roche .v-nav .v-publish b{width:36px!important;height:36px!important;border-radius:13px!important;font-size:22px!important;margin-top:0!important;margin-bottom:0}
 .vela-roche .v-drawer-clear{width:100%;border:0;background:none;color:#c9362b;padding:13px 4px;text-align:left;font-size:13px;font-weight:850;border-top:1px solid var(--v-line);margin-bottom:8px}
@@ -505,6 +505,9 @@
 .vela-roche .v-prize-remove{width:100%;border:0;border-radius:10px;background:rgba(255,59,48,.08);color:var(--v-red);padding:7px;font-size:9px;font-weight:900;margin-top:6px}
 .vela-roche .v-live-tool-actions{display:flex;gap:8px;margin-top:11px}.vela-roche .v-live-tool-actions button{flex:1;border:0;border-radius:12px;min-height:39px;font-size:10px;font-weight:900}.vela-roche .v-live-tool-actions .is-primary{background:#111;color:#fff}.vela-roche .v-live-tool-actions .is-light{background:var(--v-soft);color:var(--v-text)}
 .vela-roche .v-live-summary-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:12px}.vela-roche .v-live-summary-box{background:var(--v-soft);border-radius:15px;padding:11px}.vela-roche .v-live-summary-box small{display:block;color:var(--v-muted);font-size:8px}.vela-roche .v-live-summary-box b{display:block;margin-top:4px;font-size:15px}
+
+/* v0.2.20 · Roche ↔ Vela memory bridge */
+.vela-roche .v-memory-role{background:var(--v-card);border:1px solid var(--v-line);border-radius:18px;padding:13px;margin-bottom:10px}.vela-roche .v-memory-role-head{display:flex;align-items:center;gap:10px}.vela-roche .v-memory-role-main{min-width:0;flex:1}.vela-roche .v-memory-role-main b{display:block;font-size:13px}.vela-roche .v-memory-role-main small{display:block;color:var(--v-muted);font-size:9px;margin-top:3px;line-height:1.45}.vela-roche .v-memory-role-actions{display:flex;gap:6px}.vela-roche .v-memory-role-actions button,.vela-roche .v-memory-refresh{border:0;border-radius:10px;background:var(--v-soft);color:var(--v-text);padding:8px 10px;font-size:9px;font-weight:900}.vela-roche .v-memory-source{margin-top:10px;padding:10px;border-radius:14px;background:var(--v-soft)}.vela-roche .v-memory-source-head{display:flex;align-items:center;justify-content:space-between;gap:10px}.vela-roche .v-memory-source-head strong{font-size:10px}.vela-roche .v-memory-source-head span{font-size:8px;color:var(--v-muted)}.vela-roche .v-memory-toggle{border:0;border-radius:999px;padding:6px 9px;background:#d9d9df;color:#555;font-size:8px;font-weight:900}.vela-roche .v-memory-toggle.is-on{background:#111;color:#fff}.vela-roche .v-memory-opts{display:grid;grid-template-columns:1fr 1fr auto;gap:7px;margin-top:8px;align-items:end}.vela-roche .v-memory-opts label{font-size:8px;color:var(--v-muted)}.vela-roche .v-memory-opts input[type="number"]{width:100%;margin-top:4px;border:1px solid var(--v-line);border-radius:9px;background:var(--v-card);padding:7px;font-size:13px;color:var(--v-text)}.vela-roche .v-memory-core{display:flex;align-items:center;gap:5px;padding:7px 2px;color:var(--v-text)!important;white-space:nowrap}.vela-roche .v-memory-preview{white-space:pre-wrap;background:var(--v-soft);border-radius:14px;padding:12px;font-size:10px;line-height:1.65;max-height:280px;overflow:auto}.vela-roche .v-memory-status{font-size:9px;color:var(--v-muted);line-height:1.5;margin:8px 0 12px}
 @media(max-width:390px){.vela-roche .v-wallet-assets{grid-template-columns:1fr}.vela-roche .v-prize-row{grid-template-columns:1fr 58px}.vela-roche .v-prize-row input:nth-child(3),.vela-roche .v-prize-row input:nth-child(4){grid-column:auto}}
 
 .vela-roche.is-dark{--v-bg:#101116;--v-card:#191a20;--v-text:#f4f4f6;--v-muted:#a6a7b0;--v-line:#2b2d34;--v-soft:#23252c}.vela-roche.is-dark .v-top,.vela-roche.is-dark .v-nav,.vela-roche.is-dark .v-drawer,.vela-roche.is-dark .v-sheet,.vela-roche.is-dark .v-subhead{background:rgba(16,17,22,.96);color:var(--v-text)}.vela-roche.is-dark .v-card,.vela-roche.is-dark .v-userhead,.vela-roche.is-dark .v-identity-card,.vela-roche.is-dark .v-roche-compact,.vela-roche.is-dark .v-linkbox{background:var(--v-card);color:var(--v-text)}.vela-roche.is-dark .v-plainbtn,.vela-roche.is-dark .v-subhead>button:first-child,.vela-roche.is-dark .v-subhead .v-head-action{background:#24262d!important;color:#f4f4f6!important}.vela-roche.is-dark .v-profile-tabs button.is-active{color:#fff}.vela-roche.is-dark .v-profile-tabs button.is-active:after{background:#fff}.vela-roche.is-dark .v-chip{background:#262830;color:#ddd}.vela-roche.is-dark .v-chip.is-active,.vela-roche.is-dark .v-action{background:#f4f4f6;color:#111}.vela-roche.is-dark .v-action.light,.vela-roche.is-dark .v-follow.is-on{background:#292b33;color:#f4f4f6}.vela-roche.is-dark .v-avatar,.vela-roche.is-dark .v-mini{background:#2a2c33;color:#f4f4f6}.vela-roche.is-dark .v-exit{background:#24262d}.vela-roche.is-dark .v-switch:checked{background:#f4f4f6}.vela-roche.is-dark .v-switch:checked:after{background:#111}
@@ -854,7 +857,7 @@
             <button class="v-drawer-item" data-action="settings-note" data-settings-kind="presets"><span class="v-itemcopy"><span>生成预设</span></span><span>›</span></button>
             <button class="v-drawer-item" data-action="settings-note" data-settings-kind="appearance"><span class="v-itemcopy"><span>外观设置</span></span><span>›</span></button>
             <button class="v-drawer-item" data-action="settings-note" data-settings-kind="platform"><span class="v-itemcopy"><span>平台设置</span></span><span>›</span></button>
-            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="memory"><span class="v-itemcopy"><span>记忆互通</span></span><span class="v-itembadge">稍后&nbsp; ›</span></button>
+            <button class="v-drawer-item" data-action="settings-note" data-settings-kind="memory"><span class="v-itemcopy"><span>记忆互通</span></span><span class="v-itembadge">Roche ↔ Vela&nbsp; ›</span></button>
           </div>
         </div>
 
@@ -920,6 +923,7 @@
                   roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) },
                   businessDeals: { ...state.businessDeals, ...(saved.businessDeals || {}) },
                   generationPreset: { ...state.generationPreset, ...(saved.generationPreset || {}) },
+                  memoryBridge: { ...state.memoryBridge, ...(saved.memoryBridge || {}), sources:{ ...(state.memoryBridge?.sources || {}), ...(saved.memoryBridge?.sources || {}) }, knowledge:{ ...(state.memoryBridge?.knowledge || {}), ...(saved.memoryBridge?.knowledge || {}) }, syncCursor:{ ...(state.memoryBridge?.syncCursor || {}), ...(saved.memoryBridge?.syncCursor || {}) } },
                   appearance: { ...state.appearance, ...(saved.appearance || {}) },
                   platformSettings: { ...state.platformSettings, ...(saved.platformSettings || {}) }
                 };
@@ -1017,6 +1021,10 @@
             state.platformSettings.languagePreference = LANGUAGE_PREFERENCE_OPTIONS.some(item => item.key === String(state.platformSettings.languagePreference || ""))
               ? String(state.platformSettings.languagePreference) : "overseas_more";
             state.generationPreset = { mode: "default", customText: "", nsfwText: "成熟向内容可以更大胆、更暧昧、更有成人主播或成人社交平台氛围，可包含性感但不露骨的造型、夜生活、付费订阅与成熟向玩笑；不要生成露骨色情细节、明确性行为或色情裸露描写。", ...(state.generationPreset || {}) };
+            state.memoryBridge = { sources:{}, knowledge:{}, syncCursor:{}, ...(state.memoryBridge || {}) };
+            state.memoryBridge.sources = { ...(state.memoryBridge.sources || {}) };
+            state.memoryBridge.knowledge = { ...(state.memoryBridge.knowledge || {}) };
+            state.memoryBridge.syncCursor = { ...(state.memoryBridge.syncCursor || {}) };
             state.communityPosts = safeArray(state.communityPosts);
             state.liveReplays = safeArray(state.liveReplays);
             state.pendingLiveUserMessage = state.pendingLiveUserMessage && typeof state.pendingLiveUserMessage === "object" ? state.pendingLiveUserMessage : null;
@@ -1130,6 +1138,167 @@
             let lastVelaAIError = "";
             const communityLazyTimers = new Map();
             const liveLazyTimers = new Map();
+            const VELA_MEMORY_SYNC_PREFIX = "[Vela Memory Sync]";
+            const velaMemorySessionStartedAt = Date.now() - 1;
+            const velaMemoryContextCache = new Map();
+            const velaMemoryPendingRefresh = new Set();
+            const getMemoryActorIdFromChannel = channel => String(channel?.sourceCharacterId || "");
+            const getMemorySources = actorId => safeArray(state.memoryBridge?.sources?.[String(actorId)]).map(row => ({ ...row }));
+            const memoryDirectTarget = actorId => getMemorySources(actorId).find(row => row.enabled && !row.isGroup) || null;
+            const memoryTextIgnored = text => String(text || "").trim().startsWith(VELA_MEMORY_SYNC_PREFIX);
+            const clampMemoryLimit = value => Math.max(0, Math.min(500, Math.round(Number(value) || 0)));
+            const withMemoryTimeout = (promise, ms = 8000) => Promise.race([Promise.resolve(promise), new Promise((_, reject) => setTimeout(() => reject(new Error(`Roche 会话读取超时（${Math.round(ms/1000)} 秒）`)), ms))]);
+            const listMemoryConversations = async actorId => {
+              if (!roche?.conversation?.list) return [];
+              let rows = []; let memberFiltered = true;
+              try { rows = await withMemoryTimeout(roche.conversation.list({ memberId:String(actorId) })); }
+              catch (_) { memberFiltered = false; rows = await withMemoryTimeout(roche.conversation.list()); }
+              const id = String(actorId);
+              return safeArray(rows).filter(row => {
+                if (!row) return false;
+                if (String(row.contactId || "") === id) return true;
+                if (safeArray(row.members).some(member => String(typeof member === "object" ? member?.id : member) === id)) return true;
+                if (safeArray(row.memberProfiles).some(member => String(member?.id || "") === id)) return true;
+                return memberFiltered;
+              }).map(row => ({
+                conversationId:String(row.id || row.conversationId || ""),
+                conversationName:String(row.name || row.title || row.handle || row.id || row.conversationId || "Roche 会话"),
+                isGroup:Boolean(row.isGroup || row.type === "group" || row.kind === "group")
+              })).filter(row => row.conversationId);
+            };
+            const refreshMemoryConversations = async actorId => {
+              const id = String(actorId || ""); if (!id) return [];
+              const rows = await listMemoryConversations(id);
+              const previous = new Map(getMemorySources(id).map(row => [String(row.conversationId), row]));
+              state.memoryBridge.sources[id] = rows.map(row => {
+                const old = previous.get(String(row.conversationId));
+                return { ...row, enabled:old?.enabled ?? false, shortLimit:clampMemoryLimit(old?.shortLimit ?? 50), factLimit:clampMemoryLimit(old?.factLimit ?? 0), coreEnabled:Boolean(old?.coreEnabled) };
+              });
+              await persist();
+              return state.memoryBridge.sources[id];
+            };
+            const loadMemoryContext = async actorId => {
+              const id = String(actorId || "");
+              const sources = getMemorySources(id).filter(row => row.enabled);
+              if (!sources.length) { velaMemoryContextCache.set(id, ""); return ""; }
+              const blocks = [];
+              for (const source of sources) {
+                const lines = [];
+                if (source.shortLimit > 0 && roche?.memory?.getShortTerm) {
+                  try {
+                    const msgs = await withMemoryTimeout(roche.memory.getShortTerm({ conversationId:source.conversationId, limit:clampMemoryLimit(source.shortLimit) }));
+                    safeArray(msgs).forEach(msg => {
+                      const text = String(msg?.text || "").trim(); if (!text || memoryTextIgnored(text)) return;
+                      const who = String(msg?.senderHandle || msg?.senderName || (msg?.isMe ? "USER" : "对方"));
+                      lines.push(`${who}：${text}`);
+                    });
+                  } catch (err) { console.warn("[Vela memory] short-term read failed", err); }
+                }
+                if ((source.factLimit > 0 || source.coreEnabled) && roche?.memory?.getLongTerm) {
+                  try {
+                    const lt = await withMemoryTimeout(roche.memory.getLongTerm({ conversationId:source.conversationId, limit:clampMemoryLimit(source.factLimit || 50) }));
+                    if (source.coreEnabled && lt?.core?.summary) lines.push(`【核心记忆】${String(lt.core.summary)}`);
+                    if (source.factLimit > 0) safeArray(lt?.facts).slice(0, clampMemoryLimit(source.factLimit)).forEach(fact => {
+                      const text = String(fact?.text || fact?.summary || fact || "").trim(); if (text) lines.push(`【事实】${text}`);
+                    });
+                  } catch (err) { console.warn("[Vela memory] long-term read failed", err); }
+                }
+                if (lines.length) blocks.push(`【Roche 会话：${source.conversationName || source.conversationId}${source.isGroup ? " · 群聊" : " · 单聊"}】\n${lines.join("\n")}`);
+              }
+              let text = blocks.join("\n\n");
+              if (text.length > 20000) text = `...[较早的挂载记忆已从本次请求预算中省略]...\n${text.slice(-20000)}`;
+              velaMemoryContextCache.set(id, text);
+              return text;
+            };
+            const primeEnabledMemoryContexts = async () => {
+              for (const actorId of safeArray(state.rocheLink?.linkedCharacterIds).map(String)) {
+                if (getMemorySources(actorId).some(row => row.enabled)) await loadMemoryContext(actorId);
+              }
+            };
+            const addMemoryKnowledge = (actorId, category, text, meta = {}) => {
+              const id = String(actorId || ""); const copy = String(text || "").trim(); if (!id || !copy) return;
+              const list = state.memoryBridge.knowledge[id] = safeArray(state.memoryBridge.knowledge[id]);
+              const key = String(meta.key || `${category}:${copy}`).slice(0, 600);
+              if (list.some(row => String(row.key || "") === key)) return;
+              list.push({ id:`vk-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}`, key, category, text:copy, learnedAt:Number(meta.learnedAt || Date.now()) });
+              if (list.length > 500) state.memoryBridge.knowledge[id] = list.slice(-500);
+            };
+            const channelByCharacterId = actorId => state.channels.find(ch => String(ch.sourceCharacterId || "") === String(actorId) && (ch.accountRole === "primary" || !ch.mainChannelId)) || state.channels.find(ch => String(ch.sourceCharacterId || "") === String(actorId));
+            const harvestSessionMemory = () => {
+              const actors = safeArray(state.rocheLink?.linkedCharacterIds).map(String);
+              actors.forEach(actorId => {
+                const accounts = state.channels.filter(ch => String(ch.sourceCharacterId || "") === actorId);
+                const accountIds = new Set(accounts.map(ch => String(ch.id)));
+                safeArray(state.communityPosts).filter(post => Number(post.at || 0) >= velaMemorySessionStartedAt && post.ownerType === "channel" && accountIds.has(String(post.ownerId))).forEach(post => {
+                  const ch = accounts.find(x => String(x.id) === String(post.ownerId));
+                  const alias = ch?.accountRole === "alias" ? `副号 ${ch.handle || ch.name}` : `账号 ${ch?.handle || ch?.name || "主号"}`;
+                  addMemoryKnowledge(actorId, "role", `角色使用${alias}发布贴文：${String(post.text || "").slice(0,260)}`, { key:`post:${post.id}`, learnedAt:post.at });
+                  const reactions = safeArray(state.postReplies?.[String(post.id)]).filter(r => r && !r.isMine && String(r.text || "").trim());
+                  if (reactions.length) {
+                    const sample = reactions.slice().sort(() => Math.random()-.5).slice(0,2).map(r => `“${String(r.text).slice(0,90)}”`).join("、");
+                    addMemoryKnowledge(actorId, "audience", `该贴文的观众反馈抽样：${sample}`, { key:`post-feedback:${post.id}`, learnedAt:post.at });
+                  }
+                });
+                safeArray(state.liveReplays).filter(live => Number(live.endedAt || live.startedAt || live.at || 0) >= velaMemorySessionStartedAt && accountIds.has(String(live.ownerId || ""))).forEach(live => {
+                  const ch = accounts.find(x => String(x.id) === String(live.ownerId));
+                  const alias = ch?.accountRole === "alias" ? `副号 ${ch.handle || ch.name}` : `账号 ${ch?.handle || ch?.name || "主号"}`;
+                  const mode = `${live.accessMode === "paid" ? "付费订阅" : live.accessMode === "free" ? "免费订阅" : "公开"}${live.ageRequirement === "18+" ? " · 18+" : ""}`;
+                  addMemoryKnowledge(actorId, "role", `角色使用${alias}完成了一场${mode}直播「${live.title || live.category || "直播"}」。`, { key:`live:${live.id}`, learnedAt:Number(live.endedAt || live.startedAt || Date.now()) });
+                  const chat = safeArray(state.liveChatsById?.[String(live.id)]).filter(row => row && !row.isMine && String(row.text || "").trim());
+                  if (chat.length) {
+                    const sample = chat.slice().sort(() => Math.random()-.5).slice(0,2).map(r => `“${String(r.text).slice(0,80)}”`).join("、");
+                    addMemoryKnowledge(actorId, "audience", `该场直播的观众反应抽样：${sample}`, { key:`live-feedback:${live.id}`, learnedAt:Number(live.endedAt || Date.now()) });
+                  }
+                });
+                accounts.forEach(ch => {
+                  const dmEntries = safeArray(state.messages).filter(entry => String(entry?.channelId || "") === String(ch.id));
+                  dmEntries.forEach(entry => {
+                    const thread = safeArray(state.dmThreads?.[String(entry.id)]).filter(msg => Number(msg.at || 0) >= velaMemorySessionStartedAt && String(msg.text || "").trim() && !msg.typing);
+                    const userMsgs = thread.filter(msg => msg.sender === "user" || msg.sender === "me" || msg.isMine || msg.isUser).slice(-4);
+                    const charMsgs = thread.filter(msg => !(msg.sender === "user" || msg.sender === "me" || msg.isMine || msg.isUser)).slice(-4);
+                    if (userMsgs.length) addMemoryKnowledge(actorId, "user", `USER 在 Vela 私信中对角色说过：${userMsgs.map(m => `“${String(m.text).slice(0,100)}”`).join("；")}`, { key:`dm-user:${entry.id}:${userMsgs.map(m=>m.id||m.at).join(",")}`, learnedAt:Number(userMsgs.at(-1)?.at || Date.now()) });
+                    if (charMsgs.length) addMemoryKnowledge(actorId, "role", `角色在 Vela 私信中回复 USER：${charMsgs.map(m => `“${String(m.text).slice(0,100)}”`).join("；")}`, { key:`dm-char:${entry.id}:${charMsgs.map(m=>m.id||m.at).join(",")}`, learnedAt:Number(charMsgs.at(-1)?.at || Date.now()) });
+                    if (userMsgs.length && charMsgs.length) addMemoryKnowledge(actorId, "joint", `角色与 USER 本次在 Vela 通过${ch.accountRole === "alias" ? `角色副号 ${ch.handle || ch.name}` : "角色账号"}进行了私信互动。`, { key:`dm-joint:${entry.id}:${Math.max(Number(userMsgs.at(-1)?.at||0),Number(charMsgs.at(-1)?.at||0))}` });
+                  });
+                });
+              });
+            };
+            const memorySyncSummary = actorId => {
+              const id = String(actorId || ""); const cursor = Number(state.memoryBridge.syncCursor[id] || 0);
+              const rows = safeArray(state.memoryBridge.knowledge[id]).filter(row => Number(row.learnedAt || 0) > cursor).sort((a,b)=>Number(a.learnedAt||0)-Number(b.learnedAt||0)).slice(0,30);
+              if (!rows.length) return null;
+              const labels = { role:"角色行为", user:"用户行为", joint:"共同事件", audience:"观众反馈" };
+              const groups = new Map(); rows.forEach(row => { const label=labels[row.category] || "其他事件"; if(!groups.has(label)) groups.set(label,[]); groups.get(label).push(`- ${row.text}`); });
+              const channel = channelByCharacterId(id); const name = channel?.name || channel?.handle || rocheRuntime.characters.find(c=>String(c.id)===id)?.name || id;
+              const summary = `${VELA_MEMORY_SYNC_PREFIX}\n【Vela 记忆回传 · ${name}】\n${[...groups].map(([label,items])=>`【${label}】\n${items.join("\n")}`).join("\n\n")}`;
+              return { actorId:id, actorName:name, rows, summary, maxLearnedAt:Math.max(...rows.map(r=>Number(r.learnedAt||0))), target:memoryDirectTarget(id) };
+            };
+            const injectMemorySummary = async payload => {
+              if (!payload?.target?.conversationId || !payload.summary) return false;
+              if (roche?.memory?.injectShortTerm) return await roche.memory.injectShortTerm({ conversationId:payload.target.conversationId, text:payload.summary, summary:payload.summary, actorId:payload.actorId, actorName:payload.actorName });
+              if (roche?.memory?.appendShortTerm) return await roche.memory.appendShortTerm({ conversationId:payload.target.conversationId, text:payload.summary, senderId:payload.actorId, senderName:payload.actorName });
+              const db = await new Promise((resolve,reject)=>{ const req=indexedDB.open("Roche_db"); req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); });
+              try {
+                await new Promise((resolve,reject)=>{ const req=db.transaction("messages","readwrite").objectStore("messages").add({ id:Date.now()+Math.floor(Math.random()*1000), isMe:false, text:payload.summary, senderId:payload.actorId, timestamp:Date.now(), senderName:payload.actorName, conversationId:payload.target.conversationId }); req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); });
+                return true;
+              } finally { try { db.close(); } catch(_){} }
+            };
+            const flushVelaMemoryToRoche = async () => {
+              harvestSessionMemory();
+              const results=[];
+              for (const actorId of safeArray(state.rocheLink?.linkedCharacterIds).map(String)) {
+                let guard=0;
+                while (guard++ < 20) {
+                  const payload=memorySyncSummary(actorId); if(!payload) break;
+                  if(!payload.target){ results.push({actorId,ok:false,reason:"single_chat_not_found"}); break; }
+                  try { const ok=await injectMemorySummary(payload); if(!ok) throw new Error("write_rejected"); state.memoryBridge.syncCursor[actorId]=Math.max(Number(state.memoryBridge.syncCursor[actorId]||0),payload.maxLearnedAt); results.push({actorId,ok:true}); }
+                  catch(err){ console.warn("[Vela memory] writeback failed",err); results.push({actorId,ok:false,reason:String(err?.message||err)}); break; }
+                }
+              }
+              await persist();
+              return results;
+            };
+
 
             const persist = async () => {
               try {
@@ -1173,6 +1342,7 @@
                   messages: state.messages,
                   pendingOwnLiveInput: state.pendingOwnLiveInput,
                   generationPreset: state.generationPreset,
+                  memoryBridge: state.memoryBridge,
                   appearance: state.appearance,
                   platformSettings: state.platformSettings,
                   communityPosts: state.communityPosts,
@@ -1310,6 +1480,7 @@
                   (String(activePersona?.id || "") === String(state.rocheLink.ownerPersonaId || "") ? activePersona : null);
                 if (linkedOwner && isRocheBotIdentity(linkedOwner)) state.rocheLink.ownerPersonaId = "";
                 if (sync) await syncLinkedChannelSnapshots();
+                void primeEnabledMemoryContexts();
                 await persist();
                 if (announce) toast("已重新读取 Roche 用户与角色");
                 return true;
@@ -4091,6 +4262,21 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
               }
             };
 
+
+            const renderMemorySettings = async (focusActorId = "") => {
+              const actors = safeArray(state.rocheLink?.linkedCharacterIds).map(String).map(id => {
+                const channel = channelByCharacterId(id);
+                const char = rocheRuntime.characters.find(c => String(c?.id || "") === id);
+                return { id, name:channel?.name || char?.name || char?.handle || id, handle:channel?.handle || char?.handle || "" };
+              });
+              const cards = actors.length ? actors.map(actor => {
+                const sources = getMemorySources(actor.id); const enabled=sources.filter(x=>x.enabled); const target=memoryDirectTarget(actor.id); const pending=safeArray(state.memoryBridge.knowledge?.[actor.id]).filter(row=>Number(row.learnedAt||0)>Number(state.memoryBridge.syncCursor?.[actor.id]||0)).length;
+                const rows = sources.length ? sources.map(source => `<div class="v-memory-source" data-memory-source-row="${escapeHTML(actor.id)}:${escapeHTML(source.conversationId)}"><div class="v-memory-source-head"><div><strong>${escapeHTML(source.conversationName || source.conversationId)}</strong><span>${source.isGroup ? "群聊 · 只读取" : "单聊 · 可读取/回传"}</span></div><button class="v-memory-toggle ${source.enabled ? "is-on" : ""}" data-action="toggle-memory-source" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}">${source.enabled ? "已开启" : "关闭"}</button></div>${source.enabled ? `<div class="v-memory-opts"><label>短期<input type="number" min="0" max="500" value="${clampMemoryLimit(source.shortLimit)}" data-memory-limit="short" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}"></label><label>事实<input type="number" min="0" max="500" value="${clampMemoryLimit(source.factLimit)}" data-memory-limit="fact" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}"></label><label class="v-memory-core"><input type="checkbox" ${source.coreEnabled ? "checked" : ""} data-memory-core data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}">核心</label></div>` : ""}</div>`).join("") : `<div class="v-memory-status">尚未读取 Roche 会话。点「刷新会话」后会列出包含该角色的单聊/群聊。</div>`;
+                return `<section class="v-memory-role"><div class="v-memory-role-head"><div class="v-memory-role-main"><b>${escapeHTML(actor.name)}</b><small>${escapeHTML(actor.handle)} · ${enabled.length}/${sources.length} 个来源已开启 · ${target ? `回传到 ${target.conversationName || target.conversationId}` : "尚未开启角色单聊"} · 待回传 ${pending}</small></div><div class="v-memory-role-actions"><button data-action="refresh-memory-role" data-actor-id="${escapeHTML(actor.id)}">刷新会话</button><button data-action="preview-memory-role" data-actor-id="${escapeHTML(actor.id)}">预览</button></div></div>${rows}<div data-memory-preview-for="${escapeHTML(actor.id)}"></div></section>`;
+              }).join("") : `<div class="v-profile-empty">当前还没有连接 Roche 角色。</div>`;
+              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>记忆互通</strong><div class="v-hint">Roche → Vela 读取；关闭 Vela 后自动回传</div></div><button class="v-head-action" data-action="flush-memory-now">测试回传</button></header><div class="v-subbody"><div class="v-settings-note" style="margin-bottom:12px">每个角色可分别选择短期条数、事实条数与核心记忆。群聊只作为读取来源；Vela → Roche 只写回已开启的角色单聊。回传优先角色行为、USER 行为与共同事件，观众评论/弹幕只抽少量代表性反馈。</div>${cards}</div>`);
+              if (focusActorId && getMemorySources(focusActorId).some(row=>row.enabled)) void loadMemoryContext(focusActorId);
+            };
             const openSettingsNote = (kind) => {
               if (kind === "presets") {
                 const mode = String(state.generationPreset?.mode || "default");
@@ -4109,7 +4295,7 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
                 openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>平台设置</strong><div class="v-hint">控制 Vela 世界整体运行方式</div></div><button class="v-head-action" data-action="save-platform-settings">保存</button></header><div class="v-subbody"><div class="v-settings-group"><div class="v-setting-row"><div class="v-meta"><div class="v-name">平台活跃度 · <span data-role="activity-value">${Number(ps.activityLevel ?? 50)}%</span></div><div class="v-sub">影响直播人数、聊天室、社群在线与网友互动密度</div></div></div><input class="v-range" data-setting-field="activityLevel" type="range" min="0" max="100" step="5" value="${Number(ps.activityLevel ?? 50)}"><div class="v-field" style="margin-top:14px"><label>陌生互动频率</label><select data-setting-field="strangerInteraction"><option value="low" ${stranger === "low" ? "selected" : ""}>少</option><option value="normal" ${stranger === "normal" ? "selected" : ""}>正常</option><option value="high" ${stranger === "high" ? "selected" : ""}>多</option></select></div><div class="v-setting-row"><div class="v-meta"><div class="v-name">允许陌生商务邀约</div><div class="v-sub">关闭后不会新生成陌生品牌合作邀约</div></div><input class="v-switch" data-setting-field="allowBusinessDM" type="checkbox" ${ps.allowBusinessDM !== false ? "checked" : ""}></div><div class="v-setting-row"><div class="v-meta"><div class="v-name">内容语言倾向 · <span data-role="language-preference-value">${escapeHTML(languagePreferenceLabel(langPref))}</span></div><div class="v-sub">只调整陌生主播、陌生私信、粉丝聊天与网友评论的语言权重；不会覆盖 user / char 自己的语言设定。</div></div></div><input class="v-range" data-setting-field="languagePreference" type="range" min="0" max="4" step="1" value="${languagePreferenceIndex(langPref)}"><div class="v-language-scale"><span>中文为主</span><span>全球均衡</span><span>海外为主</span></div><div class="v-field" style="margin-top:14px"><label>推荐页每批直播数量</label><input data-setting-field="recommendationCount" type="number" min="1" max="6" step="1" value="${Number(ps.recommendationCount || 3)}"></div><div class="v-setting-row"><div class="v-meta"><div class="v-name">推荐中出现角色副号</div><div class="v-sub">默认关闭；开启后副号只低概率进入候选，角色主号仍不会被推荐。</div></div><input class="v-switch" data-setting-field="allowRoleAliasesInRecommendations" type="checkbox" ${ps.allowRoleAliasesInRecommendations === true ? "checked" : ""}></div></div></div>`);
                 return;
               }
-              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>记忆互通</strong><div class="v-hint">暂时保留入口</div></div></header><div class="v-subbody"><div class="v-card"><p class="v-settings-note" style="margin:0">这一项先保留入口，后续用于主聊天记忆、重要直播事件回传，以及角色对匿名账号的认知与 Vela 近期事件同步。</p></div></div>`);
+              renderMemorySettings();
             };
 
             const saveGenerationSettings = async () => {
@@ -4390,8 +4576,13 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
 
             const getChannelPersonaText = (channel) => {
               if (!channel?.sourceCharacterId) return "";
-              const char = rocheRuntime.characters.find(item => String(item?.id) === String(channel.sourceCharacterId));
-              return String(char?.persona || char?.prompt || char?.description || char?.bio || "");
+              const actorId = String(channel.sourceCharacterId);
+              const char = rocheRuntime.characters.find(item => String(item?.id) === actorId);
+              const base = String(char?.persona || char?.prompt || char?.description || char?.bio || "");
+              const ownAccounts = state.channels.filter(ch => String(ch.sourceCharacterId || "") === actorId);
+              const accountKnowledge = ownAccounts.length ? `【Vela 账号认知】\n你知道以下 Vela 账号都由你本人操作：${ownAccounts.map(ch => `${ch.accountRole === "alias" ? "副号" : "主号"} ${ch.handle || ch.name || ch.id}`).join("、")}。你不会把自己的副号当成陌生人。使用副号发生的行为仍属于你自己的经历，但不要向 USER 泄露其尚未知晓的副号归属。${ownAccounts.filter(ch=>ch.accountRole === "alias").map(ch=>`${ch.handle || ch.name || ch.id}：USER${ch.userKnowsAlias ? "已知" : "尚未知"}这是你的副号`).join("；")}` : "";
+              const memory = String(velaMemoryContextCache.get(actorId) || "");
+              return [base, accountKnowledge, memory ? `【Roche → Vela 挂载记忆】\n${memory}` : ""].filter(Boolean).join("\n\n");
             };
 
 
@@ -5806,11 +5997,21 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               } else if (action === "exit-vela") {
                 closeDrawer();
                 try {
+                  await flushVelaMemoryToRoche();
                   await roche?.ui?.closeApp?.();
                 } catch (err) {
                   console.warn("[Vela] closeApp failed", err);
                   toast("退出失败，请从 Roche 返回");
                 }
+              } else if (action === "refresh-memory-role") {
+                const actorId=String(button.dataset.actorId||""); button.disabled=true; button.textContent="读取中…";
+                try { await refreshMemoryConversations(actorId); await loadMemoryContext(actorId); await renderMemorySettings(actorId); } catch(err){ toast(`读取 Roche 会话失败 · ${String(err?.message||err)}`); button.disabled=false; button.textContent="刷新会话"; }
+              } else if (action === "toggle-memory-source") {
+                const actorId=String(button.dataset.actorId||""), conversationId=String(button.dataset.conversationId||""); const rows=getMemorySources(actorId); const row=rows.find(x=>String(x.conversationId)===conversationId); if(row){ row.enabled=!row.enabled; state.memoryBridge.sources[actorId]=rows; await persist(); await loadMemoryContext(actorId); await renderMemorySettings(actorId); }
+              } else if (action === "preview-memory-role") {
+                const actorId=String(button.dataset.actorId||""); await loadMemoryContext(actorId); harvestSessionMemory(); const context=String(velaMemoryContextCache.get(actorId)||""); const payload=memorySyncSummary(actorId); const host=q(`[data-memory-preview-for="${CSS.escape(actorId)}"]`); if(host) host.innerHTML=`<div class="v-memory-status">Roche → Vela 当前读取预览</div><div class="v-memory-preview">${escapeHTML(context || "（当前没有开启的记忆来源，或来源为空）")}</div><div class="v-memory-status">Vela → Roche 待回传预览</div><div class="v-memory-preview">${escapeHTML(payload?.summary || "（无新增）")}</div>`;
+              } else if (action === "flush-memory-now") {
+                button.disabled=true; button.textContent="回传中…"; const rows=await flushVelaMemoryToRoche(); const ok=rows.filter(x=>x.ok).length; toast(rows.length?`记忆回传完成 · ${ok}/${rows.length}`:"当前没有新增记忆"); button.disabled=false; button.textContent="测试回传"; await renderMemorySettings();
               } else if (action === "wallet-bind-account" || action === "wallet-edit-account") {
                 openWalletBind();
               } else if (action === "save-wallet-account") {
@@ -6470,6 +6671,13 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
 
             root.addEventListener("input", async (event) => {
               const input = event.target;
+              if (input?.matches?.('[data-memory-limit]')) {
+                const actorId=String(input.dataset.actorId||""), conversationId=String(input.dataset.conversationId||""); const rows=getMemorySources(actorId); const row=rows.find(x=>String(x.conversationId)===conversationId); if(row){ if(input.dataset.memoryLimit==="short") row.shortLimit=clampMemoryLimit(input.value); else row.factLimit=clampMemoryLimit(input.value); state.memoryBridge.sources[actorId]=rows; await persist(); void loadMemoryContext(actorId); }
+                return;
+              } else if (input?.matches?.('[data-memory-core]')) {
+                const actorId=String(input.dataset.actorId||""), conversationId=String(input.dataset.conversationId||""); const rows=getMemorySources(actorId); const row=rows.find(x=>String(x.conversationId)===conversationId); if(row){ row.coreEnabled=Boolean(input.checked); state.memoryBridge.sources[actorId]=rows; await persist(); void loadMemoryContext(actorId); }
+                return;
+              }
               if (input?.matches?.('[data-role="commerce-range"]')) {
                 const value = Math.max(0, Math.min(100, Number(input.value || 0)));
                 const charId = String(input.dataset.characterId || "");
@@ -6516,8 +6724,10 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
                 if (label) label.textContent = LANGUAGE_PREFERENCE_OPTIONS[index]?.label || "海外较多";
               }
             });
+            container.__velaFlushMemory = flushVelaMemoryToRoche;
           },
           async unmount(container) {
+            try { await container.__velaFlushMemory?.(); } catch (err) { console.warn("[Vela memory] unmount writeback failed", err); }
             container.replaceChildren();
           }
         }
