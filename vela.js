@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.20";
+  const VERSION = "0.2.21";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -98,6 +98,14 @@
       rocheLink: {
         ownerPersonaId: "",
         linkedCharacterIds: []
+      },
+      memoryBridge: {
+        version: 2,
+        sources: {},
+        events: [],
+        knowledge: {},
+        syncCursor: {},
+        nextSeq: 1
       },
       identities: [],
       channels: [],
@@ -923,7 +931,7 @@
                   roleCommerce: { ...state.roleCommerce, ...(saved.roleCommerce || {}) },
                   businessDeals: { ...state.businessDeals, ...(saved.businessDeals || {}) },
                   generationPreset: { ...state.generationPreset, ...(saved.generationPreset || {}) },
-                  memoryBridge: { ...state.memoryBridge, ...(saved.memoryBridge || {}), sources:{ ...(state.memoryBridge?.sources || {}), ...(saved.memoryBridge?.sources || {}) }, knowledge:{ ...(state.memoryBridge?.knowledge || {}), ...(saved.memoryBridge?.knowledge || {}) }, syncCursor:{ ...(state.memoryBridge?.syncCursor || {}), ...(saved.memoryBridge?.syncCursor || {}) } },
+                  memoryBridge: { ...state.memoryBridge, ...(saved.memoryBridge || {}), sources:{ ...(state.memoryBridge?.sources || {}), ...(saved.memoryBridge?.sources || {}) }, events:safeArray(saved.memoryBridge?.events), knowledge:{ ...(state.memoryBridge?.knowledge || {}), ...(saved.memoryBridge?.knowledge || {}) }, syncCursor:{ ...(state.memoryBridge?.syncCursor || {}), ...(saved.memoryBridge?.syncCursor || {}) }, nextSeq:Number(saved.memoryBridge?.nextSeq || state.memoryBridge?.nextSeq || 1) },
                   appearance: { ...state.appearance, ...(saved.appearance || {}) },
                   platformSettings: { ...state.platformSettings, ...(saved.platformSettings || {}) }
                 };
@@ -1021,10 +1029,53 @@
             state.platformSettings.languagePreference = LANGUAGE_PREFERENCE_OPTIONS.some(item => item.key === String(state.platformSettings.languagePreference || ""))
               ? String(state.platformSettings.languagePreference) : "overseas_more";
             state.generationPreset = { mode: "default", customText: "", nsfwText: "成熟向内容可以更大胆、更暧昧、更有成人主播或成人社交平台氛围，可包含性感但不露骨的造型、夜生活、付费订阅与成熟向玩笑；不要生成露骨色情细节、明确性行为或色情裸露描写。", ...(state.generationPreset || {}) };
-            state.memoryBridge = { sources:{}, knowledge:{}, syncCursor:{}, ...(state.memoryBridge || {}) };
+            state.memoryBridge = { version:2, sources:{}, events:[], knowledge:{}, syncCursor:{}, nextSeq:1, ...(state.memoryBridge || {}) };
+            state.memoryBridge.version = 2;
             state.memoryBridge.sources = { ...(state.memoryBridge.sources || {}) };
+            state.memoryBridge.events = safeArray(state.memoryBridge.events);
             state.memoryBridge.knowledge = { ...(state.memoryBridge.knowledge || {}) };
             state.memoryBridge.syncCursor = { ...(state.memoryBridge.syncCursor || {}) };
+            state.memoryBridge.nextSeq = Math.max(1, Number(state.memoryBridge.nextSeq || 1));
+            // v0.2.21: migrate the old per-role text rows into INS-style Event + Knowledge ledgers.
+            {
+              const eventIds = new Set(state.memoryBridge.events.map(event => String(event?.eventId || "")).filter(Boolean));
+              Object.entries(state.memoryBridge.knowledge).forEach(([actorId, rawRows]) => {
+                const migrated = [];
+                safeArray(rawRows).forEach((row, index) => {
+                  if (row?.eventId) {
+                    migrated.push({ eventId:String(row.eventId), learnedAt:Number(row.learnedAt || Date.now()), learnedVia:String(row.learnedVia || "direct") });
+                    return;
+                  }
+                  const copy = String(row?.text || "").trim();
+                  if (!copy) return;
+                  const seed = String(row?.id || row?.key || `${actorId}-${index}`).replace(/[^a-zA-Z0-9_-]/g, "").slice(0,80) || `${index}`;
+                  const eventId = `vela-legacy-${String(actorId).replace(/[^a-zA-Z0-9_-]/g, "").slice(0,40)}-${seed}`;
+                  if (!eventIds.has(eventId)) {
+                    state.memoryBridge.events.push({
+                      eventId,
+                      type:`legacy_${String(row?.category || "other")}`,
+                      actorId:String(actorId),
+                      targetActorIds:[],
+                      contentId:"",
+                      contentType:"",
+                      contentOwnerActorId:"",
+                      accountId:"",
+                      accountRole:"",
+                      accountHandle:"",
+                      text:copy,
+                      summary:copy,
+                      visibility:"private",
+                      dedupeKey:String(row?.key || eventId),
+                      payload:{ legacyCategory:String(row?.category || "other") },
+                      createdAt:Number(row?.learnedAt || Date.now())
+                    });
+                    eventIds.add(eventId);
+                  }
+                  migrated.push({ eventId, learnedAt:Number(row?.learnedAt || Date.now()), learnedVia:"legacy_migration" });
+                });
+                state.memoryBridge.knowledge[String(actorId)] = migrated;
+              });
+            }
             state.communityPosts = safeArray(state.communityPosts);
             state.liveReplays = safeArray(state.liveReplays);
             state.pendingLiveUserMessage = state.pendingLiveUserMessage && typeof state.pendingLiveUserMessage === "object" ? state.pendingLiveUserMessage : null;
@@ -1138,16 +1189,25 @@
             let lastVelaAIError = "";
             const communityLazyTimers = new Map();
             const liveLazyTimers = new Map();
-            const VELA_MEMORY_SYNC_PREFIX = "[Vela Memory Sync]";
+            const VELA_MEMORY_SYNC_PREFIX = "[RocheVelaSync]";
+            const VELA_MEMORY_SYNC_LEGACY_PREFIX = "[Vela Memory Sync]";
             const velaMemorySessionStartedAt = Date.now() - 1;
             const velaMemoryContextCache = new Map();
-            const velaMemoryPendingRefresh = new Set();
             const getMemoryActorIdFromChannel = channel => String(channel?.sourceCharacterId || "");
             const getMemorySources = actorId => safeArray(state.memoryBridge?.sources?.[String(actorId)]).map(row => ({ ...row }));
             const memoryDirectTarget = actorId => getMemorySources(actorId).find(row => row.enabled && !row.isGroup) || null;
-            const memoryTextIgnored = text => String(text || "").trim().startsWith(VELA_MEMORY_SYNC_PREFIX);
+            const memoryTextIgnored = text => {
+              const value = String(text || "").trim();
+              return value.startsWith(VELA_MEMORY_SYNC_PREFIX) || value.startsWith(VELA_MEMORY_SYNC_LEGACY_PREFIX);
+            };
             const clampMemoryLimit = value => Math.max(0, Math.min(500, Math.round(Number(value) || 0)));
-            const withMemoryTimeout = (promise, ms = 8000) => Promise.race([Promise.resolve(promise), new Promise((_, reject) => setTimeout(() => reject(new Error(`Roche 会话读取超时（${Math.round(ms/1000)} 秒）`)), ms))]);
+            const withMemoryTimeout = (promise, ms = 8000) => {
+              let timer = 0;
+              return Promise.race([
+                Promise.resolve(promise),
+                new Promise((_, reject) => { timer = setTimeout(() => reject(new Error(`Roche 会话读取超时（${Math.round(ms/1000)} 秒）`)), ms); })
+              ]).finally(() => clearTimeout(timer));
+            };
             const listMemoryConversations = async actorId => {
               if (!roche?.conversation?.list) return [];
               let rows = []; let memberFiltered = true;
@@ -1188,9 +1248,10 @@
                   try {
                     const msgs = await withMemoryTimeout(roche.memory.getShortTerm({ conversationId:source.conversationId, limit:clampMemoryLimit(source.shortLimit) }));
                     safeArray(msgs).forEach(msg => {
-                      const text = String(msg?.text || "").trim(); if (!text || memoryTextIgnored(text)) return;
+                      const copy = String(msg?.text || "").trim();
+                      if (!copy || memoryTextIgnored(copy)) return;
                       const who = String(msg?.senderHandle || msg?.senderName || (msg?.isMe ? "USER" : "对方"));
-                      lines.push(`${who}：${text}`);
+                      lines.push(`${who}：${copy}`);
                     });
                   } catch (err) { console.warn("[Vela memory] short-term read failed", err); }
                 }
@@ -1199,106 +1260,452 @@
                     const lt = await withMemoryTimeout(roche.memory.getLongTerm({ conversationId:source.conversationId, limit:clampMemoryLimit(source.factLimit || 50) }));
                     if (source.coreEnabled && lt?.core?.summary) lines.push(`【核心记忆】${String(lt.core.summary)}`);
                     if (source.factLimit > 0) safeArray(lt?.facts).slice(0, clampMemoryLimit(source.factLimit)).forEach(fact => {
-                      const text = String(fact?.text || fact?.summary || fact || "").trim(); if (text) lines.push(`【事实】${text}`);
+                      const copy = String(fact?.summaryText || fact?.action || fact?.text || fact?.summary || fact || "").trim();
+                      if (copy) lines.push(`【事实】${copy}`);
                     });
                   } catch (err) { console.warn("[Vela memory] long-term read failed", err); }
                 }
                 if (lines.length) blocks.push(`【Roche 会话：${source.conversationName || source.conversationId}${source.isGroup ? " · 群聊" : " · 单聊"}】\n${lines.join("\n")}`);
               }
-              let text = blocks.join("\n\n");
-              if (text.length > 20000) text = `...[较早的挂载记忆已从本次请求预算中省略]...\n${text.slice(-20000)}`;
-              velaMemoryContextCache.set(id, text);
-              return text;
+              let memoryText = blocks.join("\n\n");
+              if (memoryText.length > 20000) memoryText = `...[较早的挂载记忆已从本次请求预算中省略]...\n${memoryText.slice(-20000)}`;
+              velaMemoryContextCache.set(id, memoryText);
+              return memoryText;
             };
             const primeEnabledMemoryContexts = async () => {
               for (const actorId of safeArray(state.rocheLink?.linkedCharacterIds).map(String)) {
                 if (getMemorySources(actorId).some(row => row.enabled)) await loadMemoryContext(actorId);
               }
             };
-            const addMemoryKnowledge = (actorId, category, text, meta = {}) => {
-              const id = String(actorId || ""); const copy = String(text || "").trim(); if (!id || !copy) return;
-              const list = state.memoryBridge.knowledge[id] = safeArray(state.memoryBridge.knowledge[id]);
-              const key = String(meta.key || `${category}:${copy}`).slice(0, 600);
-              if (list.some(row => String(row.key || "") === key)) return;
-              list.push({ id:`vk-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,6)}`, key, category, text:copy, learnedAt:Number(meta.learnedAt || Date.now()) });
-              if (list.length > 500) state.memoryBridge.knowledge[id] = list.slice(-500);
+
+            // ===== v0.2.21 · INS-style Social Event + per-role Knowledge Ledger =====
+            const linkedMemoryActorIds = () => new Set(safeArray(state.rocheLink?.linkedCharacterIds).map(String));
+            const isMemoryActor = actorId => linkedMemoryActorIds().has(String(actorId || ""));
+            const getMemoryEvent = eventId => safeArray(state.memoryBridge.events).find(event => String(event?.eventId || "") === String(eventId || "")) || null;
+            const getActorMemoryLedger = actorId => {
+              const id = String(actorId || "");
+              state.memoryBridge.knowledge[id] = safeArray(state.memoryBridge.knowledge[id]).filter(row => row && row.eventId);
+              return state.memoryBridge.knowledge[id];
+            };
+            const grantMemoryKnowledge = (actorId, eventId, learnedVia = "direct", learnedAt = Date.now()) => {
+              const id = String(actorId || "");
+              if (!id || !isMemoryActor(id) || !getMemoryEvent(eventId)) return false;
+              const ledger = getActorMemoryLedger(id);
+              if (ledger.some(row => String(row.eventId) === String(eventId))) return false;
+              const lastAt = ledger.reduce((max, row) => Math.max(max, Number(row.learnedAt || 0)), 0);
+              const requestedAt = Number(learnedAt || Date.now());
+              ledger.push({ eventId:String(eventId), learnedAt:Math.max(requestedAt, lastAt + 1), learnedVia:String(learnedVia || "direct") });
+              if (ledger.length > 800) state.memoryBridge.knowledge[id] = ledger.slice(-800);
+              return true;
+            };
+            const pruneMemoryEvents = () => {
+              const events = safeArray(state.memoryBridge.events);
+              if (events.length <= 800) return;
+              const keep = events.slice(-800);
+              const keepIds = new Set(keep.map(event => String(event.eventId || "")));
+              state.memoryBridge.events = keep;
+              Object.keys(state.memoryBridge.knowledge || {}).forEach(actorId => {
+                state.memoryBridge.knowledge[actorId] = safeArray(state.memoryBridge.knowledge[actorId]).filter(row => keepIds.has(String(row?.eventId || "")));
+              });
+            };
+            const recordMemoryEvent = (data = {}, options = {}) => {
+              const knownActorIds = [...new Set(safeArray(options.knownActorIds).map(String).filter(isMemoryActor))];
+              const dedupeKey = String(data.dedupeKey || "");
+              if (dedupeKey) {
+                const existing = safeArray(state.memoryBridge.events).find(event => String(event?.dedupeKey || "") === dedupeKey);
+                if (existing) {
+                  knownActorIds.forEach(actorId => grantMemoryKnowledge(actorId, existing.eventId, options.learnedVia || "direct", Number(options.learnedAt || data.createdAt || Date.now())));
+                  return existing;
+                }
+              }
+              const now = Number(data.createdAt || Date.now());
+              const seq = Math.max(1, Number(state.memoryBridge.nextSeq || 1));
+              state.memoryBridge.nextSeq = seq + 1;
+              const event = {
+                eventId:String(data.eventId || `vevt_${now}_${seq}`),
+                type:String(data.type || "social_event"),
+                actorId:String(data.actorId || ""),
+                targetActorIds:[...new Set(safeArray(data.targetActorIds).map(String).filter(Boolean))],
+                contentId:String(data.contentId || ""),
+                contentType:String(data.contentType || ""),
+                contentOwnerActorId:String(data.contentOwnerActorId || ""),
+                accountId:String(data.accountId || ""),
+                accountRole:String(data.accountRole || ""),
+                accountHandle:String(data.accountHandle || ""),
+                text:String(data.text || ""),
+                summary:String(data.summary || ""),
+                visibility:String(data.visibility || "private"),
+                dedupeKey,
+                payload:data.payload && typeof data.payload === "object" ? { ...data.payload } : {},
+                createdAt:now
+              };
+              state.memoryBridge.events.push(event);
+              knownActorIds.forEach(actorId => grantMemoryKnowledge(actorId, event.eventId, options.learnedVia || "direct", Number(options.learnedAt || now)));
+              pruneMemoryEvents();
+              return event;
+            };
+            const getActorUnsyncedKnowledge = actorId => {
+              const id = String(actorId || "");
+              const cursor = Number(state.memoryBridge.syncCursor[id] || 0);
+              return getActorMemoryLedger(id)
+                .filter(row => Number(row.learnedAt || 0) > cursor)
+                .map(row => ({ entry:row, event:getMemoryEvent(row.eventId) }))
+                .filter(row => row.event)
+                .sort((a,b) => Number(a.entry.learnedAt || 0) - Number(b.entry.learnedAt || 0));
             };
             const channelByCharacterId = actorId => state.channels.find(ch => String(ch.sourceCharacterId || "") === String(actorId) && (ch.accountRole === "primary" || !ch.mainChannelId)) || state.channels.find(ch => String(ch.sourceCharacterId || "") === String(actorId));
+            const memoryPrimaryIdentity = () => state.identities.find(identity => identity.accountRole !== "alias" && String(identity.sourcePersonaId || "") === String(state.rocheLink?.ownerPersonaId || ""))
+              || state.identities.find(identity => identity.accountRole !== "alias")
+              || state.identities.find(identity => String(identity.id) === String(state.viewerIdentityId || ""))
+              || state.identities[0]
+              || null;
+            const memoryAccountLabel = event => {
+              const handle = String(event?.accountHandle || "").trim();
+              if (String(event?.accountRole || "") === "alias") return `副号 ${handle || event?.accountId || "未命名副号"}`;
+              return handle ? `账号 ${handle}` : "主号";
+            };
+            const compactVelaMemoryText = (value, max = 180) => {
+              const copy = String(value || "").replace(/\s+/g, " ").trim();
+              return copy.length > max ? `${copy.slice(0, Math.max(1, max - 1))}…` : copy;
+            };
+            const memoryPerspectiveLine = (event, viewerId) => {
+              const viewer = String(viewerId || "");
+              const copy = compactVelaMemoryText(event?.text || event?.summary || "", 220);
+              const accountLabel = memoryAccountLabel(event);
+              const payload = event?.payload || {};
+              switch (String(event?.type || "")) {
+                case "role_post_publish":
+                  return `我使用${accountLabel}发布了一条贴文${copy ? `：“${copy}”` : "。"}`;
+                case "role_post_reply":
+                  return `我使用${accountLabel}在自己的贴文评论区回复了${payload.replyTo ? ` ${payload.replyTo}` : "评论"}${copy ? `：“${copy}”` : "。"}`;
+                case "role_live_end":
+                  return `我使用${accountLabel}完成了一场${payload.accessLabel || ""}直播「${payload.title || "直播"}」${payload.topic ? `，主题是“${compactVelaMemoryText(payload.topic, 120)}”` : ""}。`;
+                case "role_live_participation":
+                  return `我使用${accountLabel}参加了一场联播「${payload.title || "直播"}」${payload.withNames ? `，同场有 ${payload.withNames}` : ""}。`;
+                case "user_post_comment":
+                  return `USER 使用 ${payload.userHandle || "其 Vela 账号"}在我的贴文下${payload.replyTo ? `回复了 ${payload.replyTo}` : "评论"}${copy ? `：“${copy}”` : "。"}`;
+                case "user_live_chat":
+                  return `USER 使用 ${payload.userHandle || "其 Vela 账号"}在我参与的直播间发了弹幕${copy ? `：“${copy}”` : "。"}`;
+                case "subscription_started":
+                  return `USER 使用 ${payload.userHandle || "其 Vela 账号"}开通了我的${payload.tier === "paid" ? "付费订阅" : "免费订阅"}。`;
+                case "dm_user_message":
+                  return `USER 在 Vela 私信里对我说：“${copy}”`;
+                case "dm_role_message":
+                  return `我在 Vela 私信里对 USER 说：“${copy}”`;
+                case "dm_joint":
+                  return `我和 USER 本次通过${accountLabel}进行了 Vela 私信互动。`;
+                case "joint_live":
+                  return `我和 USER 一起参加了直播「${payload.title || "直播"}」${payload.roleHandle ? `；我当时使用 ${payload.roleHandle}` : ""}${payload.userHandle ? `，USER 使用 ${payload.userHandle}` : ""}。`;
+                case "joint_business":
+                  return `我和 USER 在 Vela 确认了商务合作${payload.brandName ? `（${payload.brandName}）` : ""}${payload.title ? `：“${compactVelaMemoryText(payload.title,120)}”` : "。"}`;
+                case "joint_live_invite":
+                  return `我和 USER 确认了一次直播预约${payload.title ? `：“${compactVelaMemoryText(payload.title,120)}”` : "。"}`;
+                case "audience_post_feedback":
+                  return `我的这条贴文收到了一些观众反馈。${copy}`;
+                case "audience_live_feedback":
+                  return `这场直播的观众反馈抽样：${copy}`;
+                default:
+                  if (String(event?.type || "").startsWith("legacy_")) return copy;
+                  if (event?.actorId === viewer) return copy ? `我在 Vela 的经历：${copy}` : "";
+                  return copy || "";
+              }
+            };
+            const memorySectionForEvent = event => {
+              const type = String(event?.type || "");
+              if (type.startsWith("dm_")) return "私信";
+              if (type.startsWith("audience_")) return "观众反馈";
+              if (type === "joint_live" || type === "joint_business" || type === "joint_live_invite") return "共同事件";
+              if (type.startsWith("user_") || type === "subscription_started") return "用户行为";
+              if (type === "role_post_publish" || type === "role_post_reply" || type === "role_live_end" || type === "role_live_participation") return "直播与贴文";
+              if (type.startsWith("legacy_user")) return "用户行为";
+              if (type.startsWith("legacy_joint")) return "共同事件";
+              if (type.startsWith("legacy_audience")) return "观众反馈";
+              return "角色行为";
+            };
+            const stableMemorySample = (rows, count = 2) => safeArray(rows)
+              .filter(Boolean)
+              .map(row => ({ row, score:[...String(row?.id || row?.user || row?.text || "")].reduce((sum, ch) => (sum * 33 + ch.charCodeAt(0)) >>> 0, 5381) }))
+              .sort((a,b) => a.score - b.score)
+              .slice(0, count)
+              .map(item => item.row);
+
             const harvestSessionMemory = () => {
               const actors = safeArray(state.rocheLink?.linkedCharacterIds).map(String);
               actors.forEach(actorId => {
                 const accounts = state.channels.filter(ch => String(ch.sourceCharacterId || "") === actorId);
                 const accountIds = new Set(accounts.map(ch => String(ch.id)));
-                safeArray(state.communityPosts).filter(post => Number(post.at || 0) >= velaMemorySessionStartedAt && post.ownerType === "channel" && accountIds.has(String(post.ownerId))).forEach(post => {
-                  const ch = accounts.find(x => String(x.id) === String(post.ownerId));
-                  const alias = ch?.accountRole === "alias" ? `副号 ${ch.handle || ch.name}` : `账号 ${ch?.handle || ch?.name || "主号"}`;
-                  addMemoryKnowledge(actorId, "role", `角色使用${alias}发布贴文：${String(post.text || "").slice(0,260)}`, { key:`post:${post.id}`, learnedAt:post.at });
-                  const reactions = safeArray(state.postReplies?.[String(post.id)]).filter(r => r && !r.isMine && String(r.text || "").trim());
-                  if (reactions.length) {
-                    const sample = reactions.slice().sort(() => Math.random()-.5).slice(0,2).map(r => `“${String(r.text).slice(0,90)}”`).join("、");
-                    addMemoryKnowledge(actorId, "audience", `该贴文的观众反馈抽样：${sample}`, { key:`post-feedback:${post.id}`, learnedAt:post.at });
-                  }
-                });
-                safeArray(state.liveReplays).filter(live => Number(live.endedAt || live.startedAt || live.at || 0) >= velaMemorySessionStartedAt && accountIds.has(String(live.ownerId || ""))).forEach(live => {
-                  const ch = accounts.find(x => String(x.id) === String(live.ownerId));
-                  const alias = ch?.accountRole === "alias" ? `副号 ${ch.handle || ch.name}` : `账号 ${ch?.handle || ch?.name || "主号"}`;
-                  const mode = `${live.accessMode === "paid" ? "付费订阅" : live.accessMode === "free" ? "免费订阅" : "公开"}${live.ageRequirement === "18+" ? " · 18+" : ""}`;
-                  addMemoryKnowledge(actorId, "role", `角色使用${alias}完成了一场${mode}直播「${live.title || live.category || "直播"}」。`, { key:`live:${live.id}`, learnedAt:Number(live.endedAt || live.startedAt || Date.now()) });
-                  const chat = safeArray(state.liveChatsById?.[String(live.id)]).filter(row => row && !row.isMine && String(row.text || "").trim());
-                  if (chat.length) {
-                    const sample = chat.slice().sort(() => Math.random()-.5).slice(0,2).map(r => `“${String(r.text).slice(0,80)}”`).join("、");
-                    addMemoryKnowledge(actorId, "audience", `该场直播的观众反应抽样：${sample}`, { key:`live-feedback:${live.id}`, learnedAt:Number(live.endedAt || Date.now()) });
-                  }
-                });
+
+                // Role-owned posts: own action, USER comments, owner replies, and a tiny audience sample.
+                safeArray(state.communityPosts)
+                  .filter(post => Number(post.at || 0) >= velaMemorySessionStartedAt && post.ownerType === "channel" && accountIds.has(String(post.ownerId)))
+                  .forEach(post => {
+                    const ch = accounts.find(account => String(account.id) === String(post.ownerId)) || accounts[0];
+                    recordMemoryEvent({
+                      type:"role_post_publish", actorId, contentId:String(post.id || ""), contentType:"post", contentOwnerActorId:actorId,
+                      accountId:String(ch?.id || post.ownerId || ""), accountRole:String(ch?.accountRole || "primary"), accountHandle:String(ch?.handle || ch?.name || ""),
+                      text:String(post.text || ""), visibility:String(post.accessMode || "public"), dedupeKey:`role-post:${post.id}`, createdAt:Number(post.at || Date.now())
+                    }, { knownActorIds:[actorId], learnedVia:"self_publish" });
+
+                    const replies = safeArray(state.postReplies?.[String(post.id)]).filter(reply => reply && String(reply.text || "").trim());
+                    replies.filter(reply => reply.isUser).forEach(reply => {
+                      recordMemoryEvent({
+                        type:"user_post_comment", actorId:"user", targetActorIds:[actorId], contentId:String(post.id || ""), contentType:"post", contentOwnerActorId:actorId,
+                        text:String(reply.text || ""), visibility:"public", dedupeKey:`user-post-comment:${post.id}:${reply.id || `${reply.identityId || reply.user}:${reply.text}`}`,
+                        payload:{ userHandle:String(reply.user || ""), userIdentityId:String(reply.identityId || ""), replyTo:String(reply.replyTo || "") }, createdAt:Number(reply.at || post.at || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"direct_comment" });
+                    });
+                    replies.filter(reply => !reply.isUser && (String(reply.user || "") === String(ch?.handle || "") || String(reply.user || "") === String(ch?.name || ""))).forEach(reply => {
+                      recordMemoryEvent({
+                        type:"role_post_reply", actorId, contentId:String(post.id || ""), contentType:"post", contentOwnerActorId:actorId,
+                        accountId:String(ch?.id || ""), accountRole:String(ch?.accountRole || "primary"), accountHandle:String(ch?.handle || ch?.name || ""),
+                        text:String(reply.text || ""), visibility:"public", dedupeKey:`role-post-reply:${post.id}:${reply.id || reply.text}`,
+                        payload:{ replyTo:String(reply.replyTo || "") }, createdAt:Number(reply.at || post.at || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"self_reply" });
+                    });
+                    const audienceRows = replies.filter(reply => !reply.isUser && String(reply.user || "") !== String(ch?.handle || "") && String(reply.user || "") !== String(ch?.name || ""));
+                    if (audienceRows.length) {
+                      const sample = stableMemorySample(audienceRows, 2).map(reply => `“${compactVelaMemoryText(reply.text,90)}”`).join("、");
+                      recordMemoryEvent({
+                        type:"audience_post_feedback", actorId:"audience", targetActorIds:[actorId], contentId:String(post.id || ""), contentType:"post", contentOwnerActorId:actorId,
+                        text:`抽样评论：${sample}`, visibility:"public", dedupeKey:`audience-post-feedback:${post.id}`, createdAt:Number(post.at || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"own_post_feedback" });
+                    }
+                  });
+
+                // Any replay in which this role actually participated.
+                safeArray(state.liveReplays)
+                  .filter(live => Number(live.endedAt || live.startedAt || 0) >= velaMemorySessionStartedAt)
+                  .forEach(live => {
+                    const ownerIsRole = live.ownerType === "channel" && accountIds.has(String(live.ownerId || ""));
+                    const participantRoleAccount = safeArray(live.participants).map(p => String(p?.id || "")).find(id => accountIds.has(id));
+                    if (!ownerIsRole && !participantRoleAccount) return;
+                    const roleAccountId = ownerIsRole ? String(live.ownerId || "") : String(participantRoleAccount || "");
+                    const ch = accounts.find(account => String(account.id) === roleAccountId) || accounts[0];
+                    const participants = safeArray(live.participants);
+                    const userOwner = live.ownerType === "identity" ? state.identities.find(identity => String(identity.id) === String(live.ownerId || "")) : null;
+                    const userParticipant = participants.map(p => String(p?.id || "")).map(id => state.identities.find(identity => String(identity.id) === id)).find(Boolean);
+                    const userIdentity = userOwner || userParticipant || null;
+                    const accessLabel = `${live.accessMode === "paid" ? "付费订阅 " : live.accessMode === "free" ? "免费订阅 " : ""}${live.ageRequirement === "18+" ? "18+ " : ""}`;
+                    const otherNames = participants.filter(p => String(p?.id || "") !== roleAccountId).map(p => String(p?.name || p?.handle || "")).filter(Boolean).join("、");
+
+                    recordMemoryEvent({
+                      type:ownerIsRole ? "role_live_end" : "role_live_participation", actorId, contentId:String(live.id || ""), contentType:"live", contentOwnerActorId:ownerIsRole ? actorId : "",
+                      accountId:roleAccountId, accountRole:String(ch?.accountRole || "primary"), accountHandle:String(ch?.handle || ch?.name || ""),
+                      visibility:String(live.accessMode || "public"), dedupeKey:`role-live:${actorId}:${live.id}`, createdAt:Number(live.endedAt || live.startedAt || Date.now()),
+                      payload:{ title:String(live.title || "直播"), topic:String(live.topic || ""), accessLabel, withNames:otherNames }
+                    }, { knownActorIds:[actorId], learnedVia:ownerIsRole ? "self_live" : "live_participant" });
+
+                    if (userIdentity) {
+                      recordMemoryEvent({
+                        type:"joint_live", actorId, targetActorIds:[actorId], contentId:String(live.id || ""), contentType:"live",
+                        accountId:roleAccountId, accountRole:String(ch?.accountRole || "primary"), accountHandle:String(ch?.handle || ch?.name || ""),
+                        visibility:String(live.accessMode || "public"), dedupeKey:`joint-live:${actorId}:${live.id}`, createdAt:Number(live.endedAt || Date.now()),
+                        payload:{ title:String(live.title || "直播"), roleHandle:String(ch?.handle || ch?.name || ""), userHandle:String(userIdentity.handle || userIdentity.displayName || "") }
+                      }, { knownActorIds:[actorId], learnedVia:"joint_live" });
+                    }
+
+                    const chat = safeArray(live.chat?.length ? live.chat : state.liveChatsById?.[String(live.id)]);
+                    chat.filter(row => row?.isUser && String(row.text || "").trim()).forEach(row => {
+                      recordMemoryEvent({
+                        type:"user_live_chat", actorId:"user", targetActorIds:[actorId], contentId:String(live.id || ""), contentType:"live", contentOwnerActorId:ownerIsRole ? actorId : "",
+                        text:String(row.text || ""), visibility:"public", dedupeKey:`user-live-chat:${actorId}:${live.id}:${row.id || `${row.identityId || row.user}:${row.at || row.text}`}`,
+                        payload:{ userHandle:String(row.user || ""), userIdentityId:String(row.identityId || "") }, createdAt:Number(row.at || live.endedAt || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"live_chat_direct" });
+                    });
+                    const audienceChat = chat.filter(row => row && !row.isUser && String(row.text || "").trim() && String(row.user || "") !== "系统");
+                    if (audienceChat.length) {
+                      const sample = stableMemorySample(audienceChat, 2).map(row => `“${compactVelaMemoryText(row.text,80)}”`).join("、");
+                      recordMemoryEvent({
+                        type:"audience_live_feedback", actorId:"audience", targetActorIds:[actorId], contentId:String(live.id || ""), contentType:"live",
+                        text:sample, visibility:"public", dedupeKey:`audience-live-feedback:${actorId}:${live.id}`, createdAt:Number(live.endedAt || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"live_feedback" });
+                    }
+                  });
+
+                // Direct messages are direct knowledge. Keep each real text message as its own event, like INS.
                 accounts.forEach(ch => {
                   const dmEntries = safeArray(state.messages).filter(entry => String(entry?.channelId || "") === String(ch.id));
                   dmEntries.forEach(entry => {
-                    const thread = safeArray(state.dmThreads?.[String(entry.id)]).filter(msg => Number(msg.at || 0) >= velaMemorySessionStartedAt && String(msg.text || "").trim() && !msg.typing);
-                    const userMsgs = thread.filter(msg => msg.sender === "user" || msg.sender === "me" || msg.isMine || msg.isUser).slice(-4);
-                    const charMsgs = thread.filter(msg => !(msg.sender === "user" || msg.sender === "me" || msg.isMine || msg.isUser)).slice(-4);
-                    if (userMsgs.length) addMemoryKnowledge(actorId, "user", `USER 在 Vela 私信中对角色说过：${userMsgs.map(m => `“${String(m.text).slice(0,100)}”`).join("；")}`, { key:`dm-user:${entry.id}:${userMsgs.map(m=>m.id||m.at).join(",")}`, learnedAt:Number(userMsgs.at(-1)?.at || Date.now()) });
-                    if (charMsgs.length) addMemoryKnowledge(actorId, "role", `角色在 Vela 私信中回复 USER：${charMsgs.map(m => `“${String(m.text).slice(0,100)}”`).join("；")}`, { key:`dm-char:${entry.id}:${charMsgs.map(m=>m.id||m.at).join(",")}`, learnedAt:Number(charMsgs.at(-1)?.at || Date.now()) });
-                    if (userMsgs.length && charMsgs.length) addMemoryKnowledge(actorId, "joint", `角色与 USER 本次在 Vela 通过${ch.accountRole === "alias" ? `角色副号 ${ch.handle || ch.name}` : "角色账号"}进行了私信互动。`, { key:`dm-joint:${entry.id}:${Math.max(Number(userMsgs.at(-1)?.at||0),Number(charMsgs.at(-1)?.at||0))}` });
+                    const thread = safeArray(state.dmThreads?.[String(entry.id)]).filter(msg => Number(msg.at || 0) >= velaMemorySessionStartedAt && String(msg.text || "").trim() && !msg.typing && !String(msg.id || "").startsWith("seed-"));
+                    let hasUser = false, hasRole = false, latestAt = 0;
+                    thread.forEach(msg => {
+                      const fromUser = msg.sender === "user" || msg.sender === "me" || msg.isMine || msg.isUser;
+                      hasUser ||= fromUser; hasRole ||= !fromUser; latestAt = Math.max(latestAt, Number(msg.at || 0));
+                      recordMemoryEvent({
+                        type:fromUser ? "dm_user_message" : "dm_role_message",
+                        actorId:fromUser ? "user" : actorId,
+                        targetActorIds:[actorId],
+                        contentId:`dm:${entry.id}`, contentType:"dm", contentOwnerActorId:"",
+                        accountId:String(ch.id || ""), accountRole:String(ch.accountRole || "primary"), accountHandle:String(ch.handle || ch.name || ""),
+                        text:String(msg.text || ""), visibility:"private",
+                        dedupeKey:`dm:${entry.id}:${msg.id || `${fromUser ? "u" : "r"}:${msg.at}:${msg.text}`}`, createdAt:Number(msg.at || Date.now())
+                      }, { knownActorIds:[actorId], learnedVia:"dm_message" });
+                    });
+                    if (hasUser && hasRole) {
+                      recordMemoryEvent({
+                        type:"dm_joint", actorId, targetActorIds:[actorId], contentId:`dm:${entry.id}`, contentType:"dm",
+                        accountId:String(ch.id || ""), accountRole:String(ch.accountRole || "primary"), accountHandle:String(ch.handle || ch.name || ""),
+                        visibility:"private", dedupeKey:`dm-joint:${entry.id}:${latestAt}`, createdAt:latestAt || Date.now()
+                      }, { knownActorIds:[actorId], learnedVia:"dm_joint" });
+                    }
+
+                    safeArray(state.dmThreads?.[String(entry.id)]).filter(card => card && (card.kind === "business" || card.kind === "live_invite")).forEach(card => {
+                      const eventAt = Number(card.completedAt || card.acceptedAt || 0);
+                      if (eventAt < velaMemorySessionStartedAt) return;
+                      recordMemoryEvent({
+                        type:card.kind === "business" ? "joint_business" : "joint_live_invite",
+                        actorId, targetActorIds:[actorId], contentId:String(card.id || ""), contentType:card.kind,
+                        accountId:String(ch.id || ""), accountRole:String(ch.accountRole || "primary"), accountHandle:String(ch.handle || ch.name || ""),
+                        visibility:"private", dedupeKey:`${card.kind}:${entry.id}:${card.id}:${card.status || "accepted"}`, createdAt:eventAt || Date.now(),
+                        payload:{ title:String(card.title || card.productName || ""), brandName:String(card.brandName || ""), status:String(card.status || "") }
+                      }, { knownActorIds:[actorId], learnedVia:"joint_card" });
+                    });
                   });
+                });
+
+                // Subscription changes are USER actions directly visible to the subscribed role/channel.
+                Object.entries(state.wallet?.subscriptionPurchases || {}).forEach(([key, purchase]) => {
+                  const subscribedAt = Number(purchase?.subscribedAt || 0);
+                  if (subscribedAt < velaMemorySessionStartedAt) return;
+                  const parts = String(key).split(":");
+                  const channelId = parts.at(-1) || "";
+                  if (!accountIds.has(channelId)) return;
+                  const identityId = String(purchase?.identityId || parts.slice(0,-1).join(":") || "");
+                  const identity = state.identities.find(item => String(item.id) === identityId);
+                  recordMemoryEvent({
+                    type:"subscription_started", actorId:"user", targetActorIds:[actorId], contentId:`subscription:${key}`, contentType:"subscription",
+                    accountId:channelId, accountRole:String(accounts.find(ch => String(ch.id) === channelId)?.accountRole || "primary"), accountHandle:String(accounts.find(ch => String(ch.id) === channelId)?.handle || ""),
+                    visibility:"private", dedupeKey:`subscription:${key}:${subscribedAt}`, createdAt:subscribedAt,
+                    payload:{ tier:String(purchase?.tier || "free"), userHandle:String(identity?.handle || identity?.displayName || identityId) }
+                  }, { knownActorIds:[actorId], learnedVia:"subscription" });
                 });
               });
             };
-            const memorySyncSummary = actorId => {
-              const id = String(actorId || ""); const cursor = Number(state.memoryBridge.syncCursor[id] || 0);
-              const rows = safeArray(state.memoryBridge.knowledge[id]).filter(row => Number(row.learnedAt || 0) > cursor).sort((a,b)=>Number(a.learnedAt||0)-Number(b.learnedAt||0)).slice(0,30);
-              if (!rows.length) return null;
-              const labels = { role:"角色行为", user:"用户行为", joint:"共同事件", audience:"观众反馈" };
-              const groups = new Map(); rows.forEach(row => { const label=labels[row.category] || "其他事件"; if(!groups.has(label)) groups.set(label,[]); groups.get(label).push(`- ${row.text}`); });
-              const channel = channelByCharacterId(id); const name = channel?.name || channel?.handle || rocheRuntime.characters.find(c=>String(c.id)===id)?.name || id;
-              const summary = `${VELA_MEMORY_SYNC_PREFIX}\n【Vela 记忆回传 · ${name}】\n${[...groups].map(([label,items])=>`【${label}】\n${items.join("\n")}`).join("\n\n")}`;
-              return { actorId:id, actorName:name, rows, summary, maxLearnedAt:Math.max(...rows.map(r=>Number(r.learnedAt||0))), target:memoryDirectTarget(id) };
+
+            const memorySyncSummary = (actorId, { limit = 30 } = {}) => {
+              const id = String(actorId || "");
+              const all = getActorUnsyncedKnowledge(id);
+              if (!all.length) return null;
+              const chosen = all.slice(0, Math.max(1, Number(limit || 30)));
+              const groups = new Map();
+              let maxLearnedAt = 0;
+              chosen.forEach(({ entry, event }) => {
+                const line = memoryPerspectiveLine(event, id);
+                if (!line) return;
+                const section = memorySectionForEvent(event);
+                if (!groups.has(section)) groups.set(section, []);
+                const bucket = groups.get(section);
+                if (!bucket.includes(`- ${line}`)) bucket.push(`- ${line}`);
+                maxLearnedAt = Math.max(maxLearnedAt, Number(entry.learnedAt || 0));
+              });
+              if (!groups.size || !maxLearnedAt) return null;
+
+              const channel = channelByCharacterId(id);
+              const character = rocheRuntime.characters.find(char => String(char?.id || "") === id);
+              const actorName = String(channel?.name || character?.name || character?.handle || id);
+              const actorHandle = String(channel?.handle || character?.handle || "");
+              const userIdentity = memoryPrimaryIdentity();
+              const userName = String(userIdentity?.displayName || userIdentity?.handle || "USER");
+              const userHandle = String(userIdentity?.handle || "");
+              const now = new Date().toLocaleString("zh-CN", { month:"2-digit", day:"2-digit", hour:"2-digit", minute:"2-digit", hour12:false });
+              const bodyLines = [
+                `角色：${actorName}${actorHandle ? `（${actorHandle.startsWith("@") ? actorHandle : `@${actorHandle}`}）` : ""}`,
+                `user：${userName}${userHandle ? `（${userHandle.startsWith("@") ? userHandle : `@${userHandle}`}）` : ""}`,
+                "",
+                "以下只记录我在 Vela 实际做过、收到过、共同经历过或确实知道的社交事件；公开存在不等于我已经看见。我的主号与副号都是我本人操作，但不会因此向 USER 泄露其尚未知晓的副号归属。",
+                ""
+              ];
+              ["角色行为","用户行为","共同事件","直播与贴文","私信","观众反馈"].forEach(section => {
+                const rows = groups.get(section);
+                if (!rows?.length) return;
+                bodyLines.push(`【${section}】`);
+                bodyLines.push(...rows);
+                bodyLines.push("");
+              });
+              bodyLines.push("这是我的私人 Vela 社交记忆。之后聊天时可以自然记得并延续，但不需要向 user 逐字复述这份记录。");
+              const memoryBody = bodyLines.join("\n").trim();
+              const summary = [
+                VELA_MEMORY_SYNC_PREFIX,
+                `[TIME]${now}[/TIME]`,
+                `[COUNT]${chosen.length}[/COUNT]`,
+                "[MEMORY]",
+                memoryBody,
+                "[/MEMORY]",
+                "[/RocheVelaSync]"
+              ].join("\n");
+              return {
+                actorId:id,
+                actorName,
+                actorHandle,
+                rows:chosen,
+                eventCount:chosen.length,
+                maxLearnedAt,
+                hasMore:all.length > chosen.length,
+                summary,
+                target:memoryDirectTarget(id)
+              };
             };
             const injectMemorySummary = async payload => {
               if (!payload?.target?.conversationId || !payload.summary) return false;
-              if (roche?.memory?.injectShortTerm) return await roche.memory.injectShortTerm({ conversationId:payload.target.conversationId, text:payload.summary, summary:payload.summary, actorId:payload.actorId, actorName:payload.actorName });
-              if (roche?.memory?.appendShortTerm) return await roche.memory.appendShortTerm({ conversationId:payload.target.conversationId, text:payload.summary, senderId:payload.actorId, senderName:payload.actorName });
+              if (roche?.memory?.injectShortTerm) {
+                return await roche.memory.injectShortTerm({
+                  conversationId:payload.target.conversationId,
+                  text:payload.summary,
+                  summary:payload.summary,
+                  actorId:payload.actorId,
+                  actorName:payload.actorName
+                });
+              }
+              if (roche?.memory?.appendShortTerm) {
+                return await roche.memory.appendShortTerm({
+                  conversationId:payload.target.conversationId,
+                  text:payload.summary,
+                  senderId:payload.actorId,
+                  senderName:payload.actorName
+                });
+              }
               const db = await new Promise((resolve,reject)=>{ const req=indexedDB.open("Roche_db"); req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); });
               try {
-                await new Promise((resolve,reject)=>{ const req=db.transaction("messages","readwrite").objectStore("messages").add({ id:Date.now()+Math.floor(Math.random()*1000), isMe:false, text:payload.summary, senderId:payload.actorId, timestamp:Date.now(), senderName:payload.actorName, conversationId:payload.target.conversationId }); req.onsuccess=()=>resolve(req.result); req.onerror=()=>reject(req.error); });
+                await new Promise((resolve,reject)=>{
+                  const req=db.transaction("messages","readwrite").objectStore("messages").add({
+                    id:Date.now()+Math.floor(Math.random()*1000),
+                    isMe:false,
+                    text:payload.summary,
+                    senderId:payload.actorId,
+                    timestamp:Date.now(),
+                    senderName:payload.actorName,
+                    conversationId:payload.target.conversationId
+                  });
+                  req.onsuccess=()=>resolve(req.result);
+                  req.onerror=()=>reject(req.error);
+                });
                 return true;
               } finally { try { db.close(); } catch(_){} }
             };
             const flushVelaMemoryToRoche = async () => {
               harvestSessionMemory();
-              const results=[];
+              const results = [];
               for (const actorId of safeArray(state.rocheLink?.linkedCharacterIds).map(String)) {
-                let guard=0;
+                let guard = 0;
                 while (guard++ < 20) {
-                  const payload=memorySyncSummary(actorId); if(!payload) break;
-                  if(!payload.target){ results.push({actorId,ok:false,reason:"single_chat_not_found"}); break; }
-                  try { const ok=await injectMemorySummary(payload); if(!ok) throw new Error("write_rejected"); state.memoryBridge.syncCursor[actorId]=Math.max(Number(state.memoryBridge.syncCursor[actorId]||0),payload.maxLearnedAt); results.push({actorId,ok:true}); }
-                  catch(err){ console.warn("[Vela memory] writeback failed",err); results.push({actorId,ok:false,reason:String(err?.message||err)}); break; }
+                  const payload = memorySyncSummary(actorId);
+                  if (!payload) break;
+                  if (!payload.target) { results.push({ actorId, ok:false, reason:"single_chat_not_found" }); break; }
+                  try {
+                    const ok = await injectMemorySummary(payload);
+                    if (!ok) throw new Error("write_rejected");
+                    state.memoryBridge.syncCursor[actorId] = Math.max(Number(state.memoryBridge.syncCursor[actorId] || 0), Number(payload.maxLearnedAt || 0));
+                    results.push({ actorId, ok:true, count:payload.eventCount });
+                  } catch (err) {
+                    console.warn("[Vela memory] writeback failed", err);
+                    results.push({ actorId, ok:false, reason:String(err?.message || err) });
+                    break;
+                  }
                 }
               }
               await persist();
               return results;
             };
-
 
             const persist = async () => {
               try {
@@ -4270,11 +4677,11 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
                 return { id, name:channel?.name || char?.name || char?.handle || id, handle:channel?.handle || char?.handle || "" };
               });
               const cards = actors.length ? actors.map(actor => {
-                const sources = getMemorySources(actor.id); const enabled=sources.filter(x=>x.enabled); const target=memoryDirectTarget(actor.id); const pending=safeArray(state.memoryBridge.knowledge?.[actor.id]).filter(row=>Number(row.learnedAt||0)>Number(state.memoryBridge.syncCursor?.[actor.id]||0)).length;
+                const sources = getMemorySources(actor.id); const enabled=sources.filter(x=>x.enabled); const target=memoryDirectTarget(actor.id); const pending=getActorUnsyncedKnowledge(actor.id).length;
                 const rows = sources.length ? sources.map(source => `<div class="v-memory-source" data-memory-source-row="${escapeHTML(actor.id)}:${escapeHTML(source.conversationId)}"><div class="v-memory-source-head"><div><strong>${escapeHTML(source.conversationName || source.conversationId)}</strong><span>${source.isGroup ? "群聊 · 只读取" : "单聊 · 可读取/回传"}</span></div><button class="v-memory-toggle ${source.enabled ? "is-on" : ""}" data-action="toggle-memory-source" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}">${source.enabled ? "已开启" : "关闭"}</button></div>${source.enabled ? `<div class="v-memory-opts"><label>短期<input type="number" min="0" max="500" value="${clampMemoryLimit(source.shortLimit)}" data-memory-limit="short" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}"></label><label>事实<input type="number" min="0" max="500" value="${clampMemoryLimit(source.factLimit)}" data-memory-limit="fact" data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}"></label><label class="v-memory-core"><input type="checkbox" ${source.coreEnabled ? "checked" : ""} data-memory-core data-actor-id="${escapeHTML(actor.id)}" data-conversation-id="${escapeHTML(source.conversationId)}">核心</label></div>` : ""}</div>`).join("") : `<div class="v-memory-status">尚未读取 Roche 会话。点「刷新会话」后会列出包含该角色的单聊/群聊。</div>`;
-                return `<section class="v-memory-role"><div class="v-memory-role-head"><div class="v-memory-role-main"><b>${escapeHTML(actor.name)}</b><small>${escapeHTML(actor.handle)} · ${enabled.length}/${sources.length} 个来源已开启 · ${target ? `回传到 ${target.conversationName || target.conversationId}` : "尚未开启角色单聊"} · 待回传 ${pending}</small></div><div class="v-memory-role-actions"><button data-action="refresh-memory-role" data-actor-id="${escapeHTML(actor.id)}">刷新会话</button><button data-action="preview-memory-role" data-actor-id="${escapeHTML(actor.id)}">预览</button></div></div>${rows}<div data-memory-preview-for="${escapeHTML(actor.id)}"></div></section>`;
+                return `<section class="v-memory-role"><div class="v-memory-role-head"><div class="v-memory-role-main"><b>${escapeHTML(actor.name)}</b><small>${escapeHTML(actor.handle)} · ${enabled.length}/${sources.length} 个来源已开启 · ${target ? `回传到 ${target.conversationName || target.conversationId}` : "尚未开启角色单聊"} · 待回传 ${pending}</small></div><div class="v-memory-role-actions"><button data-action="refresh-memory-role" data-actor-id="${escapeHTML(actor.id)}">刷新会话</button><button data-action="preview-memory-role" data-actor-id="${escapeHTML(actor.id)}">回传预览</button></div></div>${rows}<div data-memory-preview-for="${escapeHTML(actor.id)}"></div></section>`;
               }).join("") : `<div class="v-profile-empty">当前还没有连接 Roche 角色。</div>`;
-              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>记忆互通</strong><div class="v-hint">Roche → Vela 读取；关闭 Vela 后自动回传</div></div><button class="v-head-action" data-action="flush-memory-now">测试回传</button></header><div class="v-subbody"><div class="v-settings-note" style="margin-bottom:12px">每个角色可分别选择短期条数、事实条数与核心记忆。群聊只作为读取来源；Vela → Roche 只写回已开启的角色单聊。回传优先角色行为、USER 行为与共同事件，观众评论/弹幕只抽少量代表性反馈。</div>${cards}</div>`);
+              openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>记忆互通</strong><div class="v-hint">Roche → Vela 读取；关闭 Vela 后自动回传</div></div></header><div class="v-subbody"><div class="v-settings-note" style="margin-bottom:12px">每个角色可分别选择短期条数、事实条数与核心记忆。群聊只作为读取来源；Vela → Roche 只写回已开启的角色单聊。回传预览只显示 Vela → Roche 的待写入文本，而且不会推进同步游标。角色/USER/共同事件优先，观众评论与弹幕只抽少量代表性反馈。</div>${cards}</div>`);
               if (focusActorId && getMemorySources(focusActorId).some(row=>row.enabled)) void loadMemoryContext(focusActorId);
             };
             const openSettingsNote = (kind) => {
@@ -6009,9 +6416,7 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               } else if (action === "toggle-memory-source") {
                 const actorId=String(button.dataset.actorId||""), conversationId=String(button.dataset.conversationId||""); const rows=getMemorySources(actorId); const row=rows.find(x=>String(x.conversationId)===conversationId); if(row){ row.enabled=!row.enabled; state.memoryBridge.sources[actorId]=rows; await persist(); await loadMemoryContext(actorId); await renderMemorySettings(actorId); }
               } else if (action === "preview-memory-role") {
-                const actorId=String(button.dataset.actorId||""); await loadMemoryContext(actorId); harvestSessionMemory(); const context=String(velaMemoryContextCache.get(actorId)||""); const payload=memorySyncSummary(actorId); const host=q(`[data-memory-preview-for="${CSS.escape(actorId)}"]`); if(host) host.innerHTML=`<div class="v-memory-status">Roche → Vela 当前读取预览</div><div class="v-memory-preview">${escapeHTML(context || "（当前没有开启的记忆来源，或来源为空）")}</div><div class="v-memory-status">Vela → Roche 待回传预览</div><div class="v-memory-preview">${escapeHTML(payload?.summary || "（无新增）")}</div>`;
-              } else if (action === "flush-memory-now") {
-                button.disabled=true; button.textContent="回传中…"; const rows=await flushVelaMemoryToRoche(); const ok=rows.filter(x=>x.ok).length; toast(rows.length?`记忆回传完成 · ${ok}/${rows.length}`:"当前没有新增记忆"); button.disabled=false; button.textContent="测试回传"; await renderMemorySettings();
+                const actorId=String(button.dataset.actorId||""); harvestSessionMemory(); const payload=memorySyncSummary(actorId); const host=q(`[data-memory-preview-for="${CSS.escape(actorId)}"]`); if(host) host.innerHTML=`<div class="v-memory-status">Vela → Roche 待回传预览${payload?.target ? ` · ${escapeHTML(payload.target.conversationName || payload.target.conversationId)}` : " · 尚未开启角色单聊"}</div><div class="v-memory-preview">${escapeHTML(payload?.summary || "（无新增）")}</div><div class="v-memory-status">预览不会写入 Roche，也不会推进同步游标。</div>`;
               } else if (action === "wallet-bind-account" || action === "wallet-edit-account") {
                 openWalletBind();
               } else if (action === "save-wallet-account") {
