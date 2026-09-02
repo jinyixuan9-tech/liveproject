@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.16";
+  const VERSION = "0.2.17";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -771,6 +771,14 @@
 .vela-roche .v-live-publish-group .v-field:first-child{border-top:0!important}
 .vela-roche .v-live-publish-group .v-field input,.vela-roche .v-live-publish-group .v-field textarea{border:0!important;background:transparent!important;border-radius:0!important;padding:2px 0!important;font-size:16px!important}
 .vela-roche .v-live-publish-group .v-field textarea{min-height:74px!important}
+/* v0.2.17 · multi appointments / subscription opt-in / post UI polish */
+.vela-roche .v-live-segments button.is-disabled,.vela-roche .v-live-segments button:disabled{opacity:.32!important;pointer-events:none!important;box-shadow:none!important}
+.vela-roche .v-schedule-entry-hit{width:100%;border:0;background:transparent;color:inherit;padding:0;text-align:left;display:block}
+.vela-roche .v-schedule-entry-more{display:block;margin-top:10px;font-size:10px;font-weight:850;color:var(--v-muted)}
+.vela-roche .v-schedule-list{display:grid;gap:12px}.vela-roche .v-schedule-list-card{background:var(--v-card);border:1px solid var(--v-line);border-radius:22px;padding:14px;overflow:hidden}.vela-roche .v-schedule-list-cover{height:155px;border-radius:17px;background:var(--v-soft);overflow:hidden;display:grid;place-items:center;margin-bottom:13px}.vela-roche .v-schedule-list-cover img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-schedule-cover-placeholder{width:38px;height:38px;border-radius:50%;background:#111;box-shadow:0 0 0 12px rgba(0,0,0,.035)}
+.vela-roche .v-schedule-list-copy h3{font-size:16px;line-height:1.35;margin:5px 0 4px}.vela-roche .v-schedule-card-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}.vela-roche .v-schedule-card-actions button{border:0;border-radius:13px;min-height:42px;font-size:10px;font-weight:900;padding:0 8px}.vela-roche .v-schedule-card-actions .is-primary{background:var(--v-blue);color:#fff}.vela-roche .v-schedule-card-actions .is-light{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-schedule-card-actions .is-danger{background:#fff0f1;color:var(--v-red)}.vela-roche .v-schedule-list-card.is-editing .v-schedule-card-actions{grid-template-columns:1fr 1fr}.vela-roche .v-schedule-edit-grid{display:grid;gap:10px}.vela-roche .v-schedule-edit-grid .v-field,.vela-roche .v-schedule-edit-grid .v-fieldpair{margin:0}
+.vela-roche .v-subscription-off{background:var(--v-card);border:1px solid var(--v-line);border-radius:18px;padding:16px}.vela-roche .v-subscription-off b{display:block;font-size:14px}.vela-roche .v-subscription-off span{display:block;margin-top:5px;color:var(--v-muted);font-size:10px;line-height:1.55}.vela-roche [data-role="subscription-plan-fields"][hidden]{display:none!important}.vela-roche .v-subscribed-list-head{margin-top:18px}.vela-roche .v-community-system-note{margin:10px auto;padding:0 10px;text-align:center;color:var(--v-muted);font-size:9px;line-height:1.5;max-width:82%}
+.vela-roche .v-post-card{border-radius:22px!important;padding:16px!important}.vela-roche .v-post-card .v-post-head{align-items:flex-start!important;gap:11px}.vela-roche .v-post-card .v-post-head>.v-social-avatar{width:46px!important;height:46px!important;border-radius:14px!important;align-self:flex-start!important;margin-top:0!important}.vela-roche .v-post-card .v-post-head>.v-social-avatar img{border-radius:14px!important}.vela-roche .v-post-author-line{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-height:20px}.vela-roche .v-post-author-line strong{font-size:14px;line-height:1.2}.vela-roche .v-post-author-handle{font-size:11px;color:var(--v-muted);font-weight:650}.vela-roche .v-post-card .v-access-badge{margin:0!important;padding:3px 6px!important;border-radius:7px!important;font-size:8px!important}.vela-roche .v-post-time{font-size:10px;color:var(--v-muted);margin-top:3px}.vela-roche .v-post-card>.v-social-text{font-size:14px;line-height:1.58;margin-top:13px}.vela-roche .v-post-engagement{gap:18px!important;margin-top:12px!important;padding-top:9px;border-top:1px solid var(--v-line)}.vela-roche .v-post-engagement button{display:inline-flex!important;align-items:center!important;gap:5px!important;color:var(--v-muted)!important;font-size:10px!important;padding:2px 0!important}.vela-roche .v-post-engagement button svg{width:20px;height:20px;display:block}.vela-roche .v-post-engagement button.is-liked{color:var(--v-red)!important}.vela-roche .v-post-card .v-inline-comments{margin-top:10px;padding-top:8px}.vela-roche .v-post-comments-empty{padding:22px 8px;text-align:center;color:var(--v-muted);font-size:10px;line-height:1.65}.vela-roche .v-post-card .v-comment{align-items:flex-start;padding:11px 0}.vela-roche .v-post-card .v-comment .v-social-avatar{width:34px!important;height:34px!important;border-radius:50%!important}.vela-roche .v-post-card .v-comment-name{font-size:11px!important;font-weight:900}.vela-roche .v-comment-replying{font-size:9px;color:var(--v-muted);margin-top:2px}.vela-roche .v-post-card .v-comment-text{font-size:12px;line-height:1.55;margin-top:3px}.vela-roche .v-comment-tool{border:0;background:none;color:var(--v-muted);font-size:9px;font-weight:800;padding:0}.vela-roche .v-comment-translation{font-size:10px!important;line-height:1.55!important;margin-top:6px!important}.vela-roche .v-post-card .v-more-comments{text-align:left;font-size:10px;padding:10px 0}.vela-roche .v-post-detail-card{margin-bottom:0}.vela-roche .v-post-publish-group .v-field textarea{min-height:105px!important}
 .vela-roche .v-readonly-link{background:var(--v-soft)!important;color:var(--v-muted)!important}
 </style>`;
   }
@@ -926,7 +934,7 @@
               knownByCharacters: { ...(item?.knownByCharacters || {}) },
               faceMode: String(item?.faceMode || "mixed"),
               identityVisibility: String(item?.identityVisibility || (item?.isAnonymous ? "hidden" : "partial")),
-              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, scheduledLive: null, activeLive: null, live: false, ...item
+              contentStyle: "", fanProfile: "", banner: "", followers: 0, following: 0, scheduledLive: null, scheduledLives: [], activeLive: null, live: false, ...item
             }));
             // v0.2.1 fresh installs no longer ship a default Vela identity.
             // Remove only the untouched old shell seed so existing real/custom accounts are preserved.
@@ -1252,6 +1260,7 @@
                   liveAutonomy: String(existing?.liveAutonomy || "flexible"),
                   profileCustomized: false,
                   scheduledLive: existing?.scheduledLive || null,
+                  scheduledLives: safeArray(existing?.scheduledLives),
                   live: Boolean(existing?.live),
                   title: String(existing?.title || ""),
                   viewers: Number(existing?.viewers || 0)
@@ -1951,6 +1960,11 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
             };
 
             const translationHTML = (id, text) => text ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(id)}">翻译</button><div class="v-translation" data-translation-id="${escapeHTML(id)}" hidden>${escapeHTML(text)}</div>` : "";
+            const postSeedNumber = (id, min, span) => { let h=0; for (const ch of String(id||"post")) h=(h*31+ch.charCodeAt(0))>>>0; return min+(h%span); };
+            const postDisplayLikes = post => Math.max(Number(post?.likes || 0), Number(post?.displayLikes || 0), postSeedNumber(post?.id,2,19));
+            const postDisplayCommentCount = post => Math.max(safeArray(state.postReplies?.[String(post?.id||"")]).length, Number(post?.displayCommentCount || post?.comments || 0), postSeedNumber(post?.id,2,11));
+            const postHeartIconHTML = () => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.7c-2-2-5.3-2-7.3 0L12 6.2l-1.5-1.5c-2-2-5.3-2-7.3 0s-2 5.3 0 7.3L12 20.8 20.8 12c2-2 2-5.3 0-7.3Z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+            const postCommentIconHTML = () => `<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 11.5a8.5 8.5 0 1 1-3-6.5 8.2 8.2 0 0 1 3 6.5Z" fill="none" stroke="currentColor" stroke-width="1.7"/><path d="M7.2 18.4 5.5 21l4-1" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
 
             const renderSocialPostCard = (post, { compact = false, canDelete = false } = {}) => {
               post = { ...post, ...(state.postOverrides?.[String(post?.id || "")] || {}) };
@@ -1959,7 +1973,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const trId = `post-card-${id}`;
               const mode = String(post.accessMode || "public");
               const age = String(post.ageRequirement || "none");
-              const accessLabel = mode === "free" ? `免费订阅${age === "18+" ? " · 18+" : ""}` : mode === "paid" ? `付费订阅${age === "18+" ? " · 18+" : ""}` : (age === "18+" ? "公开 · 18+" : "");
+              const accessLabel = mode === "free" ? `免费订阅${age === "18+" ? " · 18+" : ""}` : mode === "paid" ? `付费订阅${age === "18+" ? " · 18+" : ""}` : (age === "18+" ? "18+" : "");
               const accessClass = mode === "free" ? " is-free" : mode === "paid" ? " is-paid" : (age === "18+" ? " is-age" : "");
               const channelId = String(post.ownerType||"") === "channel" ? String(post.ownerId||"") : "";
               let eligible = channelId ? identitiesWithAccessToChannel(channelId, mode) : state.identities.slice();
@@ -1968,7 +1982,8 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               if (selected) state.postInteractionIdentity[id] = String(selected.id);
               const picker = identityPickerHTML(eligible, selected?.id, "post-identity-select", `data-post-id="${escapeHTML(id)}"`);
               const menu = `<div class="v-post-menu" data-post-menu="${escapeHTML(id)}"><button data-action="edit-post" data-post-id="${escapeHTML(id)}">编辑</button><button class="is-delete" data-action="delete-any-post" data-post-id="${escapeHTML(id)}">删除本条贴文</button></div>`;
-              return `<article class="v-card v-home-card" data-home-post-card="${escapeHTML(id)}"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(post.handle || "")}</span></div><div class="v-social-handle">${escapeHTML(post.at ? formatRelativeAt(post.at) : (post.time || "刚刚"))}</div>${accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : ""}</div><button class="v-post-more" data-action="toggle-post-menu" data-post-id="${escapeHTML(id)}">⋯</button>${menu}</div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}${imageHTML}<div class="v-social-actions"><button data-action="like-post" data-post-id="${escapeHTML(id)}">♡ ${Number(post.likes || 0)}</button><button data-action="toggle-inline-comments" data-post-id="${escapeHTML(id)}">◯ <span data-inline-count="${escapeHTML(id)}">${safeArray(state.postReplies?.[id]).length}</span></button></div><div class="v-inline-comments" data-inline-comments="${escapeHTML(id)}"><div class="v-comment-list" data-inline-comment-list="${escapeHTML(id)}"></div><button class="v-more-comments" data-action="summon-post-replies" data-post-id="${escapeHTML(id)}">再显示 5 条评论</button><div class="v-post-composer">${picker}<input data-role="inline-post-comment-input" data-post-id="${escapeHTML(id)}" placeholder="留下评论… · Enter发送" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(id)}">${planeIconHTML()}</button></div></div></article>`;
+              const badge = accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : "";
+              return `<article class="v-card v-home-card v-post-card" data-home-post-card="${escapeHTML(id)}"><div class="v-social-head v-post-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-post-author-line"><strong>${escapeHTML(post.name || "Vela Channel")}</strong><span class="v-post-author-handle">${escapeHTML(post.handle || "")}</span>${badge}</div><div class="v-post-time">${escapeHTML(post.at ? formatRelativeAt(post.at) : (post.time || "刚刚"))}</div></div><button class="v-post-more" data-action="toggle-post-menu" data-post-id="${escapeHTML(id)}">⋯</button>${menu}</div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}${imageHTML}<div class="v-social-actions v-post-engagement"><button data-action="like-post" data-post-id="${escapeHTML(id)}">${postHeartIconHTML()}<span>${postDisplayLikes(post)}</span></button><button data-action="toggle-inline-comments" data-post-id="${escapeHTML(id)}">${postCommentIconHTML()}<span data-inline-count="${escapeHTML(id)}">${postDisplayCommentCount(post)}</span></button></div><div class="v-inline-comments" data-inline-comments="${escapeHTML(id)}"><div class="v-comment-list" data-inline-comment-list="${escapeHTML(id)}"></div><button class="v-more-comments" data-action="summon-post-replies" data-post-id="${escapeHTML(id)}" hidden>再加载 5 条</button><div class="v-post-composer">${picker}<input data-role="inline-post-comment-input" data-post-id="${escapeHTML(id)}" placeholder="留下评论… · Enter发送" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(id)}">${planeIconHTML()}</button></div></div></article>`;
             };
 
             const renderHome = () => {
@@ -2180,7 +2195,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 // One own paid fan group for the currently active Vela account.
                 const ownGroups = [];
                 const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId));
-                if (identity) ownGroups.push({ ownerType:"identity", ownerId:identity.id, tier:"paid", entity:identity, identityIds:[identity.id] });
+                if (identity && subscriptionEnabled("identity", identity.id)) ownGroups.push({ ownerType:"identity", ownerId:identity.id, tier:"paid", entity:identity, identityIds:[identity.id] });
 
                 // Character/other creator groups only exist for paid subscribers. Merge duplicate membership across big/small accounts.
                 const joinedMap = new Map();
@@ -2188,7 +2203,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                   Object.entries(getIdentitySubscriptions(userIdentity.id)).forEach(([channelId, tier]) => {
                     if (tier !== "paid") return;
                     const ch = state.channels.find(item => String(item.id) === String(channelId));
-                    if (!ch) return;
+                    if (!ch || !subscriptionEnabled("channel", ch.id)) return;
                     const key = communityChatKey("channel", ch.id, "paid");
                     const item = joinedMap.get(key) || { ownerType:"channel", ownerId:ch.id, tier:"paid", entity:ch, identityIds:[] };
                     if (!item.identityIds.includes(String(userIdentity.id))) item.identityIds.push(String(userIdentity.id));
@@ -3095,13 +3110,18 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               if (!host) return;
               const replies = safeArray(state.postReplies?.[id]);
               host.innerHTML = replies.length ? replies.map((reply, index) => {
-                const trId = `post-comment-${id}-${index}`;
-                const translateTool = reply.translation ? `<button class="v-translate-btn" data-action="toggle-translation" data-translation-target="${escapeHTML(trId)}">翻译</button>` : "";
-                const translationBody = reply.translation ? `<div class="v-translation" data-translation-id="${escapeHTML(trId)}" hidden>${escapeHTML(reply.translation)}</div>` : "";
-                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-social-handle">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div><div class="v-comment-tools">${translateTool}<button data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>${translationBody}</div></div>`;
-              }).join("") : `<div class="v-hint" style="padding:12px 0">还没有评论。你可以先自己留言，或者点输入栏旁边的小飞机让这一批网友开始互动。</div>`;
+                const trId = `post-comment-${id}-${String(reply.id || index)}`;
+                const translateTool = reply.translation ? `<button class="v-comment-tool" data-action="toggle-translation" data-translation-target="${escapeHTML(trId)}">翻译</button>` : "";
+                const translationBody = reply.translation ? `<div class="v-translation v-comment-translation" data-translation-id="${escapeHTML(trId)}" hidden>${escapeHTML(reply.translation)}</div>` : "";
+                return `<div class="v-comment"><div class="v-social-avatar">${avatarHTML(reply.avatar || initials(reply.user || "V"), reply.user || "V")}</div><div class="v-comment-body"><div class="v-comment-name">${escapeHTML(reply.user || "viewer")}</div>${reply.replyTo ? `<div class="v-comment-replying">回复 ${escapeHTML(reply.replyTo)}</div>` : ""}<div class="v-comment-text">${escapeHTML(reply.text || "")}</div><div class="v-comment-tools"><button class="v-comment-tool" data-action="reply-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">回复</button>${translateTool}<button class="v-comment-tool" data-action="delete-post-comment" data-post-id="${escapeHTML(id)}" data-comment-index="${index}">删除</button></div>${translationBody}</div></div>`;
+              }).join("") : "";
+              const post = getPostById(id);
+              const displayCount = post ? postDisplayCommentCount(post) : replies.length;
               const counter = q('[data-screen="post"] [data-role="post-comment-count"]');
-              if (counter) counter.textContent = String(replies.length); const inlineCounter=q(`[data-inline-count="${CSS.escape(id)}"]`); if(inlineCounter) inlineCounter.textContent=String(replies.length);
+              if (counter) counter.textContent = String(displayCount);
+              const inlineCounter=q(`[data-inline-count="${CSS.escape(id)}"]`); if(inlineCounter) inlineCounter.textContent=String(displayCount);
+              const moreButtons = qa(`[data-action="summon-post-replies"][data-post-id="${CSS.escape(id)}"].v-more-comments`);
+              moreButtons.forEach(btn => { btn.hidden = replies.length === 0; btn.textContent = "再加载 5 条"; });
             };
 
             const openPostDetail = (postId) => {
@@ -3113,7 +3133,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const canDeletePost = Boolean(saved && saved.ownerType === "identity" && String(saved.ownerId || "") === String(state.viewerIdentityId || ""));
               const mode = String(post.accessMode || "public");
               const age = String(post.ageRequirement || "none");
-              const accessLabel = mode === "free" ? `免费订阅${age === "18+" ? " · 18+" : ""}` : mode === "paid" ? `付费订阅${age === "18+" ? " · 18+" : ""}` : (age === "18+" ? "公开 · 18+" : "");
+              const accessLabel = mode === "free" ? `免费订阅${age === "18+" ? " · 18+" : ""}` : mode === "paid" ? `付费订阅${age === "18+" ? " · 18+" : ""}` : (age === "18+" ? "18+" : "");
               const accessClass = mode === "free" ? " is-free" : mode === "paid" ? " is-paid" : (age === "18+" ? " is-age" : "");
               const channelId = String(post.ownerType || "") === "channel" ? String(post.ownerId || "") : "";
               let eligible = channelId ? identitiesWithAccessToChannel(channelId, mode) : state.identities.slice();
@@ -3122,7 +3142,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const selectedIdentity = eligible.find(x => String(x.id) === rememberedId) || eligible.find(x => String(x.id) === String(state.viewerIdentityId)) || eligible[0];
               if (selectedIdentity) state.postInteractionIdentity[String(post.id)] = String(selectedIdentity.id);
               const identityPicker = identityPickerHTML(eligible, selectedIdentity?.id, "post-identity-select", `data-post-id="${escapeHTML(post.id)}"`);
-              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>${post.kind === "restricted" ? "限定内容" : "贴文"}</strong><div class="v-hint">${escapeHTML(post.name || "Vela Channel")} · ${escapeHTML(post.time || "刚刚")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(post.name || "Vela Channel")}</div><div class="v-social-handle">${escapeHTML(post.handle || "")}</div>${accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : ""}</div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}${imageHTML ? `<div class="v-social-media">${imageHTML}</div>` : ""}<div class="v-social-actions"><button data-action="like-post" data-post-id="${escapeHTML(post.id)}">♡ ${Number(post.likes || 0)}</button><button>◌ <span data-role="post-comment-count">${safeArray(state.postReplies?.[String(post.id)]).length}</span></button><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button></div><div class="v-comment-list" data-role="post-comments"></div><div class="v-post-composer">${identityPicker}<input data-role="post-comment-input" placeholder="写下评论… · Enter发送" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" aria-label="召唤回复" title="召唤回复">${planeIconHTML()}</button></div>${canDeletePost ? `<div class="v-post-footer-actions"><button class="v-action v-delete-soft" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除贴文</button></div>` : ""}</article></div>`);
+              const badge = accessLabel ? `<span class="v-access-badge${accessClass}">${escapeHTML(accessLabel)}</span>` : "";
+              openScreen("post", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="post">‹</button><div class="v-meta"><strong>贴文</strong><div class="v-hint">${escapeHTML(post.name || "频道")}</div></div></header><div class="v-subbody"><article class="v-card v-post-card v-post-detail-card"><div class="v-social-head v-post-head"><div class="v-social-avatar">${avatarHTML(post.avatar || "", post.name || "V")}</div><div class="v-social-copy"><div class="v-post-author-line"><strong>${escapeHTML(post.name || "频道")}</strong><span class="v-post-author-handle">${escapeHTML(post.handle || "")}</span>${badge}</div><div class="v-post-time">${escapeHTML(post.at ? formatRelativeAt(post.at) : (post.time || "刚刚"))}</div></div><button class="v-post-more" data-action="toggle-post-menu" data-post-id="${escapeHTML(post.id)}">⋯</button><div class="v-post-menu" data-post-menu="${escapeHTML(post.id)}"><button data-action="edit-post" data-post-id="${escapeHTML(post.id)}">编辑</button>${canDeletePost ? `<button class="is-delete" data-action="delete-community-post" data-post-id="${escapeHTML(post.id)}">删除本条贴文</button>` : ""}</div></div><div class="v-social-text">${escapeHTML(post.text || "")}</div>${translationHTML(trId, post.translation || "")}${imageHTML ? `<div class="v-social-media">${imageHTML}</div>` : ""}<div class="v-social-actions v-post-engagement"><button data-action="like-post" data-post-id="${escapeHTML(post.id)}">${postHeartIconHTML()}<span>${postDisplayLikes(post)}</span></button><button type="button">${postCommentIconHTML()}<span data-role="post-comment-count">${postDisplayCommentCount(post)}</span></button></div><div class="v-comment-list" data-role="post-comments"></div><button class="v-more-comments" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" hidden>再加载 5 条</button><div class="v-post-composer">${identityPicker}<input data-role="post-comment-input" data-post-id="${escapeHTML(post.id)}" placeholder="写下评论… · Enter发送" maxlength="240"><button class="v-summon-mini" data-action="summon-post-replies" data-post-id="${escapeHTML(post.id)}" aria-label="召唤回复" title="召唤回复">${planeIconHTML()}</button></div></article></div>`);
               renderPostComments(post.id);
             };
 
@@ -3152,6 +3173,50 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               return state.channels.find(x => String(x.id) === String(id)) || null;
             };
 
+            const scheduleIdentityKey = item => String(item?.scheduleId || (item?.sourceMessageId && item?.sourceCardId ? `card:${item.sourceMessageId}:${item.sourceCardId}` : ""));
+            const scheduledLiveList = entity => {
+              if (!entity) return [];
+              let rows = safeArray(entity.scheduledLives).filter(item => item && typeof item === "object");
+              if (entity.scheduledLive && typeof entity.scheduledLive === "object") {
+                const legacy = { ...entity.scheduledLive };
+                if (!legacy.scheduleId) legacy.scheduleId = scheduleIdentityKey(legacy) || `schedule-${String(entity.id || "host")}-${Number(legacy.scheduledAt || Date.now()).toString(36)}`;
+                const legacyKey = scheduleIdentityKey(legacy);
+                if (!rows.some(item => scheduleIdentityKey(item) === legacyKey)) rows.push(legacy);
+              }
+              const seen = new Set();
+              rows = rows.map((item,index) => ({ ...item, scheduleId:String(item.scheduleId || scheduleIdentityKey(item) || `schedule-${String(entity.id || "host")}-${Number(item.scheduledAt || Date.now()).toString(36)}-${index}`) }))
+                .filter(item => { const key=scheduleIdentityKey(item); if(seen.has(key)) return false; seen.add(key); return true; })
+                .sort((a,b) => Number(a.scheduledAt || Number.MAX_SAFE_INTEGER) - Number(b.scheduledAt || Number.MAX_SAFE_INTEGER));
+              entity.scheduledLives = rows;
+              const now = Date.now();
+              entity.scheduledLive = rows.find(item => !Number(item.scheduledAt || 0) || !Number(item.endsAt || 0) || Number(item.endsAt || 0) >= now) || null;
+              return rows;
+            };
+            const upsertScheduledLive = (entity, item) => {
+              if (!entity || !item) return null;
+              const rows = scheduledLiveList(entity);
+              const normalized = { ...item, scheduleId:String(item.scheduleId || scheduleIdentityKey(item) || `schedule-${String(entity.id || "host")}-${Date.now().toString(36)}`) };
+              const key = scheduleIdentityKey(normalized);
+              const index = rows.findIndex(row => scheduleIdentityKey(row) === key);
+              if (index >= 0) rows[index] = normalized; else rows.push(normalized);
+              entity.scheduledLives = rows.sort((a,b)=>Number(a.scheduledAt || Number.MAX_SAFE_INTEGER)-Number(b.scheduledAt || Number.MAX_SAFE_INTEGER));
+              scheduledLiveList(entity);
+              return normalized;
+            };
+            const removeScheduledLive = (entity, scheduleId) => {
+              if (!entity) return null;
+              const rows = scheduledLiveList(entity);
+              const index = rows.findIndex(item => String(item.scheduleId || "") === String(scheduleId || ""));
+              if (index < 0) return null;
+              const [removed] = rows.splice(index,1);
+              entity.scheduledLives = rows; entity.scheduledLive = null; scheduledLiveList(entity);
+              return removed;
+            };
+            const nearestScheduledLive = entity => {
+              const now = Date.now();
+              return scheduledLiveList(entity).find(item => !Number(item.scheduledAt || 0) || !Number(item.endsAt || 0) || Number(item.endsAt || 0) >= now) || null;
+            };
+
             const profileName = (entity, ownerType) => ownerType === "identity"
               ? String(entity?.displayName || "Vela User")
               : String(entity?.name || "频道");
@@ -3164,6 +3229,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const name = profileName(entity, ownerType);
               const current = state.subscriptionProfiles?.[key] || {};
               const normalized = {
+                enabled: current.enabled === true,
                 free: {
                   emoji: "🌊",
                   name: "支持者",
@@ -3197,6 +3263,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               state.subscriptionProfiles[key] = normalized;
               return normalized;
             };
+            const subscriptionEnabled = (ownerType, id) => getSubscriptionProfile(ownerType, id).enabled === true;
 
             const renderMembershipCard = (ownerType, entity, tier, cfg, currentTier) => {
               const paid = tier === "paid";
@@ -3221,12 +3288,10 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               if (tab === "activity") {
                 const blocks = [];
 
-                if (entity.scheduledLive) {
-                  const scheduledInner = `<div class="v-kicker">置顶 · 预约直播</div><div class="v-live-title">${escapeHTML(entity.scheduledLive.title || "预约直播")}</div><div class="v-sub" style="margin-top:6px">${escapeHTML(entity.scheduledLive.dateText || "未设置时间")}${entity.scheduledLive.sourceType ? ` · 来自${entity.scheduledLive.sourceType === "business" ? "商务合作" : "直播邀约"}` : ""}</div>`;
-                  const manage = ownerType === "identity"
-                    ? `<div class="v-inline-manage"><button data-action="create-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">编辑</button><button class="is-danger" data-action="cancel-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">删除</button></div>`
-                    : "";
-                  blocks.push(`<article class="v-activity-pin is-scheduled">${ownerType === "identity" ? `<button data-action="open-scheduled-live" data-identity-id="${escapeHTML(entity.id)}">${scheduledInner}</button>` : scheduledInner}${manage}</article>`);
+                const nearestAppointment = nearestScheduledLive(entity);
+                if (nearestAppointment) {
+                  const scheduledInner = `<div class="v-kicker">置顶 · 最近预约</div><div class="v-live-title">${escapeHTML(nearestAppointment.title || "预约直播")}</div><div class="v-sub" style="margin-top:6px">${escapeHTML(nearestAppointment.dateText || "未设置时间")}${nearestAppointment.sourceType ? ` · 来自${nearestAppointment.sourceType === "business" ? "商务合作" : "直播邀约"}` : ""}</div>`;
+                  blocks.push(`<article class="v-activity-pin is-scheduled"><button class="v-schedule-entry-hit" data-action="open-scheduled-live" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">${scheduledInner}<span class="v-schedule-entry-more">查看全部预约 ›</span></button></article>`);
                 }
 
                 if (ownerType === "identity" && entity.activeLive) {
@@ -3237,9 +3302,9 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                   blocks.push(`<article class="v-activity-pin is-live"><button data-action="open-live" data-live-id="${escapeHTML(entity.id)}"><div class="v-kicker">正在直播</div><div class="v-live-title">${escapeHTML(entity.title || "正在直播")}</div><div class="v-sub" style="margin-top:6px">${formatViewers(entity.viewers || 0)} 人正在观看</div></button></article>`);
                 }
 
-                const ownPosts = state.communityPosts.filter(p => String(p.ownerType || "") === String(ownerType) && String(p.ownerId || "") === String(id));
+                const ownPosts = state.communityPosts.filter(p => String(p.ownerType || "") === String(ownerType) && String(p.ownerId || "") === String(id)).map(p => getPostById(p.id)).filter(Boolean);
                 const snap = ownerType === "channel" ? state.homeFeedByChannel?.[String(id)] : null;
-                const sample = ownerType === "channel" && snap ? { ...snap, name:entity.name, handle:entity.handle, avatar:entity.avatar, comments:safeArray(state.postReplies?.[String(snap.id)]).length } : null;
+                const sample = ownerType === "channel" && snap ? getPostById(snap.id) : null;
                 const postItems = [sample, ...ownPosts].filter(Boolean).filter(post => {
                   if (ownerType !== "channel") return true;
                   const mode = String(post.accessMode || "public");
@@ -3289,13 +3354,21 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                   return `<article class="v-my-sub-card"><div class="v-my-sub-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-meta"><div class="v-my-sub-title">${escapeHTML(channel.name || channel.handle || "频道")}</div><div class="v-my-sub-handle">${escapeHTML(channel.handle || "")}</div></div><span class="v-my-sub-tier ${paid ? "is-paid" : "is-free"}">${label}</span></div><div class="v-my-sub-detail"><div>当前方案 <b>${escapeHTML(tierCfg.name || (paid ? "付费订阅" : "免费订阅"))}${paid ? ` · 🔷${Number(tierCfg.coinPrice || 0).toLocaleString("zh-CN")}/月` : ""}</b></div>${paid ? `<div>会员社群 <b>${escapeHTML(tierCfg.communityName || "会员社群")}</b></div>` : `<div>权限 <b>免费限定贴文 / 直播</b></div>`}</div><div class="v-my-sub-actions"><button class="v-continue-sub" data-action="continue-subscription" data-channel-id="${escapeHTML(channel.id)}">继续订阅</button><button class="v-cancel-sub" data-action="cancel-subscription" data-channel-id="${escapeHTML(channel.id)}">取消订阅</button></div></article>`;
                 }).join("");
 
-                host.innerHTML = `<div class="v-own-subscription-tools"><div><h3>我的订阅</h3><p>这里显示你已经订阅的主播。</p></div><button data-action="open-subscription-settings" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">我的频道方案</button></div>${cards ? `<div class="v-my-subscriptions">${cards}</div>` : `<div class="v-profile-empty">还没有订阅任何主播。<br>去喜欢的主播主页「订阅」里选择方案。</div>`}`;
+                const ownCfg = getSubscriptionProfile("identity", id);
+                const ownPlan = ownCfg.enabled
+                  ? `<div class="v-membership-grid v-own-plan-grid">${renderMembershipCard("identity", entity, "free", ownCfg.free, "none")}${renderMembershipCard("identity", entity, "paid", ownCfg.paid, "none")}</div>`
+                  : `<div class="v-subscription-off"><b>当前未开启订阅计划</b><span>这个账号现在是普通频道，不会显示订阅档位或会员社群。</span></div>`;
+                host.innerHTML = `<div class="v-own-subscription-tools"><div><h3>我的频道方案</h3><p>${ownCfg.enabled ? "订阅计划已开启。" : "默认关闭；需要时再开启。"}</p></div><button data-action="open-subscription-settings" data-owner-type="identity" data-owner-id="${escapeHTML(id)}">${ownCfg.enabled ? "管理方案" : "开启订阅计划"}</button></div>${ownPlan}<div class="v-own-subscription-tools v-subscribed-list-head"><div><h3>我的订阅</h3><p>这里显示你已经订阅的主播。</p></div></div>${cards ? `<div class="v-my-subscriptions">${cards}</div>` : `<div class="v-profile-empty">还没有订阅任何主播。<br>去喜欢的主播主页「订阅」里选择方案。</div>`}`;
                 return;
               }
 
               const cfg = getSubscriptionProfile(ownerType, id);
               const currentTier = getSubscriptionTierFor(state.viewerIdentityId, id);
               const canEdit = Boolean(entity.sourceCharacterId);
+              if (!cfg.enabled) {
+                host.innerHTML = `<div class="v-subscription-head"><div><h3>订阅</h3><p>这个频道目前没有开启订阅计划。</p></div>${canEdit ? `<button data-action="open-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(id)}">开启订阅计划</button>` : ""}</div><div class="v-subscription-off"><b>普通频道</b><span>开启订阅计划后，才会出现免费订阅 / 付费订阅档位与会员社群。</span></div>`;
+                return;
+              }
               let currentText = "暂未订阅";
               let currentNote = "关注关系与订阅关系彼此独立；只有付费订阅才会加入会员社群。";
               if (currentTier === "paid") {
@@ -3314,7 +3387,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const sheet = q('[data-role="publish-sheet"]');
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="post-image-preview"><div class="v-ios-media-placeholder"><b>＋</b><span>可选配图</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">▣ 选择照片<input type="file" accept="image/*" data-post-image-file></label><button class="v-ios-media-remove" data-action="clear-post-image">移除</button></div><input type="hidden" data-post-field="image" value=""><div class="v-ios-url"><label>图片 URL（备用）</label><input data-post-image-url placeholder="https://..."></div></div><div class="v-ios-group"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-access-row"><div class="v-field"><label>可见范围</label><select data-post-field="accessMode"><option value="public">公开</option><option value="free">免费订阅</option><option value="paid">付费订阅</option></select></div><div class="v-field"><label>年龄限制</label><select data-post-field="ageRequirement"><option value="none">无限制</option><option value="18+">18+</option></select></div></div></div><div class="v-publish-note">发布后会同步到当前主页「贴文」和首页内容流。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
+              const segments = (field, items, selected, disabledValues = []) => `<div class="v-live-segments v-post-segments" data-post-choice-group="${escapeHTML(field)}">${items.map(([value,label]) => `<button type="button" class="${value === selected ? "is-selected" : ""} ${disabledValues.includes(value) ? "is-disabled" : ""}" data-action="choose-post-option" data-post-field="${escapeHTML(field)}" data-post-value="${escapeHTML(value)}" ${disabledValues.includes(value) ? "disabled" : ""}>${escapeHTML(label)}</button>`).join("")}</div><input type="hidden" data-post-field="${escapeHTML(field)}" value="${escapeHTML(selected)}">`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="post-image-preview"><div class="v-ios-media-placeholder"><b>＋</b><span>可选配图</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">选择照片<input type="file" accept="image/*" data-post-image-file></label><button class="v-ios-media-remove" data-action="clear-post-image">移除</button></div><input type="hidden" data-post-field="image" value=""><div class="v-ios-url"><label>图片 URL（备用）</label><input data-post-image-url placeholder="https://..."></div></div><div class="v-live-publish-group v-post-publish-group"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-live-publish-section"><div class="v-live-publish-label">可见范围</div>${segments("accessMode", [["public","公开"],["free","免费订阅"],["paid","付费订阅"]], "public")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">年龄限制</div>${segments("ageRequirement", [["none","无限制"],["18+","18+"]], "none", ["18+"])}</div></div><div class="v-publish-note">公开贴文不能开启 18+；免费订阅或付费订阅内容可选择 18+。发布后会同步到当前主页和首页内容流。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -3324,10 +3398,11 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const image = String(screen?.querySelector('[data-post-field="image"]')?.value || "").trim();
               const accessModeRaw = String(screen?.querySelector('[data-post-field="accessMode"]')?.value || "public");
               const accessMode = ["public","free","paid"].includes(accessModeRaw) ? accessModeRaw : "public";
-              const ageRequirement = String(screen?.querySelector('[data-post-field="ageRequirement"]')?.value || "none") === "18+" ? "18+" : "none";
+              const requestedAge = String(screen?.querySelector('[data-post-field="ageRequirement"]')?.value || "none") === "18+" ? "18+" : "none";
+              const ageRequirement = accessMode === "public" ? "none" : requestedAge;
               if (!text) { toast("先写一点贴文内容"); return; }
               const id = `post-${Date.now().toString(36)}`;
-              state.communityPosts.unshift({ id, ownerType, ownerId, kind: "post", accessMode, ageRequirement, text, image, translation: "", time: "刚刚", likes: 0 });
+              state.communityPosts.unshift({ id, ownerType, ownerId, kind:"post", accessMode, ageRequirement, text, image, translation:"", time:"刚刚", at:Date.now(), likes:postSeedNumber(id,3,18), displayCommentCount:postSeedNumber(id,2,10) });
               state.postReplies[id] = [];
               await persist();
               q('[data-role="publish-sheet"]')?.classList.remove("is-open");
@@ -3345,20 +3420,39 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const identity = state.identities.find(x => String(x.id) === selectedIdentityId) || state.identities.find(x => String(x.id) === String(state.viewerIdentityId)) || state.identities[0];
               if (identity) state.postInteractionIdentity[id] = String(identity.id);
               const current = safeArray(state.postReplies[id]);
+              const replyTo = String(input?.dataset?.replyTo || "").trim();
               current.push({
                 id: `comment-${Date.now().toString(36)}`,
                 user: identity?.handle || identity?.displayName || "@user",
                 avatar: identity?.avatar || initials(identity?.displayName || "U"),
                 text: textValue,
+                replyTo,
                 translation: "",
                 isUser: true,
                 identityId: identity?.id || state.viewerIdentityId
               });
               state.postReplies[id] = current;
-              if (input) input.value = "";
+              if (input) {
+                input.value = "";
+                delete input.dataset.replyTo;
+                input.placeholder = input.dataset.defaultPlaceholder || (input.matches('[data-role="post-comment-input"]') ? "写下评论… · Enter发送" : "留下评论… · Enter发送");
+              }
               await persist();
               renderPostComments(id);
               if (!q(`[data-inline-comments="${CSS.escape(id)}"].is-open`)) renderHome();
+            };
+
+            const replyToPostComment = (postId, indexValue) => {
+              const id = String(postId || "");
+              const index = Number(indexValue);
+              const reply = safeArray(state.postReplies[id])[index];
+              if (!reply) return;
+              const input = q(`[data-role="inline-post-comment-input"][data-post-id="${CSS.escape(id)}"]`) || q('[data-screen="post"] [data-role="post-comment-input"]');
+              if (!input) return;
+              if (!input.dataset.defaultPlaceholder) input.dataset.defaultPlaceholder = input.placeholder || "留下评论… · Enter发送";
+              input.dataset.replyTo = String(reply.user || "");
+              input.placeholder = `回复 ${String(reply.user || "评论")}… · Enter发送`;
+              input.focus();
             };
 
             const deletePostComment = async (postId, indexValue) => {
@@ -3464,8 +3558,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const cohostChoices = mutualRoles.length
                 ? mutualRoles.map(ch => `<label class="v-live-cohost-choice"><input type="checkbox" data-live-cohost-id="${escapeHTML(ch.id)}"><span>${escapeHTML(ch.name || ch.handle || "角色")}</span></label>`).join("")
                 : `<div class="v-live-cohost-empty">目前没有与你互关、可邀请一起直播的角色。</div>`;
-              const segments = (field, items, selected) => `<div class="v-live-segments" data-live-choice-group="${escapeHTML(field)}">${items.map(([value,label]) => `<button type="button" class="${value === selected ? "is-selected" : ""}" data-action="choose-live-option" data-live-field="${escapeHTML(field)}" data-live-value="${escapeHTML(value)}">${escapeHTML(label)}</button>`).join("")}</div><input type="hidden" data-live-publish-field="${escapeHTML(field)}" value="${escapeHTML(selected)}">`;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>开始直播</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="live-cover-preview"><div class="v-ios-media-placeholder"><span>直播封面</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">选择照片<input type="file" accept="image/*" data-live-cover-file></label><button class="v-ios-media-remove" data-action="clear-live-cover">移除</button></div><input type="hidden" data-live-publish-field="cover" value=""><div class="v-ios-url"><label>封面 URL（备用）</label><input data-live-cover-url placeholder="https://..."></div></div><div class="v-live-publish-group"><div class="v-field"><label>直播标题</label><input data-live-publish-field="title" maxlength="90" placeholder="给这场直播起个标题"></div><div class="v-field"><label>直播内容</label><textarea data-live-publish-field="topic" maxlength="500" placeholder="今天准备播什么、聊什么"></textarea></div><div class="v-live-publish-section"><div class="v-live-publish-label">直播类型</div>${segments("liveType", [["video","视频直播"],["voice","语音直播"]], "video")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">直播方式</div>${segments("broadcastStyle", [["solo","单人直播"],["multi","多人直播"]], "solo")}</div><div class="v-live-multi-fields" data-role="multi-live-fields" hidden><div class="v-live-publish-section"><div class="v-live-publish-label">合作方式</div>${segments("cohostPlan", [["online","线上"],["same-room","线下"]], "online")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">和谁一起播</div><div class="v-live-cohost-list">${cohostChoices}</div><div class="v-hint" style="margin-top:7px">仅显示与你任一账号互关的角色；最多选择 3 位。</div></div></div><div class="v-live-publish-section"><div class="v-live-publish-label">观看权限</div>${segments("accessMode", [["public","公开"],["free","免费订阅"],["paid","付费订阅"]], "public")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">年龄限制</div>${segments("ageRequirement", [["none","无限制"],["18+","18+"]], "none")}</div></div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">取消</button><button class="v-action" data-action="start-prepared-live">开始直播</button></div>`;
+              const segments = (field, items, selected, disabledValues = []) => `<div class="v-live-segments" data-live-choice-group="${escapeHTML(field)}">${items.map(([value,label]) => `<button type="button" class="${value === selected ? "is-selected" : ""} ${disabledValues.includes(value) ? "is-disabled" : ""}" data-action="choose-live-option" data-live-field="${escapeHTML(field)}" data-live-value="${escapeHTML(value)}" ${disabledValues.includes(value) ? "disabled" : ""}>${escapeHTML(label)}</button>`).join("")}</div><input type="hidden" data-live-publish-field="${escapeHTML(field)}" value="${escapeHTML(selected)}">`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>开始直播</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="live-cover-preview"><div class="v-ios-media-placeholder"><span>直播封面</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">选择照片<input type="file" accept="image/*" data-live-cover-file></label><button class="v-ios-media-remove" data-action="clear-live-cover">移除</button></div><input type="hidden" data-live-publish-field="cover" value=""><div class="v-ios-url"><label>封面 URL（备用）</label><input data-live-cover-url placeholder="https://..."></div></div><div class="v-live-publish-group"><div class="v-field"><label>直播标题</label><input data-live-publish-field="title" maxlength="90" placeholder="给这场直播起个标题"></div><div class="v-field"><label>直播内容</label><textarea data-live-publish-field="topic" maxlength="500" placeholder="今天准备播什么、聊什么"></textarea></div><div class="v-live-publish-section"><div class="v-live-publish-label">直播类型</div>${segments("liveType", [["video","视频直播"],["voice","语音直播"]], "video")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">直播方式</div>${segments("broadcastStyle", [["solo","单人直播"],["multi","多人直播"]], "solo")}</div><div class="v-live-multi-fields" data-role="multi-live-fields" hidden><div class="v-live-publish-section"><div class="v-live-publish-label">合作方式</div>${segments("cohostPlan", [["online","线上"],["same-room","线下"]], "online")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">和谁一起播</div><div class="v-live-cohost-list">${cohostChoices}</div><div class="v-hint" style="margin-top:7px">仅显示与你任一账号互关的角色；最多选择 3 位。</div></div></div><div class="v-live-publish-section"><div class="v-live-publish-label">观看权限</div>${segments("accessMode", [["public","公开"],["free","免费订阅"],["paid","付费订阅"]], "public")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">年龄限制</div>${segments("ageRequirement", [["none","无限制"],["18+","18+"]], "none", ["18+"])}</div></div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">取消</button><button class="v-action" data-action="start-prepared-live">开始直播</button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -3480,7 +3574,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const broadcastStyle = get("broadcastStyle") === "multi" ? "multi" : "solo";
               const cohostPlan = get("cohostPlan") === "same-room" ? "same-room" : "online";
               const accessMode = ["public","free","paid"].includes(get("accessMode")) ? get("accessMode") : "public";
-              const ageRequirement = get("ageRequirement") === "18+" ? "18+" : "none";
+              const requestedAge = get("ageRequirement") === "18+" ? "18+" : "none";
+              const ageRequirement = accessMode === "public" ? "none" : requestedAge;
               const selectedIds = broadcastStyle === "multi" ? [...screen.querySelectorAll('[data-live-cohost-id]:checked')].map(o => String(o.dataset.liveCohostId || "")).filter(Boolean).slice(0,3) : [];
               const mutual = ch => state.identities.some(i => isFollowing("identity", i.id, "channel", ch.id) && isFollowing("channel", ch.id, "identity", i.id));
               const participants = selectedIds.map(id => state.channels.find(ch => String(ch.id) === id)).filter(ch => ch && mutual(ch)).map(ch => ({ id:String(ch.id), name:String(ch.name || ch.handle || "嘉宾"), handle:String(ch.handle || ""), avatar:String(ch.avatar || initials(ch.name || "嘉宾")) }));
@@ -3527,35 +3622,54 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               await persist(); closeLiveEconomyPanel(); openLive(live); toast(`已与 ${cohost.name || "嘉宾"} 连线 · ${live.participants.length + 1}/4 人`);
             };
 
-            const openScheduledLiveEditor = (identityId) => {
-              const identity = state.identities.find(x => String(x.id) === String(identityId));
-              if (!identity) return;
-              const item = identity.scheduledLive || {};
-              openScreen("schedule-editor", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="schedule-editor">‹</button><div class="v-meta"><strong>预约直播</strong><div class="v-hint">${escapeHTML(identity.displayName || "我的频道")}</div></div><button class="v-head-action" data-action="save-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">保存</button></header><div class="v-subbody"><div class="v-card"><div class="v-editform"><div class="v-field"><label>直播标题</label><input data-schedule-field="title" maxlength="80" value="${escapeHTML(item.title || "")}" placeholder="这场直播准备聊什么？"></div><div class="v-field"><label>直播时间</label><input data-schedule-field="dateText" maxlength="60" value="${escapeHTML(item.dateText || "")}" placeholder="例如：9/12 · 20:00"></div><div class="v-field"><label>封面 URL（可留空）</label><input data-schedule-field="cover" value="${escapeHTML(item.cover || "")}" placeholder="https://..."></div></div></div><p class="v-hint">预约只显示在这个 Vela 身份的主页里；真正开播后会切换为 LIVE 状态。</p></div>`);
+            const scheduleInputValue = value => {
+              const ms = Number(value || 0); if (!ms) return "";
+              const d = new Date(ms - new Date(ms).getTimezoneOffset() * 60000);
+              return d.toISOString().slice(0,16);
             };
-
-            const saveScheduledLive = async (identityId) => {
+            const openScheduledLiveEditor = (identityId, scheduleId = "") => {
+              openScheduledLiveDetail("identity", identityId, scheduleId || String(nearestScheduledLive(state.identities.find(x => String(x.id) === String(identityId)))?.scheduleId || ""));
+            };
+            const saveScheduledLive = async (identityId, scheduleId = "") => {
               const identity = state.identities.find(x => String(x.id) === String(identityId));
               if (!identity) return;
-              const screen = q('[data-screen="schedule-editor"]');
-              const title = String(screen?.querySelector('[data-schedule-field="title"]')?.value || "").trim();
-              const dateText = String(screen?.querySelector('[data-schedule-field="dateText"]')?.value || "").trim();
-              const cover = String(screen?.querySelector('[data-schedule-field="cover"]')?.value || "").trim();
-              if (!title || !dateText) { toast("先填写直播标题和时间"); return; }
-              identity.scheduledLive = { ...(identity.scheduledLive || {}), title, dateText, cover };
-              await persist();
-              closeScreen("schedule-editor");
-              openProfile("identity", identity.id);
+              const card = q(`[data-screen="schedule-detail"] [data-schedule-edit-card="${CSS.escape(String(scheduleId || ""))}"]`);
+              if (!card) return;
+              const read = name => String(card.querySelector(`[data-schedule-field="${name}"]`)?.value || "").trim();
+              const title = read("title"), startRaw = read("scheduledAt"), endRaw = read("endsAt"), cover = read("cover");
+              if (!title || !startRaw) { toast("先填写直播标题和开始时间"); return; }
+              const start = new Date(startRaw).getTime();
+              let end = endRaw ? new Date(endRaw).getTime() : start + 2*3600000;
+              if (!Number.isFinite(start)) { toast("直播时间格式不正确"); return; }
+              if (!Number.isFinite(end) || end <= start) end = start + 2*3600000;
+              const rows = scheduledLiveList(identity);
+              const item = rows.find(row => String(row.scheduleId || "") === String(scheduleId || ""));
+              if (!item) return;
+              item.title = title; item.scheduledAt = start; item.endsAt = end; item.cover = cover;
+              item.dateText = item.sourceType === "business" ? formatBusinessWindow(start,end) : `${formatDateTextFromInput(start)}–${new Date(end).toLocaleTimeString("zh-CN",{hour:"2-digit",minute:"2-digit",hour12:false})}`;
+              if (item.business) { item.business.scheduledAt = start; item.business.endsAt = end; }
+              identity.scheduledLive = null; scheduledLiveList(identity);
+              await persist(); armAppointmentTimer(); armCommunityBotTimers?.();
+              openScheduledLiveDetail("identity", identity.id);
               renderProfileTab("identity", identity.id, "activity");
               toast("直播预约已保存");
             };
-
-            const openScheduledLiveDetail = (identityId) => {
-              const identity = state.identities.find(x => String(x.id) === String(identityId));
-              const item = identity?.scheduledLive;
-              if (!identity || !item) return;
-              const coverHTML = isImageURL(item.cover || "") ? `<img src="${escapeHTML(item.cover)}" alt="" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">` : `<div style="font-size:40px">●</div>`;
-              openScreen("schedule-detail", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="schedule-detail">‹</button><div class="v-meta"><strong>预约直播</strong><div class="v-hint">${escapeHTML(identity.displayName || "我的频道")}</div></div></header><div class="v-subbody"><article class="v-card"><div class="v-postimg" style="height:150px;overflow:hidden">${coverHTML}</div><div class="v-name" style="margin-top:12px">${escapeHTML(item.title)}</div><div class="v-sub" style="margin-top:5px">${escapeHTML(item.dateText)}</div><div class="v-settings-actions"><button class="v-action" data-action="start-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">开始直播</button><button class="v-action light" data-action="create-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">编辑预约</button><button class="v-action light" data-action="cancel-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">取消预约</button></div></article></div>`);
+            const openScheduledLiveDetail = (ownerType = "identity", ownerId = "", editingScheduleId = "") => {
+              if (ownerId === "" && ownerType && ownerType !== "identity" && ownerType !== "channel") { ownerId = ownerType; ownerType = "identity"; }
+              const entity = getProfileEntity(ownerType, ownerId);
+              if (!entity) return;
+              const rows = scheduledLiveList(entity);
+              const canEdit = ownerType === "identity";
+              const cards = rows.map(item => {
+                const editing = canEdit && String(item.scheduleId || "") === String(editingScheduleId || "");
+                if (editing) {
+                  return `<article class="v-schedule-list-card is-editing" data-schedule-edit-card="${escapeHTML(item.scheduleId)}"><div class="v-schedule-edit-grid"><div class="v-field"><label>直播标题</label><input data-schedule-field="title" maxlength="80" value="${escapeHTML(item.title || "")}"></div><div class="v-fieldpair"><div class="v-field"><label>开始时间</label><input type="datetime-local" data-schedule-field="scheduledAt" value="${escapeHTML(scheduleInputValue(item.scheduledAt))}"></div><div class="v-field"><label>结束时间</label><input type="datetime-local" data-schedule-field="endsAt" value="${escapeHTML(scheduleInputValue(item.endsAt))}"></div></div><div class="v-field"><label>封面 URL（可留空）</label><input data-schedule-field="cover" value="${escapeHTML(item.cover || "")}" placeholder="https://..."></div></div><div class="v-schedule-card-actions"><button class="is-light" data-action="cancel-scheduled-live-inline" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">取消</button><button class="is-primary" data-action="save-scheduled-live-inline" data-identity-id="${escapeHTML(entity.id)}" data-schedule-id="${escapeHTML(item.scheduleId)}">保存</button></div></article>`;
+                }
+                const coverHTML = isImageURL(item.cover || "") ? `<img src="${escapeHTML(item.cover)}" alt="">` : `<div class="v-schedule-cover-placeholder">●</div>`;
+                const source = item.sourceType === "business" ? "商务合作" : item.sourceType === "live_invite" ? "直播邀约" : "预约直播";
+                return `<article class="v-schedule-list-card"><div class="v-schedule-list-cover">${coverHTML}</div><div class="v-schedule-list-copy"><div class="v-kicker">${escapeHTML(source)}</div><h3>${escapeHTML(item.title || "预约直播")}</h3><div class="v-sub">${escapeHTML(item.dateText || "时间待定")}</div></div><div class="v-schedule-card-actions"><button class="is-primary" data-action="start-scheduled-live-item" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}" data-schedule-id="${escapeHTML(item.scheduleId)}">开始直播</button>${canEdit ? `<button class="is-light" data-action="edit-scheduled-live-inline" data-owner-type="identity" data-owner-id="${escapeHTML(entity.id)}" data-schedule-id="${escapeHTML(item.scheduleId)}">编辑</button><button class="is-danger" data-action="delete-scheduled-live-from-list" data-identity-id="${escapeHTML(entity.id)}" data-schedule-id="${escapeHTML(item.scheduleId)}">删除</button>` : ""}</div></article>`;
+              }).join("");
+              openScreen("schedule-detail", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="schedule-detail">‹</button><div class="v-meta"><strong>预约直播</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))} · ${rows.length} 场</div></div></header><div class="v-subbody"><div class="v-schedule-list">${cards || '<div class="v-profile-empty">还没有预约直播。</div>'}</div></div>`);
             };
 
             const openProfile = (ownerType, id) => {
@@ -3954,18 +4068,27 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             const openSubscriptionSettings = (ownerType, ownerId) => {
               const entity = getProfileEntity(ownerType, ownerId); if (!entity) return;
               const cfg = getSubscriptionProfile(ownerType, ownerId);
-              openScreen("subscription-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="subscription-settings">‹</button><div class="v-meta"><strong>订阅设置</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))}</div></div><button class="v-head-action" data-action="save-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">保存</button></header><div class="v-subbody"><div class="v-subscription-editor-grid"><section class="v-subscription-editor-tier"><h3>免费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="freeEmoji" maxlength="4" value="${escapeHTML(cfg.free.emoji || "🌊")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="freeName" maxlength="24" value="${escapeHTML(cfg.free.name || "支持者")}"></div></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="freeCover" value="${escapeHTML(cfg.free.cover || "")}" placeholder="https://..."></div><div class="v-publish-note">关注频道动态，解锁免费订阅贴文与直播推送。<br>权益：获得粉丝身份。</div></div></section><section class="v-subscription-editor-tier is-paid"><h3>付费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="paidEmoji" maxlength="4" value="${escapeHTML(cfg.paid.emoji || "💎")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="paidName" maxlength="24" value="${escapeHTML(cfg.paid.name || "会员")}"></div></div><div class="v-fieldpair"><div class="v-field"><label>月费 · Vela Coin</label><input data-sub-field="paidCoinPrice" type="number" min="1" max="999999" step="1" value="${Number(cfg.paid.coinPrice || 500)}"></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="paidCover" value="${escapeHTML(cfg.paid.cover || "")}" placeholder="https://..."></div></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="paidCommunity" maxlength="40" value="${escapeHTML(cfg.paid.communityName || "")}"></div><div class="v-publish-note">支持喜欢的主播，解锁付费订阅内容与社群。<br>权益：获得付费粉丝身份 · 加入订阅社群 · 获得主播第一手资讯。</div></div></section></div></div>`);
+              openScreen("subscription-settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="subscription-settings">‹</button><div class="v-meta"><strong>订阅设置</strong><div class="v-hint">${escapeHTML(profileName(entity, ownerType))}</div></div><button class="v-head-action" data-action="save-subscription-settings" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">保存</button></header><div class="v-subbody"><div class="v-settings-group v-sub-plan-toggle"><div class="v-setting-row"><div class="v-meta"><div class="v-name">开启订阅计划</div><div class="v-sub">关闭时这个账号就是普通频道，不显示订阅档位或会员社群。</div></div><input class="v-switch" data-sub-field="enabled" data-action="toggle-subscription-plan-editor" type="checkbox" ${cfg.enabled ? "checked" : ""}></div></div><div class="v-subscription-editor-grid" data-role="subscription-plan-fields" ${cfg.enabled ? "" : "hidden"}><section class="v-subscription-editor-tier"><h3>免费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="freeEmoji" maxlength="4" value="${escapeHTML(cfg.free.emoji || "🌊")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="freeName" maxlength="24" value="${escapeHTML(cfg.free.name || "支持者")}"></div></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="freeCover" value="${escapeHTML(cfg.free.cover || "")}" placeholder="https://..."></div><div class="v-publish-note">关注频道动态，解锁免费订阅贴文与直播推送。<br>权益：获得粉丝身份。</div></div></section><section class="v-subscription-editor-tier is-paid"><h3>付费订阅</h3><div class="v-editform"><div class="v-fieldpair"><div class="v-field"><label>粉丝 Emoji</label><input data-sub-field="paidEmoji" maxlength="4" value="${escapeHTML(cfg.paid.emoji || "💎")}"></div><div class="v-field"><label>方案名称</label><input data-sub-field="paidName" maxlength="24" value="${escapeHTML(cfg.paid.name || "会员")}"></div></div><div class="v-fieldpair"><div class="v-field"><label>月费 · Vela Coin</label><input data-sub-field="paidCoinPrice" type="number" min="1" max="999999" step="1" value="${Number(cfg.paid.coinPrice || 500)}"></div><div class="v-field"><label>卡片封面 URL（可空）</label><input data-sub-field="paidCover" value="${escapeHTML(cfg.paid.cover || "")}" placeholder="https://..."></div></div><div class="v-field"><label>对应群聊名称</label><input data-sub-field="paidCommunity" maxlength="40" value="${escapeHTML(cfg.paid.communityName || "")}"></div><div class="v-publish-note">支持喜欢的主播，解锁付费订阅内容与社群。<br>权益：获得付费粉丝身份 · 加入订阅社群 · 获得主播第一手资讯。</div></div></section></div></div>`);
             };
 
             const saveSubscriptionSettings = async (ownerType, ownerId) => {
               const entity=getProfileEntity(ownerType,ownerId), screen=q('[data-screen="subscription-settings"]'); if(!entity||!screen) return;
               const read=name=>String(screen.querySelector(`[data-sub-field="${name}"]`)?.value||"").trim();
               const current=getSubscriptionProfile(ownerType,ownerId);
+              const wasEnabled = current.enabled === true;
+              const enabled = Boolean(screen.querySelector('[data-sub-field="enabled"]')?.checked);
               state.subscriptionProfiles[subscriptionProfileKey(ownerType,ownerId)]={
+                enabled,
                 free:{...current.free,emoji:read("freeEmoji")||"🌊",name:read("freeName")||"支持者",cover:read("freeCover"),intro:"关注频道动态，解锁免费订阅贴文与直播推送。",benefits:["获得粉丝身份。"]},
                 paid:{...current.paid,emoji:read("paidEmoji")||"💎",name:read("paidName")||"会员",coinPrice:Math.max(1,Math.min(999999,Math.round(Number(read("paidCoinPrice")||500)))),cover:read("paidCover"),intro:"支持喜欢的主播，解锁付费订阅内容与社群。",benefits:["获得付费粉丝身份","加入订阅社群","获得主播第一手资讯"],communityName:read("paidCommunity")||`${profileName(entity,ownerType)} · 会员社群`}
               };
-              await persist(); closeScreen("subscription-settings"); openProfile(ownerType,ownerId); renderProfileTab(ownerType,ownerId,"subscriptions"); renderMessages(); toast("订阅方案已保存");
+              if (!wasEnabled && enabled) {
+                const key = communityChatKey(ownerType, ownerId, "paid");
+                // A newly opened paid community starts clean; old demo/ambient chat must not leak back in.
+                state.communityChats[key] = [{ id:`system-sub-open-${Date.now().toString(36)}`, kind:"system", eventType:"subscription_opened", text:"您已开通付费订阅社群", at:Date.now() }];
+                state.communityChatQueues[key] = [];
+              }
+              await persist(); closeScreen("subscription-settings"); openProfile(ownerType,ownerId); renderProfileTab(ownerType,ownerId,"subscriptions"); renderMessages(); toast(enabled ? "订阅方案已保存" : "订阅计划已关闭");
             };
 
             const formatChatTimestamp = (value) => {
@@ -4011,12 +4134,13 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             const hasScheduleForCard = (messageId, cardId) => {
               const rows = safeArray(state.dmThreads?.[String(messageId)]);
               const card = rows.find(item => String(item?.id || "") === String(cardId || ""));
+              const matches = entity => scheduledLiveList(entity).some(item => String(item?.sourceMessageId || "") === String(messageId || "") && String(item?.sourceCardId || "") === String(cardId || ""));
               if (card?.hostOwnerType === "identity") {
                 const activeIdentityId = String(state.dmInteractionIdentity?.[String(messageId)] || state.viewerIdentityId || state.identities[0]?.id || "");
                 const identity = state.identities.find(item => String(item.id) === activeIdentityId);
-                return Boolean(identity && String(identity?.scheduledLive?.sourceMessageId || "") === String(messageId || "") && String(identity?.scheduledLive?.sourceCardId || "") === String(cardId || ""));
+                return Boolean(identity && matches(identity));
               }
-              return [...state.identities, ...state.channels].some(entity => String(entity?.scheduledLive?.sourceMessageId || "") === String(messageId || "") && String(entity?.scheduledLive?.sourceCardId || "") === String(cardId || ""));
+              return [...state.identities, ...state.channels].some(matches);
             };
 
             const renderDMToolCard = (item, messageId) => {
@@ -4243,15 +4367,18 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               card.endsAt = end;
               card.dateText = card.kind === "business" ? formatBusinessWindow(start, end) : String(card.dateText || "时间待定");
               if (card.kind === "business") { card.scheduleDeletedAt = 0; card.scheduleLinkedAt = Date.now(); }
-              // A single DM card owns only one appointment. Rebinding/migrating it removes stale copies from old identities.
+              const scheduleId = `card:${String(messageId)}:${String(card.id || "")}`;
+              // One DM card owns one appointment, but each host can have many different appointments.
               [...state.identities, ...state.channels].forEach(entity => {
                 if (entity === host) return;
-                if (String(entity?.scheduledLive?.sourceMessageId || "") === String(messageId) && String(entity?.scheduledLive?.sourceCardId || "") === String(card.id || "")) entity.scheduledLive = null;
+                const rows = scheduledLiveList(entity).filter(item => !(String(item.sourceMessageId || "") === String(messageId) && String(item.sourceCardId || "") === String(card.id || "")));
+                entity.scheduledLives = rows; entity.scheduledLive = null; scheduledLiveList(entity);
               });
-              host.scheduledLive = {
-                title:String(card.title || (card.kind === "business" ? "商务合作直播" : "联播预约")), dateText:String(card.dateText || "时间待定"), scheduledAt:start, endsAt:end, cover:String(card.cover || ""), content:String(card.content || ""), mode:String(card.mode || "online"), sourceMessageId:String(messageId), sourceCardId:String(card.id), sourceType:String(card.kind), hostOwnerType:String(card.hostOwnerType), hostOwnerId:String(card.hostOwnerId), participantIds:participants.map(p => p.id), participants,
+              const appointment = {
+                scheduleId, title:String(card.title || (card.kind === "business" ? "商务合作直播" : "联播预约")), dateText:String(card.dateText || "时间待定"), scheduledAt:start, endsAt:end, cover:String(card.cover || ""), content:String(card.content || ""), mode:String(card.mode || "online"), sourceMessageId:String(messageId), sourceCardId:String(card.id), sourceType:String(card.kind), hostOwnerType:String(card.hostOwnerType), hostOwnerId:String(card.hostOwnerId), participantIds:participants.map(p => p.id), participants,
                 business: card.kind === "business" ? { brandName:String(card.brandName || ""), productName:String(card.productName || ""), productPriceCNY:Math.max(0,Number(card.productPriceCNY || 0)), totalFeeCNY:amounts.total, cashAmountCNY:amounts.total, depositCNY:amounts.deposit, balanceCNY:amounts.balance, deliverables:String(card.deliverables || card.content || ""), adCopy:String(card.adCopy || ""), adLink:String(card.adLink || ""), sourceMessageId:String(messageId), sourceCardId:String(card.id || ""), scheduledAt:start, endsAt:end } : null
               };
+              upsertScheduledLive(host, appointment);
               await persist(); armAppointmentTimer(); armCommunityBotTimers?.();
             };
 
@@ -4559,7 +4686,6 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 if (moved) await persist();
                 const currentKey = String(q('[data-screen="message"] [data-role="community-message-input"]')?.dataset?.communityKey || "");
                 if (currentKey === key) { const [ownerType, ownerId, tier] = key.split(":"); openCommunityChat(ownerType, ownerId, tier); }
-                if (safeArray(state.communityChatQueues[key]).length < 5) setTimeout(() => ensureCommunityAmbientBatch(key), 80);
                 armCommunityLazyTimer(key);
               }, delay);
               communityLazyTimers.set(key, timer);
@@ -4599,6 +4725,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             const openCommunityChat = (ownerType, ownerId, tier) => {
               const entity = getProfileEntity(ownerType, ownerId);
               if (!entity) return;
+              if (!subscriptionEnabled(ownerType, ownerId)) { toast("这个频道还没有开启付费订阅社群"); return; }
               tier = "paid";
               const key = communityChatKey(ownerType, ownerId, "paid");
               const own = isOwnCommunity(ownerType, ownerId);
@@ -4626,10 +4753,12 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 if (body) body.scrollTop = body.scrollHeight;
               });
               armCommunityLazyTimer(key);
-              if (safeArray(state.communityChatQueues[key]).length < 5) setTimeout(() => ensureCommunityAmbientBatch(key), 80);
             };
 
             const renderCommunityItem = (item, key, own) => {
+              if (item.kind === "system") {
+                return `<div class="v-community-system-note">${escapeHTML(item.text || "系统提示")}</div>`;
+              }
               if (item.kind === "poll") {
                 const total = safeArray(item.votes).reduce((sum, n) => sum + Number(n || 0), 0);
                 return `<div class="v-community-card-msg" data-longpress="delete-chat-item" data-thread-type="community" data-thread-key="${escapeHTML(key)}" data-item-id="${escapeHTML(item.id)}"><div class="v-kicker">群内投票</div><h4>${escapeHTML(item.question || "投票")}</h4><p>${escapeHTML(item.note || "")}</p><div class="v-poll-options">${safeArray(item.options).map((opt, index) => {
@@ -4671,7 +4800,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               if (!key || communityReplyPending.has(key)) return;
               const [ownerType, ownerId, tier] = key.split(":");
               const entity = getProfileEntity(ownerType, ownerId);
-              if (!entity) return;
+              if (!entity || !subscriptionEnabled(ownerType, ownerId)) return;
               communityReplyPending.add(key);
               const typingToken = `community-typing-${Date.now().toString(36)}`;
               const body = q('[data-screen="message"] [data-role="chat-body"]');
@@ -4681,42 +4810,65 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               }
               const removeTyping = () => q(`[data-community-typing="${CSS.escape(typingToken)}"]`)?.remove();
               try {
-              const cfg = getCommunitySettings(ownerType, ownerId, tier);
-              const rows = safeArray(state.communityChats[key]);
-              const history = rows.slice(-22).map(item => item.kind === "text" ? `${item.sender === "user" ? "USER" : item.name || "成员"}: ${item.text || ""}` : `[${item.kind}] ${item.question || item.prize || item.title || ""}`).join("\n");
-              const activity = Math.max(0, Math.min(100, Number(state.platformSettings?.activityLevel ?? 50)));
-              const maxReplies = activity < 30 ? 1 : activity > 75 ? 3 : 2;
-              const localeHint = ownerType === "channel" ? inferChannelLocale(entity) : "global";
-              const system = `${VELA_DEFAULT_PRESET}\n\n你正在模拟 Vela 订阅社群中除 USER 之外的群成员。绝对禁止替 USER 发言、行动、投票或决定。小飞机表示“继续群聊”，即使 USER 没有新消息，也让群成员彼此自然交流，不必围着 USER。当前社群主要语言/地区倾向：${localeHint}；同地区成员可以更多，但仍可自然混入其他地区用户。\n陌生粉丝语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}
+                const cfg = getCommunitySettings(ownerType, ownerId, tier);
+                const rows = safeArray(state.communityChats[key]);
+                const history = rows.slice(-22).map(item => item.kind === "text" ? `${item.sender === "user" ? "USER" : item.name || "成员"}: ${item.text || ""}` : `[${item.kind}] ${item.question || item.prize || item.title || item.text || ""}`).join("\n");
+                const activity = Math.max(0, Math.min(100, Number(state.platformSettings?.activityLevel ?? 50)));
+                const localeHint = ownerType === "channel" ? inferChannelLocale(entity) : "global";
+                const replayRows = safeArray(state.liveReplays)
+                  .filter(item => String(item.ownerType || "") === String(ownerType) && String(item.ownerId || "") === String(ownerId))
+                  .sort((a,b)=>Number(b.endedAt || 0)-Number(a.endedAt || 0))
+                  .slice(0,5)
+                  .map(item => ({
+                    title:String(item.title || ""), topic:String(item.topic || ""), startedAt:Number(item.startedAt || 0), endedAt:Number(item.endedAt || 0),
+                    moments:safeArray(item.timeline).slice(-6).map(x => String(x?.speech || x?.action || x?.text || "")).filter(Boolean)
+                  }));
+                const replayRule = replayRows.length
+                  ? `可引用的真实近期直播回放（仅限这些事实）：${JSON.stringify(replayRows)}。如果提到过去某场直播、日期或具体发生的事，只能依据这 1~5 场真实回放，不得补写不存在的历史。`
+                  : "当前账号没有任何可验证的直播回放。禁止说‘昨天直播’、‘上周直播’、‘前天那场’、具体周几直播或虚构具体直播内容；也不要暗示成员一定看过这个账号以前的直播。可以聊当前社群、贴文、日常话题。";
+                const system = `${VELA_DEFAULT_PRESET}
+
+你正在模拟 Vela 付费订阅社群中除 USER 之外的群成员。绝对禁止替 USER 发言、行动、投票或决定。小飞机表示“让群里继续聊”，这次后台生成一批 10 条候选消息，但这些消息会由 Vela 慢慢显示，不要把 10 条写成连续问答脚本。成员可以互相聊天、跑题、接梗、发短句或 emoji，不必围着 USER。当前社群主要语言/地区倾向：${localeHint}。
+${replayRule}
+陌生粉丝语言倾向：${languagePreferencePrompt()}
+${translationRulePrompt()}
 群主：${profileName(entity, ownerType)}
 粉丝称呼：${cfg.fanName}
 粉丝画像：${cfg.fanProfile}
 聊天内容倾向：${cfg.chatStyle}
 平台活跃度：${activity}%。
-返回严格 JSON 数组，1~${maxReplies} 条，例如：
+返回严格 JSON 数组，恰好 10 条，例如：
 [{"role":"member","name":"成员昵称","text":"消息","translation":"按翻译规则填写"}]
-${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输出 {"role":"owner","text":"群主消息","translation":""}；不要每轮都让群主出现。' : '这是 USER 自己的社群：禁止输出 role=owner，不能替 USER 说话。'}成员风格要有差异，不要每轮所有人都说话。`;
-              const aiText = await runVelaAI([{ role: "system", content: system }, { role: "user", content: `最近群聊：\n${history || "群里暂时安静，让成员自然开启一个话题。"}` }]);
-              if (!String(aiText || "").trim()) { toast(`社群生成失败 · ${shortVelaAIError("AI 返回为空")}`); return; }
-              let data = extractJSON(aiText);
-              if (!Array.isArray(data)) { toast(`社群生成失败 · 回复格式解析失败 · ${String(aiText || "").replace(/\s+/g," ").slice(0,72)}`); return; }
-              data.slice(0, 3).forEach((item, index) => {
-                const ownerReply = ownerType === "channel" && item?.role === "owner";
-                state.communityChats[key].push({
-                  id: `group-ai-${Date.now().toString(36)}-${index}`,
-                  kind: "text",
-                  sender: ownerReply ? "owner" : "other",
-                  role: ownerReply ? "owner" : "member",
-                  name: ownerReply ? profileName(entity, ownerType) : String(item?.name || ""),
-                  avatar: ownerReply ? String(entity.avatar || "") : STRANGER_AVATAR,
-                  text: String(item?.text || ""),
-                  translation: String(item?.translation || ""),
-                  at: Date.now() + index
+${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner；但不能每轮都出现。' : '这是 USER 自己的社群：禁止输出 role=owner，不能替 USER 说话。'}成员风格要有差异，同一个成员不要连续刷屏。`;
+                const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`最近群聊：\n${history || "群里刚建立，可以从轻松的日常话题自然开始。"}` }]);
+                if (!String(aiText || "").trim()) { toast(`社群生成失败 · ${shortVelaAIError("AI 返回为空")}`); return; }
+                const data = extractJSON(aiText);
+                if (!Array.isArray(data)) { toast(`社群生成失败 · 回复格式解析失败 · ${String(aiText || "").replace(/\s+/g," ").slice(0,72)}`); return; }
+                state.communityChatQueues[key] = safeArray(state.communityChatQueues[key]);
+                const now = Date.now();
+                let cursor = now + 1200;
+                const queue = [];
+                data.slice(0,10).forEach((item,index) => {
+                  if (!item || typeof item !== "object") return;
+                  const ownerReply = ownerType === "channel" && item?.role === "owner";
+                  const text = String(item?.text || "").trim();
+                  if (!text) return;
+                  if (index > 0) cursor += Math.round((index < 4 ? 2.5 + Math.random()*5 : 7 + Math.random()*14) * 1000);
+                  queue.push({
+                    id:`group-ai-${Date.now().toString(36)}-${index}-${Math.random().toString(36).slice(2,5)}`,
+                    kind:"text", sender:ownerReply ? "owner" : "other", role:ownerReply ? "owner" : "member",
+                    name:ownerReply ? profileName(entity, ownerType) : String(item?.name || cfg.fanName || "member"),
+                    avatar:ownerReply ? String(entity.avatar || "") : STRANGER_AVATAR,
+                    text, translation:String(item?.translation || ""), plannedAt:cursor
+                  });
                 });
-              });
-              state.communityChats[key] = state.communityChats[key].slice(-300);
-              await persist();
-              openCommunityChat(ownerType, ownerId, tier);
+                if (!queue.length) { toast("社群生成失败 · 没有有效消息"); return; }
+                state.communityChatQueues[key].push(...queue);
+                await persist();
+                removeTyping();
+                armCommunityLazyTimer(key);
+                const moved = flushCommunityChatQueue(key);
+                if (moved) { await persist(); openCommunityChat(ownerType, ownerId, tier); }
               } catch (err) {
                 console.warn("[Vela] community reply processing failed", err);
                 toast(`社群处理失败 · ${String(err?.message || err || "未知错误").replace(/\s+/g," ").slice(0,110)}`);
@@ -4862,6 +5014,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
             };
 
             const pushCommunityBotEvent = (ownerType, ownerId, eventType, payload = {}, onlyTier = "") => {
+              if (!subscriptionEnabled(ownerType, ownerId)) return;
               ["paid"].forEach(tier => {
                 if (onlyTier && tier !== onlyTier) return;
                 const key = communityChatKey(ownerType, ownerId, tier);
@@ -4912,6 +5065,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               const identity = state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
               if (!channel || !identity) return;
               const normalizedTier = tier === "paid" ? "paid" : "free";
+              if (!subscriptionEnabled("channel", channel.id)) { toast("这个频道还没有开启订阅计划"); return; }
               const cfg = getSubscriptionProfile("channel", channel.id)[normalizedTier];
               const currentTier = getSubscriptionTierFor(identity.id, channel.id);
               if (normalizedTier === "free" && (currentTier === "free" || currentTier === "paid")) { toast("这个账号已经拥有免费订阅权限"); return; }
@@ -4931,6 +5085,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               const identity = state.identities.find(item => String(item.id) === String(identityId || ""));
               if (!channel || !identity) return;
               const normalizedTier = tier === "paid" ? "paid" : "free";
+              if (!subscriptionEnabled("channel", channel.id)) { toast("这个频道还没有开启订阅计划"); return; }
               const currentTier = getSubscriptionTierFor(identity.id, channel.id);
               if (normalizedTier === "paid" && currentTier !== "paid") {
                 const cfg = getSubscriptionProfile("channel", channel.id).paid;
@@ -4941,6 +5096,10 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                 state.wallet.transactions.unshift({ id:`tx-${Date.now().toString(36)}-sub`, type:"coin", title:"付费订阅", note:`${channel.name || channel.handle || "频道"} · ${cfg.name || "会员"}`, coin:-coinPrice, identityId:identity.id, at:Date.now() });
                 recordSubscriptionAccrual("channel", channel.id, coinPrice, `订阅者 ${identity.id}`);
                 setSubscriptionTierFor(identity.id, channel.id, "paid");
+                const communityKey = communityChatKey("channel", channel.id, "paid");
+                state.communityChats[communityKey] = safeArray(state.communityChats[communityKey]);
+                state.communityChats[communityKey].push({ id:`system-sub-join-${identity.id}-${Date.now().toString(36)}`, kind:"system", eventType:"subscription_joined", text:"您已加入TA的付费订阅社群", identityId:String(identity.id), at:Date.now() });
+                state.communityChatQueues[communityKey] = [];
               } else if (normalizedTier === "free" && currentTier === "none") {
                 state.wallet.subscriptionPurchases[`${String(identity.id)}:${String(channel.id)}`] = { tier:"free", coinPriceSnapshot:0, subscribedAt:Date.now(), identityId:identity.id };
                 setSubscriptionTierFor(identity.id, channel.id, "free");
@@ -5015,7 +5174,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                   : (role === "alias" ? "hidden" : "partial"),
                 contentStyle: "",
                 fanProfile: "",
-                scheduledLive: null,
+                scheduledLive: null, scheduledLives: [],
                 activeLive: null,
                 live: false,
                 isAnonymous: role === "alias" && !linkedToMain
@@ -5127,7 +5286,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                 liveSchedule: String(main.liveSchedule || ""),
                 liveAutonomy: String(main.liveAutonomy || "flexible"),
                 profileCustomized: true,
-                scheduledLive: null,
+                scheduledLive: null, scheduledLives: [],
                 live: false,
                 title: "",
                 viewers: 0
@@ -5302,21 +5461,17 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               const viewerId = String(state.viewerIdentityId || "");
               const rows = [];
               state.identities.forEach(entity => {
-                const item = entity.scheduledLive;
-                if (!item) return;
-                const participants = safeArray(item.participantIds);
-                if (String(entity.id) === viewerId || participants.includes(viewerId)) rows.push({ ownerType: "identity", ownerId: entity.id, entity, item });
+                scheduledLiveList(entity).forEach(item => {
+                  const participants = safeArray(item.participantIds).map(String);
+                  if (String(entity.id) === viewerId || participants.includes(viewerId)) rows.push({ ownerType:"identity", ownerId:entity.id, entity, item });
+                });
               });
               state.channels.forEach(entity => {
-                const item = entity.scheduledLive;
-                if (!item) return;
-                if (safeArray(item.participantIds).includes(viewerId)) rows.push({ ownerType: "channel", ownerId: entity.id, entity, item });
+                scheduledLiveList(entity).forEach(item => {
+                  if (safeArray(item.participantIds).map(String).includes(viewerId)) rows.push({ ownerType:"channel", ownerId:entity.id, entity, item });
+                });
               });
-              return rows.sort((a, b) => {
-                const av = Number(a.item.scheduledAt || Number.MAX_SAFE_INTEGER);
-                const bv = Number(b.item.scheduledAt || Number.MAX_SAFE_INTEGER);
-                return av - bv;
-              });
+              return rows.sort((a,b)=>Number(a.item.scheduledAt || Number.MAX_SAFE_INTEGER)-Number(b.item.scheduledAt || Number.MAX_SAFE_INTEGER));
             };
 
             const localDateKey = (date = new Date()) => `${date.getFullYear()}-${String(date.getMonth()+1).padStart(2,"0")}-${String(date.getDate()).padStart(2,"0")}`;
@@ -5349,8 +5504,8 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
 
             const allHostAppointments = () => {
               const rows = [];
-              state.identities.forEach(entity => { if (entity?.scheduledLive) rows.push({ ownerType:"identity", ownerId:entity.id, entity, item:entity.scheduledLive }); });
-              state.channels.forEach(entity => { if (entity?.scheduledLive) rows.push({ ownerType:"channel", ownerId:entity.id, entity, item:entity.scheduledLive }); });
+              state.identities.forEach(entity => scheduledLiveList(entity).forEach(item => rows.push({ ownerType:"identity", ownerId:entity.id, entity, item })));
+              state.channels.forEach(entity => scheduledLiveList(entity).forEach(item => rows.push({ ownerType:"channel", ownerId:entity.id, entity, item })));
               return rows;
             };
 
@@ -5360,6 +5515,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               let nextDue = Number.MAX_SAFE_INTEGER;
               let changed = false;
               for (const entry of allHostAppointments()) {
+                if (!subscriptionEnabled(entry.ownerType, entry.ownerId)) continue;
                 const scheduledAt = Number(entry.item?.scheduledAt || 0);
                 if (!scheduledAt || scheduledAt <= now) continue;
                 entry.item.botReminderSentKeys = { ...(entry.item.botReminderSentKeys || {}) };
@@ -5390,9 +5546,12 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
 
             const armCommunityBotTimers = () => { processCommunityBotReminders(); };
 
-            const startAppointmentHostLive = async (ownerType, ownerId) => {
-              const entity = getProfileEntity(ownerType, ownerId), item = entity?.scheduledLive;
-              if (!entity || !item) return;
+            const startAppointmentHostLive = async (ownerType, ownerId, scheduleId = "") => {
+              const entity = getProfileEntity(ownerType, ownerId);
+              if (!entity) return;
+              const rows = scheduledLiveList(entity);
+              const item = rows.find(row => String(row.scheduleId || "") === String(scheduleId || "")) || rows[0];
+              if (!item) return;
               const now = Date.now(), start = Number(item.scheduledAt || 0), end = Number(item.endsAt || (start ? start + 2*3600000 : 0));
               if (item.sourceType === "business") {
                 if (start && now < start) { toast(`这场商务直播还没到约定时间 · ${item.dateText || ""}`); return; }
@@ -5404,33 +5563,33 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               }
               if (ownerType === "channel") {
                 const live = { ...entity, id:entity.id, ownerType:"channel", ownerId:entity.id, title:item.title || "预约直播", category:item.content || "预约直播", mode:item.mode || "solo", startedAt:now, live:true, viewers:Math.max(1,Number(entity.viewers||0)), userParticipant:safeArray(item.participantIds).map(String).includes(String(state.viewerIdentityId)), participants:safeArray(item.participants).filter(p => String(p?.id||"") !== String(entity.id)).map(p => { if (String(p?.id||"") === String(state.viewerIdentityId)) { const viewer=state.identities.find(x=>String(x.id)===String(state.viewerIdentityId)); return {id:String(viewer?.id||p.id),name:String(viewer?.displayName||p.name||"user"),handle:String(viewer?.handle||""),avatar:String(viewer?.avatar||"")}; } const ch=state.channels.find(x=>String(x.id)===String(p?.id||"")); return {id:String(p?.id||""),name:String(ch?.name||p?.name||"嘉宾"),handle:String(ch?.handle||""),avatar:String(ch?.avatar||"")}; }), business:contract, ad:contract ? {...contract} : null };
-                entity.live=true; entity.title=live.title; entity.scheduledLive=null; pushCommunityBotEvent("channel",entity.id,"live",{title:live.title,text:"直播已经开始，点击频道即可进入。"}); await persist(); openLive(live);
+                entity.live=true; entity.title=live.title; removeScheduledLive(entity, item.scheduleId); pushCommunityBotEvent("channel",entity.id,"live",{title:live.title,text:"直播已经开始，点击频道即可进入。"}); await persist(); openLive(live);
               } else {
-                const live = { id:`own-scheduled-${entity.id}-${Date.now().toString(36)}`, ownerType:"identity", ownerId:entity.id, isOwn:true, name:entity.displayName||"我的频道", handle:entity.handle||"@me", avatar:entity.avatar||"U", followers:Number(entity.followers||0), title:item.title||"我的直播间", category:item.content||"预约直播", cover:item.cover||"", viewers:0, mode:item.mode||"solo", accessMode:"public", ageRequirement:"none", participants:safeArray(item.participants).filter(p=>String(p?.id||"")!==String(entity.id)).map(p=>{const ch=state.channels.find(x=>String(x.id)===String(p?.id||""));return{id:String(p?.id||""),name:String(ch?.name||p?.name||"嘉宾"),handle:String(ch?.handle||""),avatar:String(ch?.avatar||"")};}), business:contract, ad:contract ? {...contract} : null, startedAt:now };
-                entity.live=true; entity.activeLive={...live}; entity.scheduledLive=null; state.liveChat=[]; state.pendingLiveUserMessage=null; pushCommunityBotEvent("identity",entity.id,"live",{title:live.title,text:"直播已经开始。"}); await persist(); openLive(live);
+                const live = { id:`own-scheduled-${entity.id}-${Date.now().toString(36)}`, ownerType:"identity", ownerId:entity.id, isOwn:true, name:entity.displayName||"我的频道", handle:entity.handle||"@me", avatar:entity.avatar||"U", followers:Number(entity.followers||0), title:item.title||"我的直播间", category:item.content||"预约直播", cover:item.cover||"", viewers:0, mode:item.mode||"solo", accessMode:item.accessMode||"public", ageRequirement:item.ageRequirement||"none", participants:safeArray(item.participants).filter(p=>String(p?.id||"")!==String(entity.id)).map(p=>{const ch=state.channels.find(x=>String(x.id)===String(p?.id||""));return{id:String(p?.id||""),name:String(ch?.name||p?.name||"嘉宾"),handle:String(ch?.handle||""),avatar:String(ch?.avatar||"")};}), business:contract, ad:contract ? {...contract} : null, startedAt:now };
+                entity.live=true; entity.activeLive={...live}; removeScheduledLive(entity, item.scheduleId); state.liveChat=[]; state.pendingLiveUserMessage=null; pushCommunityBotEvent("identity",entity.id,"live",{title:live.title,text:"直播已经开始。"}); await persist(); openLive(live);
               }
             };
 
-            const openScheduleDeleteConfirm = identityId => {
+            const openScheduleDeleteConfirm = (identityId, scheduleId = "") => {
               const identity = state.identities.find(item => String(item.id) === String(identityId || ""));
-              const item = identity?.scheduledLive;
+              const item = scheduledLiveList(identity).find(row => String(row.scheduleId || "") === String(scheduleId || "")) || nearestScheduledLive(identity);
               if (!identity || !item) return;
               const business = item.sourceType === "business" || Boolean(item.business?.sourceCardId);
-              openScreen("live-summary", `<div class="v-center-modal-backdrop"><div class="v-confirm-card"><div class="v-kicker">删除预约直播</div><h3>确认删除这个预约直播吗？</h3><p>${business ? "删除后不会取消对应商务合作；你仍可以从 DM 里的商务合作卡重新创建预约直播。" : "删除后这条预约将从主页移除。"}</p><div class="v-confirm-actions"><button class="is-cancel" data-action="close-schedule-delete-confirm">取消</button><button class="is-danger" data-action="confirm-delete-scheduled-live" data-identity-id="${escapeHTML(identity.id)}">确认删除</button></div></div></div>`);
+              openScreen("live-summary", `<div class="v-center-modal-backdrop"><div class="v-confirm-card"><div class="v-kicker">删除预约直播</div><h3>确认删除这个预约直播吗？</h3><p>${business ? "删除后不会取消对应商务合作；你仍可以从 DM 里的商务合作卡重新创建预约直播。" : "删除后这条预约将从预约列表移除。"}</p><div class="v-confirm-actions"><button class="is-cancel" data-action="close-schedule-delete-confirm">取消</button><button class="is-danger" data-action="confirm-delete-scheduled-live" data-identity-id="${escapeHTML(identity.id)}" data-schedule-id="${escapeHTML(item.scheduleId || "")}">确认删除</button></div></div></div>`);
             };
-            const deleteScheduledLiveConfirmed = async identityId => {
+            const deleteScheduledLiveConfirmed = async (identityId, scheduleId = "") => {
               const identity = state.identities.find(item => String(item.id) === String(identityId || ""));
-              const item = identity?.scheduledLive;
-              if (!identity || !item) { closeScreen("live-summary"); return; }
+              if (!identity) { closeScreen("live-summary"); return; }
+              const item = scheduledLiveList(identity).find(row => String(row.scheduleId || "") === String(scheduleId || "")) || nearestScheduledLive(identity);
+              if (!item) { closeScreen("live-summary"); return; }
               if (item.sourceMessageId && item.sourceCardId) {
                 const card = findDMCard(item.sourceMessageId, item.sourceCardId);
                 if (card?.kind === "business" && card.status !== "completed") card.scheduleDeletedAt = Date.now();
               }
-              identity.scheduledLive = null;
+              removeScheduledLive(identity, item.scheduleId);
               await persist();
               closeScreen("live-summary");
-              closeScreen("schedule-detail");
-              openProfile("identity", identity.id);
+              openScheduledLiveDetail("identity", identity.id);
               renderProfileTab("identity", identity.id, "activity");
               toast("预约直播已删除");
             };
@@ -5619,7 +5778,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                 const field = String(button.dataset.liveField || "");
                 const value = String(button.dataset.liveValue || "");
                 const sheet = q('[data-role="publish-sheet"]');
-                if (!sheet || !field) return;
+                if (!sheet || !field || button.disabled) return;
                 const hidden = sheet.querySelector(`[data-live-publish-field="${CSS.escape(field)}"]`);
                 if (hidden) hidden.value = value;
                 sheet.querySelectorAll(`[data-live-choice-group="${CSS.escape(field)}"] button`).forEach(item => item.classList.toggle("is-selected", item === button));
@@ -5627,6 +5786,30 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                   const multi = sheet.querySelector('[data-role="multi-live-fields"]');
                   if (multi) multi.hidden = value !== "multi";
                   if (value !== "multi") sheet.querySelectorAll('[data-live-cohost-id]:checked').forEach(input => { input.checked = false; });
+                }
+                if (field === "accessMode") {
+                  const ageHidden = sheet.querySelector('[data-live-publish-field="ageRequirement"]');
+                  const adult = sheet.querySelector('[data-live-choice-group="ageRequirement"] [data-live-value="18+"]');
+                  const unrestricted = sheet.querySelector('[data-live-choice-group="ageRequirement"] [data-live-value="none"]');
+                  const locked = value === "public";
+                  if (adult) { adult.disabled = locked; adult.classList.toggle("is-disabled", locked); }
+                  if (locked) { if (ageHidden) ageHidden.value = "none"; unrestricted?.classList.add("is-selected"); adult?.classList.remove("is-selected"); }
+                }
+              } else if (action === "choose-post-option") {
+                const field = String(button.dataset.postField || "");
+                const value = String(button.dataset.postValue || "");
+                const sheet = q('[data-role="publish-sheet"]');
+                if (!sheet || !field || button.disabled) return;
+                const hidden = sheet.querySelector(`[data-post-field="${CSS.escape(field)}"]`);
+                if (hidden) hidden.value = value;
+                sheet.querySelectorAll(`[data-post-choice-group="${CSS.escape(field)}"] button`).forEach(item => item.classList.toggle("is-selected", item === button));
+                if (field === "accessMode") {
+                  const ageHidden = sheet.querySelector('[data-post-field="ageRequirement"]');
+                  const adult = sheet.querySelector('[data-post-choice-group="ageRequirement"] [data-post-value="18+"]');
+                  const unrestricted = sheet.querySelector('[data-post-choice-group="ageRequirement"] [data-post-value="none"]');
+                  const locked = value === "public";
+                  if (adult) { adult.disabled = locked; adult.classList.toggle("is-disabled", locked); }
+                  if (locked) { if (ageHidden) ageHidden.value = "none"; unrestricted?.classList.add("is-selected"); adult?.classList.remove("is-selected"); }
                 }
               } else if (action === "start-prepared-live") {
                 await startPreparedLive();
@@ -5677,7 +5860,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "toggle-post-menu") {
                 const menu=q(`[data-post-menu="${CSS.escape(String(button.dataset.postId||""))}"]`); if(menu) menu.classList.toggle("is-open");
               } else if (action === "toggle-inline-comments") {
-                const id=String(button.dataset.postId||""); const box=q(`[data-inline-comments="${CSS.escape(id)}"]`); if(box){box.classList.toggle("is-open"); if(box.classList.contains("is-open")){ if(!safeArray(state.postReplies?.[id]).length) await summonPostReplies(id); renderPostComments(id); }}
+                const id=String(button.dataset.postId||""); const box=q(`[data-inline-comments="${CSS.escape(id)}"]`); if(box){box.classList.toggle("is-open"); if(box.classList.contains("is-open")) renderPostComments(id); }
               } else if (action === "delete-any-post") {
                 await deleteAnyPost(button.dataset.postId||"");
               } else if (action === "toggle-dm-bubble-translation") {
@@ -5709,12 +5892,16 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "like-post") {
                 const liked = button.dataset.liked === "1";
                 button.dataset.liked = liked ? "0" : "1";
-                const raw = Number((button.textContent.match(/\d+/) || [0])[0]);
-                button.textContent = `${liked ? "♡" : "♥"} ${Math.max(0, raw + (liked ? -1 : 1))}`;
+                button.classList.toggle("is-liked", !liked);
+                const count = button.querySelector("span");
+                const raw = Number(String(count?.textContent || "0").replace(/\D/g, "")) || 0;
+                if (count) count.textContent = String(Math.max(0, raw + (liked ? -1 : 1)));
               } else if (action === "summon-post-replies") {
                 await summonPostReplies(button.dataset.postId || "");
               } else if (action === "send-post-comment") {
                 await sendPostComment(button.dataset.postId || "");
+              } else if (action === "reply-post-comment") {
+                replyToPostComment(button.dataset.postId || "", button.dataset.commentIndex);
               } else if (action === "delete-post-comment") {
                 await deletePostComment(button.dataset.postId || "", button.dataset.commentIndex);
               } else if (action === "delete-community-post") {
@@ -5884,6 +6071,9 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                 renderProfileTab(button.dataset.ownerType || "identity", button.dataset.ownerId || "", button.dataset.profileTab || "activity");
               } else if (action === "open-subscription-settings") {
                 openSubscriptionSettings(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
+              } else if (action === "toggle-subscription-plan-editor") {
+                const fields = q('[data-screen="subscription-settings"] [data-role="subscription-plan-fields"]');
+                if (fields) fields.hidden = !Boolean(button.checked);
               } else if (action === "save-subscription-settings") {
                 await saveSubscriptionSettings(button.dataset.ownerType || "identity", button.dataset.ownerId || "");
               } else if (action === "toggle-profile-follow") {
@@ -5958,8 +6148,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "view-appointment-host") {
                 const ownerType = button.dataset.ownerType || "channel", ownerId = button.dataset.ownerId || "";
                 closeScreen("appointment-reminder");
-                if (ownerType === "identity") openScheduledLiveDetail(ownerId);
-                else { openProfile(ownerType, ownerId); renderProfileTab(ownerType, ownerId, "activity"); }
+                openScheduledLiveDetail(ownerType, ownerId);
               } else if (action === "appointment-reminder-later") {
                 closeScreen("appointment-reminder");
               } else if (action === "mute-appointment-reminders-today") {
@@ -5976,18 +6165,23 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
               } else if (action === "delete-replay") {
                 await deleteReplay(button.dataset.replayId || "");
               } else if (action === "create-scheduled-live") {
-                closeScreen("schedule-detail");
-                openScheduledLiveEditor(button.dataset.identityId || state.viewerIdentityId);
+                openScheduledLiveEditor(button.dataset.identityId || state.viewerIdentityId, button.dataset.scheduleId || "");
               } else if (action === "save-scheduled-live") {
-                await saveScheduledLive(button.dataset.identityId || state.viewerIdentityId);
+                await saveScheduledLive(button.dataset.identityId || state.viewerIdentityId, button.dataset.scheduleId || "");
               } else if (action === "open-scheduled-live") {
-                openScheduledLiveDetail(button.dataset.identityId || state.viewerIdentityId);
-              } else if (action === "cancel-scheduled-live") {
-                openScheduleDeleteConfirm(button.dataset.identityId || "");
+                openScheduledLiveDetail(button.dataset.ownerType || "identity", button.dataset.ownerId || button.dataset.identityId || state.viewerIdentityId);
+              } else if (action === "edit-scheduled-live-inline") {
+                openScheduledLiveDetail(button.dataset.ownerType || "identity", button.dataset.ownerId || button.dataset.identityId || state.viewerIdentityId, button.dataset.scheduleId || "");
+              } else if (action === "cancel-scheduled-live-inline") {
+                openScheduledLiveDetail(button.dataset.ownerType || "identity", button.dataset.ownerId || state.viewerIdentityId);
+              } else if (action === "save-scheduled-live-inline") {
+                await saveScheduledLive(button.dataset.identityId || state.viewerIdentityId, button.dataset.scheduleId || "");
+              } else if (action === "delete-scheduled-live-from-list" || action === "cancel-scheduled-live") {
+                openScheduleDeleteConfirm(button.dataset.identityId || "", button.dataset.scheduleId || "");
               } else if (action === "close-schedule-delete-confirm") {
                 closeScreen("live-summary");
               } else if (action === "confirm-delete-scheduled-live") {
-                await deleteScheduledLiveConfirmed(button.dataset.identityId || "");
+                await deleteScheduledLiveConfirmed(button.dataset.identityId || "", button.dataset.scheduleId || "");
               } else if (action === "recreate-business-schedule") {
                 const messageId = String(button.dataset.messageId || ""), cardId = String(button.dataset.cardId || "");
                 const card = findDMCard(messageId, cardId);
@@ -6003,12 +6197,11 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                   renderHome();
                   toast("已从商务合作方案重新创建预约直播");
                 }
-              } else if (action === "start-scheduled-live") {
-                const identity = state.identities.find(x => String(x.id) === String(button.dataset.identityId || ""));
-                if (identity?.scheduledLive) {
-                  closeScreen("schedule-detail");
-                  await startAppointmentHostLive("identity", identity.id);
-                }
+              } else if (action === "start-scheduled-live-item" || action === "start-scheduled-live") {
+                const ownerType = button.dataset.ownerType || "identity";
+                const ownerId = button.dataset.ownerId || button.dataset.identityId || state.viewerIdentityId;
+                closeScreen("schedule-detail");
+                await startAppointmentHostLive(ownerType, ownerId, button.dataset.scheduleId || "");
               } else if (action === "settings-note") {
                 closeDrawer(); openSettingsNote(button.dataset.settingsKind || "platform");
               } else if (action === "save-generation-settings") {
@@ -6090,8 +6283,7 @@ ${ownerType === "channel" ? '如果角色群主自然想参与，可以偶尔输
                 await sendPostComment(target.dataset.postId || "");
               } else if (target?.matches?.('[data-role="post-comment-input"]')) {
                 event.preventDefault();
-                const button = q('[data-screen="post"] [data-action="send-post-comment"]');
-                if (button) await sendPostComment(button.dataset.postId || "");
+                await sendPostComment(target.dataset.postId || "");
               } else if (target?.matches?.('[data-role="live-input"]')) {
                 event.preventDefault();
                 await sendLiveChatOnly();
