@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.14";
+  const VERSION = "0.2.15";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -1527,7 +1527,7 @@
               if (key === "overseas_main") return "陌生用户明显以海外语言为主；简体中文只占很少一部分，繁中、韩语、日语、英语和东南亚语言占大多数。";
               return "陌生用户默认海外较多：简体中文偏少；繁中（台湾/香港）、韩语、日语、英语、东南亚及其他语言明显更多。同一批不要全来自同一国家。";
             };
-            const translationRulePrompt = "只要原文不是简体中文，就提供自然的简体中文翻译；繁体中文（台湾/香港）也必须翻译成简体中文。原文已经是简体中文时 translation 留空。";
+            const translationRulePrompt = () => "只要原文不是简体中文，就提供自然的简体中文翻译；繁体中文（台湾/香港）也必须翻译成简体中文。原文已经是简体中文时 translation 留空。";
             const localeNeedsTranslation = locale => {
               const value = String(locale || "").toLowerCase();
               if (!value) return false;
