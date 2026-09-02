@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.17";
+  const VERSION = "0.2.18";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -85,6 +85,7 @@
       homeFeedByChannel: {},
       homeActivities: [],
       liveChatsById: {},
+      liveChatQueues: {},
       recommendationSamplesSeeded: false,
       communityChats: {},
       communityChatQueues: {},
@@ -135,7 +136,8 @@
       roleCommerce: {},
       generationPreset: {
         mode: "default",
-        customText: ""
+        customText: "",
+        nsfwText: "成熟向内容可以更大胆、更暧昧、更有成人主播或成人社交平台氛围，可包含性感但不露骨的造型、夜生活、付费订阅与成熟向玩笑；不要生成露骨色情细节、明确性行为或色情裸露描写。"
       },
       appearance: {
         topbarHeight: 62,
@@ -461,9 +463,9 @@
 
 
 /* v0.2.2 · account cap / live compact cards / bottom icon polish */
-.vela-roche .v-nav-icon{width:22px;height:22px;object-fit:contain;display:block;flex:0 0 auto}
+.vela-roche .v-nav-icon{width:25px;height:25px;object-fit:contain;display:block;flex:0 0 auto}.vela-roche .v-nav button[data-nav="wallet"] .v-nav-icon{width:23px;height:23px}
 .vela-roche .v-nav button{gap:3px!important}
-.vela-roche .v-nav .v-publish b{margin-bottom:0}
+.vela-roche .v-nav .v-publish b{width:36px!important;height:36px!important;border-radius:13px!important;font-size:22px!important;margin-top:0!important;margin-bottom:0}
 .vela-roche .v-drawer-clear{width:100%;border:0;background:none;color:#c9362b;padding:13px 4px;text-align:left;font-size:13px;font-weight:850;border-top:1px solid var(--v-line);margin-bottom:8px}
 .vela-roche .v-rolecard>.v-author .v-mini,.vela-roche [data-screen="roles"] .v-mini{width:44px!important;height:44px!important;flex:0 0 44px!important;aspect-ratio:1/1!important;border-radius:50%!important;overflow:hidden!important}
 .vela-roche [data-screen="roles"] .v-mini img{width:100%!important;height:100%!important;object-fit:cover!important;border-radius:50%!important}
@@ -778,8 +780,12 @@
 .vela-roche .v-schedule-list{display:grid;gap:12px}.vela-roche .v-schedule-list-card{background:var(--v-card);border:1px solid var(--v-line);border-radius:22px;padding:14px;overflow:hidden}.vela-roche .v-schedule-list-cover{height:155px;border-radius:17px;background:var(--v-soft);overflow:hidden;display:grid;place-items:center;margin-bottom:13px}.vela-roche .v-schedule-list-cover img{width:100%;height:100%;object-fit:cover;display:block}.vela-roche .v-schedule-cover-placeholder{width:38px;height:38px;border-radius:50%;background:#111;box-shadow:0 0 0 12px rgba(0,0,0,.035)}
 .vela-roche .v-schedule-list-copy h3{font-size:16px;line-height:1.35;margin:5px 0 4px}.vela-roche .v-schedule-card-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:13px}.vela-roche .v-schedule-card-actions button{border:0;border-radius:13px;min-height:42px;font-size:10px;font-weight:900;padding:0 8px}.vela-roche .v-schedule-card-actions .is-primary{background:var(--v-blue);color:#fff}.vela-roche .v-schedule-card-actions .is-light{background:var(--v-soft);color:var(--v-text)}.vela-roche .v-schedule-card-actions .is-danger{background:#fff0f1;color:var(--v-red)}.vela-roche .v-schedule-list-card.is-editing .v-schedule-card-actions{grid-template-columns:1fr 1fr}.vela-roche .v-schedule-edit-grid{display:grid;gap:10px}.vela-roche .v-schedule-edit-grid .v-field,.vela-roche .v-schedule-edit-grid .v-fieldpair{margin:0}
 .vela-roche .v-subscription-off{background:var(--v-card);border:1px solid var(--v-line);border-radius:18px;padding:16px}.vela-roche .v-subscription-off b{display:block;font-size:14px}.vela-roche .v-subscription-off span{display:block;margin-top:5px;color:var(--v-muted);font-size:10px;line-height:1.55}.vela-roche [data-role="subscription-plan-fields"][hidden]{display:none!important}.vela-roche .v-subscribed-list-head{margin-top:18px}.vela-roche .v-community-system-note{margin:10px auto;padding:0 10px;text-align:center;color:var(--v-muted);font-size:9px;line-height:1.5;max-width:82%}
-.vela-roche .v-post-card{border-radius:22px!important;padding:16px!important}.vela-roche .v-post-card .v-post-head{align-items:flex-start!important;gap:11px}.vela-roche .v-post-card .v-post-head>.v-social-avatar{width:46px!important;height:46px!important;border-radius:14px!important;align-self:flex-start!important;margin-top:0!important}.vela-roche .v-post-card .v-post-head>.v-social-avatar img{border-radius:14px!important}.vela-roche .v-post-author-line{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-height:20px}.vela-roche .v-post-author-line strong{font-size:14px;line-height:1.2}.vela-roche .v-post-author-handle{font-size:11px;color:var(--v-muted);font-weight:650}.vela-roche .v-post-card .v-access-badge{margin:0!important;padding:3px 6px!important;border-radius:7px!important;font-size:8px!important}.vela-roche .v-post-time{font-size:10px;color:var(--v-muted);margin-top:3px}.vela-roche .v-post-card>.v-social-text{font-size:14px;line-height:1.58;margin-top:13px}.vela-roche .v-post-engagement{gap:18px!important;margin-top:12px!important;padding-top:9px;border-top:1px solid var(--v-line)}.vela-roche .v-post-engagement button{display:inline-flex!important;align-items:center!important;gap:5px!important;color:var(--v-muted)!important;font-size:10px!important;padding:2px 0!important}.vela-roche .v-post-engagement button svg{width:20px;height:20px;display:block}.vela-roche .v-post-engagement button.is-liked{color:var(--v-red)!important}.vela-roche .v-post-card .v-inline-comments{margin-top:10px;padding-top:8px}.vela-roche .v-post-comments-empty{padding:22px 8px;text-align:center;color:var(--v-muted);font-size:10px;line-height:1.65}.vela-roche .v-post-card .v-comment{align-items:flex-start;padding:11px 0}.vela-roche .v-post-card .v-comment .v-social-avatar{width:34px!important;height:34px!important;border-radius:50%!important}.vela-roche .v-post-card .v-comment-name{font-size:11px!important;font-weight:900}.vela-roche .v-comment-replying{font-size:9px;color:var(--v-muted);margin-top:2px}.vela-roche .v-post-card .v-comment-text{font-size:12px;line-height:1.55;margin-top:3px}.vela-roche .v-comment-tool{border:0;background:none;color:var(--v-muted);font-size:9px;font-weight:800;padding:0}.vela-roche .v-comment-translation{font-size:10px!important;line-height:1.55!important;margin-top:6px!important}.vela-roche .v-post-card .v-more-comments{text-align:left;font-size:10px;padding:10px 0}.vela-roche .v-post-detail-card{margin-bottom:0}.vela-roche .v-post-publish-group .v-field textarea{min-height:105px!important}
+.vela-roche .v-post-card{border-radius:22px!important;padding:16px!important}.vela-roche .v-post-card .v-post-head{align-items:flex-start!important;gap:11px}.vela-roche .v-post-card .v-post-head>.v-social-avatar{width:46px!important;height:46px!important;border-radius:14px!important;align-self:flex-start!important;margin-top:0!important}.vela-roche .v-post-card .v-post-head>.v-social-avatar img{border-radius:14px!important}.vela-roche .v-post-author-line{display:flex;align-items:center;gap:5px;flex-wrap:wrap;min-height:20px}.vela-roche .v-post-author-line strong{font-size:14px;line-height:1.2}.vela-roche .v-post-author-handle{font-size:11px;color:var(--v-muted);font-weight:650}.vela-roche .v-post-card .v-access-badge{margin:0!important;padding:3px 6px!important;border-radius:7px!important;font-size:8px!important}.vela-roche .v-post-time{font-size:10px;color:var(--v-muted);margin-top:3px}.vela-roche .v-post-card>.v-social-text{font-size:14px;line-height:1.58;margin-top:13px}.vela-roche .v-post-engagement{gap:18px!important;margin-top:12px!important;padding-top:0;border-top:0}.vela-roche .v-post-engagement button{display:inline-flex!important;align-items:center!important;gap:5px!important;color:var(--v-muted)!important;font-size:10px!important;padding:2px 0!important}.vela-roche .v-post-engagement button svg{width:20px;height:20px;display:block}.vela-roche .v-post-engagement button.is-liked{color:var(--v-red)!important}.vela-roche .v-post-card .v-inline-comments{margin-top:10px;padding-top:8px}.vela-roche .v-post-comments-empty{padding:22px 8px;text-align:center;color:var(--v-muted);font-size:10px;line-height:1.65}.vela-roche .v-post-card .v-comment{align-items:flex-start;padding:11px 0}.vela-roche .v-post-card .v-comment .v-social-avatar{width:34px!important;height:34px!important;border-radius:50%!important}.vela-roche .v-post-card .v-comment-name{font-size:11px!important;font-weight:900}.vela-roche .v-comment-replying{font-size:9px;color:var(--v-muted);margin-top:2px}.vela-roche .v-post-card .v-comment-text{font-size:12px;line-height:1.55;margin-top:3px}.vela-roche .v-comment-tool{border:0;background:none;color:var(--v-muted);font-size:9px;font-weight:800;padding:0}.vela-roche .v-comment-translation{font-size:10px!important;line-height:1.55!important;margin-top:6px!important}.vela-roche .v-post-card .v-more-comments{text-align:left;font-size:10px;padding:10px 0}.vela-roche .v-post-detail-card{margin-bottom:0}.vela-roche .v-post-publish-group .v-field textarea{min-height:105px!important}
 .vela-roche .v-readonly-link{background:var(--v-soft)!important;color:var(--v-muted)!important}
+.vela-roche .v-appointment-actions .v-today{background:var(--v-red)!important;color:#fff!important}
+.vela-roche .v-profile-follow.is-mutual{background:var(--v-red)!important;color:#fff!important}
+.vela-roche button.is-generating{pointer-events:none!important;opacity:.72!important}
+.vela-roche .v-summon-dots{display:inline-flex;letter-spacing:2px;font-weight:900;line-height:1}
 </style>`;
   }
 
@@ -1010,7 +1016,7 @@
               ? state.platformSettings.strangerInteraction : "normal";
             state.platformSettings.languagePreference = LANGUAGE_PREFERENCE_OPTIONS.some(item => item.key === String(state.platformSettings.languagePreference || ""))
               ? String(state.platformSettings.languagePreference) : "overseas_more";
-            state.generationPreset = { mode: "default", customText: "", ...(state.generationPreset || {}) };
+            state.generationPreset = { mode: "default", customText: "", nsfwText: "成熟向内容可以更大胆、更暧昧、更有成人主播或成人社交平台氛围，可包含性感但不露骨的造型、夜生活、付费订阅与成熟向玩笑；不要生成露骨色情细节、明确性行为或色情裸露描写。", ...(state.generationPreset || {}) };
             state.communityPosts = safeArray(state.communityPosts);
             state.liveReplays = safeArray(state.liveReplays);
             state.pendingLiveUserMessage = state.pendingLiveUserMessage && typeof state.pendingLiveUserMessage === "object" ? state.pendingLiveUserMessage : null;
@@ -1038,6 +1044,7 @@
             state.homeFeedByChannel = { ...(state.homeFeedByChannel || {}) };
             state.homeActivities = safeArray(state.homeActivities);
             state.liveChatsById = { ...(state.liveChatsById || {}) };
+            state.liveChatQueues = { ...(state.liveChatQueues || {}) };
             state.recommendationSamplesSeeded = Boolean(state.recommendationSamplesSeeded);
             state.subscriptionProfiles = { ...(state.subscriptionProfiles || {}) };
             state.communityChats = { ...(state.communityChats || {}) };
@@ -1118,8 +1125,11 @@
             const dmReplyPending = new Set();
             const communityReplyPending = new Set();
             const communityGenerationBusy = new Set();
+            const postReplyPending = new Set();
+            const liveReplyPending = new Set();
             let lastVelaAIError = "";
             const communityLazyTimers = new Map();
+            const liveLazyTimers = new Map();
 
             const persist = async () => {
               try {
@@ -1145,6 +1155,7 @@
                   subscriptionsByIdentity: state.subscriptionsByIdentity,
                   follows: state.follows,
                   followDefaultsInitialized: state.followDefaultsInitialized,
+                  appointmentReminderMuteDate: state.appointmentReminderMuteDate,
                   subscriptionProfiles: state.subscriptionProfiles,
                   postInteractionIdentity: state.postInteractionIdentity,
                   communityInteractionIdentity: state.communityInteractionIdentity,
@@ -1153,6 +1164,7 @@
                   homeFeedByChannel: state.homeFeedByChannel,
                   homeActivities: state.homeActivities,
                   liveChatsById: state.liveChatsById,
+                  liveChatQueues: state.liveChatQueues,
                   recommendationSamplesSeeded: state.recommendationSamplesSeeded,
                   communityChats: state.communityChats,
                   communityChatQueues: state.communityChatQueues,
@@ -1707,6 +1719,9 @@
               };
               return packs[locale] || packs.ko;
             };
+            const nsfwPresetText = () => String(state.generationPreset?.nsfwText || "").trim();
+            const nsfwPresetPrompt = active => active && nsfwPresetText() ? `NSFW / 18+ 自定义风格预设：${nsfwPresetText()}` : "";
+
             const normalizeRecommendedAIItems = (data, count, allowedAliases = []) => {
               const arr = Array.isArray(data) ? data : [];
               const aliasIds = new Set(allowedAliases.map(item => String(item.id)));
@@ -1748,6 +1763,9 @@
                   category,
                   categoryTranslation:String(raw.categoryTranslation || "").trim(),
                   creatorProfile:String(raw.creatorProfile || alias?.contentStyle || "").trim(),
+                  nsfw:Boolean(raw.nsfw === true || safeArray(raw.tags).some(tag => String(tag).toUpperCase() === "NSFW")),
+                  ageRequirement:String(raw.ageRequirement || "none") === "18+" ? "18+" : "none",
+                  accessMode:["public","free","paid"].includes(String(raw.accessMode || "")) ? String(raw.accessMode) : "public",
                   viewers:Math.max(1, Math.round(Number(raw.viewers || 0) || (80 + Math.random()*2400))),
                   live:true,
                   startedAt:at,
@@ -1798,7 +1816,7 @@
                   channelId:String(channel.id), publicName:channel.name || channel.handle || "Vela Channel", handle:channel.handle || "@vela",
                   accountRole:channel.accountRole || "primary", linkedToMain:Boolean(channel.linkedToMain), mainChannelId:String(channel.mainChannelId || ""),
                   faceMode:channel.faceMode || "mixed", identityVisibility:channel.identityVisibility || "partial", contentStyle:channel.contentStyle || "", fanProfile:channel.fanProfile || "",
-                  liveSchedule:channel.liveSchedule || "", liveAutonomy:channel.liveAutonomy || "flexible", persona:String((typeof getChannelPersonaText === "function" ? getChannelPersonaText(channel) : "") || "").slice(0,1500)
+                  liveSchedule:channel.liveSchedule || "", liveAutonomy:channel.liveAutonomy || "flexible", subscriptionEnabled:subscriptionEnabled("channel", channel.id), persona:String((typeof getChannelPersonaText === "function" ? getChannelPersonaText(channel) : "") || "").slice(0,1500)
                 }));
                 const custom = state.generationPreset?.mode === "custom" ? String(state.generationPreset?.customText || "").trim() : "";
                 const system = `${VELA_DEFAULT_PRESET}
@@ -1808,11 +1826,12 @@
 生成前检查账号风格、露脸方式、主副号公开关联关系和直播习惯。linkedToMain=true 的关联副号可以在自然情况下与主号出现内容延续；未公开关联的小号要当作独立账号，不要用相似内容或线索暴露关系。看得到什么才能讨论什么：不露脸的账号不要让正文、弹幕或评论无依据讨论脸。默认只使用当前 Vela 账号公开网名/频道名/handle；除非账号风格明确说明本名已公开，否则不要让任何外部人知道本名。
 
 直播必须符合当前星期和时间以及 liveSchedule；明显不在习惯直播时间时不要硬生成直播，可以生成贴文或什么都不生成。贴文发布时间可以是今天、昨天或更早的合理时间；直播应是当前仍在进行的近期直播。不同主副号不要机械地同一时间发完全相似内容。
+如果账号风格/直播风格明确说明会做面向订阅用户的 18+ 成熟向内容，可以自然地生成这种活动，但不是每次都必须生成。只有 subscriptionEnabled=true 的频道才能输出 accessMode=free 或 paid；否则必须 public。ageRequirement=18+ 只允许搭配 free/paid，public 必须 none。对于你决定标记为 18+ 的条目，应用这段风格预设：${nsfwPresetText() || "保持成熟向但不露骨"}。
 角色频道自己的正文、标题和说话语言必须遵循角色账号设定，不受陌生人语言倾向覆盖；只有 chatSeed 里的陌生观众受平台语言倾向影响：${languagePreferencePrompt()}
 ${translationRulePrompt()}
 
 返回严格 JSON 数组，最多 ${Math.max(1, Math.min(4,candidates.length))} 条。字段：
-[{"channelId":"必须从候选 channelId 中选","type":"post|live","publishedAt":"ISO时间","text":"贴文正文，live 可空","translation":"按翻译规则填写","title":"直播标题，post 可空","titleTranslation":"按翻译规则填写","category":"直播内容/分类","categoryTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
+[{"channelId":"必须从候选 channelId 中选","type":"post|live","publishedAt":"ISO时间","accessMode":"public|free|paid","ageRequirement":"none|18+","text":"贴文正文，live 可空","translation":"按翻译规则填写","title":"直播标题，post 可空","titleTranslation":"按翻译规则填写","category":"直播内容/分类","categoryTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
 直播的 chatSeed 给 2~4 条已有弹幕，让直播间不是空的；语言和昵称按角色地区、人设、粉丝画像自然分布。${custom ? `
 用户自定义平台规则：${custom}` : ""}`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${now.toString()}
@@ -1836,14 +1855,16 @@ ${translationRulePrompt()}
                     channel.categoryTranslation = String(item.categoryTranslation || "");
                     channel.startedAt = Math.max(Date.now()-2*60*60*1000, at);
                     channel.viewers = Math.max(8, Math.round((Number(channel.followers || 0) || 500) * (.02 + Math.random()*.05)));
-                    channel.accessMode = "public";
+                    const requestedMode = ["free","paid"].includes(String(item.accessMode || "")) && subscriptionEnabled("channel", channel.id) ? String(item.accessMode) : "public";
+                    channel.accessMode = requestedMode;
+                    channel.ageRequirement = requestedMode !== "public" && String(item.ageRequirement || "") === "18+" ? "18+" : "none";
                     channel.chatSeed = safeArray(item.chatSeed).map(x => ({ user:String(x?.user || "").trim(), avatar:STRANGER_AVATAR, text:String(x?.text || "").trim(), translation:String(x?.translation || "") })).filter(x => x.user && x.text);
                     added += 1;
                     return;
                   }
                   const id = `home-ai-${String(channel.id)}-${at.toString(36)}-${index}-${Math.random().toString(36).slice(2,5)}`;
                   const postText = String(item.text || "").trim(); if (!postText) return;
-                  state.communityPosts.push({ id, ownerType:"channel", ownerId:String(channel.id), text:postText, translation:String(item.translation || ""), image:"", time:formatRelativeAt(at), likes:Math.max(0,Math.round((Number(channel.followers||0)||120)*(.02+Math.random()*.08))), accessMode:"public", ageRequirement:"none", at, generatedByHome:true });
+                  state.communityPosts.push({ id, ownerType:"channel", ownerId:String(channel.id), text:postText, translation:String(item.translation || ""), image:"", time:formatRelativeAt(at), likes:Math.max(0,Math.round((Number(channel.followers||0)||120)*(.02+Math.random()*.08))), accessMode:(["free","paid"].includes(String(item.accessMode || "")) && subscriptionEnabled("channel", channel.id) ? String(item.accessMode) : "public"), ageRequirement:(["free","paid"].includes(String(item.accessMode || "")) && subscriptionEnabled("channel", channel.id) && String(item.ageRequirement || "") === "18+" ? "18+" : "none"), at, generatedByHome:true });
                   state.postReplies[id] = safeArray(state.postReplies[id]);
                   added += 1;
                 });
@@ -1871,17 +1892,20 @@ ${translationRulePrompt()}
                 const aliasCandidates = aliasBatch ? state.channels.filter(ch => !ch?.isDemo && String(ch?.accountRole || "primary") === "alias").sort(() => Math.random()-.5).slice(0, 4) : [];
                 const aliasSummary = aliasCandidates.map(ch => ({ ownerId:String(ch.id), publicName:ch.name || ch.handle || "Vela Channel", handle:ch.handle || "", contentStyle:ch.contentStyle || "", fanProfile:ch.fanProfile || "", faceMode:ch.faceMode || "mixed", identityVisibility:ch.identityVisibility || "partial", persona:String(getChannelPersonaText(ch) || "").slice(0,1000) }));
                 const custom = state.generationPreset?.mode === "custom" ? String(state.generationPreset?.customText || "").trim() : "";
+                const nsfwBatch = selectedTopics.includes("NSFW");
                 const topicRule = selectedTopics.length ? `本批用户主动选择的偏好标签：${recommendationTopicPrompt(selectedTopics)}。优先围绕这些方向，但 ${count} 个直播仍要彼此明显不同，不要做成同一个模板。` : "本批没有选择标签，完全随机探索不同题材。";
                 const system = `${VELA_DEFAULT_PRESET}
 
 你正在生成 Vela 推荐页的正在直播频道。默认只推荐陌生主播，不得生成 USER 自己的账号，也不得生成任何角色主号。${aliasCandidates.length ? "本轮低概率开放角色副号候选；最多允许 1 条 source=alias，并且 ownerId 必须来自提供的副号候选。其余必须是陌生主播。" : "本轮完全禁止角色账号，全部必须是陌生主播。"}
 ${topicRule}
+${nsfwPresetPrompt(nsfwBatch)}
+如果本批选择了 NSFW，请把符合该方向的直播设为 nsfw=true；NSFW 在 Vela 中表示成熟向、成人主播/成人社交平台氛围，可以更大胆、暧昧、性感但不露骨。
 陌生人语言规则：${languagePreferencePrompt()}。source=stranger 的主播和陌生观众按这个权重；source=alias 的角色副号本身必须遵循候选角色账号的人设与语言，不得被这个设置改成别的语言，但聊天室里的陌生观众仍可按平台权重自然混合。
 
 陌生主播要像真实平台用户：姓名/网名、handle、地区语言、直播标题、分类、当前动作和已存在聊天室都要彼此一致。不要三个主播都用同一种说话节奏；允许有人安静做自己的事、有人和熟客闲聊、有人刚好在吃东西或工作。聊天室不是 NPC 队列：观众不需要每条都回应主播，允许观众之间接话、跑题、只发 emoji、只发一两个词、有人潜水，不要求每句都有信息量。不要使用固定模板或重复老名字。
 ${translationRulePrompt()}
 返回严格 JSON 数组，恰好 ${count} 条。每条字段：
-[{"source":"stranger|alias","ownerId":"alias 时填候选 id，否则空","name":"公开昵称","handle":"@handle","locale":"zh-CN|zh-TW|zh-HK|ko|ja|en|th|vi|id|其他合理语言","creatorProfile":"一句主播风格/地区提示","title":"原语言直播标题","titleTranslation":"按翻译规则填写","category":"原语言直播内容/分类","categoryTranslation":"按翻译规则填写","viewers":1234,"startedMinutesAgo":20,"openingAction":"镜头里正在发生的动作","openingSpeech":"主播正在说的话，符合 locale","openingTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
+[{"source":"stranger|alias","ownerId":"alias 时填候选 id，否则空","name":"公开昵称","handle":"@handle","locale":"zh-CN|zh-TW|zh-HK|ko|ja|en|th|vi|id|其他合理语言","creatorProfile":"一句主播风格/地区提示","nsfw":false,"title":"原语言直播标题","titleTranslation":"按翻译规则填写","category":"原语言直播内容/分类","categoryTranslation":"按翻译规则填写","viewers":1234,"startedMinutesAgo":20,"openingAction":"镜头里正在发生的动作","openingSpeech":"主播正在说的话，符合 locale","openingTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
 chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭空泄露角色本名或后台身份。${custom ? `
 用户自定义平台规则：${custom}` : ""}`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${new Date().toString()}
@@ -1891,6 +1915,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                   ? parsedRecommended
                   : safeArray(parsedRecommended?.items || parsedRecommended?.lives || parsedRecommended?.recommendations || parsedRecommended?.data);
                 const batch = normalizeRecommendedAIItems(recommendedRows, count, aliasCandidates);
+                if (nsfwBatch) batch.forEach(item => { item.nsfw = true; });
                 if (!batch.length) { toast(`推荐生成失败 · ${String(aiText || "").trim() ? "没有解析到可用直播" : shortVelaAIError("AI 返回为空")}`); return; }
                 state.recommendedLives = [...safeArray(state.recommendedLives), ...batch];
                 await persist(); renderRecommended();
@@ -1998,7 +2023,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                   const live = identity.activeLive;
                   const stats = getLiveStats(live);
                   const trId = `home-own-live-${String(live.id || identity.id)}`;
-                  cards.push({ type:"live", order:Number(live.startedAt || Date.now()), html:`<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-own-profile-live" data-identity-id="${escapeHTML(identity.id)}"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(identity.avatar || "", identity.displayName || "U")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(identity.displayName || "我的频道")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(identity.handle || "")}</span></div><div class="v-home-self-label">我的账号直播 · ${formatViewers(stats.currentViewers || 0)} 人观看</div></div></div><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(live.title || "正在直播")}</div><div class="v-viewers">${escapeHTML(live.category || "直播进行中")}</div></div></div></button>${translationHTML(trId, live.titleTranslation || "")}</article>` });
+                  cards.push({ type:"live", order:Number(live.startedAt || Date.now()), html:`<article class="v-card v-home-card"><button class="v-home-card-hit" data-action="open-own-profile-live" data-identity-id="${escapeHTML(identity.id)}"><div class="v-social-head"><div class="v-social-avatar">${avatarHTML(identity.avatar || "", identity.displayName || "U")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(identity.displayName || "我的频道")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(identity.handle || "")}</span></div><div class="v-home-self-label">我的账号直播 · ${live.accessMode === "paid" ? "付费订阅" : live.accessMode === "free" ? "免费订阅" : "公开直播"}${live.ageRequirement === "18+" ? " · 18+" : ""} · ${formatViewers(stats.currentViewers || 0)} 人观看</div></div></div><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span>${live.nsfw === true ? '<span class="v-badge" style="margin-left:6px">NSFW</span>' : ""}<div class="v-live-title">${escapeHTML(live.title || "正在直播")}</div><div class="v-viewers">${escapeHTML(live.category || "直播进行中")}</div></div></div></button>${translationHTML(trId, live.titleTranslation || "")}</article>` });
                 }
                 state.communityPosts.filter(p => String(p.ownerType || "") === "identity" && String(p.ownerId || "") === String(identity.id)).forEach(post => {
                   const resolved = getPostById(post.id);
@@ -2015,7 +2040,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                   if (followerIds.length) {
                     const liveTrId = `home-live-${String(channel.id)}`;
                     const liveTranslation = [channel.titleTranslation, channel.categoryTranslation].filter(Boolean).join("\n");
-                    cards.push({ type:"live", order:Number(channel.startedAt || Date.now()), html:`<article class="v-card v-home-card"><div class="v-home-live-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(channel.name || "频道")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(channel.handle || "")}</span></div><div class="v-social-handle">正在直播 · ${formatViewers(channel.viewers || 0)} 人观看 · ${escapeHTML(formatRelativeAt(channel.startedAt || Date.now()))}</div></div><div class="v-home-live-actions"><button class="v-post-more" data-action="toggle-home-live-menu" data-channel-id="${escapeHTML(channel.id)}">⋯</button><div class="v-post-menu" data-home-live-menu="${escapeHTML(channel.id)}"><button data-action="edit-generated-live" data-channel-id="${escapeHTML(channel.id)}">编辑直播</button><button class="is-delete" data-action="close-generated-live" data-channel-id="${escapeHTML(channel.id)}">关闭本场直播</button></div></div></div><button class="v-home-live-stage" data-action="open-live" data-live-id="${escapeHTML(channel.id)}"><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(channel.title || "正在直播")}</div><div class="v-viewers">${escapeHTML(channel.category || channel.contentStyle || "频道直播")}</div></div></div></button>${translationHTML(liveTrId, liveTranslation)}</article>` });
+                    cards.push({ type:"live", order:Number(channel.startedAt || Date.now()), html:`<article class="v-card v-home-card"><div class="v-home-live-head"><div class="v-social-avatar">${avatarHTML(channel.avatar || "", channel.name || "V")}</div><div class="v-social-copy"><div class="v-social-name">${escapeHTML(channel.name || "频道")} <span style="font-weight:600;color:var(--v-muted)">${escapeHTML(channel.handle || "")}</span></div><div class="v-social-handle">正在直播 · ${channel.accessMode === "paid" ? "付费订阅" : channel.accessMode === "free" ? "免费订阅" : "公开直播"}${channel.ageRequirement === "18+" ? " · 18+" : ""} · ${formatViewers(channel.viewers || 0)} 人观看 · ${escapeHTML(formatRelativeAt(channel.startedAt || Date.now()))}</div></div><div class="v-home-live-actions"><button class="v-post-more" data-action="toggle-home-live-menu" data-channel-id="${escapeHTML(channel.id)}">⋯</button><div class="v-post-menu" data-home-live-menu="${escapeHTML(channel.id)}"><button data-action="edit-generated-live" data-channel-id="${escapeHTML(channel.id)}">编辑直播</button><button class="is-delete" data-action="close-generated-live" data-channel-id="${escapeHTML(channel.id)}">关闭本场直播</button></div></div></div><button class="v-home-live-stage" data-action="open-live" data-live-id="${escapeHTML(channel.id)}"><div class="v-stage"><div class="v-stage-copy"><span class="v-badge">LIVE</span><div class="v-live-title">${escapeHTML(channel.title || "正在直播")}</div><div class="v-viewers">${escapeHTML(channel.category || channel.contentStyle || "频道直播")}</div></div></div></button>${translationHTML(liveTrId, liveTranslation)}</article>` });
                   }
                 }
                 state.communityPosts.filter(p => String(p.ownerType || "") === "channel" && String(p.ownerId || "") === String(channel.id)).forEach(post => {
@@ -2866,6 +2891,9 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 : safeArray(currentLive.chatSeed);
               state.liveChat = seededChat.map(item => ({ ...item }));
               state.liveChatsById[currentLiveKey] = state.liveChat.map(item => ({ ...item }));
+              state.liveChatQueues[currentLiveKey] = safeArray(state.liveChatQueues?.[currentLiveKey]);
+              flushLiveChatQueue(currentLiveKey);
+              armLiveLazyTimer(currentLiveKey);
               const title = currentLive.title || "正在直播";
               const hostName = currentLive.name || currentLive.handle || "主播";
               const liveTrId = `live-title-${String(currentLive.id || "live")}`;
@@ -2891,6 +2919,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 : `<div class="v-live-host-avatar">${avatarHTML(currentLive.avatar || "", hostName)}</div><div class="v-live-host-copy"><div class="v-live-host-name">${escapeHTML(hostName)}</div><div class="v-live-viewers" data-role="live-viewers"></div></div>`;
               const accessLabel = currentLive.accessMode === "free" ? "免费订阅" : currentLive.accessMode === "paid" ? "付费订阅" : "公开直播";
               const ageLabel = currentLive.ageRequirement === "18+" ? " · 18+" : "";
+              const nsfwLabel = currentLive.nsfw === true ? " · NSFW" : "";
               const modeLabel = guests.length ? ` · ${mode === "same-room" ? "线下同镜" : "线上联播"}` : "";
               const liveInteractionKey = String(currentLive.id || currentLive.ownerId || "live");
               const liveChannelId = String(currentLive.ownerId || currentLive.id || "");
@@ -2900,17 +2929,42 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const liveSelectedIdentity = liveEligibleIdentities.find(item => String(item.id) === liveRemembered) || liveEligibleIdentities.find(item => String(item.id) === String(state.viewerIdentityId)) || liveEligibleIdentities[0];
               if (liveSelectedIdentity) state.liveInteractionIdentity[liveInteractionKey] = String(liveSelectedIdentity.id);
               const liveIdentityPicker = identityPickerHTML(liveEligibleIdentities, liveSelectedIdentity?.id, "live-identity-select", `data-live-key="${escapeHTML(liveInteractionKey)}"`);
-              const viewerComposer = `<div class="v-composer">${liveIdentityPicker}<input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="open-gift-picker" aria-label="送礼物" title="送礼物">🎁</button><button data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播">${planeIconHTML()}</button></div>`;
+              const viewerComposer = `<div class="v-composer">${liveIdentityPicker}<input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="open-gift-picker" aria-label="送礼物" title="送礼物">🎁</button><button class="${liveReplyPending.has(liveInteractionKey) ? "is-generating" : ""}" data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播" ${liveReplyPending.has(liveInteractionKey) ? "disabled" : ""}>${liveReplyPending.has(liveInteractionKey) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div>`;
               const activeAd = liveStats.ad || currentLive.ad || currentLive.business || null;
               const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">${activeAd?.active ? "AD · 投放中" : "AD"}</button></div>` : "";
               const adStrip = "";
               const connectButton = own ? `<button class="v-live-connect-btn" data-action="open-invite-guest">与…连线${guests.length ? ` · ${participants.length}/4` : ""}</button>` : "";
-              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button class="v-summon-host" data-action="summon-host-live" aria-label="召唤 / 继续">${planeIconHTML()}</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span></div></div>`;
+              const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button class="v-summon-host ${liveReplyPending.has(liveInteractionKey) ? "is-generating" : ""}" data-action="summon-host-live" aria-label="召唤 / 继续" ${liveReplyPending.has(liveInteractionKey) ? "disabled" : ""}>${liveReplyPending.has(liveInteractionKey) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span></div></div>`;
 
-              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div>${quickTools}<button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + modeLabel)}</span></div><div class="v-live-title-row"><h2>${escapeHTML(title)}</h2>${connectButton}</div><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}${adStrip}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="50">❤️ 🔷50</button><button data-action="send-live-gift" data-gift-amount="200">💕 🔷200</button><button data-action="send-live-gift" data-gift-amount="500">💖 🔷500</button><button data-action="send-live-gift" data-gift-amount="1000">🛍️ 🔷1000</button><button data-action="send-live-gift" data-gift-amount="2888">🎁 🔷2888</button><button data-action="send-live-gift" data-gift-amount="5888">🎉 🔷5888</button><button data-action="send-live-gift" data-gift-amount="9888">❤️‍🔥 🔷9888</button><button data-action="send-live-gift" data-gift-amount="18888">💎 🔷18888</button></div></div><div class="v-live-economy-panel" data-role="live-economy-panel"></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${canEndLive ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : managedChannel ? '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
+              openScreen("live", `<div class="v-live-screen"><div class="v-live-body"><div class="v-live-fixed"><div class="v-live-stage ${coverHTML ? "has-cover" : ""}">${coverHTML}<div class="v-live-hud ${mode === "same-room" ? "is-same-room" : ""}"><button class="v-live-exit" data-action="open-live-exit" aria-label="退出">×</button><div class="v-live-host ${multiHost ? "is-multi" : ""}">${participantsHUD}</div>${quickTools}<button class="v-gift-rank-trigger" data-action="toggle-gift-rank" data-role="gift-rank-trigger">🎁 礼物榜</button></div><div class="v-live-moment" data-role="live-moment"></div></div><div class="v-live-info"><div class="v-live-info-head"><span class="v-badge">LIVE</span><span class="v-cohost-pill">${escapeHTML(accessLabel + ageLabel + nsfwLabel + modeLabel)}</span></div><div class="v-live-title-row"><h2>${escapeHTML(title)}</h2>${connectButton}</div><p>${escapeHTML(currentLive.category || "直播进行中")}</p>${translationHTML(liveTrId, liveTranslation)}${adStrip}</div></div><div class="v-chat-panel"><div class="v-chat-title">聊天室</div><div class="v-chat-scroll" data-role="live-chat-scroll"><div data-role="live-chat-lines"></div></div>${own ? hostConsole : viewerComposer}</div></div><div class="v-live-popover" data-role="gift-rank-panel"><div class="v-live-popover-card"><div class="v-live-popover-title"><span>本场礼物榜</span><button data-action="close-gift-rank">×</button></div><div data-role="gift-rank-rows"></div></div></div><div class="v-gift-picker" data-role="gift-picker"><div class="v-live-popover-title"><span>送礼物</span><button data-action="close-gift-picker">×</button></div><div class="v-gift-balance" data-role="gift-balance"></div><div class="v-gift-grid"><button data-action="send-live-gift" data-gift-amount="50">❤️ 🔷50</button><button data-action="send-live-gift" data-gift-amount="200">💕 🔷200</button><button data-action="send-live-gift" data-gift-amount="500">💖 🔷500</button><button data-action="send-live-gift" data-gift-amount="1000">🛍️ 🔷1000</button><button data-action="send-live-gift" data-gift-amount="2888">🎁 🔷2888</button><button data-action="send-live-gift" data-gift-amount="5888">🎉 🔷5888</button><button data-action="send-live-gift" data-gift-amount="9888">❤️‍🔥 🔷9888</button><button data-action="send-live-gift" data-gift-amount="18888">💎 🔷18888</button></div></div><div class="v-live-economy-panel" data-role="live-economy-panel"></div><div class="v-live-exitmenu" data-role="live-exit-menu"><div class="v-live-exitcard"><h3>${canEndLive ? "退出或结束直播" : "退出直播间？"}</h3>${own ? '<button class="v-primary" data-action="hang-own-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : managedChannel ? '<button class="v-primary" data-action="leave-live">退出直播间</button><button class="v-danger" data-action="end-current-live">结束直播</button>' : '<button class="v-primary" data-action="leave-live">退出直播间</button>'}<button class="v-cancel" data-action="close-live-exit">取消</button></div></div></div>`);
               renderLiveMoment();
               renderLiveChatLines();
               renderLiveHUD();
+            };
+
+            const flushLiveChatQueue = liveKey => {
+              state.liveChatQueues[liveKey] = safeArray(state.liveChatQueues?.[liveKey]);
+              const now = Date.now();
+              const due = state.liveChatQueues[liveKey].filter(item => Number(item?.plannedAt || 0) <= now);
+              if (!due.length) return 0;
+              const ids = new Set(due.map(item => String(item.id || "")));
+              state.liveChatQueues[liveKey] = state.liveChatQueues[liveKey].filter(item => !ids.has(String(item?.id || "")));
+              due.forEach(item => state.liveChat.push({ ...item, at:Number(item.plannedAt || now), plannedAt:undefined }));
+              state.liveChat = state.liveChat.slice(-120);
+              state.liveChatsById[liveKey] = state.liveChat.map(item => ({ ...item }));
+              return due.length;
+            };
+            const armLiveLazyTimer = liveKey => {
+              if (liveLazyTimers.has(liveKey)) clearTimeout(liveLazyTimers.get(liveKey));
+              const next = safeArray(state.liveChatQueues?.[liveKey]).map(item => Number(item?.plannedAt || 0)).filter(at => at > Date.now()).sort((a,b)=>a-b)[0];
+              if (!next) { liveLazyTimers.delete(liveKey); return; }
+              const timer = setTimeout(async () => {
+                liveLazyTimers.delete(liveKey);
+                const moved = flushLiveChatQueue(liveKey);
+                if (moved) { await persist(); if (state.liveSession && String(state.liveSession.id || state.liveSession.ownerId || "live") === liveKey) renderLiveChatLines(); }
+                armLiveLazyTimer(liveKey);
+              }, Math.max(350, next-Date.now()));
+              liveLazyTimers.set(liveKey, timer);
             };
 
             const renderLiveChatLines = () => {
@@ -2950,8 +3004,13 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
             const summonLive = async () => {
               const live = state.liveSession;
               if (!live) return;
-              const input = q('[data-screen="live"] [data-role="live-input"]');
-              const typed = String(input?.value || "").trim();
+              const liveKey = String(live.id || live.ownerId || "live");
+              if (liveReplyPending.has(liveKey)) return;
+              const inputBeforeBusy = q('[data-screen="live"] [data-role="live-input"]');
+              const typed = String(inputBeforeBusy?.value || "").trim();
+              liveReplyPending.add(liveKey);
+              openLive({ ...live });
+              try {
               let userText = "";
               if (typed) userText = await sendLiveChatOnly(typed);
               if (!userText && state.pendingLiveUserMessage && String(state.pendingLiveUserMessage.liveId || "") === String(live.id || "")) {
@@ -2959,6 +3018,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               }
               state.pendingLiveUserMessage = null;
               await advanceLive({ fromUser: Boolean(userText), userText });
+              } finally { liveReplyPending.delete(liveKey); if (state.liveSession && String(state.liveSession.id || state.liveSession.ownerId || "live") === liveKey) openLive({ ...state.liveSession }); }
             };
 
             const deleteLiveChat = async (indexValue) => {
@@ -3009,10 +3069,16 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
             const summonHostLive = async () => {
               const live = state.liveSession;
               if (!live || !isOwnLiveSession(live)) return;
+              const liveKey = String(live.id || live.ownerId || "live");
+              if (liveReplyPending.has(liveKey)) return;
+              liveReplyPending.add(liveKey);
+              openLive({ ...live });
+              try {
               const pending = state.pendingOwnLiveInput && String(state.pendingOwnLiveInput.liveId || "") === String(live.id || "") ? state.pendingOwnLiveInput : null;
               const text = pending ? String(pending.text || "") : "";
               state.pendingOwnLiveInput = null;
               await advanceLive({ fromUser: Boolean(text), userText: text });
+              } finally { liveReplyPending.delete(liveKey); if (state.liveSession && String(state.liveSession.id || state.liveSession.ownerId || "live") === liveKey) openLive({ ...state.liveSession }); }
             };
 
             const advanceLive = async ({ fromUser = false, userText = "" } = {}) => {
@@ -3027,7 +3093,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const recentTimeline = safeArray(progress.timeline).slice(-10).map(event => ({ actorName:event.actorName || "", action:event.action || "", speech:event.speech || "" }));
               const recentChat = safeArray(state.liveChat).slice(-16).map(line => ({ user:line.user || "", text:line.text || "" }));
               const activity = Math.max(0, Math.min(100, Number(state.platformSettings?.activityLevel ?? 50)));
-              const expectedChat = activity < 30 ? 1 : activity > 75 ? 3 : 2;
+              const expectedChat = activity < 30 ? 5 : activity > 75 ? 10 : 7;
               const allowedActors = own
                 ? guests.map(g => ({ id:String(g.id), name:String(g.name || "嘉宾") }))
                 : [{ id:String(live.ownerId || live.id || "host"), name:String(live.name || live.handle || "主播") }, ...guests.map(g => ({ id:String(g.id), name:String(g.name || "嘉宾") }))];
@@ -3039,15 +3105,16 @@ ${own ? "这是一场 USER 自己开的直播：绝对不能替 USER 说话或�
 允许发言/动作的非 USER 主体：${JSON.stringify(allowedActors)}。
 最近直播时间线：${JSON.stringify(recentTimeline)}
 最近聊天室：${JSON.stringify(recentChat)}
+${nsfwPresetPrompt(live.ageRequirement === "18+" || live.nsfw === true)}
 ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}。主播/嘉宾可以看到，也可以按人设自然略过。` : "USER 本轮没有新增输入，只是继续观看。"}
 
-陌生观众语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}\n返回严格 JSON 对象：{"endLive":false,"events":[{"actorId":"必须来自允许主体 id","actorName":"显示名","action":"自然动作，可空","speech":"实际说的话，可空；使用主要语言","translation":"按翻译规则填写"}],"chat":[{"user":"各不相同的观众网名","text":"原语言弹幕","translation":"按翻译规则填写","tipCoin":0,"giftCoin":0}]}。\n${own ? "这是 USER 自己的直播，endLive 必须为 false，不能替 USER 决定下播。" : "这是非 USER 主播的直播；如果当前话题和直播进度已经自然收尾，可以低概率设置 endLive=true，让主播自己结束直播，不要每几轮就结束。"}\n要求：events 0~${Math.max(1, Math.min(3, allowedActors.length))} 条，chat 约 ${expectedChat} 条；不要复用固定网名或固定动作模板；giftCoin/tipCoin 只能偶尔出现，数值应自然。`;
+陌生观众语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}\n返回严格 JSON 对象：{"endLive":false,"events":[{"actorId":"必须来自允许主体 id","actorName":"显示名","action":"自然动作，可空","speech":"实际说的话，可空；使用主要语言","translation":"按翻译规则填写"}],"chat":[{"user":"各不相同的观众网名","text":"原语言弹幕","translation":"按翻译规则填写","tipCoin":0,"giftCoin":0}]}。\n${own ? "这是 USER 自己的直播，endLive 必须为 false，不能替 USER 决定下播。" : "这是非 USER 主播的直播；如果当前话题和直播进度已经自然收尾，可以低概率设置 endLive=true，让主播自己结束直播，不要每几轮就结束。"}\n要求：events 0~${Math.max(1, Math.min(3, allowedActors.length))} 条，chat 约 ${expectedChat} 条。Vela 会把本批聊天室消息放进懒加载队列，像真实直播弹幕一样逐条滚出来，所以每条都应能独立成立，不要写成必须瞬间连续显示的脚本；不要复用固定网名或固定动作模板；giftCoin/tipCoin 只能偶尔出现，数值应自然。`;
               const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:"继续这一场直播。" }]);
               const data = extractJSON(aiText);
               if (!data || typeof data !== "object" || Array.isArray(data)) { toast("直播继续生成失败，请再试一次"); return; }
               const validActorIds = new Set(allowedActors.map(item => String(item.id)));
               const events = safeArray(data.events).slice(0, 3).filter(event => validActorIds.has(String(event?.actorId || "")) && (String(event?.action || "").trim() || String(event?.speech || "").trim()));
-              const chat = safeArray(data.chat).slice(0, 4).map((item,index) => ({
+              const chat = safeArray(data.chat).slice(0, 12).map((item,index) => ({
                 user:String(item?.user || "").trim(), avatar:STRANGER_AVATAR, text:String(item?.text || "").trim(), translation:String(item?.translation || "").trim(), tipCoin:Math.max(0, Math.round(Number(item?.tipCoin || 0))), giftCoin:Math.max(0, Math.round(Number(item?.giftCoin || 0))), at:Date.now()+index
               })).filter(item => item.user && item.text);
               if (!events.length && !chat.length) { toast("直播继续生成失败，请再试一次"); return; }
@@ -3059,7 +3126,10 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 pushLiveTimelineEvent(progress, normalized);
                 if (normalized.speech || normalized.action) { progress.text = normalized.speech || normalized.action; progress.translation = normalized.translation || ""; }
               });
-              state.liveChat.push(...chat.map(({giftCoin,...item}) => item));
+              const liveKey = String(live.id || live.ownerId || "live");
+              state.liveChatQueues[liveKey] = safeArray(state.liveChatQueues?.[liveKey]);
+              let cursor = Date.now() + 550;
+              chat.forEach((item,index) => { if (index > 0) cursor += Math.round((0.8 + Math.random()*2.7) * 1000); const {giftCoin,...row} = item; state.liveChatQueues[liveKey].push({ ...row, id:`liveq-${Date.now().toString(36)}-${index}-${Math.random().toString(36).slice(2,5)}`, plannedAt:cursor }); });
               const stats = getLiveStats(live);
               stats.tipReceivedCoin = Number(stats.tipReceivedCoin || 0) + chat.reduce((sum,item) => sum + Number(item.tipCoin || 0), 0);
               chat.forEach(item => {
@@ -3070,7 +3140,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 state.liveChat.push({ user:"系统", avatar:"🎁", text:`${item.user} 送出礼物 · 🔷${giftCoin}`, translation:"", at:Date.now()+10+Math.random() });
               });
               advanceViewerCount(live, { heatBoost: fromUser ? 2 : 0 });
-              renderLiveMoment(); renderLiveChatLines(); renderLiveHUD(); await persist();
+              flushLiveChatQueue(liveKey); armLiveLazyTimer(liveKey); renderLiveMoment(); renderLiveChatLines(); renderLiveHUD(); await persist();
               if (!own && data.endLive === true) { await endCurrentLive({ automatic:true }); }
             };
 
@@ -3388,7 +3458,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const host = q('[data-role="publish-sheet-content"]');
               if (!sheet || !host) return;
               const segments = (field, items, selected, disabledValues = []) => `<div class="v-live-segments v-post-segments" data-post-choice-group="${escapeHTML(field)}">${items.map(([value,label]) => `<button type="button" class="${value === selected ? "is-selected" : ""} ${disabledValues.includes(value) ? "is-disabled" : ""}" data-action="choose-post-option" data-post-field="${escapeHTML(field)}" data-post-value="${escapeHTML(value)}" ${disabledValues.includes(value) ? "disabled" : ""}>${escapeHTML(label)}</button>`).join("")}</div><input type="hidden" data-post-field="${escapeHTML(field)}" value="${escapeHTML(selected)}">`;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="post-image-preview"><div class="v-ios-media-placeholder"><b>＋</b><span>可选配图</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">选择照片<input type="file" accept="image/*" data-post-image-file></label><button class="v-ios-media-remove" data-action="clear-post-image">移除</button></div><input type="hidden" data-post-field="image" value=""><div class="v-ios-url"><label>图片 URL（备用）</label><input data-post-image-url placeholder="https://..."></div></div><div class="v-live-publish-group v-post-publish-group"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-live-publish-section"><div class="v-live-publish-label">可见范围</div>${segments("accessMode", [["public","公开"],["free","免费订阅"],["paid","付费订阅"]], "public")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">年龄限制</div>${segments("ageRequirement", [["none","无限制"],["18+","18+"]], "none", ["18+"])}</div></div><div class="v-publish-note">公开贴文不能开启 18+；免费订阅或付费订阅内容可选择 18+。发布后会同步到当前主页和首页内容流。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
+              host.innerHTML = `<div class="v-publish-sheet-title"><h3>发布贴文</h3><button data-action="render-publish-menu">‹</button></div><div class="v-ios-publish"><div class="v-ios-media-card"><div class="v-ios-media-preview" data-role="post-image-preview"><div class="v-ios-media-placeholder"><span>可选配图</span></div></div><div class="v-ios-media-actions"><label class="v-ios-media-picker">选择照片<input type="file" accept="image/*" data-post-image-file></label><button class="v-ios-media-remove" data-action="clear-post-image">移除</button></div><input type="hidden" data-post-field="image" value=""><div class="v-ios-url"><label>图片 URL（备用）</label><input data-post-image-url placeholder="https://..."></div></div><div class="v-live-publish-group v-post-publish-group"><div class="v-field"><label>贴文内容</label><textarea data-post-field="text" maxlength="1000" placeholder="写点什么……"></textarea></div><div class="v-live-publish-section"><div class="v-live-publish-label">可见范围</div>${segments("accessMode", [["public","公开"],["free","免费订阅"],["paid","付费订阅"]], "public")}</div><div class="v-live-publish-section"><div class="v-live-publish-label">年龄限制</div>${segments("ageRequirement", [["none","无限制"],["18+","18+"]], "none", ["18+"])}</div></div><div class="v-publish-note">公开贴文不能开启 18+；免费订阅或付费订阅内容可选择 18+。发布后会同步到当前主页和首页内容流。</div></div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="render-publish-menu">返回</button><button class="v-action" data-action="save-community-post" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}">发布</button></div>`;
               sheet.classList.add("is-open");
             };
 
@@ -3492,8 +3562,13 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 
             const summonPostReplies = async (postId) => {
               const id = String(postId || "");
+              if (!id || postReplyPending.has(id)) return;
               const post = getPostById(id);
               if (!post) return;
+              postReplyPending.add(id);
+              const setBusy = busy => { qa(`[data-action="summon-post-replies"][data-post-id="${CSS.escape(id)}"]`).forEach(btn => { btn.classList.toggle("is-generating", busy); btn.disabled = busy; if (btn.classList.contains("v-summon-mini")) btn.innerHTML = busy ? '<span class="v-summon-dots">•••</span>' : planeIconHTML(); }); };
+              setBusy(true);
+              try {
               const ownerChannel = post?.ownerType === "channel" ? state.channels.find(ch => String(ch.id) === String(post.ownerId || "")) : null;
               const persona = ownerChannel ? String(getChannelPersonaText(ownerChannel) || "").slice(0,1600) : "";
               const current = safeArray(state.postReplies[id]);
@@ -3503,10 +3578,11 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
 
 你正在给一条 Vela 贴文继续生成评论区互动。贴文作者：${post.name || post.handle || "Vela 用户"}；作者语言/地区倾向：${locale}；贴文：${post.text || ""}。${persona ? `角色设定：${persona}` : ""}
 已有最新评论：${JSON.stringify(history)}
+${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
 陌生评论者语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}\n返回严格 JSON 数组，恰好 5 条：[{"role":"viewer|owner","user":"viewer 时填自然网名；owner 可空","text":"评论原语言","translation":"按翻译规则填写","replyTo":"可空；需要回复已有评论时写对方公开名"}]。评论者网名和语言要有差异，不要复用固定模板；owner 只能是贴文作者本人，且不必每批出现。绝对不能替 USER 发评论。`;
               const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:"继续生成下一批 5 条评论。" }]);
               const data = extractJSON(aiText);
-              if (!Array.isArray(data)) { toast("评论生成失败，请再试一次"); return; }
+              if (!Array.isArray(data)) { toast(`评论生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`); return; }
               const additions = [];
               for (const item of data) {
                 if (additions.length >= 5 || !item || typeof item !== "object") continue;
@@ -3517,12 +3593,13 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 if (!user) continue;
                 additions.push({ id:`reply-${Date.now().toString(36)}-${additions.length}-${Math.random().toString(36).slice(2,5)}`, user, avatar:ownerReply ? String(post.avatar || initials(post.name || "V")) : STRANGER_AVATAR, text, translation:String(item.translation || "").trim(), replyTo:String(item.replyTo || "").trim(), isUser:false });
               }
-              if (additions.length !== 5) { toast("评论生成失败，请再试一次"); return; }
+              if (additions.length !== 5) { toast(`评论生成失败 · 只解析到 ${additions.length}/5 条有效评论`); return; }
               state.postReplies[id] = [...current, ...additions];
               await persist();
               renderPostComments(id);
               if (!q(`[data-inline-comments="${CSS.escape(id)}"].is-open`)) renderHome();
               toast("已追加 5 条评论");
+              } catch (err) { toast(`评论处理失败 · ${String(err?.message || err || "未知错误").replace(/\s+/g," ").slice(0,100)}`); } finally { postReplyPending.delete(id); setBusy(false); }
             };
 
 
@@ -3540,7 +3617,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const selector = kind === "live" ? '[data-role="live-cover-preview"]' : '[data-role="post-image-preview"]';
               const preview = q(`[data-role="publish-sheet"] ${selector}`);
               if (!preview) return;
-              preview.innerHTML = isImageURL(value) ? `<img src="${escapeHTML(value)}" alt="">` : `<div class="v-ios-media-placeholder"><b>＋</b><span>${kind === "live" ? "直播封面" : "可选配图"}</span></div>`;
+              preview.innerHTML = isImageURL(value) ? `<img src="${escapeHTML(value)}" alt="">` : `<div class="v-ios-media-placeholder"><span>${kind === "live" ? "直播封面" : "可选配图"}</span></div>`;
             };
 
             const renderPublishMenu = () => {
@@ -3683,8 +3760,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const viewerFollows = ownerType === "channel" && viewer ? isFollowing("identity", viewer.id, "channel", entity.id) : false;
               const channelFollows = ownerType === "channel" && viewer ? isFollowing("channel", entity.id, "identity", viewer.id) : false;
               const followLabel = viewerFollows && channelFollows ? "互关" : viewerFollows ? "已关注" : channelFollows ? "关注了你" : "关注";
-              const profileActions = ownerType === "channel" ? `<div class="v-profile-actions"><button class="v-profile-follow ${viewerFollows ? "is-on" : ""}" data-action="toggle-profile-follow" data-channel-id="${escapeHTML(entity.id)}">${escapeHTML(followLabel)}</button><button class="v-profile-message" data-action="message-channel" data-channel-id="${escapeHTML(entity.id)}">私信</button></div>` : "";
-              openScreen("profile", `<div class="v-profile-shell"><header class="v-subhead"><button data-action="close-screen" data-screen-name="profile">‹</button><div class="v-meta"><strong>${escapeHTML(name)}</strong><div class="v-hint">${ownerType === "identity" ? "我的 Vela 主页" : "角色频道主页"}</div></div><button class="v-head-action" data-action="edit-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">编辑主页</button></header><div class="v-profile-banner">${bannerHTML}</div><div class="v-profile-info"><div class="v-profile-avatar ${entity.live || entity.activeLive ? "is-live-profile" : ""}">${avatarHTML(entity.avatar || "", name)}</div><div class="v-profile-main"><div class="v-profile-maincopy"><h2>${escapeHTML(name)}</h2><div class="v-profile-handle">${escapeHTML(handle)}</div></div>${profileActions}</div><div class="v-profile-stats"><span><b>${Number(entity.followers || 0).toLocaleString("zh-CN")}</b> 粉丝</span><span><b>${Number(entity.following || 0).toLocaleString("zh-CN")}</b> 关注</span></div>${entity.bio ? `<div class="v-profile-bio">${escapeHTML(entity.bio)}</div>` : ""}${entity.sourceCharacterId ? `<div class="v-linkstatus"><span class="v-dot on"></span>已关联 Roche 角色</div>` : ""}</div><div class="v-profile-tabs"><button class="is-active" data-action="profile-tab" data-profile-tab="activity" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">动态</button><button data-action="profile-tab" data-profile-tab="replays" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">回放</button><button data-action="profile-tab" data-profile-tab="subscriptions" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">订阅</button></div><div class="v-profile-tabbody" data-role="profile-tab-body"></div></div>`);
+              const profileActions = ownerType === "channel" ? `<div class="v-profile-actions"><button class="v-profile-follow ${viewerFollows ? "is-on" : ""} ${viewerFollows && channelFollows ? "is-mutual" : ""}" data-action="toggle-profile-follow" data-channel-id="${escapeHTML(entity.id)}">${escapeHTML(followLabel)}</button><button class="v-profile-message" data-action="message-channel" data-channel-id="${escapeHTML(entity.id)}">私信</button></div>` : "";
+              openScreen("profile", `<div class="v-profile-shell"><header class="v-subhead"><button data-action="close-screen" data-screen-name="profile">‹</button><div class="v-meta"><strong>${escapeHTML(name)}</strong><div class="v-hint">${ownerType === "identity" ? "我的 Vela 主页" : "角色频道主页"}</div></div><button class="v-head-action" data-action="edit-profile" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">编辑主页</button></header><div class="v-profile-banner">${bannerHTML}</div><div class="v-profile-info"><div class="v-profile-avatar ${entity.live || entity.activeLive ? "is-live-profile" : ""}">${avatarHTML(entity.avatar || "", name)}</div><div class="v-profile-main"><div class="v-profile-maincopy"><h2>${escapeHTML(name)}</h2><div class="v-profile-handle">${escapeHTML(handle)}</div></div>${profileActions}</div><div class="v-profile-stats"><span><b>${Number(entity.followers || 0).toLocaleString("zh-CN")}</b> 粉丝</span><span><b>${Number(entity.following || 0).toLocaleString("zh-CN")}</b> 关注</span></div>${entity.bio ? `<div class="v-profile-bio">${escapeHTML(entity.bio)}</div>` : ""}</div><div class="v-profile-tabs"><button class="is-active" data-action="profile-tab" data-profile-tab="activity" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">动态</button><button data-action="profile-tab" data-profile-tab="replays" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">回放</button><button data-action="profile-tab" data-profile-tab="subscriptions" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(entity.id)}">订阅</button></div><div class="v-profile-tabbody" data-role="profile-tab-body"></div></div>`);
               renderProfileTab(ownerType, entity.id, "activity");
             };
 
@@ -4017,7 +4094,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
             const openSettingsNote = (kind) => {
               if (kind === "presets") {
                 const mode = String(state.generationPreset?.mode || "default");
-                openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>生成预设</strong><div class="v-hint">Vela 默认规则会一直生效；需要时可在下面追加自己的规则。</div></div><button class="v-head-action" data-action="save-generation-settings">保存</button></header><div class="v-subbody"><div class="v-settings-group"><h3>Vela 默认生成规则</h3><div class="v-preset-box">${escapeHTML(VELA_DEFAULT_PRESET)}</div></div><div class="v-settings-group"><h3>自定义</h3><div class="v-field"><label>使用方式</label><select data-setting-field="presetMode"><option value="default" ${mode === "default" ? "selected" : ""}>只使用 Vela 默认预设</option><option value="custom" ${mode === "custom" ? "selected" : ""}>默认预设 + 我的补充</option></select></div><div class="v-field" style="margin-top:12px"><label>自定义补充（可留空）</label><textarea data-setting-field="customPreset" maxlength="5000" placeholder="例如：希望弹幕更安静、直播节奏更慢……">${escapeHTML(state.generationPreset?.customText || "")}</textarea></div></div></div>`);
+                openScreen("settings", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="settings">‹</button><div class="v-meta"><strong>生成预设</strong><div class="v-hint">Vela 默认规则会一直生效；普通自定义与 18+ / NSFW 预设分开注入。</div></div><button class="v-head-action" data-action="save-generation-settings">保存</button></header><div class="v-subbody"><div class="v-settings-group"><h3>Vela 默认生成规则</h3><div class="v-preset-box">${escapeHTML(VELA_DEFAULT_PRESET)}</div></div><div class="v-settings-group"><h3>普通自定义</h3><div class="v-field"><label>使用方式</label><select data-setting-field="presetMode"><option value="default" ${mode === "default" ? "selected" : ""}>只使用 Vela 默认预设</option><option value="custom" ${mode === "custom" ? "selected" : ""}>默认预设 + 我的补充</option></select></div><div class="v-field" style="margin-top:12px"><label>自定义补充（可留空）</label><textarea data-setting-field="customPreset" maxlength="5000" placeholder="例如：希望弹幕更安静、直播节奏更慢……">${escapeHTML(state.generationPreset?.customText || "")}</textarea></div></div><div class="v-settings-group"><h3>NSFW / 18+ 预设</h3><p class="v-settings-note">只注入到带 18+ 标签的 user / char 直播与贴文互动，以及推荐页中带 NSFW 标签的直播和聊天室。不会影响普通内容。</p><div class="v-field"><label>成熟向生成风格</label><textarea data-setting-field="nsfwPreset" maxlength="5000" placeholder="写下你希望的成熟向主播、聊天室、评论区风格……">${escapeHTML(state.generationPreset?.nsfwText || "")}</textarea></div></div></div>`);
                 return;
               }
               if (kind === "appearance") {
@@ -4039,7 +4116,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const screen = q('[data-screen="settings"]');
               const mode = screen?.querySelector('[data-setting-field="presetMode"]')?.value === "custom" ? "custom" : "default";
               const customText = String(screen?.querySelector('[data-setting-field="customPreset"]')?.value || "").trim();
-              state.generationPreset = { mode, customText };
+              const nsfwText = String(screen?.querySelector('[data-setting-field="nsfwPreset"]')?.value || "").trim();
+              state.generationPreset = { mode, customText, nsfwText };
               await persist(); toast("生成预设已保存");
             };
 
@@ -4179,7 +4257,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const selectedIdentity = state.identities.find(item => String(item.id) === rememberedIdentity) || state.identities.find(item => String(item.id) === String(state.viewerIdentityId)) || state.identities[0];
               if (selectedIdentity) state.dmInteractionIdentity[String(messageId)] = String(selectedIdentity.id);
               const identityPicker = identityPickerHTML(state.identities, selectedIdentity?.id, "dm-identity-select", `data-message-id="${escapeHTML(messageId)}"`);
-              openScreen("message", `<div class="v-chat-screen v-dm-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="更多" title="更多">⋯</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}">${planeIconHTML()}</button></div></div>`);
+              openScreen("message", `<div class="v-chat-screen v-dm-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(msg.name || "Vela ID")}</strong><small>${escapeHTML(handle)}</small></div><div class="v-chat-headactions"><button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="更多" title="更多">⋯</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-direct-chat" data-message-id="${escapeHTML(messageId)}">清除聊天记录</button></div></header><div class="v-chat-body" data-role="chat-body">${rowHTML || '<div class="v-group-empty">还没有消息。<br>Enter 只发送你的消息，小飞机才召唤对方。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="dm-input" data-message-id="${escapeHTML(messageId)}" placeholder="发消息… · Enter发送" maxlength="600"><button class="v-chat-plus" data-action="open-dm-plus" data-message-id="${escapeHTML(messageId)}">＋</button><button class="v-chat-summon ${dmReplyPending.has(String(messageId)) ? "is-generating" : ""}" data-action="summon-direct-message" data-message-id="${escapeHTML(messageId)}" ${dmReplyPending.has(String(messageId)) ? "disabled" : ""}>${dmReplyPending.has(String(messageId)) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div></div>`);
               requestAnimationFrame(() => {
                 const body = q('[data-screen="message"] [data-role="chat-body"]');
                 if (body) body.scrollTop = body.scrollHeight;
@@ -4452,7 +4530,8 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                 const system = `${VELA_DEFAULT_PRESET}\n\n你正在模拟 Vela 私信中 USER 之外的对方。绝对禁止替 USER 发言、行动、做决定。Enter 只发送 USER 自己写的内容，小飞机召唤时即使 USER 没有新消息，对方也可以自然继续说自己的事，不需要强行围着 USER。对方身份：${msg.name || "对方"} ${channel?.handle || msg.handle || ""}。对方类型：${msg.badge || msg.strangerKind || "普通私信"}。${msg.businessProfile ? `商务资料：${msg.businessProfile}。` : ""}${persona ? `角色设定：${persona}` : ""}\n${msg.external || msg.strangerKind ? `陌生用户语言倾向：${languagePreferencePrompt()}` : "这是角色账号私信：必须遵循角色自身语言与人设，不受平台陌生人语言倾向覆盖。"}\n${translationRulePrompt()}
 
 请返回严格 JSON。普通消息：
-{"type":"message","text":"对方实际发出的消息","translation":"按翻译规则填写","acceptCardId":""}
+{"type":"message","messages":[{"text":"对方实际发出的消息1","translation":"按翻译规则填写"},{"text":"可选的第2条","translation":"按翻译规则填写"}],"text":"兼容单条消息时可填写","translation":"兼容单条翻译","acceptCardId":""}
+普通私信一次允许对方自然连续说 1~3 条短消息；如果输出多条，用 messages 数组。Vela 会在生成完成后一起显示，不做逐条懒加载。
 平台陌生互动频率：${state.platformSettings?.strangerInteraction || "normal"}。
 只有在非常自然、符合身份和上下文时，才可以主动发直播邀约。商务合作只能由“对方 / 品牌方”主动提出，USER 不能自己生成正式商务卡。${state.platformSettings?.allowBusinessDM === false ? "当前平台设置已关闭陌生商务邀约：除非这个会话已经存在明确合作上下文，否则不得主动创建新的 business 卡。" : ""}
 直播邀约：
@@ -4475,9 +4554,11 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
                   state.dmThreads[messageId].push(incoming);
                   if (data.text) state.dmThreads[messageId].push({ id:`dm-${Date.now().toString(36)}-after`, kind:"text", sender:"other", name:msg.name || "对方", avatar:otherAvatar, text:String(data.text), translation:String(data.translation || ""), locale:String(msg.locale || ""), needsTranslation:Boolean(!data.translation && textNeedsSimplifiedTranslation(String(data.text || ""), msg.locale)), at:Date.now()+1 });
                 } else {
-                  const replyText = String(data.text || "").trim();
-                  if (!replyText) { await persist(); renderDirectThread(messageId); toast("对方这次没有生成有效消息"); return; }
-                  state.dmThreads[messageId].push({ id:`dm-${Date.now().toString(36)}`, kind:"text", sender:"other", name:msg.name || "对方", avatar:otherAvatar, text:replyText, translation:String(data.translation || ""), locale:String(msg.locale || ""), needsTranslation:Boolean(!data.translation && textNeedsSimplifiedTranslation(String(data.text || ""), msg.locale)), at:Date.now() });
+                  const messageRows = safeArray(data.messages).slice(0,3).map(item => ({ text:String(item?.text || "").trim(), translation:String(item?.translation || "").trim() })).filter(item => item.text);
+                  if (!messageRows.length && String(data.text || "").trim()) messageRows.push({ text:String(data.text || "").trim(), translation:String(data.translation || "").trim() });
+                  if (!messageRows.length) { await persist(); renderDirectThread(messageId); toast("对方这次没有生成有效消息"); return; }
+                  messageRows.forEach((row,index) => state.dmThreads[messageId].push({ id:`dm-${Date.now().toString(36)}-${index}`, kind:"text", sender:"other", name:msg.name || "对方", avatar:otherAvatar, text:row.text, translation:row.translation, locale:String(msg.locale || ""), needsTranslation:Boolean(!row.translation && textNeedsSimplifiedTranslation(row.text, msg.locale)), at:Date.now()+index }));
+                  if (!data.text) data.text = messageRows.map(row => row.text).join(" ");
                 }
                 state.dmThreads[messageId] = state.dmThreads[messageId].slice(-240);
                 msg.preview = String(data.text || data.title || msg.preview || "");
@@ -4491,6 +4572,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               } finally {
                 removeTyping();
                 dmReplyPending.delete(messageId);
+                if (q('[data-screen="message"] [data-role="dm-input"]')?.dataset?.messageId === String(messageId)) renderDirectThread(messageId);
               }
             };
 
@@ -4747,7 +4829,7 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               const selectedIdentity = eligibleIdentities.find(x => String(x.id) === remembered) || eligibleIdentities.find(x => String(x.id) === String(state.viewerIdentityId)) || eligibleIdentities[0];
               if (selectedIdentity) state.communityInteractionIdentity[key] = String(selectedIdentity.id);
               const identityPicker = identityPickerHTML(eligibleIdentities, selectedIdentity?.id, "community-identity-select", `data-community-key="${escapeHTML(key)}"`);
-              openScreen("message", `<div class="v-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(cfg.name)} · ${stats.members.toLocaleString("zh-CN")}人</strong><small>${stats.active.toLocaleString("zh-CN")}人正在聊天</small></div><div class="v-chat-headactions">${canEdit ? `<button class="v-chat-headicon is-edit" data-action="edit-community" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="paid">编辑</button>` : ""}<button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="更多" title="更多">⋯</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-community-chat" data-community-key="${escapeHTML(key)}" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="paid">${canManage ? "清空全部聊天记录" : "清空本地聊天记录"}</button></div></header><div class="v-chat-body" data-role="chat-body">${cfg.announcement ? `<div class="v-community-announcement">公告 · ${escapeHTML(cfg.announcement)}</div>` : ""}${rowHTML || '<div class="v-group-empty">群聊已经建立。<br>Enter 只发送你的消息，小飞机会让群成员自己交流。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="community-message-input" data-community-key="${escapeHTML(key)}" placeholder="发消息… · Enter发送" maxlength="600">${canManage ? `<button class="v-chat-plus" data-action="open-community-plus" data-community-key="${escapeHTML(key)}">＋</button>` : ""}<button class="v-chat-summon" data-action="summon-community-chat" data-community-key="${escapeHTML(key)}">${planeIconHTML()}</button></div></div>`);
+              openScreen("message", `<div class="v-chat-screen"><header class="v-chat-head"><button class="v-chat-back" data-action="close-screen" data-screen-name="message">‹</button><div class="v-chat-headcopy"><strong>${escapeHTML(cfg.name)} · ${stats.members.toLocaleString("zh-CN")}人</strong><small>${stats.active.toLocaleString("zh-CN")}人正在聊天</small></div><div class="v-chat-headactions">${canEdit ? `<button class="v-chat-headicon is-edit" data-action="edit-community" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="paid">编辑</button>` : ""}<button class="v-chat-headicon" data-action="toggle-chat-topmenu" aria-label="更多" title="更多">⋯</button></div><div class="v-chat-topmenu" data-role="chat-topmenu"><button data-action="clear-community-chat" data-community-key="${escapeHTML(key)}" data-owner-type="${escapeHTML(ownerType)}" data-owner-id="${escapeHTML(ownerId)}" data-tier="paid">${canManage ? "清空全部聊天记录" : "清空本地聊天记录"}</button></div></header><div class="v-chat-body" data-role="chat-body">${cfg.announcement ? `<div class="v-community-announcement">公告 · ${escapeHTML(cfg.announcement)}</div>` : ""}${rowHTML || '<div class="v-group-empty">群聊已经建立。<br>Enter 只发送你的消息，小飞机会让群成员自己交流。</div>'}</div><div class="v-chat-composer-wrap">${identityPicker}<input data-role="community-message-input" data-community-key="${escapeHTML(key)}" placeholder="发消息… · Enter发送" maxlength="600">${canManage ? `<button class="v-chat-plus" data-action="open-community-plus" data-community-key="${escapeHTML(key)}">＋</button>` : ""}<button class="v-chat-summon ${communityReplyPending.has(key) ? "is-generating" : ""}" data-action="summon-community-chat" data-community-key="${escapeHTML(key)}" ${communityReplyPending.has(key) ? "disabled" : ""}>${communityReplyPending.has(key) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div></div>`);
               requestAnimationFrame(() => {
                 const body = q('[data-screen="message"] [data-role="chat-body"]');
                 if (body) body.scrollTop = body.scrollHeight;
@@ -4875,6 +4957,7 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               } finally {
                 removeTyping();
                 communityReplyPending.delete(key);
+                if (q('[data-screen="message"] [data-role="community-message-input"]')?.dataset?.communityKey === key) openCommunityChat(ownerType, ownerId, tier);
               }
             };
 
