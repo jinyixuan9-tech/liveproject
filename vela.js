@@ -1,7 +1,7 @@
 (() => {
   const PLUGIN_ID = "vela-live";
   const APP_ID = "vela-live-home";
-  const VERSION = "0.2.22";
+  const VERSION = "0.3.0";
   const STRANGER_AVATAR = "https://imgbed.heliar.top/i/sbLXJ9cX7mtcq4Ua_%E9%9F%A9%E5%A5%B3%E9%83%BD%E5%9C%A8%E7%94%A8%E7%9A%84%E6%B3%A8%E9%94%80%E7%B3%BB%E5%A4%B4%E5%83%8F%EF%BC%88%E5%8F%AF%E5%AD%98%EF%BC%89_8_%E6%81%8B%E6%97%B6%E9%9B%A8_%E6%9D%A5%E8%87%AA%E5%B0%8F%E7%BA%A2%E4%B9%A6%E7%BD%91%E9%A1%B5%E7%89%88.webp";
   const RECOMMENDATION_TOPICS = ["随便看看","日常","恋爱","音乐","游戏","工作","吃播","户外","多人联播","NSFW"];
   const LANGUAGE_PREFERENCE_OPTIONS = [
@@ -170,9 +170,10 @@
   }
 
   function formatViewers(value) {
-    const n = Number(value || 0);
-    if (n >= 10000) return `${(n / 10000).toFixed(n >= 100000 ? 0 : 1)}万`;
-    if (n >= 1000) return `${(n / 1000).toFixed(1)}K`;
+    const n = Math.max(0, Math.round(Number(value || 0)));
+    const compact = (num, unit) => `${Number(num.toFixed(1))}${unit}`;
+    if (n >= 10000) return compact(n / 10000, "w");
+    if (n >= 1000) return compact(n / 1000, "k");
     return String(n);
   }
 
@@ -799,6 +800,9 @@
 .vela-roche .v-profile-follow.is-mutual{background:var(--v-red)!important;color:#fff!important}
 .vela-roche button.is-generating{pointer-events:none!important;opacity:.72!important}
 .vela-roche .v-summon-dots{display:inline-flex;letter-spacing:2px;font-weight:900;line-height:1}
+/* v0.3.0 layout polish */
+.vela-roche .v-replay-timeline{max-height:46vh;overflow:auto;overscroll-behavior:contain;padding-right:2px}.vela-roche .v-replay-chat{max-height:28vh;overflow:auto;overscroll-behavior:contain}.vela-roche .v-live-host{min-width:0!important;max-width:62%!important}.vela-roche .v-live-host-copy{min-width:0!important;flex:1!important}.vela-roche .v-live-viewers{flex:0 0 auto!important}.vela-roche .v-prize-row{grid-template-columns:minmax(72px,1fr) 58px minmax(110px,1.5fr) 30px!important;align-items:center}.vela-roche .v-prize-remove{width:30px!important;height:30px!important;padding:0!important;border-radius:50%!important;font-size:16px!important}.vela-roche .v-wallet-bind-modal{position:absolute;inset:0;display:grid;place-items:center;padding:18px;background:rgba(0,0,0,.36);backdrop-filter:blur(7px)}.vela-roche .v-wallet-bind-modal .v-wallet-flow-card{width:min(100%,390px);max-height:min(76vh,610px);overflow:auto}.vela-roche .v-home-refresh-grid{display:grid;gap:8px}.vela-roche .v-home-refresh-grid button{border:0;border-radius:14px;background:var(--v-soft);color:var(--v-text);padding:12px;text-align:left;font-weight:850}.vela-roche .v-rec-free-input{width:100%;min-height:88px;resize:vertical;border:1px solid var(--v-line);border-radius:14px;padding:11px;background:var(--v-card);color:var(--v-text);font:inherit}
+
 </style>`;
   }
 
@@ -815,14 +819,14 @@
       </header>
       <main class="v-main">
         <section class="v-page is-active" data-page="home">
-          <div class="v-title-row"><div class="v-title">首页 <small>关注中的频道</small></div><div class="v-title-actions"><button class="v-icon-btn" data-action="refresh-home" aria-label="刷新首页" title="刷新首页">${refreshIconHTML()}</button></div></div>
+          <div class="v-title-row"><div class="v-title">首页 <small>关注中的频道</small></div><div class="v-title-actions"><button class="v-icon-btn" data-action="open-home-refresh" aria-label="刷新首页" title="刷新首页">${refreshIconHTML()}</button></div></div>
           <div class="v-channels" data-role="channel-strip"></div>
           <div data-role="schedule"></div>
           <div class="v-filters"><button class="v-chip" data-action="home-filter" data-home-filter="all">全部</button><button class="v-chip" data-action="home-filter" data-home-filter="live">正在直播</button><button class="v-chip" data-action="home-filter" data-home-filter="post">贴文</button></div>
           <div data-role="home-feed"></div>
         </section>
         <section class="v-page" data-page="discover">
-          <div class="v-title-row"><div class="v-title">推荐 <small>现在正在播什么</small></div><div class="v-title-actions"><button class="v-rec-topic-btn" data-action="open-recommendation-topics">想看什么</button><button class="v-icon-btn" data-action="refresh-recommended" aria-label="刷新推荐" title="随机刷新推荐">${refreshIconHTML()}</button></div></div>
+          <div class="v-title-row"><div class="v-title">推荐 <small>现在正在播什么</small></div><div class="v-title-actions"><button class="v-rec-topic-btn" data-action="open-recommendation-topics">这一批想看什么？</button><button class="v-icon-btn" data-action="open-recommendation-topics" aria-label="刷新推荐" title="刷新推荐">${refreshIconHTML()}</button></div></div>
           <div data-role="recommended"></div>
         </section>
         <section class="v-page" data-page="messages">
@@ -1983,15 +1987,13 @@
             };
 
             const switchPage = (page) => {
+              if (page === "wallet" && !state.wallet.linkedAccount) { openWalletBind(); return; }
               state.activePage = page;
               qa(".v-page").forEach(el => el.classList.toggle("is-active", el.dataset.page === page));
               qa("[data-nav]").forEach(el => el.classList.toggle("is-active", el.dataset.nav === page));
               if (page === "wallet") {
                 renderWallet();
                 settleWeeklySubscriptions().then(() => renderWallet());
-                if (!state.wallet.linkedAccount) setTimeout(() => {
-                  if (state.activePage === "wallet" && !state.wallet.linkedAccount) openWalletBind();
-                }, 120);
               }
             };
 
@@ -2309,6 +2311,7 @@
               const out = [];
               for (const raw of arr) {
                 if (!raw || typeof raw !== "object" || out.length >= count) continue;
+                const type = String(raw.type || "live") === "post" ? "post" : "live";
                 const source = String(raw.source || "stranger") === "alias" ? "alias" : "stranger";
                 const ownerId = source === "alias" && aliasIds.has(String(raw.ownerId || "")) ? String(raw.ownerId) : "";
                 if (source === "alias" && !ownerId) continue;
@@ -2318,46 +2321,28 @@
                 if (!name || !handle || usedHandles.has(handle.toLowerCase())) continue;
                 const title = String(raw.title || "").trim();
                 const category = String(raw.category || "").trim();
-                if (!title || !category) continue;
+                const text = String(raw.text || "").trim();
+                if (type === "live" && (!title || !category)) continue;
+                if (type === "post" && !text) continue;
                 usedHandles.add(handle.toLowerCase());
-                const locale = String(raw.locale || "").trim() || detectLiveLanguage({ title, category });
+                const locale = String(raw.locale || "").trim() || detectLiveLanguage({ title, category, text });
                 const at = Date.now() - Math.max(3, Math.min(120, Number(raw.startedMinutesAgo || 20))) * 60 * 1000;
-                const chatSeed = safeArray(raw.chatSeed).slice(0, 6).map((item, index) => ({
-                  user:String(item?.user || "").trim(),
-                  avatar:STRANGER_AVATAR,
-                  text:String(item?.text || "").trim(),
-                  translation:String(item?.translation || "").trim(),
-                  at:at + index
-                })).filter(item => item.user && item.text);
+                const chatSeed = type === "live" ? safeArray(raw.chatSeed).slice(0, 6).map((item, index) => ({
+                  user:String(item?.user || "").trim(), avatar:STRANGER_AVATAR, text:String(item?.text || "").trim(), translation:String(item?.translation || "").trim(), at:at + index
+                })).filter(item => item.user && item.text) : [];
                 out.push({
                   id:`rec-${Date.now().toString(36)}-${Math.random().toString(36).slice(2,7)}-${out.length}`,
-                  external:!alias,
-                  locale,
-                  name,
-                  handle,
-                  avatar:String(alias?.avatar || STRANGER_AVATAR),
-                  ownerId:alias?.id || "",
-                  sourceType:alias ? "role-alias" : "stranger",
-                  title,
-                  titleTranslation:String(raw.titleTranslation || "").trim(),
-                  category,
-                  categoryTranslation:String(raw.categoryTranslation || "").trim(),
-                  creatorProfile:String(raw.creatorProfile || alias?.contentStyle || "").trim(),
-                  nsfw:Boolean(raw.nsfw === true || safeArray(raw.tags).some(tag => String(tag).toUpperCase() === "NSFW")),
-                  ageRequirement:String(raw.ageRequirement || "none") === "18+" ? "18+" : "none",
-                  accessMode:["public","free","paid"].includes(String(raw.accessMode || "")) ? String(raw.accessMode) : "public",
-                  viewers:Math.max(1, Math.round(Number(raw.viewers || 0) || (80 + Math.random()*2400))),
-                  live:true,
-                  startedAt:at,
-                  at,
-                  openingAction:String(raw.openingAction || "").trim(),
-                  openingSpeech:String(raw.openingSpeech || "").trim(),
-                  openingTranslation:String(raw.openingTranslation || "").trim(),
-                  chatSeed
+                  type, external:!alias, locale, name, handle, avatar:String(alias?.avatar || STRANGER_AVATAR), ownerId:alias?.id || "", sourceType:alias ? "role-alias" : "stranger",
+                  title, titleTranslation:String(raw.titleTranslation || "").trim(), category, categoryTranslation:String(raw.categoryTranslation || "").trim(), text, translation:String(raw.translation || "").trim(),
+                  creatorProfile:String(raw.creatorProfile || alias?.contentStyle || "").trim(), nsfw:Boolean(raw.nsfw === true || safeArray(raw.tags).some(tag => String(tag).toUpperCase() === "NSFW")),
+                  ageRequirement:String(raw.ageRequirement || "none") === "18+" ? "18+" : "none", accessMode:["public","free","paid"].includes(String(raw.accessMode || "")) ? String(raw.accessMode) : "public",
+                  viewers:type === "live" ? Math.max(1, Math.round(Number(raw.viewers || 0) || (30 + Math.random()*3800))) : 0,
+                  live:type === "live", startedAt:type === "live" ? at : 0, at, openingAction:String(raw.openingAction || "").trim(), openingSpeech:String(raw.openingSpeech || "").trim(), openingTranslation:String(raw.openingTranslation || "").trim(), chatSeed
                 });
               }
               return out.slice(0, count);
             };
+
             const scheduleAllowsLiveNow = channel => {
               const text = String(channel?.liveSchedule || "").trim();
               const d = new Date();
@@ -2384,11 +2369,13 @@
               const validIds = new Set(candidates.map(ch => String(ch.id)));
               return arr.filter(item => item && validIds.has(String(item.channelId || "")) && ["post","live"].includes(String(item.type || ""))).slice(0, Math.max(1, candidates.length));
             };
-            const refreshHomeFeedContent = async () => {
+            const refreshHomeFeedContent = async ({ channelId = "", mode = "auto" } = {}) => {
               if (generationBusy.home) return;
               const ids = [...followedChannelIds()];
-              const candidates = ids.map(id => state.channels.find(ch => String(ch.id) === String(id))).filter(ch => ch && !ch.isDemo);
-              if (!candidates.length) { toast("先用任意账号关注至少一个角色频道"); return; }
+              let candidates = ids.map(id => state.channels.find(ch => String(ch.id) === String(id))).filter(ch => ch && !ch.isDemo);
+              if (channelId) candidates = candidates.filter(ch => String(ch.id) === String(channelId));
+              if (!candidates.length) { toast(channelId ? "这个角色频道当前不在首页关注列表" : "先用任意账号关注至少一个角色频道"); return; }
+              if (mode === "live") { const target = candidates[0]; if (!target || target.live || !scheduleAllowsLiveNow(target)) { toast(target?.live ? "TA 已经在直播中" : "TA尚未开播"); return; } }
               setRefreshBusy("home", true);
               try {
                 const now = new Date();
@@ -2401,7 +2388,7 @@
                 const custom = state.generationPreset?.mode === "custom" ? String(state.generationPreset?.customText || "").trim() : "";
                 const system = `${VELA_DEFAULT_PRESET}
 
-你正在给 Vela 聚合首页生成“已经被 USER 任一大号/副号关注的角色频道”的新活动。只生成角色频道自己的贴文或当前直播，不得替 USER 发任何内容。一次可以只出现 1~2 个角色，也可以多个，当前没有合适活动时允许返回空数组，不要为了热闹强行让所有角色同时营业。
+你正在给 Vela 聚合首页生成“已经被 USER 任一大号/副号关注的角色频道”的新活动。只生成角色频道自己的贴文或当前直播，不得替 USER 发任何内容。一次可以只出现 1~2 个角色，也可以多个，当前没有合适活动时允许返回空数组，不要为了热闹强行让所有角色同时营业。${mode === "post" ? "本次 USER 明确选择刷新 TA 的贴文：只能返回 post，不得返回 live。" : mode === "live" ? "本次 USER 只是去看看 TA 当前有没有开播：仅当当前时段、人设和直播习惯确实合适时返回 live；不合适应返回空数组，绝不能为了响应 USER 强制开播。" : ""}
 
 生成前检查账号风格、露脸方式、主副号公开关联关系和直播习惯。linkedToMain=true 的关联副号可以在自然情况下与主号出现内容延续；未公开关联的小号要当作独立账号，不要用相似内容或线索暴露关系。看得到什么才能讨论什么：不露脸的账号不要让正文、弹幕或评论无依据讨论脸。默认只使用当前 Vela 账号公开网名/频道名/handle；除非账号风格明确说明本名已公开，否则不要让任何外部人知道本名。
 
@@ -2418,7 +2405,9 @@ ${translationRulePrompt()}
 候选频道：${JSON.stringify(summaries)}` }]);
                 const parsedHome = extractJSON(aiText);
                 if (!Array.isArray(parsedHome)) { toast(`首页生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`); return; }
-                const items = normalizeHomeAIItems(parsedHome, candidates);
+                let items = normalizeHomeAIItems(parsedHome, candidates);
+                if (mode === "post") items = items.filter(item => String(item.type) === "post");
+                if (mode === "live") items = items.filter(item => String(item.type) === "live");
                 let added = 0;
                 items.forEach((item,index) => {
                   const channel = candidates.find(ch => String(ch.id) === String(item.channelId));
@@ -2446,24 +2435,42 @@ ${translationRulePrompt()}
                   const postText = String(item.text || "").trim(); if (!postText) return;
                   state.communityPosts.push({ id, ownerType:"channel", ownerId:String(channel.id), text:postText, translation:String(item.translation || ""), image:"", time:formatRelativeAt(at), likes:Math.max(0,Math.round((Number(channel.followers||0)||120)*(.02+Math.random()*.08))), accessMode:(["free","paid"].includes(String(item.accessMode || "")) && subscriptionEnabled("channel", channel.id) ? String(item.accessMode) : "public"), ageRequirement:(["free","paid"].includes(String(item.accessMode || "")) && subscriptionEnabled("channel", channel.id) && String(item.ageRequirement || "") === "18+" ? "18+" : "none"), at, generatedByHome:true });
                   state.postReplies[id] = safeArray(state.postReplies[id]);
+                  if (!state.postReplies[id].length) state.postReplies[id] = [
+                    {id:`c-${id}-1`,user:"daily_rain",avatar:STRANGER_AVATAR,text:"刚刷到这条，前面还有相关内容吗？",translation:""},
+                    {id:`c-${id}-2`,user:"오후네시",avatar:STRANGER_AVATAR,text:"오늘 분위기 좋다",translation:"今天氛围很好"},
+                    {id:`c-${id}-3`,user:"mii__log",avatar:STRANGER_AVATAR,text:"我倒觉得上次那种风格更适合你一点",translation:""},
+                    {id:`c-${id}-4`,user:"tea_room9",avatar:STRANGER_AVATAR,text:"replying to @daily_rain：我也想问哈哈",replyTo:"daily_rain",translation:""},
+                    {id:`c-${id}-5`,user:"wander_0",avatar:STRANGER_AVATAR,text:"路过，图/文案还挺有记忆点",translation:""}
+                  ];
                   added += 1;
                 });
                 maybeSilentCharacterFollowAlias();
                 await persist();
                 renderChannels();
                 renderHome();
-                toast(added ? `首页已生成 ${added} 条新活动` : "这次没有适合的新动态");
+                toast(added ? `首页已生成 ${added} 条新活动` : (mode === "live" ? "TA尚未开播" : "这次没有适合的新动态"));
               } finally {
                 setRefreshBusy("home", false);
               }
             };
+            const openHomeRefreshPicker = () => {
+              const sheet=q('[data-role="publish-sheet"]'), host=q('[data-role="publish-sheet-content"]');
+              if(!sheet||!host) return;
+              const ids=[...followedChannelIds()];
+              const channels=ids.map(id=>state.channels.find(ch=>String(ch.id)===String(id))).filter(ch=>ch&&!ch.isDemo);
+              if(!channels.length){ toast("先用任意账号关注至少一个角色频道"); return; }
+              const options=channels.map(ch=>`<option value="${escapeHTML(ch.id)}">${escapeHTML(ch.name||ch.handle||"Vela Channel")}${ch.accountRole==="alias"?" · 副号":""}</option>`).join("");
+              host.innerHTML=`<div class="v-publish-sheet-title"><h3>刷新首页</h3><button data-action="close-publish-sheet">×</button></div><div class="v-field"><label>先选择要刷新的 char</label><select data-home-refresh-channel>${options}</select></div><div class="v-home-refresh-grid" style="margin-top:12px"><button data-action="run-home-refresh" data-refresh-mode="post"><b>刷新 TA 的贴文</b><div class="v-hint">生成符合账号风格的新贴文</div></button><button data-action="run-home-refresh" data-refresh-mode="live"><b>看看 TA 的直播间</b><div class="v-hint">只查看现在是否自然开播，不会强制召唤</div></button></div>`;
+              sheet.classList.add("is-open");
+            };
+
             const recommendationTopicPrompt = topics => safeArray(topics).map(topic => {
               if (topic === "NSFW") return "NSFW=成熟向/深夜/暧昧或成人生活话题氛围，但不得包含色情、露骨性内容或明确性行为描写";
               return topic;
             }).join("、");
-            const refreshRecommendedLives = async (topics = []) => {
+            const refreshRecommendedLives = async (requestText = "") => {
               if (generationBusy.recommended) return;
-              const selectedTopics = safeArray(topics).filter(topic => RECOMMENDATION_TOPICS.includes(topic) && topic !== "随便看看");
+              const request = String(requestText || "").trim();
               setRefreshBusy("recommended", true);
               try {
                 const count = Math.max(1, Math.min(6, Number(state.platformSettings?.recommendationCount || 3)));
@@ -2472,11 +2479,11 @@ ${translationRulePrompt()}
                 const aliasCandidates = aliasBatch ? state.channels.filter(ch => !ch?.isDemo && String(ch?.accountRole || "primary") === "alias").sort(() => Math.random()-.5).slice(0, 4) : [];
                 const aliasSummary = aliasCandidates.map(ch => ({ ownerId:String(ch.id), publicName:ch.name || ch.handle || "Vela Channel", handle:ch.handle || "", contentStyle:ch.contentStyle || "", fanProfile:ch.fanProfile || "", faceMode:ch.faceMode || "mixed", identityVisibility:ch.identityVisibility || "partial", persona:String(getChannelPersonaText(ch) || "").slice(0,1000) }));
                 const custom = state.generationPreset?.mode === "custom" ? String(state.generationPreset?.customText || "").trim() : "";
-                const nsfwBatch = selectedTopics.includes("NSFW");
-                const topicRule = selectedTopics.length ? `本批用户主动选择的偏好标签：${recommendationTopicPrompt(selectedTopics)}。优先围绕这些方向，但 ${count} 个直播仍要彼此明显不同，不要做成同一个模板。` : "本批没有选择标签，完全随机探索不同题材。";
+                const nsfwBatch = /NSFW|18\+|成人|深夜|暧昧/i.test(request);
+                const topicRule = request ? `USER 对这一批的自由输入是：${request}。请自然理解主题与氛围，并自行决定每条是贴文还是直播；不要为了凑比例强行安排。` : "本批没有输入主题，完全随机探索不同题材。";
                 const system = `${VELA_DEFAULT_PRESET}
 
-你正在生成 Vela 推荐页的正在直播频道。默认只推荐陌生主播，不得生成 USER 自己的账号，也不得生成任何角色主号。${aliasCandidates.length ? "本轮低概率开放角色副号候选；最多允许 1 条 source=alias，并且 ownerId 必须来自提供的副号候选。其余必须是陌生主播。" : "本轮完全禁止角色账号，全部必须是陌生主播。"}
+你正在生成 Vela 推荐页的一批推荐内容，内容可以自然混合贴文与正在直播。默认只推荐陌生账号，不得生成 USER 自己的账号，也不得生成任何角色主号。${aliasCandidates.length ? "本轮低概率开放角色副号候选；最多允许 1 条 source=alias，并且 ownerId 必须来自提供的副号候选。其余必须是陌生主播。" : "本轮完全禁止角色账号，全部必须是陌生主播。"}
 ${topicRule}
 ${nsfwPresetPrompt(nsfwBatch)}
 如果本批选择了 NSFW，请把符合该方向的直播设为 nsfw=true；NSFW 在 Vela 中表示成熟向、成人主播/成人社交平台氛围，可以更大胆、暧昧、性感但不露骨。
@@ -2485,8 +2492,8 @@ ${nsfwPresetPrompt(nsfwBatch)}
 陌生主播要像真实平台用户：姓名/网名、handle、地区语言、直播标题、分类、当前动作和已存在聊天室都要彼此一致。不要三个主播都用同一种说话节奏；允许有人安静做自己的事、有人和熟客闲聊、有人刚好在吃东西或工作。聊天室不是 NPC 队列：观众不需要每条都回应主播，允许观众之间接话、跑题、只发 emoji、只发一两个词、有人潜水，不要求每句都有信息量。不要使用固定模板或重复老名字。
 ${translationRulePrompt()}
 返回严格 JSON 数组，恰好 ${count} 条。每条字段：
-[{"source":"stranger|alias","ownerId":"alias 时填候选 id，否则空","name":"公开昵称","handle":"@handle","locale":"zh-CN|zh-TW|zh-HK|ko|ja|en|th|vi|id|其他合理语言","creatorProfile":"一句主播风格/地区提示","nsfw":false,"title":"原语言直播标题","titleTranslation":"按翻译规则填写","category":"原语言直播内容/分类","categoryTranslation":"按翻译规则填写","viewers":1234,"startedMinutesAgo":20,"openingAction":"镜头里正在发生的动作","openingSpeech":"主播正在说的话，符合 locale","openingTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
-chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭空泄露角色本名或后台身份。${custom ? `
+[{"type":"live|post","source":"stranger|alias","ownerId":"alias 时填候选 id，否则空","name":"公开昵称","handle":"@handle","locale":"zh-CN|zh-TW|zh-HK|ko|ja|en|th|vi|id|其他合理语言","creatorProfile":"一句账号风格/地区提示","nsfw":false,"title":"直播标题；post 可空","titleTranslation":"按翻译规则填写","category":"直播内容/分类；post 可空","categoryTranslation":"按翻译规则填写","text":"post 正文；live 可空","translation":"post 正文翻译；live 可空","viewers":1234,"startedMinutesAgo":20,"openingAction":"live 镜头动作；post 可空","openingSpeech":"live 主播正在说的话；post 可空","openingTranslation":"按翻译规则填写","chatSeed":[{"user":"观众网名","text":"原语言弹幕","translation":"按翻译规则填写"}]}]
+live 的 chatSeed 每场 2~5 条；post 可不填 chatSeed。不同内容不要共用同一批观众名。不要凭空泄露角色本名或后台身份。${custom ? `
 用户自定义平台规则：${custom}` : ""}`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${new Date().toString()}
 允许的角色副号候选：${JSON.stringify(aliasSummary)}` }]);
@@ -2509,21 +2516,19 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               if (generationBusy.messages) return;
               setRefreshBusy("messages", true);
               try {
-                // Mellow Studio is the one intentional business-demo contact. If it was removed, DM refresh restores it.
-                ensureMellowBusinessDemo();
                 const strangerMode = ["low","normal","high"].includes(state.platformSettings?.strangerInteraction) ? state.platformSettings.strangerInteraction : "normal";
                 const count = strangerMode === "low" ? 1 : strangerMode === "high" ? 3 : 2;
                 const allowBusiness = state.platformSettings?.allowBusinessDM !== false;
                 const system = `${VELA_DEFAULT_PRESET}
 
-你正在生成 Vela 私信列表中刚刚出现的陌生联系人。不得冒充 USER，也不得把已有 Roche 角色伪装成陌生人。生成 ${count} 个彼此不同的联系人。可以是普通陌生网友、粉丝或品牌商务联系人；${allowBusiness ? "允许少量商务联系人，但不要每批都有。" : "本轮禁止商务联系人。"} Mellow Studio 是平台保留的单独商务演示联系人，不要在本批重复生成它。
+你正在生成 Vela 私信列表中刚刚出现的陌生联系人。不得冒充 USER，也不得把已有 Roche 角色伪装成陌生人。生成 ${count} 个彼此不同的联系人。可以是普通陌生网友、粉丝或品牌商务联系人；${allowBusiness ? "允许少量商务联系人，但不要每批都有。" : "本轮禁止商务联系人。"}
 返回严格 JSON 数组：[{"kind":"stranger|fan|business","name":"公开昵称或品牌名","handle":"@handle","badge":"陌生私信|粉丝|商务联系","locale":"zh-CN|zh-TW|zh-HK|ko|ja|en|th|vi|id|其他合理语言","preview":"对方第一条自然私信；品牌先问合作意向，不要一上来发正式合同","translation":"按翻译规则给 preview 的简体中文翻译或空","businessProfile":"仅 business 可写公司主营/品牌风格/产品方向，否则空"}]。${languagePreferencePrompt()} ${translationRulePrompt()}`;
                 const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:`当前时间：${new Date().toString()}` }]);
                 const data = extractJSON(aiText);
                 if (!Array.isArray(data)) {
                   await persist();
                   renderMessages();
-                  toast(`Mellow Studio 已保留；DM 生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`);
+                  toast(`DM 生成失败 · ${String(aiText || "").trim() ? "回复格式解析失败" : shortVelaAIError("AI 返回为空")}`);
                   return;
                 }
                 const existingHandles = new Set(state.messages.map(item => String(item?.handle || "").toLowerCase()).filter(Boolean));
@@ -2551,7 +2556,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                 state.messages = [...batch, ...(mellow ? [mellow] : []), ...others].slice(0, 50);
                 await persist();
                 renderMessages();
-                toast(batch.length ? `新增 ${batch.length} 条私信` : "Mellow Studio 已保留；这次没有生成新的私信");
+                toast(batch.length ? `新增 ${batch.length} 条私信` : "这次没有生成新的私信");
               } finally {
                 setRefreshBusy("messages", false);
               }
@@ -2641,32 +2646,22 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
             };
 
             const openRecommendationTopics = () => {
-              const sheet = q('[data-role="publish-sheet"]');
-              const host = q('[data-role="publish-sheet-content"]');
-              if (!sheet || !host) return;
-              host.innerHTML = `<div class="v-publish-sheet-title"><h3>想看什么</h3><button data-action="close-publish-sheet">×</button></div><div class="v-rec-topic-note">选一个或多个标签，只影响这一次推荐刷新。直接点推荐页刷新按钮仍然是随机。</div><div class="v-rec-topic-grid">${RECOMMENDATION_TOPICS.map(topic => `<button class="v-rec-topic-chip ${topic === "随便看看" ? "is-active" : ""}" data-action="toggle-recommendation-topic" data-topic="${escapeHTML(topic)}">${escapeHTML(topic)}</button>`).join("")}</div><div class="v-publish-sheet-actions"><button class="v-action light" data-action="close-publish-sheet">取消</button><button class="v-action" data-action="refresh-recommended-topics">按这些刷新</button></div>`;
+              const sheet=q('[data-role="publish-sheet"]'), host=q('[data-role="publish-sheet-content"]');
+              if(!sheet||!host) return;
+              host.innerHTML=`<div class="v-publish-sheet-title"><h3>这一批想看什么？</h3><button data-action="close-publish-sheet">×</button></div><div class="v-rec-topic-note">自由输入主题，Vela 会自然决定这一批出现贴文、直播和不同账号的比例。</div><textarea class="v-rec-free-input" data-recommendation-request maxlength="240" placeholder="例如：想看深夜聊天 / 最近吵架的情侣博主 / 旅行内容……"></textarea><div class="v-publish-sheet-actions"><button class="v-action light" data-action="close-publish-sheet">取消</button><button class="v-action" data-action="refresh-recommended-topics">刷新这一批</button></div>`;
               sheet.classList.add("is-open");
             };
-            const selectedRecommendationTopics = () => {
-              const sheet = q('[data-role="publish-sheet"]');
-              if (!sheet) return [];
-              return [...sheet.querySelectorAll('[data-action="toggle-recommendation-topic"].is-active')].map(btn => String(btn.dataset.topic || "")).filter(topic => topic && topic !== "随便看看");
-            };
-            const toggleRecommendationTopic = button => {
-              const sheet = q('[data-role="publish-sheet"]');
-              if (!sheet || !button) return;
-              const topic = String(button.dataset.topic || "");
-              const chips = [...sheet.querySelectorAll('[data-action="toggle-recommendation-topic"]')];
-              if (topic === "随便看看") { chips.forEach(chip => chip.classList.toggle("is-active", chip === button)); return; }
-              chips.find(chip => String(chip.dataset.topic || "") === "随便看看")?.classList.remove("is-active");
-              button.classList.toggle("is-active");
-              if (!chips.some(chip => chip.classList.contains("is-active"))) chips.find(chip => String(chip.dataset.topic || "") === "随便看看")?.classList.add("is-active");
-            };
+            const selectedRecommendationTopics = () => String(q('[data-role="publish-sheet"] [data-recommendation-request]')?.value || "").trim();
+            const toggleRecommendationTopic = () => {};
 
             const renderRecommended = () => {
               const recs = safeArray(state.recommendedLives);
               if (!recs.length) { q('[data-role="recommended"]').innerHTML = `<div class="v-profile-empty">暂时还没有推荐直播，点右上角刷新试试。</div>`; return; }
               q('[data-role="recommended"]').innerHTML = recs.map(live => {
+                if(String(live.type||"live")==="post"){
+                  const trId=`rec-post-${String(live.id||"rec")}`;
+                  return `<article class="v-card v-rec-card"><button class="v-rec-remove" data-action="remove-recommended-live" data-rec-id="${escapeHTML(live.id)}">×</button><div class="v-author"><div class="v-mini">${avatarHTML(live.avatar||"",live.name||"V")}</div><div class="v-meta"><div class="v-name">${escapeHTML(live.name||live.handle||"Vela")}</div><div class="v-sub">${escapeHTML(live.handle||"")}</div></div></div><div class="v-posttext">${escapeHTML(live.text||"")}</div>${translationHTML(trId,live.translation||"")}</article>`;
+                }
                 const trId = `rec-live-${String(live.id || "rec")}`;
                 const trText = [live.titleTranslation, live.categoryTranslation].filter(Boolean).join("\n");
                 const channel = state.channels.find(item => String(item.id) === String(live.ownerId || ""));
@@ -2958,7 +2953,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
 
             const openWalletBind = () => {
               const account = state.wallet.linkedAccount || {};
-              openScreen("wallet-flow", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="wallet-flow">‹</button><div class="v-meta"><strong>${state.wallet.linkedAccount ? "管理提现账户" : "绑定提现账户"}</strong><div class="v-hint">Vela 模拟结算账户</div></div><button class="v-head-action" data-action="save-wallet-account">保存</button></header><div class="v-subbody"><div class="v-wallet-flow-card"><div class="v-editform"><div class="v-field"><label>银行名称</label><input data-wallet-field="bankName" maxlength="40" value="${escapeHTML(account.bankName || "")}" placeholder="例如 Vela Bank"></div><div class="v-fieldpair"><div class="v-field"><label>账号前四位</label><input data-wallet-field="first4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.first4 || "")}" placeholder="1234"></div><div class="v-field"><label>账号后四位</label><input data-wallet-field="last4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.last4 || "")}" placeholder="5678"></div></div><div class="v-field"><label>Vela 交易 PIN · 6 位</label><input data-wallet-field="pin" type="password" inputmode="numeric" maxlength="6" placeholder="${state.wallet.linkedAccount ? "不修改可留空" : "仅用于 Vela 模拟验证"}"></div></div><div class="v-publish-note" style="margin-top:12px">不要输入真实银行卡完整号码或真实银行密码。这里只保存银行名称、前四位、后四位以及不可逆的 Vela PIN 摘要。</div></div></div>`);
+              openScreen("wallet-flow", `<div class="v-wallet-bind-modal"><div class="v-wallet-flow-card"><div class="v-live-tool-title"><div><h3>${state.wallet.linkedAccount ? "管理提现账户" : "绑定提现账户"}</h3><div class="v-hint">Vela 模拟结算账户</div></div><button data-action="close-screen" data-screen-name="wallet-flow">×</button></div><div class="v-editform" style="margin-top:12px"><div class="v-field"><label>银行名称</label><input data-wallet-field="bankName" maxlength="40" value="${escapeHTML(account.bankName || "")}" placeholder="例如 Vela Bank"></div><div class="v-fieldpair"><div class="v-field"><label>账号前四位</label><input data-wallet-field="first4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.first4 || "")}" placeholder="1234"></div><div class="v-field"><label>账号后四位</label><input data-wallet-field="last4" inputmode="numeric" maxlength="4" value="${escapeHTML(account.last4 || "")}" placeholder="5678"></div></div><div class="v-field"><label>Vela 交易 PIN · 6 位</label><input data-wallet-field="pin" type="password" inputmode="numeric" maxlength="6" placeholder="${state.wallet.linkedAccount ? "不修改可留空" : "仅用于 Vela 模拟验证"}"></div></div><div class="v-publish-note" style="margin-top:12px">不要输入真实银行卡完整号码或真实银行密码。这里只保存银行名称、前四位、后四位以及不可逆的 Vela PIN 摘要。</div><button class="v-action" style="width:100%;margin-top:12px" data-action="save-wallet-account">保存并进入钱包</button></div></div>`);
             };
 
             const saveWalletAccount = async () => {
@@ -2976,6 +2971,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               state.wallet.linkedAccount = { bankName, first4, last4, pinHash: pin ? await hashWalletPin(pin) : old.pinHash || "" };
               await persist();
               closeScreen("wallet-flow");
+              switchPage("wallet");
               renderWallet();
               toast("提现账户已保存");
             };
@@ -3189,10 +3185,21 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               if (!state.liveStats[id]) {
                 const followers = Math.max(0, Number(live?.followers || 0));
                 const activity = Math.max(0, Math.min(100, Number(state.platformSettings?.activityLevel ?? 50)));
-                const followerBase = followers > 0 ? Math.max(3, Math.round(followers * (0.025 + activity * 0.00018))) : 0;
-                const seedViewers = Math.max(1, Number(live?.viewers || followerBase || 36));
-                const baseViewers = followerBase || seedViewers;
-                const currentViewers = followers > 0 ? Math.max(1, Math.round((baseViewers + seedViewers) / 2)) : Math.round(seedViewers);
+                const ownLive = isOwnLiveSession(live);
+                const strangerLive = !ownLive && !state.channels.some(ch=>String(ch.id)===String(live?.ownerId||live?.id||""));
+                const scaleViewerBase = f => {
+                  if(!f) return ownLive ? 10+Math.floor(Math.random()*26) : strangerLive ? [18,42,85,160,420,950,1800,4200][Math.floor(Math.random()*8)] : 18+Math.floor(Math.random()*28);
+                  if(f < 500) return Math.max(12, Math.round(25 + f*.28 + Math.random()*40));
+                  if(f < 3000) return Math.round(180 + f*.18 + Math.random()*260);
+                  if(f < 30000) return Math.round(520 + Math.sqrt(f)*4.2 + Math.random()*520);
+                  if(f < 200000) return Math.round(1100 + Math.sqrt(f)*8 + Math.random()*1800);
+                  return Math.round(3200 + Math.sqrt(f)*15 + Math.random()*6500);
+                };
+                const followerBase = scaleViewerBase(followers);
+                const explicit = Number(live?.viewers || 0);
+                const seedViewers = explicit > 0 ? explicit : followerBase;
+                const baseViewers = Math.max(1, Math.round(seedViewers*(.82 + activity/250)));
+                const currentViewers = Math.max(1, Math.round((baseViewers+seedViewers)/2));
                 const seededGifts = [];
                 state.liveStats[id] = {
                   baseViewers,
@@ -3203,6 +3210,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
                   tipReceivedCoin: 0,
                   giftReceivedCoin: seededGifts.reduce((sum, item) => sum + Number(item.amount || 0), 0),
                   gifts: seededGifts,
+                  contributions: [],
                   lottery: null,
                   ad: live?.business ? { ...live.business } : null
                 };
@@ -3215,7 +3223,8 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const identity = state.identities.find(x => x.id === state.viewerIdentityId) || state.identities[0];
               const ownHandle = String(identity?.handle || identity?.displayName || "@user");
               const map = new Map();
-              safeArray(stats.gifts).forEach(item => map.set(String(item.user), (map.get(String(item.user)) || 0) + Number(item.amount || 0)));
+              const contributionRows = safeArray(stats.contributions).length ? safeArray(stats.contributions) : safeArray(stats.gifts);
+              contributionRows.forEach(item => map.set(String(item.user), (map.get(String(item.user)) || 0) + Number(item.amount || 0)));
               if (Number(stats.userGiftTotal || 0) > 0) map.set(ownHandle, Number(stats.userGiftTotal || 0));
               return [...map.entries()].map(([user, amount]) => ({ user, amount })).sort((a,b) => b.amount - a.amount);
             };
@@ -3247,7 +3256,9 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const swing = Math.max(1, Math.round(current * 0.055));
               const heatPull = ((stats.heat - 50) / 50) * Math.max(1, Math.round(base * 0.025));
               const delta = Math.round((Math.random() - 0.48) * swing * 2 + heatPull);
-              const low = Math.max(1, Math.round(base * 0.58));
+              const uniqueChatters = new Set(safeArray(state.liveChat).map(x=>String(x?.user||"")).filter(Boolean)).size;
+              const chatFloor = uniqueChatters ? Math.max(1, Math.round(uniqueChatters * (uniqueChatters < 10 ? 1.4 : 2.2))) : 1;
+              const low = Math.max(chatFloor, Math.round(base * 0.58));
               const high = Math.max(low + 1, Math.round(base * 1.85));
               stats.currentViewers = Math.max(low, Math.min(high, current + delta));
               stats.peakViewers = Math.max(Number(stats.peakViewers || 0), stats.currentViewers);
@@ -3336,7 +3347,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               return rows;
             };
 
-            const livePrizeRowHTML = (item = {}, index = 0) => `<div class="v-prize-row" data-prize-row><input data-prize-field="name" maxlength="20" value="${escapeHTML(item.name || `${["一","二","三","四","五"][index] || index + 1}等奖`)}" placeholder="奖项"><input data-prize-field="count" type="number" min="1" max="100" value="${Math.max(1, Number(item.count || 1))}" placeholder="人数"><input data-prize-field="content" maxlength="100" value="${escapeHTML(item.content || "")}" placeholder="奖品内容"><input data-prize-field="value" type="number" min="0" value="${Math.max(0, Number(item.value || 0))}" placeholder="估值"><button class="v-prize-remove" data-action="remove-live-prize-row">删除这一档</button></div>`;
+            const livePrizeRowHTML = (item = {}, index = 0) => `<div class="v-prize-row" data-prize-row><input data-prize-field="name" maxlength="20" value="${escapeHTML(item.name || `${["一","二","三","四","五"][index] || index + 1}等奖`)}" placeholder="奖项"><input data-prize-field="count" type="number" min="1" max="100" value="${Math.max(1, Number(item.count || 1))}" placeholder="人数"><input data-prize-field="content" maxlength="100" value="${escapeHTML(item.content || "")}" placeholder="奖品内容"><button class="v-prize-remove" data-action="remove-live-prize-row" aria-label="删除">×</button></div>`;
 
             const closeLiveEconomyPanel = () => q('[data-screen="live"] [data-role="live-economy-panel"]')?.classList.remove("is-open");
 
@@ -3349,7 +3360,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               if (!panel) return;
               if (lottery?.status === "active") {
                 const left = Math.max(0, Number(lottery.endsAt || 0) - Date.now());
-                panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场抽奖 · 进行中</h3><button data-action="close-live-economy">×</button></div><div class="v-wallet-convert-preview" style="margin-top:10px">剩余约 ${Math.max(0, Math.ceil(left/60000))} 分钟 · ${safeArray(lottery.prizes).length} 档奖项</div>${safeArray(lottery.prizes).map(item => `<div class="v-row"><div><b>${escapeHTML(item.name)}</b><small>${escapeHTML(item.content || "奖品")} · ${Number(item.count || 1)} 人</small></div><span>${item.value ? `¥${Number(item.value).toLocaleString("zh-CN")}` : ""}</span></div>`).join("")}<div class="v-live-tool-actions"><button class="is-light" data-action="resolve-live-lottery">立即开奖</button><button class="is-primary" data-action="close-live-economy">返回直播</button></div></div>`;
+                panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场抽奖 · 进行中</h3><button data-action="close-live-economy">×</button></div><div class="v-wallet-convert-preview" style="margin-top:10px">剩余约 ${Math.max(0, Math.ceil(left/60000))} 分钟 · ${safeArray(lottery.prizes).length} 档奖项</div>${safeArray(lottery.prizes).map(item => `<div class="v-row"><div><b>${escapeHTML(item.name)}</b><small>${escapeHTML(item.content || "奖品")} · ${Number(item.count || 1)} 人</small></div><span></span></div>`).join("")}<div class="v-live-tool-actions"><button class="is-light" data-action="resolve-live-lottery">立即开奖</button><button class="is-primary" data-action="close-live-economy">返回直播</button></div></div>`;
               } else if (lottery?.status === "ended") {
                 panel.innerHTML = `<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>本场抽奖 · 已开奖</h3><button data-action="close-live-economy">×</button></div>${safeArray(lottery.results).map(item => `<div class="v-row"><div><b>${escapeHTML(item.prizeName)}</b><small>${escapeHTML(item.winners.join("、") || "暂无参与者")}</small></div></div>`).join("")}<div class="v-live-tool-actions"><button class="is-primary" data-action="new-live-lottery">再开一轮</button></div></div>`;
               } else {
@@ -3366,8 +3377,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const prizes = [...panel.querySelectorAll('[data-prize-row]')].map(row => ({
                 name:String(row.querySelector('[data-prize-field="name"]')?.value || "奖项").trim(),
                 count:Math.max(1, Math.min(100, Number(row.querySelector('[data-prize-field="count"]')?.value || 1))),
-                content:String(row.querySelector('[data-prize-field="content"]')?.value || "").trim(),
-                value:Math.max(0, Number(row.querySelector('[data-prize-field="value"]')?.value || 0))
+                content:String(row.querySelector('[data-prize-field="content"]')?.value || "").trim()
               })).filter(item => item.name);
               if (!prizes.length) { toast("至少保留一个奖项"); return; }
               const stats = getLiveStats(live);
@@ -3405,6 +3415,32 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               await persist();
               renderLiveChatLines();
               openLiveLotteryPanel();
+            };
+
+            const openLiveRedPacketPanel = () => {
+              const live=state.liveSession; if(!live||!isOwnLiveSession(live)) return;
+              const panel=q('[data-screen="live"] [data-role="live-economy-panel"]'); if(!panel) return;
+              panel.innerHTML=`<div class="v-live-economy-card"><div class="v-live-tool-title"><h3>拼手气红包</h3><button data-action="close-live-economy">×</button></div><div class="v-field" style="margin-top:10px"><label>红包总 Coin</label><input data-redpacket-total type="number" min="1" step="1" value="100"></div><div class="v-field" style="margin-top:10px"><label>红包个数</label><input data-redpacket-count type="number" min="1" max="100" step="1" value="5"></div><div class="v-publish-note" style="margin-top:10px">固定为拼手气红包；从 USER 当前 Vela Coin 钱包扣除，不计入主播礼物收入。</div><div class="v-live-tool-actions"><button class="is-primary" data-action="send-live-redpacket">发红包</button></div></div>`;
+              panel.classList.add("is-open");
+            };
+            const sendLiveRedPacket = async () => {
+              const live=state.liveSession, panel=q('[data-screen="live"] [data-role="live-economy-panel"]'); if(!live||!panel||!isOwnLiveSession(live)) return;
+              const total=Math.max(1,Math.round(Number(panel.querySelector('[data-redpacket-total]')?.value||0)));
+              const count=Math.max(1,Math.min(100,Math.round(Number(panel.querySelector('[data-redpacket-count]')?.value||1))));
+              if(total<count){ toast("红包总 Coin 不能少于红包个数"); return; }
+              if(Number(state.wallet?.coinBalance||0)<total){ toast("Vela Coin 余额不足"); return; }
+              state.wallet.coinBalance=Number(state.wallet.coinBalance||0)-total;
+              const identity=state.identities.find(x=>String(x.id)===String(state.viewerIdentityId))||state.identities[0];
+              state.wallet.transactions.unshift({id:`tx-${Date.now().toString(36)}-redpacket`,type:"coin",title:"直播红包",note:`${live.title||"本场直播"} · 拼手气 ${count} 个`,coin:-total,identityId:identity?.id||state.viewerIdentityId,at:Date.now()});
+              const users=[...new Set(safeArray(state.liveChat).map(x=>String(x?.user||"")).filter(x=>x&&x!=="系统"&&x!==String(identity?.handle||"")))];
+              while(users.length<count) users.push(`viewer_${Math.random().toString(36).slice(2,7)}`);
+              users.sort(()=>Math.random()-.5);
+              let remain=total; const shares=[];
+              for(let i=0;i<count;i++){ const left=count-i; const amount=left===1?remain:Math.max(1,Math.min(remain-(left-1),Math.floor(1+Math.random()*Math.max(1,(remain/left)*2-1)))); remain-=amount; shares.push({user:users[i],amount}); }
+              state.liveChat.push({user:"系统",avatar:"🧧",text:`${identity?.handle||"USER"} 发出拼手气红包 · 🔷${total} / ${count} 个`,translation:"",at:Date.now()});
+              shares.forEach((x,i)=>state.liveChat.push({user:"系统",avatar:"🧧",text:`${x.user} 抢到红包 · 🔷${x.amount}`,translation:"",at:Date.now()+i+1}));
+              const stats=getLiveStats(live); stats.heat=Math.min(100,Number(stats.heat||50)+10); advanceViewerCount(live,{heatBoost:8});
+              await persist(); closeLiveEconomyPanel(); renderLiveChatLines(); renderLiveHUD(); toast(`红包已发出 · 🔷${total}`);
             };
 
             const openLiveAdPanel = () => {
@@ -3511,7 +3547,7 @@ chatSeed 每场 2~5 条；不同直播不要共用同一批观众名。不要凭
               const liveIdentityPicker = identityPickerHTML(liveEligibleIdentities, liveSelectedIdentity?.id, "live-identity-select", `data-live-key="${escapeHTML(liveInteractionKey)}"`);
               const viewerComposer = `<div class="v-composer">${liveIdentityPicker}<input data-role="live-input" placeholder="回车发送弹幕…" maxlength="120"><button data-action="open-gift-picker" aria-label="送礼物" title="送礼物">🎁</button><button class="${liveReplyPending.has(liveInteractionKey) ? "is-generating" : ""}" data-action="summon-live" aria-label="召唤 / 继续直播" title="召唤 / 继续直播" ${liveReplyPending.has(liveInteractionKey) ? "disabled" : ""}>${liveReplyPending.has(liveInteractionKey) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div>`;
               const activeAd = liveStats.ad || currentLive.ad || currentLive.business || null;
-              const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">${activeAd?.active ? "AD · 投放中" : "AD"}</button></div>` : "";
+              const quickTools = own ? `<div class="v-live-quicktools"><button class="v-live-quicktool is-lottery" data-action="open-live-lottery">抽奖</button><button class="v-live-quicktool" data-action="open-live-redpacket">红包</button><button class="v-live-quicktool is-ad" data-action="open-live-ad">${activeAd?.active ? "AD · 投放中" : "AD"}</button></div>` : "";
               const adStrip = "";
               const connectButton = own ? `<button class="v-live-connect-btn" data-action="open-invite-guest">与…连线${guests.length ? ` · ${participants.length}/4` : ""}</button>` : "";
               const hostConsole = `<div class="v-host-console"><div class="v-host-console-top"><button class="v-host-mode is-active" data-action="set-host-input-mode" data-host-input-mode="speech">说话</button><button class="v-host-mode" data-action="set-host-input-mode" data-host-input-mode="action">动作</button></div><div class="v-host-console-row"><input data-role="host-live-input" placeholder="输入你在直播里说的话… · Enter发送" maxlength="500"><button class="v-summon-host ${liveReplyPending.has(liveInteractionKey) ? "is-generating" : ""}" data-action="summon-host-live" aria-label="召唤 / 继续" ${liveReplyPending.has(liveInteractionKey) ? "disabled" : ""}>${liveReplyPending.has(liveInteractionKey) ? '<span class="v-summon-dots">•••</span>' : planeIconHTML()}</button></div><div class="v-host-console-foot"><span>发送只记录 user 的说话 / 动作，不自动召唤。</span></div></div>`;
@@ -3688,7 +3724,7 @@ ${own ? "这是一场 USER 自己开的直播：绝对不能替 USER 说话或�
 ${nsfwPresetPrompt(live.ageRequirement === "18+" || live.nsfw === true)}
 ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}。主播/嘉宾可以看到，也可以按人设自然略过。` : "USER 本轮没有新增输入，只是继续观看。"}
 
-陌生观众语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}\n返回严格 JSON 对象：{"endLive":false,"events":[{"actorId":"必须来自允许主体 id","actorName":"显示名","action":"自然动作，可空","speech":"实际说的话，可空；使用主要语言","translation":"按翻译规则填写"}],"chat":[{"user":"各不相同的观众网名","text":"原语言弹幕","translation":"按翻译规则填写","tipCoin":0,"giftCoin":0}]}。\n${own ? "这是 USER 自己的直播，endLive 必须为 false，不能替 USER 决定下播。" : "这是非 USER 主播的直播；如果当前话题和直播进度已经自然收尾，可以低概率设置 endLive=true，让主播自己结束直播，不要每几轮就结束。"}\n要求：events 0~${Math.max(1, Math.min(3, allowedActors.length))} 条，chat 约 ${expectedChat} 条。Vela 会把本批聊天室消息放进懒加载队列，像真实直播弹幕一样逐条滚出来，所以每条都应能独立成立，不要写成必须瞬间连续显示的脚本；不要复用固定网名或固定动作模板；giftCoin/tipCoin 只能偶尔出现，数值应自然。`;
+陌生观众语言倾向：${languagePreferencePrompt()}\n${translationRulePrompt()}\n返回严格 JSON 对象：{"endLive":false,"events":[{"actorId":"必须来自允许主体 id","actorName":"显示名","action":"自然动作，可空","speech":"实际说的话，可空；使用主要语言","translation":"按翻译规则填写"}],"chat":[{"user":"各不相同的观众网名","text":"原语言弹幕","translation":"按翻译规则填写","tipCoin":0,"giftCoin":0}]}。\n${own ? "这是 USER 自己的直播，endLive 必须为 false，不能替 USER 决定下播。" : "这是非 USER 主播的直播；如果当前话题和直播进度已经自然收尾，可以低概率设置 endLive=true，让主播自己结束直播，不要每几轮就结束。"}\n要求：events 0~${Math.max(1, Math.min(3, allowedActors.length))} 条，chat 约 ${expectedChat} 条。Vela 会把本批聊天室消息放进懒加载队列，像真实直播弹幕一样逐条滚出来，所以每条都应能独立成立，不要写成必须瞬间连续显示的脚本；不要复用固定网名或固定动作模板。不要让所有观众都响应主播：混合回应当前话题、反问、延迟接上一轮、刚进场打招呼、观众互聊、跑题、没听清前情、不同意见与轻微吐槽。允许正常冷淡、质疑、误解和不同意见，但不要每轮强塞负面。giftCoin/tipCoin 只能偶尔出现，数值应自然。`;
               const aiText = await runVelaAI([{ role:"system", content:system }, { role:"user", content:"继续这一场直播。" }]);
               const data = extractJSON(aiText);
               if (!data || typeof data !== "object" || Array.isArray(data)) { toast("直播继续生成失败，请再试一次"); return; }
@@ -3712,10 +3748,14 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               chat.forEach((item,index) => { if (index > 0) cursor += Math.round((0.8 + Math.random()*2.7) * 1000); const {giftCoin,...row} = item; state.liveChatQueues[liveKey].push({ ...row, id:`liveq-${Date.now().toString(36)}-${index}-${Math.random().toString(36).slice(2,5)}`, plannedAt:cursor }); });
               const stats = getLiveStats(live);
               stats.tipReceivedCoin = Number(stats.tipReceivedCoin || 0) + chat.reduce((sum,item) => sum + Number(item.tipCoin || 0), 0);
+              stats.contributions = safeArray(stats.contributions);
               chat.forEach(item => {
+                const tipCoin = Math.max(0, Number(item.tipCoin || 0));
                 const giftCoin = Math.max(0, Number(item.giftCoin || 0));
+                if (tipCoin) stats.contributions.push({ user:item.user, amount:tipCoin, source:"tip" });
                 if (!giftCoin) return;
                 stats.gifts.push({ user:item.user, amount:giftCoin });
+                stats.contributions.push({ user:item.user, amount:giftCoin, source:"gift" });
                 stats.giftReceivedCoin = Number(stats.giftReceivedCoin || 0) + giftCoin;
                 state.liveChat.push({ user:"系统", avatar:"🎁", text:`${item.user} 送出礼物 · 🔷${giftCoin}`, translation:"", at:Date.now()+10+Math.random() });
               });
@@ -4056,9 +4096,10 @@ ${fromUser && userContext ? `USER 刚刚在直播里输入了：${userContext}�
               state.postReplies[id] = [];
               await persist();
               q('[data-role="publish-sheet"]')?.classList.remove("is-open");
-              openProfile(ownerType, ownerId);
-              renderProfileTab(ownerType, ownerId, "activity");
-              toast("贴文已发布，并关联到当前主页");
+              renderHome();
+              const profile=q('[data-screen="profile"]');
+              if(profile?.classList.contains("is-open")) renderProfileTab(ownerType, ownerId, "activity");
+              toast("贴文已发布，并同步到主页和首页");
             };
 
             const sendPostComment = async (postId) => {
@@ -4524,7 +4565,7 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
                 const trId = `replay-chat-${String(replay.id)}-${index}`;
                 return `<div class="v-chatline"><div class="v-social-avatar">${avatarHTML(line.avatar || initials(line.user || "V"), line.user || "V")}</div><div class="v-chatline-body"><div class="v-chatline-head">${escapeHTML(line.user || "viewer")}</div><div class="v-chatline-text">${escapeHTML(line.text || "")}</div>${translationHTML(trId, line.translation || "")}</div></div>`;
               }).join("") : `<div class="v-profile-empty">这场回放没有保存聊天室内容。</div>`;
-              openScreen("replay", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="replay">‹</button><div class="v-meta"><strong>直播回放</strong><div class="v-hint">${escapeHTML(replay.endedText || "已结束")}</div></div><button class="v-head-action" style="color:var(--v-red)!important" data-action="delete-replay" data-replay-id="${escapeHTML(replay.id)}">删除</button></header><div class="v-subbody"><div class="v-replay-summary"><div class="v-name">${escapeHTML(replay.title || "直播回放")}</div><div class="v-sub" style="margin-top:4px">${escapeHTML(replay.topic || "直播")} · ${escapeHTML(modeLabel)} · 最高 ${formatViewers(replay.peakViewers || 0)} 人观看</div>${participants.length ? `<div class="v-sub" style="margin-top:5px">参与：${escapeHTML(participants.map(p => p.name || "嘉宾").join("、"))}</div>` : ""}</div><div class="v-title" style="font-size:15px;margin-top:4px">直播内容</div><div class="v-replay-timeline">${eventHTML}</div><div class="v-title" style="font-size:15px;margin-top:14px">聊天室</div><div class="v-replay-chat">${chatHTML}</div></div>`);
+              openScreen("replay", `<header class="v-subhead"><button data-action="close-screen" data-screen-name="replay">‹</button><div class="v-meta"><strong>直播回放</strong><div class="v-hint">${escapeHTML(replay.endedText || "已结束")}</div></div><button class="v-head-action" style="color:var(--v-red)!important" data-action="delete-replay" data-replay-id="${escapeHTML(replay.id)}">删除</button></header><div class="v-subbody"><div class="v-replay-summary"><div class="v-name">${escapeHTML(replay.title || "直播回放")}</div><div class="v-sub" style="margin-top:4px">${escapeHTML(replay.topic || "直播")} · ${escapeHTML(modeLabel)} · 最高 ${formatViewers(replay.peakViewers || 0)} 人观看</div>${participants.length ? `<div class="v-sub" style="margin-top:5px">参与：${escapeHTML(participants.map(p => p.name || "嘉宾").join("、"))}</div>` : ""}</div><div class="v-title" style="font-size:15px;margin-top:4px">直播内容</div><div class="v-replay-timeline">${eventHTML}</div><div class="v-title" style="font-size:15px;margin-top:14px">聊天室记录</div><div class="v-replay-chat">${chatHTML}</div></div>`);
             };
 
             const deleteReplay = async (replayId) => {
@@ -4627,6 +4668,7 @@ ${nsfwPresetPrompt(String(post.ageRequirement || "") === "18+")}
                   startedAt: Number(live.startedAt || Date.now()),
                   peakViewers: Number(stats.peakViewers || stats.currentViewers || 0),
                   gifts: safeArray(stats.gifts).map(item => ({ ...item })),
+                  giftRanking: getGiftRanking(live).map(item => ({ ...item })),
                   tipCoin,
                   giftCoin,
                   businessCashCNY,
@@ -6288,7 +6330,6 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
 
             await refreshRocheData({ announce: false, sync: true });
             await migrateExistingPrimaryMutualFollows();
-            ensureMellowBusinessDemo();
             await persist();
             rerender();
             armAppointmentTimer();
@@ -6380,8 +6421,8 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               suppressClickUntil = Date.now() + 320;
               event.preventDefault?.();
               event.stopPropagation?.();
-              if (action === "refresh-home") void refreshHomeFeedContent();
-              else if (action === "refresh-recommended") void refreshRecommendedLives([]);
+              if (action === "refresh-home") openHomeRefreshPicker();
+              else if (action === "refresh-recommended") openRecommendationTopics();
               else if (action === "refresh-messages") void refreshDirectMessages();
             });
 
@@ -6532,8 +6573,14 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
                 state.homeFilter = ["all","live","post"].includes(button.dataset.homeFilter) ? button.dataset.homeFilter : "all";
                 renderHome();
                 await persist();
+              } else if (action === "open-home-refresh") {
+                openHomeRefreshPicker();
+              } else if (action === "run-home-refresh") {
+                const channelId=String(q('[data-role="publish-sheet"] [data-home-refresh-channel]')?.value||"");
+                const mode=String(button.dataset.refreshMode||"post"); q('[data-role="publish-sheet"]')?.classList.remove("is-open");
+                await refreshHomeFeedContent({channelId,mode});
               } else if (action === "refresh-home") {
-                await refreshHomeFeedContent();
+                openHomeRefreshPicker();
               } else if (action === "refresh-recommended") {
                 await refreshRecommendedLives([]);
               } else if (action === "open-recommendation-topics") {
@@ -6541,9 +6588,9 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               } else if (action === "toggle-recommendation-topic") {
                 toggleRecommendationTopic(button);
               } else if (action === "refresh-recommended-topics") {
-                const topics = selectedRecommendationTopics();
+                const request = selectedRecommendationTopics();
                 q('[data-role="publish-sheet"]')?.classList.remove("is-open");
-                await refreshRecommendedLives(topics);
+                await refreshRecommendedLives(request);
               } else if (action === "refresh-messages") {
                 await refreshDirectMessages();
               } else if (action === "open-post-by-id") {
@@ -6672,6 +6719,10 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
               } else if (action === "new-live-lottery") {
                 const live = state.liveSession;
                 if (live) { getLiveStats(live).lottery = null; await persist(); openLiveLotteryPanel(); }
+              } else if (action === "open-live-redpacket") {
+                openLiveRedPacketPanel();
+              } else if (action === "send-live-redpacket") {
+                await sendLiveRedPacket();
               } else if (action === "open-live-ad") {
                 openLiveAdPanel();
               } else if (action === "save-live-ad") {
@@ -6723,6 +6774,7 @@ ${ownerType === "channel" ? '角色群主可以偶尔自然参与，role=owner�
                 stats.giftReceivedCoin = Number(stats.giftReceivedCoin || 0) + amount;
                 const ownHandle = giftIdentity?.handle || "@user";
                 stats.gifts.push({ user:ownHandle, amount });
+                stats.contributions = safeArray(stats.contributions); stats.contributions.push({ user:ownHandle, amount, source:"gift" });
                 stats.heat = Math.min(100, Number(stats.heat || 50) + Math.min(18, amount / 80));
                 advanceViewerCount(live, { heatBoost: Math.min(10, amount / 120) });
                 state.liveChat.push({ user: "系统", avatar: "🎁", text: `${giftIdentity?.handle || "@user"} 送出了 🔷${amount} 的礼物`, translation: "", at:Date.now() });
